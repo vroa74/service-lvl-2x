@@ -97,6 +97,33 @@ Route::get('/test-individual-pdf/{id}', function ($id) {
     }
 })->name('test.individual.pdf');
 
+// Ruta para generar reporte individual de servicio y mostrarlo directamente
+Route::get('/service-pdf/{id}', function ($id) {
+    try {
+        // Obtener el servicio específico con todas sus relaciones
+        $service = \App\Models\Service::with(['solicitante', 'efectuo', 'vobo', 'capturo'])->findOrFail($id);
+        
+        // Preparar datos para la vista (re-agregando las variables que podrían faltar)
+        $data = [
+            'service' => $service,
+            'title' => 'Reporte Individual de Servicio',
+            'generatedAt' => now()->format('d/m/Y H:i:s'),
+        ];
+        
+        // Cargar la vista y generar el PDF para transmitirlo
+        $pdf = PDF::loadView('reports.services.individual', $data)
+                  ->setPaper('letter', 'portrait');
+        
+        // Hacer stream del PDF directamente al navegador
+        return $pdf->stream('reporte_servicio_' . preg_replace('/[^A-Za-z0-9_-]/', '_', $service->id_s) . '.pdf');
+        
+    } catch (\Exception $e) {
+        // Log del error para depuración
+        \Illuminate\Support\Facades\Log::error('Error generando PDF para servicio ' . $id . ': ' . $e->getMessage());
+        abort(500, 'Error al generar el PDF. Por favor, revise los logs.');
+    }
+})->name('service.pdf');
+
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified', ])->group(function () {
     
     

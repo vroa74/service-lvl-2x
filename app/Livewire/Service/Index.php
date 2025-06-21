@@ -194,41 +194,14 @@ class Index extends Component
     public function generateIndividualServiceReport($serviceId)
     {
         try {
-            $service = Service::with(['solicitante', 'efectuo', 'vobo', 'capturo'])->findOrFail($serviceId);
-            
-            $filename = $this->generateIndividualReport($service);
-            
-            // Emitir evento para abrir el PDF en nueva pestaña
-            $this->dispatch('openPdfInNewTab', url: '/storage/temp/' . $filename);
+            // Emitir evento inmediatamente para abrir el PDF en nueva pestaña
+            $this->dispatch('openPdfInNewTab', url: route('service.pdf', $serviceId));
             
             session()->flash('message', 'Reporte del servicio generado correctamente.');
             
         } catch (\Exception $e) {
             session()->flash('error', 'Error al generar el reporte del servicio: ' . $e->getMessage());
         }
-    }
-
-    private function generateIndividualReport($service)
-    {
-        $data = [
-            'service' => $service,
-            'title' => 'Reporte Individual de Servicio',
-            'generatedAt' => now()->format('d/m/Y H:i:s'),
-        ];
-
-        $pdf = PDF::loadView('reports.services.individual', $data);
-        // Limpiar el id_s para que sea un nombre de archivo válido
-        $safeIdS = preg_replace('/[^A-Za-z0-9_-]/', '_', $service->id_s);
-        $filename = 'reporte_servicio_' . $safeIdS . '_' . now()->format('Y-m-d_H-i-s') . '.pdf';
-        
-        // Guardar temporalmente el PDF
-        $path = storage_path('app/public/temp/' . $filename);
-        if (!file_exists(dirname($path))) {
-            mkdir(dirname($path), 0755, true);
-        }
-        file_put_contents($path, $pdf->output());
-        
-        return $filename;
     }
 
     private function generateGeneralReport($services)

@@ -2,10 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Individual de Servicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }}</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         @page {
-            margin: 5cm 0.5cm 5cm 0.5cm;
+            margin: 5cm 0.5cm 4cm 0.5cm;
         }
         #header {
             position: fixed;
@@ -27,8 +30,9 @@
         }
 
         #footer {
-            position: fixed;            
-            bottom: -4.5cm;
+            position: fixed;
+            
+            bottom: -3.5cm;
             width: 100%;
             text-align: center;
             padding: 10px 0;
@@ -63,7 +67,7 @@
             margin-bottom: 0;
             padding: 10px;
             /* background-color: #f306ac !important; */
-        }|
+        }
 
         .tablaSection1 td {
             vertical-align: top;
@@ -83,7 +87,7 @@
 
         .tablaSection1 .box {
             border: 2px solid black;
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 3px;
             margin: 0;
         }
@@ -481,7 +485,6 @@
             }
         }
     </style>
-
 </head>
 <body>
     <div id="header" >
@@ -490,14 +493,12 @@
                 <tr>
                     <td style="width: 20%; text-align: center; vertical-align: middle;"></td>
                     <td style="width: 56%; text-align: center; vertical-align: middle; padding: 10px;">
-
                         @php
-                        $headImagePath = public_path('ple/head.png');
-                        $headImageBase64 = base64_encode(file_get_contents($headImagePath));
-                    @endphp
-                    <img    src="data:image/png;base64,{{ $headImageBase64 }}" 
-                            alt="Logo izquierdo" style="max-width: 160%; height: auto;">
-
+                            $headImagePath = public_path('ple/head.png');
+                            $headImageBase64 = base64_encode(file_get_contents($headImagePath));
+                        @endphp
+                        <img    src="data:image/png;base64,{{ $headImageBase64 }}" 
+                                alt="Logo izquierdo" style="max-width: 160%; height: auto;">
                         <h1 style="margin: 5px 0;">ORDEN DE SERVICIO</h1>
                     </td>
                     <td style="width: 20%; text-align: center; vertical-align: middle;"></td>
@@ -509,17 +510,15 @@
     <table class="tablaSection1">
         <tr>
             <td class="col1">
-                <p class="text-xs font-bold m-1" style="margin: 2px 0;">FECHA DE SERVICIO:  <span class="font-underline"> {{ $service->F_serv ? $service->F_serv->format('d/m/Y') : 'N/A' }} </span> </p>
-                <p class="text-xs font-bold m-1" style="margin: 2px 0;">NOMBRE DE SOLICITANTE:   <span class="font-underline">{{ $service->solicitante->name ?? 'N/A' }}</span> </p>
-                <p class="text-xs font-bold m-1" style="margin: 2px 0;">OFICINA O DEPARTAMENTO:   <span class="font-underline">{{ $service->solicitante->direction ?? 'N/A' }}</span> </p>
+                <p class="text-xs font-bold m-1" style="margin: 2px 0;">FECHA DE SERVICIO:  <span class="font-underline">{{ $service->F_serv ? $service->F_serv->format('d/m/Y') : 'N/A' }}</span> </p>
+                <p class="text-xs font-bold m-1" style="margin: 2px 0;">NOMBRE DE SOLICITANTE:   <span class="font-underline"> {{ is_object($service->solicitante) && isset($service->solicitante->name) ? $service->solicitante->name : 'No asignado' }} </span> </p>
+                <p class="text-xs font-bold m-1" style="margin: 2px 0;">OFICINA O DEPARTAMENTO:   <span class="font-underline"> {{ is_object($service->solicitante) && isset($service->solicitante->direction ) ? $service->solicitante->direction : 'No asignado' }} </span> </p>
             </td>
-              <br>
-    <br>
-    
             <td class="col2">
                 <div class="box text-center">
                     No. Reporte:<br>
-                    <span class="font-bold ml-5 text-sm"> {{ $service->id_s ?? 'N/A' }}</span> <br>                    
+                    <span class="font-bold ml-5 text-sm">{{ $service->id_s ?? 'N/A' }}</span> <br>
+                    
                 </div>
             </td>
         </tr>
@@ -532,7 +531,7 @@
             <td>
                 <div class="box">
                     <span class="font-bold ml-5 text-sm">OBJETIVO DE LA SOLICITUD :</span> <br>
-                     <span class="text-xs">{!! $service->obj_sol ?? 'N/A' !!}</span>
+                     <span class="text-xs">  {!! $service->obj_sol ?? 'No especificado' !!}  </span>
                 </div>
             </td>
         </tr>
@@ -643,7 +642,8 @@
                             <td style="width: 50%; padding: 1px;">
                                 <div style="white-space: nowrap;">
                                     <br>
-                                    <span style="vertical-align: middle;"></span>
+                                    {{-- <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->calendario ? 'background-color: black;' : '' }}"></span> --}}
+                                    <span style="vertical-align: middle;"</span>
                                 </div>
                             </td>
                             <td style="width: 50%; padding: 1px;">
@@ -666,7 +666,7 @@
                         <span class="font-bold ml-5 text-sm"> Actividades Realizadas </span>
                     </div><br>
                     <span  class="text-xs text-justify">
-                        {!! $service->actividades ?? 'N/A' !!}
+                        {!! $service->actividades ?? 'No especificado' !!}
                     </span>
                 </div>
             </td>
@@ -677,13 +677,20 @@
                         <span class="font-bold ml-5 text-sm"> Observaciones </span>
                     </div> <br>
                     <span class="text-xs text-justify">
-                        {{ $service->observaciones ?? 'N/A' }}
+                        {!! $service->observaciones ?? 'No especificado' !!}
                     </span>
                 </div>
             </td>
         </tr>
     </table>
 
+    {{-- <p style="color:white">Capturista: </p>
+    {{ is_object($service->capturista) && isset($service->capturista->name) ? $service->capturista->name : 'No asignado' }}  -
+    {{ is_object($service->capturista) && isset($service->capturista->position) ? $service->capturista->position : 'No especificado' }}  -  
+    {{ is_object($service->capturista) && isset($service->capturista->direction) ? $service->capturista->direction : 'No especificada' }}</p> --}}
+    {{-- ================================================================================================================================== --}}
+    
+    
     <div id="footer" style="border: none !important;">
             <!-- Tablas de firmas - Pie de página -->
     <table style="width: 100%; border-collapse: separate; border-spacing: 0.5rem;" class="mb-4">
@@ -704,41 +711,33 @@
         <tr style="height: 6rem;">
             <td style="padding: 0.5rem; vertical-align: bottom; text-align: center; border: none;" class="text-xs">
                 <div class="text-8px">
-                    {{ $service->solicitante->name ?? 'N/A' }}<br>
-                    {{ $service->solicitante->position ?? 'N/A' }}<br>
-                    {{ $service->solicitante->direction ?? 'N/A' }}
-                </div>
-            </td>        
-            <td style="padding: 0.5rem; vertical-align: bottom; text-align: center; border: none;" class="text-xs">
-                <div class="text-8px">
-                    {{ $service->efectuo->name ?? 'N/A' }}<br>
-                    {{ $service->efectuo->position ?? 'N/A' }}<br>                                        
-                    {{ $service->efectuo->direction ?? 'N/A' }}                
+                    {{ is_object($service->solicitante) && isset($service->solicitante->name) ? $service->solicitante->name : 'No asignado' }}<br>
+                    {{ is_object($service->solicitante) && isset($service->solicitante->direction) ? $service->solicitante->direction : 'No especificada' }}<br>
+                    {{ is_object($service->solicitante) && isset($service->solicitante->position) ? $service->solicitante->position : 'No especificado' }}
                 </div>
             </td>
     
             <td style="padding: 0.5rem; vertical-align: bottom; text-align: center; border: none;" class="text-xs">
                 <div class="text-8px">
-                    {{ $service->vobo->name ?? 'N/A' }}<br>
-                    {{ $service->vobo->position ?? 'N/A' }}<br>
-                    {{ $service->vobo->direction ?? 'N/A' }}                
+                    {{ is_object($service->efectuo) && isset($service->efectuo->name) ? $service->efectuo->name : 'No asignado' }}<br>
+                    {{ is_object($service->efectuo) && isset($service->efectuo->direction) ? $service->efectuo->direction : 'No especificada' }}<br>
+                    {{ is_object($service->efectuo) && isset($service->efectuo->position) ? $service->efectuo->position : 'No especificado' }}
+                </div>
+            </td>
+    
+            <td style="padding: 0.5rem; vertical-align: bottom; text-align: center; border: none;" class="text-xs">
+                <div class="text-8px">
+                    {{ is_object($service->vobo) && isset($service->vobo->name) ? $service->vobo->name : 'No asignado' }}<br>
+                    {{ is_object($service->vobo) && isset($service->vobo->direction) ? $service->vobo->direction : 'No especificada' }}<br>
+                    {{ is_object($service->vobo) && isset($service->vobo->position) ? $service->vobo->position : 'No especificado' }}
                 </div>
             </td>
         </tr>
     </table>
         
-        @php
-            $footImagePath = public_path('ple/foot.png');
-            $footImageBase64 = file_exists($footImagePath) ? base64_encode(file_get_contents($footImagePath)) : '';
-        @endphp
-        
-        @if($footImageBase64)
-            <img    src="data:image/png;base64,{{ $footImageBase64 }}" 
-            alt="Pie de página" 
-            style="max-width: 80%; height: auto; margin-top: 5px;">
-        @endif
-        
+        <img    src="data:image/png;base64,{{ $footImageBase64 }}" 
+                alt="Pie de página" 
+                style="max-width: 80%; height: auto; margin-top: 5px;">
     </div>
-    
 </body>
 </html> 
