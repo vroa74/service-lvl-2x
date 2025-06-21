@@ -11,7 +11,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('inventory.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventory.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class InventoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('inventory.show');
     }
 
     /**
@@ -43,7 +43,7 @@ class InventoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('inventory.edit');
     }
 
     /**
@@ -61,4 +61,9 @@ class InventoryController extends Controller
     {
         //
     }
+    public function userinv()     {
+        return view('inventory.user-inv');
+    }
+
+    
 }

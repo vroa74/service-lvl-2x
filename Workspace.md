@@ -29,7 +29,12 @@ ya quedo lista la primera pagina ahora vamos a ver el primer componente de livew
 
     php artisan make:livewire usuario.index
 
-    php artisan make:livewire Inventory\index
+    php artisan make:livewire Inventory.index
+    php artisan make:livewire Inventory.create
+    php artisan make:livewire Inventory.edit
+    php artisan make:livewire Inventory.user-inv
+
+
     php artisan make:livewire Service\index
     php artisan make:livewire service.edit
     php artisan make:livewire Service\create

@@ -36,6 +36,10 @@
                     <x-nav-link href="{{ route('servicios.index') }}" :active="request()->routeIs('servicios.index')">
                         {{ __('Gestión de Servicios') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('inventario.index') }}" :active="request()->routeIs('inventario.index')">
+                        {{ __('Gestión de Inventarios') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
