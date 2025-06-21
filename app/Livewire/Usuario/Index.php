@@ -1,0 +1,193 @@
+<?php
+
+namespace App\Livewire\Usuario;
+
+use App\Models\User;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Hash;
+
+class Index extends Component
+{
+    use WithPagination, WithFileUploads;
+
+    public $search = '';
+    public $showModal = false;
+    public $editing = false;
+    public $userId = null;
+
+    // Campos del formulario
+    public $name = '';
+    public $rfc = '';
+    public $direction = '';
+    public $position = '';
+    public $sex = '';
+    public $lvl = '';
+    public $tipo = 3;
+    public $status = true;
+    public $email = '';
+    public $password = '';
+    public $password_confirmation = '';
+
+    protected $rules = [
+        'name' => 'required|string|max:255',
+        'rfc' => 'nullable|string|max:13|unique:users,rfc',
+        'direction' => 'nullable|string|max:250',
+        'position' => 'nullable|string|max:35',
+        'sex' => 'nullable|in:masculino,femenino',
+        'lvl' => 'nullable|string|max:15',
+        'tipo' => 'required|integer',
+        'status' => 'boolean',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:8|confirmed',
+    ];
+
+    protected $messages = [
+        'name.required' => 'El nombre es obligatorio',
+        'email.required' => 'El email es obligatorio',
+        'email.email' => 'El email debe ser válido',
+        'email.unique' => 'El email ya está registrado',
+        'password.required' => 'La contraseña es obligatoria',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+        'password.confirmed' => 'Las contraseñas no coinciden',
+        'rfc.unique' => 'El RFC ya está registrado',
+    ];
+
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function openModal()
+    {
+        $this->resetForm();
+        $this->showModal = true;
+        $this->editing = false;
+    }
+
+    public function editUser($userId)
+    {
+        $user = User::findOrFail($userId);
+        
+        $this->userId = $user->id;
+        $this->name = $user->name;
+        $this->rfc = $user->rfc;
+        $this->direction = $user->direction;
+        $this->position = $user->position;
+        $this->sex = $user->sex;
+        $this->lvl = $user->lvl;
+        $this->tipo = $user->tipo;
+        $this->status = $user->status;
+        $this->email = $user->email;
+        $this->password = '';
+        $this->password_confirmation = '';
+
+        $this->showModal = true;
+        $this->editing = true;
+    }
+
+    public function saveUser()
+    {
+        if ($this->editing) {
+            $this->rules['email'] = 'required|email|unique:users,email,' . $this->userId;
+            $this->rules['rfc'] = 'nullable|string|max:13|unique:users,rfc,' . $this->userId;
+            $this->rules['password'] = 'nullable|min:8|confirmed';
+        }
+
+        $this->validate();
+
+        $userData = [
+            'name' => $this->name,
+            'rfc' => $this->rfc,
+            'direction' => $this->direction,
+            'position' => $this->position,
+            'sex' => $this->sex,
+            'lvl' => $this->lvl,
+            'tipo' => $this->tipo,
+            'status' => $this->status,
+            'email' => $this->email,
+        ];
+
+        if ($this->password) {
+            $userData['password'] = Hash::make($this->password);
+        }
+
+        if ($this->editing) {
+            User::find($this->userId)->update($userData);
+            session()->flash('message', 'Usuario actualizado correctamente.');
+        } else {
+            User::create($userData);
+            session()->flash('message', 'Usuario creado correctamente.');
+        }
+
+        $this->closeModal();
+    }
+
+    public function deleteUser($userId)
+    {
+        User::find($userId)->delete();
+        session()->flash('message', 'Usuario eliminado correctamente.');
+    }
+
+    public function toggleStatus($userId)
+    {
+        $user = User::find($userId);
+        $user->update(['status' => !$user->status]);
+        session()->flash('message', 'Estado del usuario actualizado.');
+    }
+
+    public function toggleSex($userId)
+    {
+        $user = User::find($userId);
+        $newSex = $user->sex === 'masculino' ? 'femenino' : 'masculino';
+        $user->update(['sex' => $newSex]);
+        session()->flash('message', 'Sexo del usuario actualizado.');
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->resetForm();
+    }
+
+    private function resetForm()
+    {
+        $this->userId = null;
+        $this->name = '';
+        $this->rfc = '';
+        $this->direction = '';
+        $this->position = '';
+        $this->sex = '';
+        $this->lvl = '';
+        $this->tipo = 3;
+        $this->status = true;
+        $this->email = '';
+        $this->password = '';
+        $this->password_confirmation = '';
+        $this->editing = false;
+        $this->resetValidation();
+    }
+
+    public function render()
+    {
+        $users = User::query()
+            ->when($this->search, function ($query) {
+                $query->where(function ($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%')
+                      ->orWhere('email', 'like', '%' . $this->search . '%')
+                      ->orWhere('rfc', 'like', '%' . $this->search . '%')
+                      ->orWhere('direction', 'like', '%' . $this->search . '%')
+                      ->orWhere('position', 'like', '%' . $this->search . '%')
+                      ->orWhere('sex', 'like', '%' . $this->search . '%')
+                      ->orWhere('lvl', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->orderBy('id')
+            ->paginate(10);
+
+        return view('livewire.usuario.index', [
+            'users' => $users
+        ]);
+    }
+}

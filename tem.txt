@@ -1,0 +1,38 @@
+
+api/user .......... 
+create  service.addcreate  ServiceController@index1
+create/inicio .. service.inicio  ServiceController@inicio
+dashboard .. dashboard
+inventory . inventory.index
+inventory . inventory.store
+inventory/create . inventory.create 
+inventory/invgruop . inventory.invgruop
+inventory/tool-user .. inventory.tool-user
+inventory/{inventory}  inventory.show
+inventory/{inventory} .. inventory.update
+inventory/{inventory}  inventory.destroy
+inventory/{inventory}/edit . inventory.edit
+
+service . service.index
+service . service.store
+service/create . service.create
+service/{service} .. service.show
+service/{service} . service.update
+service/{service} .. service.destroy
+service/{service}/edit  service.edit
+
+tools/user  tools.user
+tools/user_inv . tools.user_inv
+
+usuarios . usuarios.index
+usuarios . usuarios.store
+usuarios/create . usuarios.create
+usuarios/{usuario} .. usuarios.show
+usuarios/{usuario} . usuarios.update
+usuarios/{usuario} .. usuarios.destroy
+usuarios/{usuario}/edit  usuarios.edit
+
+wireui/assets/scripts  wireui.assets.scripts
+wireui/assets/styles  wireui.assets.styles
+wireui/button .. wireui.render.button
+wireui/icons/{variant}/{icon} . wireui.icons
