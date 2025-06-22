@@ -3045,7 +3045,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('RGLI447419QGKSFP74')
         ]);
 
-
-
+        @php
+            dd(config('jetstream.features'), Laravel\Jetstream\Jetstream::managesProfilePhotos());
+        @endphp
     }
 }

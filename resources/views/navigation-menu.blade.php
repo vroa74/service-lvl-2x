@@ -6,14 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        {{-- <x-application-mark class="block h-9 w-auto" /> --}}
-                        <picture>
-                            @php
-                                $icon = 'favicon_' . rand(1, 7) . '.png';
-                            @endphp
-                            <source srcset="{{ asset($icon) }}" type="image/png">
-                            <img src="{{ asset($icon) }}" alt="Logo" class="block w-auto h-9">
-                        </picture>
+                        <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
                 {{-- <div class="shrink-0 flex items-center">
