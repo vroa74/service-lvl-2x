@@ -58,9 +58,9 @@ class Inventory extends Model
     /**
      * Get the user that owns the inventory item.
      */
-    public function user(): BelongsTo
+    public function assignedUser(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

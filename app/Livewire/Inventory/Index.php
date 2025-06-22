@@ -328,7 +328,7 @@ class Index extends Component
     public function render()
     {
         $inventories = Inventory::query()
-            ->with(['user', 'responsible'])
+            ->with(['assignedUser', 'responsible'])
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('articulo', 'like', '%' . $this->search . '%')

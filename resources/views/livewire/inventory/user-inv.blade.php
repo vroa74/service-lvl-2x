@@ -38,7 +38,10 @@
                             <thead>
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Nombre / Resguardante
+                                        Usuario
+                                    </th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
+                                        Resguardante
                                     </th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
                                         NI
@@ -47,10 +50,7 @@
                                         Artículo
                                     </th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Estado
-                                    </th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Ubicación
+                                        Información
                                     </th>
                                 </tr>
                             </thead>
@@ -59,14 +59,34 @@
                                     <td class="px-4 py-3">
                                         <div class="relative">
                                             <input 
-                                                wire:model.live="generalSearch" 
+                                                wire:model.live="userNameFilter" 
                                                 type="text" 
-                                                placeholder="Buscar por nombre o resguardante..." 
+                                                placeholder="Buscar por usuario..." 
                                                 class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                             >
                                             <button
-                                                x-show="$wire.generalSearch"
-                                                wire:click="$set('generalSearch', '')"
+                                                x-show="$wire.userNameFilter"
+                                                wire:click="$set('userNameFilter', '')"
+                                                type="button"
+                                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
+                                                aria-label="Limpiar búsqueda"
+                                                x-cloak
+                                            >
+                                                <x-lucide name="x" class="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <div class="relative">
+                                            <input 
+                                                wire:model.live="resguardanteSearch" 
+                                                type="text" 
+                                                placeholder="Buscar por resguardante..." 
+                                                class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            >
+                                            <button
+                                                x-show="$wire.resguardanteSearch"
+                                                wire:click="$set('resguardanteSearch', '')"
                                                 type="button"
                                                 class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
                                                 aria-label="Limpiar búsqueda"
@@ -116,20 +136,17 @@
                                             </button>
                                         </div>
                                     </td>
-                                    <td class="px-4 py-3">
-                                        <select wire:model.live="filterEstado" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <option value="">Todos los estados</option>
-                                            <option value="1">Activo</option>
-                                            <option value="0">Inactivo</option>
-                                        </select>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <select wire:model.live="filterUbicacion" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <option value="">Todas las ubicaciones</option>
-                                            @foreach($ubicaciones as $ubicacion)
-                                                <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
-                                            @endforeach
-                                        </select>
+                                    <td class="px-4 py-3 text-sm text-white">
+                                        <div class="flex flex-col items-center justify-center space-y-2">
+                                            <div class="text-center">
+                                                <span class="block text-xs font-semibold text-gray-400">Usuarios</span>
+                                                <span class="block text-lg font-bold">{{ $users->total() }}</span>
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="block text-xs font-semibold text-gray-400">Inventario</span>
+                                                <span class="block text-lg font-bold">{{ $inventories->total() }}</span>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -181,12 +198,6 @@
                                                 <x-lucide name="laptop" class="w-4 h-4" />
                                                 Es una computadora
                                             </button>
-                                            <!-- is user-->
-                                            <button                                                 
-                                                class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors flex items-center gap-2" >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                                Asignar a Usuario
-                                            </button>
 
                                             <!-- Botón para Asignar Responsable -->
                                             <button
@@ -211,6 +222,31 @@
                                             >
                                                 <x-lucide name="user-check" class="w-4 h-4" />
                                                 Asignar Responsable
+                                            </button>
+
+                                            <!-- Botón para Asignar Usuario -->
+                                            <button
+                                                type="button"
+                                                @click="
+                                                    Swal.fire({
+                                                        title: '¿Asignar Usuario?',
+                                                        text: 'Esto asignará el usuario filtrado a todos los registros de inventario filtrados. ¿Continuar?',
+                                                        icon: 'question',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3B82F6',
+                                                        cancelButtonColor: '#EF4444',
+                                                        confirmButtonText: 'Sí, ¡asignar!',
+                                                        cancelButtonText: 'Cancelar'
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            $wire.dispatch('confirmAssignUser');
+                                                        }
+                                                    })
+                                                "
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                                            >
+                                                <x-lucide name="user-plus" class="w-4 h-4" />
+                                                Asignar Usuario
                                             </button>
 
                                             <!-- Botón Limpiar Filtros -->
@@ -240,7 +276,7 @@
                 <div class="px-4 py-3 bg-gray-700 border-b border-gray-600">
                     <h3 class="text-lg font-medium text-white">Usuarios</h3>
                 </div>
-                <div class="overflow-y-auto max-h-96 flex-1">
+                <div class="flex-1 overflow-y-auto">
                     <table class="min-w-full border-2 border-gray-700 rounded-3xl">
                         <thead class="bg-gray-700/50 sticky top-0">
                             <tr class="rounded-3xl border-2 border-gray-700">
@@ -274,7 +310,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <!-- Paginación de Usuarios -->
                 @if($users->hasPages())
                     <div class="px-3 py-2 bg-gray-700 border-t border-gray-600">
@@ -334,19 +370,22 @@
                                     </td>
                                     <td class="px-3 py-4 text-sm text-gray-300">
                                         <div class="space-y-2">
-                                            @if($item->user && is_object($item->user))
+                                            @if($item->assignedUser && is_object($item->assignedUser))
                                                 <div>
                                                     <div class="text-xs text-gray-400">Usuario:</div>
-                                                    <div class="font-medium text-white">{{ $item->user->name }}</div>
-                                                    <div class="text-xs text-gray-500">{{ $item->user->position ?? 'Sin posición' }}</div>
+                                                    <div class="font-medium text-yellow-400">ID: {{ $item->assignedUser->id }}</div>
+                                                    <div class="font-medium text-yellow-400">{{ $item->assignedUser->name }}</div>
+                                                    <div class="text-xs text-yellow-300">Posición: {{ $item->assignedUser->position ?? 'Sin posición' }}</div>
+                                                    <div class="text-xs text-yellow-300">Dirección: {{ $item->assignedUser->direction ?? 'Sin dirección' }}</div>
                                                 </div>
                                             @endif
                                             @if($item->responsible && is_object($item->responsible))
                                                 <div>
                                                     <div class="text-xs text-gray-400">Resguardante:</div>
-                                                    <div class="font-medium text-white">{{ $item->responsible->id }}</div>
-                                                    <div class="font-medium text-white">{{ $item->responsible->name }}</div>
-                                                    <div class="text-xs text-gray-500">{{ $item->responsible->position ?? 'Sin posición' }}</div>
+                                                    <div class="font-medium text-pink-400">ID: {{ $item->responsible->id }}</div>
+                                                    <div class="font-medium text-pink-400">{{ $item->responsible->name }}</div>
+                                                    <div class="text-xs text-pink-300">Posición: {{ $item->responsible->position ?? 'Sin posición' }}</div>
+                                                    <div class="text-xs text-pink-300">Dirección: {{ $item->responsible->direction ?? 'Sin dirección' }}</div>
                                                 </div>
                                             @endif
                                         </div>
