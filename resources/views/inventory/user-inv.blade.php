@@ -5,11 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4">        
             <div class="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg border border-gray-700">
-                <x-welcome />
-            </div>
-        </div>
+                <livewire:inventory.user-inv />
+            </div>        
     </div>
 </x-app-layout>

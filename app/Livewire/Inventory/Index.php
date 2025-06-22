@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Service;
+namespace App\Livewire\Inventory;
 
-use App\Models\Service;
+use App\Models\Inventory;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,7 +17,7 @@ class Index extends Component
 
     public $search = '';
     public $editing = false;
-    public $serviceId = null;
+    public $inventoryId = null;
 
     // Propiedades para reportes
     public $showReportModal = false;
@@ -28,70 +28,65 @@ class Index extends Component
     public $reportStatus = '';
 
     // Campos del formulario para edición
-    public $id_s = '';
-    public $F_serv = '';
-    public $solicitante_id = '';
-    public $solicitante2_id = '';
-    public $efectuo_id = '';
-    public $vobo_id = '';
-    public $obj_sol = '';
-    public $actividades = '';
-    public $mantenimiento = '';
-    public $observaciones = '';
-    
-    // Tipo de servicio
-    public $correctivo = false;
-    public $preventivo = false;
-    public $transparencia = false;
-    public $a_tec = false;
-    public $web_ins = false;
-    public $print = false;
-    
-    // Via de solicitud
-    public $email = false;
-    public $tel = false;
-    public $sol_ser = false;
-    public $oficio = false;
-    public $calendario = false;
-    
-    public $capturo = '';
+    public $fecha_inv = '';
+    public $user_id = '';
+    public $res_id = '';
+    public $fecha = '';
+    public $dir = '';
+    public $resguardante = '';
+    public $user = '';
+    public $is_pc = false;
+    public $gpo = '';
+    public $disp = '';
+    public $type = '';
+    public $articulo = '';
+    public $ni = '';
+    public $marca = '';
+    public $modelo = '';
+    public $ns = '';
+    public $nombres = '';
+    public $apa = '';
+    public $ama = '';
+    public $gpo_pc_user = '';
+    public $fullname = '';
+    public $software_instalado = '';
+    public $info = '';
+    public $esp = '';
     public $status = false;
-    public $impressions = false;
 
     protected $rules = [
-        'id_s' => 'nullable|string|max:25',
-        'F_serv' => 'nullable|date',
-        'solicitante_id' => 'required|exists:users,id',
-        'solicitante2_id' => 'nullable|exists:users,id',
-        'efectuo_id' => 'required|exists:users,id',
-        'vobo_id' => 'required|exists:users,id',
-        'obj_sol' => 'nullable|string',
-        'actividades' => 'nullable|string',
-        'mantenimiento' => 'nullable|string',
-        'observaciones' => 'nullable|string',
-        'correctivo' => 'boolean',
-        'preventivo' => 'boolean',
-        'transparencia' => 'boolean',
-        'a_tec' => 'boolean',
-        'web_ins' => 'boolean',
-        'print' => 'boolean',
-        'email' => 'boolean',
-        'tel' => 'boolean',
-        'sol_ser' => 'boolean',
-        'oficio' => 'boolean',
-        'calendario' => 'boolean',
-        'capturo' => 'required|exists:users,id',
+        'fecha_inv' => 'nullable|date',
+        'user_id' => 'nullable|exists:users,id',
+        'res_id' => 'nullable|exists:users,id',
+        'fecha' => 'nullable|date',
+        'dir' => 'nullable|string',
+        'resguardante' => 'nullable|string',
+        'user' => 'nullable|string',
+        'is_pc' => 'boolean',
+        'gpo' => 'nullable|string',
+        'disp' => 'nullable|string',
+        'type' => 'nullable|string',
+        'articulo' => 'nullable|string',
+        'ni' => 'nullable|string',
+        'marca' => 'nullable|string',
+        'modelo' => 'nullable|string',
+        'ns' => 'nullable|string',
+        'nombres' => 'nullable|string',
+        'apa' => 'nullable|string',
+        'ama' => 'nullable|string',
+        'gpo_pc_user' => 'nullable|string',
+        'fullname' => 'nullable|string',
+        'software_instalado' => 'nullable|string',
+        'info' => 'nullable|string',
+        'esp' => 'nullable|string',
         'status' => 'boolean',
-        'impressions' => 'boolean',
     ];
 
     protected $messages = [
-        'F_serv.date' => 'La fecha debe ser válida',
-        'solicitante_id.exists' => 'El solicitante debe ser un usuario válido',
-        'solicitante2_id.exists' => 'El solicitante 2 debe ser un usuario válido',
-        'efectuo_id.exists' => 'El usuario que efectuó debe ser válido',
-        'vobo_id.exists' => 'El usuario de VºBº debe ser válido',
-        'capturo.exists' => 'El usuario que captura debe ser válido',
+        'fecha_inv.date' => 'La fecha de inventario debe ser válida',
+        'fecha.date' => 'La fecha debe ser válida',
+        'user_id.exists' => 'El usuario debe ser válido',
+        'res_id.exists' => 'El responsable debe ser un usuario válido',
     ];
 
     public function updatedSearch()
@@ -99,17 +94,17 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function editService($serviceId)
+    public function editInventory($inventoryId)
     {
         // Redirigir a la página de edición
-        return redirect()->route('servicios.edit', $serviceId);
+        return redirect()->route('inventario.edit', $inventoryId);
     }
 
-    public function toggleStatus($serviceId)
+    public function toggleStatus($inventoryId)
     {
-        $service = Service::find($serviceId);
-        $service->update(['status' => !$service->status]);
-        session()->flash('message', 'Estado del servicio actualizado.');
+        $inventory = Inventory::find($inventoryId);
+        $inventory->update(['status' => !$inventory->status]);
+        session()->flash('message', 'Estado del artículo actualizado.');
     }
 
     // Métodos para reportes
@@ -136,19 +131,17 @@ class Index extends Component
     public function generateReport()
     {
         try {
-            $query = Service::with(['solicitante', 'efectuo', 'vobo', 'capturo']);
+            $query = Inventory::with(['user', 'responsible']);
 
             // Aplicar filtros según el tipo de reporte
             if ($this->reportDateFrom && $this->reportDateTo) {
-                $query->whereBetween('F_serv', [$this->reportDateFrom, $this->reportDateTo]);
+                $query->whereBetween('fecha', [$this->reportDateFrom, $this->reportDateTo]);
             }
 
             if ($this->reportUser) {
                 $query->where(function ($q) {
-                    $q->where('solicitante_id', $this->reportUser)
-                      ->orWhere('efectuo_id', $this->reportUser)
-                      ->orWhere('vobo_id', $this->reportUser)
-                      ->orWhere('capturo', $this->reportUser);
+                    $q->where('user_id', $this->reportUser)
+                      ->orWhere('res_id', $this->reportUser);
                 });
             }
 
@@ -156,24 +149,24 @@ class Index extends Component
                 $query->where('status', $this->reportStatus);
             }
 
-            $services = $query->orderBy('F_serv', 'desc')->get();
+            $inventories = $query->orderBy('fecha', 'desc')->get();
 
             // Generar el reporte según el tipo
             switch ($this->reportType) {
                 case 'general':
-                    $filename = $this->generateGeneralReport($services);
+                    $filename = $this->generateGeneralReport($inventories);
                     break;
                 case 'por_usuario':
-                    $filename = $this->generateUserReport($services);
+                    $filename = $this->generateUserReport($inventories);
                     break;
                 case 'por_tipo':
-                    $filename = $this->generateTypeReport($services);
+                    $filename = $this->generateTypeReport($inventories);
                     break;
                 case 'por_fecha':
-                    $filename = $this->generateDateReport($services);
+                    $filename = $this->generateDateReport($inventories);
                     break;
                 default:
-                    $filename = $this->generateGeneralReport($services);
+                    $filename = $this->generateGeneralReport($inventories);
                     break;
             }
 
@@ -190,33 +183,33 @@ class Index extends Component
         }
     }
 
-    // Método para generar reporte individual de servicio
-    public function generateIndividualServiceReport($serviceId)
+    // Método para generar reporte individual de inventario
+    public function generateIndividualInventoryReport($inventoryId)
     {
         try {
             // Emitir evento inmediatamente para abrir el PDF en nueva pestaña
-            $this->dispatch('openPdfInNewTab', url: route('service.pdf', $serviceId));
+            $this->dispatch('openPdfInNewTab', url: route('inventory.pdf', $inventoryId));
             
-            session()->flash('message', 'Reporte del servicio generado correctamente.');
+            session()->flash('message', 'Reporte del artículo generado correctamente.');
             
         } catch (\Exception $e) {
-            session()->flash('error', 'Error al generar el reporte del servicio: ' . $e->getMessage());
+            session()->flash('error', 'Error al generar el reporte del artículo: ' . $e->getMessage());
         }
     }
 
-    private function generateGeneralReport($services)
+    private function generateGeneralReport($inventories)
     {
         $data = [
-            'title' => 'Reporte General de Servicios',
+            'title' => 'Reporte General de Inventario',
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
-            'services' => $services,
-            'totalServices' => $services->count(),
-            'activeServices' => $services->where('status', true)->count(),
-            'inactiveServices' => $services->where('status', false)->count(),
+            'inventories' => $inventories,
+            'totalItems' => $inventories->count(),
+            'activeItems' => $inventories->where('status', true)->count(),
+            'inactiveItems' => $inventories->where('status', false)->count(),
         ];
 
-        $pdf = PDF::loadView('reports.services.general', $data);
-        $filename = 'reporte_general_servicios_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.inventory.general', $data);
+        $filename = 'reporte_general_inventario_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -228,18 +221,18 @@ class Index extends Component
         return $filename;
     }
 
-    private function generateUserReport($services)
+    private function generateUserReport($inventories)
     {
-        $userServices = $services->groupBy('solicitante_id');
+        $userInventories = $inventories->groupBy('user_id');
         $data = [
-            'title' => 'Reporte de Servicios por Usuario',
+            'title' => 'Reporte de Inventario por Usuario',
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
-            'userServices' => $userServices,
-            'totalServices' => $services->count(),
+            'userInventories' => $userInventories,
+            'totalItems' => $inventories->count(),
         ];
 
-        $pdf = PDF::loadView('reports.services.by_user', $data);
-        $filename = 'reporte_servicios_por_usuario_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.inventory.by_user', $data);
+        $filename = 'reporte_inventario_por_usuario_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -251,26 +244,22 @@ class Index extends Component
         return $filename;
     }
 
-    private function generateTypeReport($services)
+    private function generateTypeReport($inventories)
     {
         $typeStats = [
-            'correctivo' => $services->where('correctivo', true)->count(),
-            'preventivo' => $services->where('preventivo', true)->count(),
-            'transparencia' => $services->where('transparencia', true)->count(),
-            'a_tec' => $services->where('a_tec', true)->count(),
-            'web_ins' => $services->where('web_ins', true)->count(),
-            'print' => $services->where('print', true)->count(),
+            'PC' => $inventories->where('is_pc', true)->count(),
+            'Otros' => $inventories->where('is_pc', false)->count(),
         ];
 
         $data = [
-            'title' => 'Reporte de Servicios por Tipo',
+            'title' => 'Reporte de Inventario por Tipo',
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
             'typeStats' => $typeStats,
-            'totalServices' => $services->count(),
+            'totalItems' => $inventories->count(),
         ];
 
-        $pdf = PDF::loadView('reports.services.by_type', $data);
-        $filename = 'reporte_servicios_por_tipo_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.inventory.by_type', $data);
+        $filename = 'reporte_inventario_por_tipo_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -282,21 +271,21 @@ class Index extends Component
         return $filename;
     }
 
-    private function generateDateReport($services)
+    private function generateDateReport($inventories)
     {
-        $dateStats = $services->groupBy(function ($service) {
-            return $service->F_serv ? $service->F_serv->format('Y-m') : 'Sin fecha';
+        $dateStats = $inventories->groupBy(function ($inventory) {
+            return $inventory->fecha ? $inventory->fecha->format('Y-m') : 'Sin fecha';
         });
 
         $data = [
-            'title' => 'Reporte de Servicios por Fecha',
+            'title' => 'Reporte de Inventario por Fecha',
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
             'dateStats' => $dateStats,
-            'totalServices' => $services->count(),
+            'totalItems' => $inventories->count(),
         ];
 
-        $pdf = PDF::loadView('reports.services.by_date', $data);
-        $filename = 'reporte_servicios_por_fecha_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.inventory.by_date', $data);
+        $filename = 'reporte_inventario_por_fecha_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -338,14 +327,15 @@ class Index extends Component
 
     public function render()
     {
-        $services = Service::query()
-            ->with(['solicitante', 'efectuo', 'vobo', 'capturo'])
+        $inventories = Inventory::query()
+            ->with(['user', 'responsible'])
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('id_s', 'like', '%' . $this->search . '%')
-                      ->orWhere('obj_sol', 'like', '%' . $this->search . '%')
-                      ->orWhere('actividades', 'like', '%' . $this->search . '%')
-                      ->orWhere('capturo', 'like', '%' . $this->search . '%');
+                    $q->where('articulo', 'like', '%' . $this->search . '%')
+                      ->orWhere('ni', 'like', '%' . $this->search . '%')
+                      ->orWhere('ns', 'like', '%' . $this->search . '%')
+                      ->orWhere('marca', 'like', '%' . $this->search . '%')
+                      ->orWhere('resguardante', 'like', '%' . $this->search . '%');
                 });
             })
             ->orderBy('created_at', 'desc')
@@ -354,7 +344,7 @@ class Index extends Component
         $users = User::where('status', true)->orderBy('name')->get();
 
         return view('livewire.inventory.index', [
-            'services' => $services,
+            'inventories' => $inventories,
             'users' => $users
         ]);
     }

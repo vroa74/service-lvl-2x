@@ -130,6 +130,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
     Route::resource('usuarios', UsuariosController::class)->names('usuarios');
     Route::resource('service', ServiceController::class)->names('servicios');
     Route::resource('inventario', InventoryController::class)->names('inventario');
+    Route::get('/inventory-user-inv', [InventoryController::class, 'userinv'])->name('inventory.user-inv');
     
     // Ruta para el componente Livewire de usuarios
     Route::get('/usuarios-livewire', function () {
@@ -140,6 +141,8 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified',
     Route::get('/servicios-livewire', function () {
         return view('service.index');
     })->name('servicios.livewire');
+
+    // Ruta para el componente Livewire de inventario por usuario
 
     
     Route::get('/dashboard', function () {

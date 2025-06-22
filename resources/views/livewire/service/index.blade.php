@@ -57,12 +57,12 @@
     </div>
 
     <!-- Tabla de servicios -->
-    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+    <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-700">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-700">
+            <table class="min-w-full divide-y divide-gray-700 rounded-3xl overflow-hidden">
                 <thead class="bg-gray-700">
                     <tr>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%]">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%] rounded-tl-3xl">
                             ID Servicio
                         </th>
                         <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%]">
@@ -83,7 +83,7 @@
                         <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%]">
                             Estado
                         </th>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[5%]">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[5%] rounded-tr-3xl">
                             Acciones
                         </th>
                     </tr>

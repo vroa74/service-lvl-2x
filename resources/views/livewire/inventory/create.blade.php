@@ -446,12 +446,12 @@
                         </div>
                     </div>
                     <!-- Tabla de usuarios -->
-                    <div class="bg-gray-700 rounded-lg overflow-hidden">
+                    <div class="bg-gray-700 rounded-3xl overflow-hidden border border-gray-600">
                         <div class="overflow-x-auto">
-                            <table class="w-full">
+                            <table class="w-full rounded-3xl overflow-hidden">
                                 <thead class="bg-gray-600">
                                     <tr>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs rounded-tl-3xl">
                                             Nombre
                                         </th>
                                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
@@ -472,7 +472,7 @@
                                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
                                             Nivel
                                         </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs rounded-tr-3xl">
                                             Acciones
                                         </th>
                                     </tr>
@@ -616,16 +616,16 @@
                         </div>
                     </div>
                     <!-- Tabla de inventarios -->
-                    <div class="bg-gray-700 rounded-lg overflow-hidden">
+                    <div class="bg-gray-700 rounded-3xl overflow-hidden border border-gray-600">
                         <div class="overflow-x-auto">
-                            <table class="w-full">
+                            <table class="w-full rounded-3xl overflow-hidden">
                                 <thead class="bg-gray-600">
                                     <tr>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">NI</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-3xl">NI</th>
                                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">SN</th>
                                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">TYPE</th>
                                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ARTICULO</th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Acciones</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-3xl">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-gray-700 divide-y divide-gray-600">
