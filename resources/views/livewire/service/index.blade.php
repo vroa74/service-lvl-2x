@@ -33,27 +33,12 @@
             </div>
         </div>
         <div class="flex gap-2">
-            <button 
-                wire:click="testPdf"
-                class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center gap-2 transition-colors"
-                title="Test PDF"
-            >
-                <x-lucide name="test-tube" class="w-5 h-5" />
-                Test PDF
-            </button>
-            <button 
-                wire:click="openReportModal('general')"
-                class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-2 transition-colors"
-                title="Generar Reporte" >
-                <x-lucide name="file-text" class="w-5 h-5" />
-                Reportes
-            </button>
             <a href="{{ route('servicios.create') }}"
                 class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2 transition-colors" >
                 <x-lucide name="plus" class="w-5 h-5" />
                 Agregar Servicio
             </a>
-    </div>
+        </div>
     </div>
 
     <!-- Tabla de servicios -->
@@ -92,7 +77,7 @@
                     @forelse($services as $service)
                         <tr class="hover:bg-gray-700 transition-colors">
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
-                                {{ $service->id_s ?? 'N/A' }}
+                                {{ $service->id_s ?? 'N/A' }} <br> { {{ $this->NameQrCode($service->id_s) }}  }
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
                                 {{ $service->F_serv ? $service->F_serv->format('d/m/Y') : 'N/A' }}
@@ -164,13 +149,6 @@
                                         title="Editar"
                                     >
                                         <x-lucide name="edit" class="w-4 h-4" />
-                                    </button>
-                                    <button 
-                                        wire:click="openReportModal('general')"
-                                        class="text-green-400 hover:text-green-300 transition-colors"
-                                        title="Generar Reporte"
-                                    >
-                                        <i class="ri-printer-line"></i>
                                     </button>
                                     <button 
                                         wire:click="toggleStatus({{ $service->id }})"

@@ -203,6 +203,181 @@ alias gitup
 ========================================================================================================
 
 
+    public function mostrarQr($item)
+    {
+        $ni = preg_replace('/[^a-zA-Z0-9]/', '_', $item->ni);
+        $filename = "qr_{$ni}.png";
+        $path = public_path("qr/{$filename}");
+
+        $wasJustRegenerated = isset($this->qrTimestamps[$item->ni]);
+
+        // ⚠️ NO retornes base64 nunca más
+        if (file_exists($path) && !$wasJustRegenerated) {
+            return [
+                'src' => asset("qr/{$filename}"),
+                'from_file' => true,
+            ];
+        }
+
+        // 🔁 Siempre guarda en disco, y retorna la URL
+        return [
+            'src' => $this->getQrCode($item),
+            'from_file' => false,
+        ];
+    }
+
+
+//----------------------------------------------------------------------------------------------------------------------
+    protected $listeners = ['qrRegenerado' => 'regenerateQrTimestamp'];
+
+//----------------------------------------------------------------------------------------------------------------------
+    public function regenerateQrTimestamp($ni)
+    {
+        $this->qrTimestamps[$ni] = now()->timestamp;
+    }
+
+//----------------------------------------------------------------------------------------------------------------------
+    public $qrTimestamps = [];
+
+    public function regenerarQr($ni)
+    {
+        $item = Inventory::where('ni', $ni)->first();
+
+        if (!$item) return;
+
+        $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $ni) . '.png';
+        $path = public_path("qr/{$filename}");
+
+        if (file_exists($path)) {
+            unlink($path); // eliminar QR viejo
+        }
+
+        $this->getQrCode($item);
+        $this->regenerateQrTimestamp($ni);
+    }
+
+//----------------------------------------------------------------------------------------------------------------------
+### creacion de QR
+
+    use Endroid\QrCode\QrCode;
+    use Endroid\QrCode\Writer\PngWriter;
+    use Endroid\QrCode\Encoding\Encoding;
+    use Endroid\QrCode\ErrorCorrectionLevel;
+    use Endroid\QrCode\Color\Color;
+    use Endroid\QrCode\Label\Label;
+    use Endroid\QrCode\Logo\Logo;
+    use Endroid\QrCode\RoundBlockSizeMode;
+    use Endroid\QrCode\Writer\ValidationException;
+
+
+
+
+    public $data;
+
+    public function getQrCode($data)
+    {
+        if (empty($data)) {
+            return null;
+        }
+
+        $datos = is_array($data) || is_object($data) ? json_encode($data) : (string)$data;
+        $decoded = json_decode($datos, true);
+        $name = $decoded['ni'] ?? 'SinNombre';
+
+        $qrText = 'ID: ' . ($decoded['id'] ?? '') . "\n";
+        $qrText .= 'Dir: ' . ($decoded['dir'] ?? '') . "\n";
+        $qrText .= 'Resguardante: ' . ($decoded['resguardante'] ?? '') . "\n";
+        $qrText .= 'NI: ' . ($decoded['ni'] ?? '') . "\n";
+        $qrText .= 'Artículo: ' . ($decoded['articulo'] ?? '') . "\n";
+        $qrText .= 'Marca: ' . ($decoded['marca'] ?? '') . "\n";
+        $qrText .= 'Modelo: ' . ($decoded['modelo'] ?? '') . "\n";
+        $qrText .= 'NS: ' . ($decoded['ns'] ?? '') . "\n";
+        $qrText .= 'By L.I. Victor Román Ortiz Abreu, MDIS & MCCC';
+
+        try {
+            $qrCode = new QrCode(
+                data: $qrText,
+                encoding: new Encoding('UTF-8'),
+                errorCorrectionLevel: ErrorCorrectionLevel::High,
+                size: 300,
+                margin: 20,
+                roundBlockSizeMode: RoundBlockSizeMode::None,
+                foregroundColor: new Color(0, 0, 255),
+                backgroundColor: new Color(255, 255, 255)
+            );
+            // 🔳 LOGO con fondo blanco
+            $logo = null;
+            $logonameico = 'favicon.png';
+            $ico = random_int(0, 6);
+            switch ($ico) {
+                case 0:
+                    $logonameico = 'favicon.png';
+                    break;
+                case 1:
+                    $logonameico = 'favicon1.png';
+                    break;
+                case 2:
+                    $logonameico = 'favicon2.png';
+                    break;
+                case 3:
+                    $logonameico = 'favicon3.png';
+                    break;
+                case 4:
+                    $logonameico = 'favicon4.png';
+                    break;
+                case 5:
+                    $logonameico = 'favicon5.png';
+                    break;
+                case 5:
+                    $logonameico = 'favicon6.png';
+                    break;
+                default:
+                    $logonameico = 'favicon.png';
+                    break;
+                }
+                                            
+            $logoPath = public_path($logonameico);
+            if (file_exists($logoPath)) {
+                $logoImage = imagecreatefrompng($logoPath);
+                $width = imagesx($logoImage);
+                $height = imagesy($logoImage);
+                $background = imagecreatetruecolor($width, $height);
+                $white = imagecolorallocate($background, 255, 255, 255);
+                imagefilledrectangle($background, 0, 0, $width, $height, $white);
+                imagecopy($background, $logoImage, 0, 0, 0, 0, $width, $height);
+
+                $tempLogoPath = storage_path('app/temp_logo_with_bg.png');
+                imagepng($background, $tempLogoPath);
+                imagedestroy($logoImage);
+                imagedestroy($background);
+                $logo = new Logo($tempLogoPath, 75);
+            }
+
+            // 🏷️ LABEL con texto
+            $label = new Label($name, textColor: new Color(255, 30, 30));
+            $writer = new PngWriter();
+            $result = $writer->write($qrCode, $logo, $label);
+
+            // 🗂️ Guardar imagen en disco (public/qr)
+            $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $name) . '.png';
+            $fullPath = public_path('qr/' . $filename);
+
+            if (!file_exists(public_path('qr'))) {
+                mkdir(public_path('qr'), 0755, true);
+            }
+
+            file_put_contents($fullPath, $result->getString());
+
+            // ✅ Retornar URL pública del QR
+            return asset('qr/' . $filename);
+
+        } catch (\Exception $e) {
+            \Log::error('Error generando QR: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+
 
 ========================================================================================================
 

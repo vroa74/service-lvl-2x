@@ -124,6 +124,27 @@ Route::get('/service-pdf/{id}', function ($id) {
     }
 })->name('service.pdf');
 
+Route::get('/inventory-pdf/{id}', function ($id) {
+    try {
+        $inventory = \App\Models\Inventory::with(['assignedUser', 'responsible'])->findOrFail($id);
+        
+        $data = [
+            'inventory' => $inventory,
+            'title' => 'Reporte Individual de Inventario',
+            'generatedAt' => now()->format('d/m/Y H:i:s'),
+        ];
+        
+        $pdf = PDF::loadView('reports.inventory.individual', $data)
+                  ->setPaper('letter', 'portrait');
+        
+        return $pdf->stream('reporte_inventario_' . $inventory->id . '.pdf');
+        
+    } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::error('Error generando PDF para inventario ' . $id . ': ' . $e->getMessage());
+        abort(500, 'Error al generar el PDF. Por favor, revise los logs.');
+    }
+})->name('inventory.pdf');
+
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified', ])->group(function () {
     
     

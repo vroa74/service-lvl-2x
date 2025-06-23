@@ -97,27 +97,18 @@ class Index extends Component
 
         $this->validate();
 
-        $userData = [
-            'name' => $this->name,
-            'rfc' => $this->rfc,
-            'direction' => $this->direction,
-            'position' => $this->position,
-            'sex' => $this->sex,
-            'lvl' => $this->lvl,
-            'tipo' => $this->tipo,
-            'status' => $this->status,
-            'email' => $this->email,
-        ];
+        $validatedData = $this->only(['name', 'rfc', 'direction', 'position', 'sex', 'lvl', 'tipo', 'email']);
+        $validatedData['status'] = $this->status ? 1 : 0;
 
         if ($this->password) {
-            $userData['password'] = Hash::make($this->password);
+            $validatedData['password'] = Hash::make($this->password);
         }
 
         if ($this->editing) {
-            User::find($this->userId)->update($userData);
+            User::find($this->userId)->update($validatedData);
             session()->flash('message', 'Usuario actualizado correctamente.');
         } else {
-            User::create($userData);
+            User::create($validatedData);
             session()->flash('message', 'Usuario creado correctamente.');
         }
 

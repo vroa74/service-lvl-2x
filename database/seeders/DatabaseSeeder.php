@@ -15,3038 +15,3272 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-                
         User::factory()->create([
             'name' => 'DALILA DEL CARMEN MATA PEREZ',
-            'email' => 'NEIM@altinbox.net',
-            'rfc' => 'NEIM759401JIS',
+            'email' => 'AACL@inbox.com',
+            'rfc' => 'AACL508851',
+            'curp' => 'AACL508851',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NEIM354479GSMOII59')
+            'profile_photo_path' => 'profile-photos/00641',
+            'password' => Hash::make('AACL217073362559'),
         ]);
         
         User::factory()->create([
             'name' => 'ENA AMERICA GARCIA GARCIA',
-            'email' => 'CRIM@skyemail.net',
-            'rfc' => 'CRIM594027UDT',
+            'email' => 'ACAA@live.com',
+            'rfc' => 'ACAA367505',
+            'curp' => 'ACAA367505',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('CRIM778543HOBATU03')
+            'profile_photo_path' => 'profile-photos/00755',
+            'password' => Hash::make('ACAA793424704417'),
         ]);
         
         User::factory()->create([
             'name' => 'MAYDA ARACELY MAS TUN',
-            'email' => 'YNMT@myinbox.net',
-            'rfc' => 'YNMT964512RXP',
+            'email' => 'ULLA@inbox.com',
+            'rfc' => 'ULLA104543',
+            'curp' => 'ULLA104543',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('YNMT375837MUNLJU11')
+            'profile_photo_path' => 'profile-photos/00201',
+            'password' => Hash::make('ULLA658746379318'),
         ]);
         
         User::factory()->create([
             'name' => 'GLADYS SOFIA RIVERA LOPEZ',
-            'email' => 'FSDA@hotmail.com',
-            'rfc' => 'FSDA278068JSS',
+            'email' => 'RLIO@icloud.com',
+            'rfc' => 'RLIO536855',
+            'curp' => 'RLIO536855',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('FSDA397356BBOGCJ23')
+            'profile_photo_path' => 'profile-photos/00178',
+            'password' => Hash::make('RLIO386601864950'),
         ]);
         
         User::factory()->create([
             'name' => 'VERONICA MARGARITA ROCA MENDEZ',
-            'email' => 'DMTG@mailxpress.org',
-            'rfc' => 'DMTG965971UMB',
+            'email' => 'CVCO@hotmail.com',
+            'rfc' => 'CVCO569436',
+            'curp' => 'CVCO569436',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DMTG386377TCVDKP95')
+            'profile_photo_path' => 'profile-photos/00106',
+            'password' => Hash::make('CVCO294919704267'),
         ]);
         
         User::factory()->create([
             'name' => 'FRANCISCA ZARATE LOPEZ',
-            'email' => 'PZTO@yahoo.com',
-            'rfc' => 'PZTO066253ERW',
+            'email' => 'AEEZ@icloud.com',
+            'rfc' => 'AEEZ817458',
+            'curp' => 'AEEZ817458',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PZTO158522QNLYVZ41')
+            'profile_photo_path' => 'profile-photos/00369',
+            'password' => Hash::make('AEEZ981107412998'),
         ]);
         
         User::factory()->create([
             'name' => 'DIANA LUISA AGUILAR RUELAS',
-            'email' => 'NRDE@letterbox.org',
-            'rfc' => 'NRDE175885HCQ',
+            'email' => 'AAGR@rocketmail.com',
+            'rfc' => 'AAGR447174',
+            'curp' => 'AAGR447174',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NRDE523003HQXBTE16')
+            'profile_photo_path' => 'profile-photos/00604',
+            'password' => Hash::make('AAGR928026632722'),
         ]);
         
         User::factory()->create([
             'name' => 'TANIA DOMINGUEZ FERNANDEZ',
-            'email' => 'FNTZ@gmail.com',
-            'rfc' => 'FNTZ918460SMV',
+            'email' => 'EAMA@live.com',
+            'rfc' => 'EAMA248358',
+            'curp' => 'EAMA248358',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('FNTZ782102TZTXAU46')
+            'profile_photo_path' => 'profile-photos/00008',
+            'password' => Hash::make('EAMA914894322013'),
         ]);
         
         User::factory()->create([
             'name' => 'TANIA GONZALEZ PEREZ',
-            'email' => 'GIEN@gmail.com',
-            'rfc' => 'GIEN559288IKD',
+            'email' => 'AEEP@hushmail.com',
+            'rfc' => 'AEEP590404',
+            'curp' => 'AEEP590404',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GIEN648806SMCRJL14')
+            'profile_photo_path' => 'profile-photos/00369',
+            'password' => Hash::make('AEEP597496829040'),
         ]);
         
         User::factory()->create([
             'name' => 'DELMA DEL CARMEN RABELO CUEVAS',
-            'email' => 'VAMC@gmail.com',
-            'rfc' => 'VAMC902966XYD',
+            'email' => 'ERAE@pm.me',
+            'rfc' => 'ERAE002651',
+            'curp' => 'ERAE002651',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('VAMC334539OWJLFR81')
+            'profile_photo_path' => 'profile-photos/00713',
+            'password' => Hash::make('ERAE642841106091'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA DEL ROSARIO CRUZ HERNANDEZ',
-            'email' => 'ZODE@blazemail.co',
-            'rfc' => 'ZODE825851CQX',
+            'email' => 'AEAA@live.com',
+            'rfc' => 'AEAA981877',
+            'curp' => 'AEAA981877',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZODE001352GHWYEQ78')
+            'profile_photo_path' => 'profile-photos/00497',
+            'password' => Hash::make('AEAA859004798229'),
         ]);
         
         User::factory()->create([
             'name' => 'ANA MARIA LOPEZ HERNANDEZ',
-            'email' => 'OZIL@zoho.com',
-            'rfc' => 'OZIL832729WSU',
+            'email' => 'ILND@inbox.com',
+            'rfc' => 'ILND272701',
+            'curp' => 'ILND272701',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OZIL511637HXPTBH16')
+            'profile_photo_path' => 'profile-photos/00847',
+            'password' => Hash::make('ILND872840367108'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA DEL CARMEN AVALOS TRUJILLO',
-            'email' => 'RJTI@myinbox.net',
-            'rfc' => 'RJTI789493HWS',
+            'email' => 'IRLR@hotmail.com',
+            'rfc' => 'IRLR878629',
+            'curp' => 'IRLR878629',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RJTI538412MFPHIZ98')
+            'profile_photo_path' => 'profile-photos/00240',
+            'password' => Hash::make('IRLR016016160910'),
         ]);
         
         User::factory()->create([
             'name' => 'HIPSI MARISOL ESTRELLA GUILLERMO',
-            'email' => 'SOPU@securemailbox.org',
-            'rfc' => 'SOPU879998WUU',
+            'email' => 'ELRM@gmail.com',
+            'rfc' => 'ELRM835844',
+            'curp' => 'ELRM835844',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SOPU469508TTLSYR24')
+            'profile_photo_path' => 'profile-photos/00748',
+            'password' => Hash::make('ELRM718407198127'),
         ]);
         
         User::factory()->create([
             'name' => 'MONICA FERNANDEZ MONTUFAR',
-            'email' => 'TUCN@hey.com',
-            'rfc' => 'TUCN902278ZDA',
+            'email' => 'MOZO@hushmail.com',
+            'rfc' => 'MOZO952864',
+            'curp' => 'MOZO952864',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TUCN430005SSIIZJ82')
+            'profile_photo_path' => 'profile-photos/00494',
+            'password' => Hash::make('MOZO160028058097'),
         ]);
         
         User::factory()->create([
             'name' => 'MARICELA FLORES MOO',
-            'email' => 'EORL@fusionmail.cc',
-            'rfc' => 'EORL167920GAW',
+            'email' => 'IAAL@mail.com',
+            'rfc' => 'IAAL764104',
+            'curp' => 'IAAL764104',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EORL243002XYSBZI39')
+            'profile_photo_path' => 'profile-photos/00046',
+            'password' => Hash::make('IAAL797866066754'),
         ]);
         
         User::factory()->create([
             'name' => 'ABIGAIL GUTIERREZ MORALES',
-            'email' => 'SUIO@runbox.com',
-            'rfc' => 'SUIO035797XFO',
+            'email' => 'IGEA@inbox.com',
+            'rfc' => 'IGEA274428',
+            'curp' => 'IGEA274428',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SUIO333406FPLOOB01')
+            'profile_photo_path' => 'profile-photos/00897',
+            'password' => Hash::make('IGEA843174462382'),
         ]);
         
         User::factory()->create([
             'name' => 'BALBINA ALEJANDRA HIDALGO ZAVALA',
-            'email' => 'OJLE@epicmail.com',
-            'rfc' => 'OJLE935645TVA',
+            'email' => 'GOEJ@gmail.com',
+            'rfc' => 'GOEJ162060',
+            'curp' => 'GOEJ162060',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OJLE869042FXTSGU48')
+            'profile_photo_path' => 'profile-photos/00787',
+            'password' => Hash::make('GOEJ816309728860'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE ANTONIO JIMENEZ GUTIERREZ',
-            'email' => 'IZUR@digitmail.xyz',
-            'rfc' => 'IZUR024958YHJ',
+            'email' => 'EIEJ@pm.me',
+            'rfc' => 'EIEJ481292',
+            'curp' => 'EIEJ481292',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IZUR757674ZUFPNU92')
+            'profile_photo_path' => 'profile-photos/00915',
+            'password' => Hash::make('EIEJ089780759479'),
         ]);
         
         User::factory()->create([
             'name' => 'JORGE PEREZ FALCONI',
-            'email' => 'RLOZ@gmx.com',
-            'rfc' => 'RLOZ252445JQQ',
+            'email' => 'ZANO@protonmail.com',
+            'rfc' => 'ZANO768101',
+            'curp' => 'ZANO768101',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RLOZ168974FAPDDI84')
+            'profile_photo_path' => 'profile-photos/00647',
+            'password' => Hash::make('ZANO692930948157'),
         ]);
         
         User::factory()->create([
             'name' => 'ISMAEL LOPEZ GARCES',
-            'email' => 'ZLMS@yandex.com',
-            'rfc' => 'ZLMS615192ZSD',
+            'email' => 'ZPAE@inbox.com',
+            'rfc' => 'ZPAE055934',
+            'curp' => 'ZPAE055934',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZLMS231343FQBFAI34')
+            'profile_photo_path' => 'profile-photos/00610',
+            'password' => Hash::make('ZPAE577868104782'),
         ]);
         
         User::factory()->create([
             'name' => 'GASPAR DE JESUS NAH MISS',
-            'email' => 'HJPD@netpostbox.com',
-            'rfc' => 'HJPD319014JUY',
+            'email' => 'URGD@gmail.com',
+            'rfc' => 'URGD392617',
+            'curp' => 'URGD392617',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('HJPD224214TPJXPS03')
+            'profile_photo_path' => 'profile-photos/00159',
+            'password' => Hash::make('URGD860392896143'),
         ]);
         
         User::factory()->create([
             'name' => 'DAHER ANTONIO PUCH RIVERA',
-            'email' => 'AUPR@protonmail.com',
-            'rfc' => 'AUPR342417RXV',
+            'email' => 'OPIR@pm.me',
+            'rfc' => 'OPIR428400',
+            'curp' => 'OPIR428400',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AUPR838121DMPVIQ91')
+            'profile_photo_path' => 'profile-photos/00149',
+            'password' => Hash::make('OPIR129629990845'),
         ]);
         
         User::factory()->create([
             'name' => 'OMAR ALBERTO TALANGO CERVANTES',
-            'email' => 'LCRM@posteo.net',
-            'rfc' => 'LCRM658871PQX',
+            'email' => 'OLTT@inbox.com',
+            'rfc' => 'OLTT991567',
+            'curp' => 'OLTT991567',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LCRM711864OXLOMI40')
+            'profile_photo_path' => 'profile-photos/00375',
+            'password' => Hash::make('OLTT161784931463'),
         ]);
         
         User::factory()->create([
             'name' => 'CARLOS ENRIQUE UCAN YAM',
-            'email' => 'ROYM@neonmail.biz',
-            'rfc' => 'ROYM938352RDP',
+            'email' => 'QRIR@me.com',
+            'rfc' => 'QRIR047440',
+            'curp' => 'QRIR047440',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ROYM013766GQVGQZ87')
+            'profile_photo_path' => 'profile-photos/00807',
+            'password' => Hash::make('QRIR453601013592'),
         ]);
         
         User::factory()->create([
             'name' => 'PEDRO ARMENTIA LOPEZ',
-            'email' => 'RNPL@airmail.cc',
-            'rfc' => 'RNPL186506ZQQ',
+            'email' => 'IIRE@pm.me',
+            'rfc' => 'IIRE377408',
+            'curp' => 'IIRE377408',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RNPL113381YKAIBK07')
+            'profile_photo_path' => 'profile-photos/00806',
+            'password' => Hash::make('IIRE418885655308'),
         ]);
         
         User::factory()->create([
             'name' => 'ALDO ROMAN CONTRERAS UC',
-            'email' => 'MOSR@gmail.com',
-            'rfc' => 'MOSR664648MUY',
+            'email' => 'NOUM@zoho.com',
+            'rfc' => 'NOUM424415',
+            'curp' => 'NOUM424415',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MOSR652063QGZWUC18')
+            'profile_photo_path' => 'profile-photos/00522',
+            'password' => Hash::make('NOUM970487960259'),
         ]);
         
         User::factory()->create([
             'name' => 'PEDRO HERNANDEZ MACDONALD',
-            'email' => 'REON@warpbox.com',
-            'rfc' => 'REON593847YLV',
+            'email' => 'DNDR@pm.me',
+            'rfc' => 'DNDR297215',
+            'curp' => 'DNDR297215',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('REON753452EYTPLY60')
+            'profile_photo_path' => 'profile-photos/00591',
+            'password' => Hash::make('DNDR995178873708'),
         ]);
         
         User::factory()->create([
             'name' => 'IGNACIO JOSE MUÑOZ HERNANDEZ',
-            'email' => 'ÑJDO@hotmail.com',
-            'rfc' => 'ÑJDO977555DIN',
+            'email' => 'AECÑ@hotmail.com',
+            'rfc' => 'AECÑ922995',
+            'curp' => 'AECÑ922995',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ÑJDO651698FVMJGK26')
+            'profile_photo_path' => 'profile-photos/00096',
+            'password' => Hash::make('AECÑ312740747834'),
         ]);
         
         User::factory()->create([
             'name' => 'JORGE SALIM ABRAHAM QUIJANO',
-            'email' => 'ABLQ@tutanota.com',
-            'rfc' => 'ABLQ018247GIA',
+            'email' => 'EAAA@inbox.com',
+            'rfc' => 'EAAA157440',
+            'curp' => 'EAAA157440',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ABLQ817803LLNZKG74')
+            'profile_photo_path' => 'profile-photos/00551',
+            'password' => Hash::make('EAAA535510115039'),
         ]);
         
         User::factory()->create([
             'name' => 'MIGUEL ANGEL POOL ALPUCHE',
-            'email' => 'MCEP@fusionmail.cc',
-            'rfc' => 'MCEP598027JGX',
+            'email' => 'GLEO@gmx.com',
+            'rfc' => 'GLEO166633',
+            'curp' => 'GLEO166633',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MCEP135353BGVEPD02')
+            'profile_photo_path' => 'profile-photos/00946',
+            'password' => Hash::make('GLEO804201383339'),
         ]);
         
         User::factory()->create([
             'name' => 'JHOSUE JESUS RODRIGUEZ GOLIB',
-            'email' => 'OJUD@outlook.com',
-            'rfc' => 'OJUD672622VDB',
+            'email' => 'UJGI@msn.com',
+            'rfc' => 'UJGI912256',
+            'curp' => 'UJGI912256',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OJUD381662FJCYKX50')
+            'profile_photo_path' => 'profile-photos/00752',
+            'password' => Hash::make('UJGI874541335761'),
         ]);
         
         User::factory()->create([
             'name' => 'ANDRES FERNANDEZ DEL VALLE LAISEQUILLA',
-            'email' => 'EQVU@openmailbox.org',
-            'rfc' => 'EQVU481017UNF',
+            'email' => 'LDQE@zoho.com',
+            'rfc' => 'LDQE013194',
+            'curp' => 'LDQE013194',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EQVU603551MNLEYV34')
+            'profile_photo_path' => 'profile-photos/00943',
+            'password' => Hash::make('LDQE553118547118'),
         ]);
         
         User::factory()->create([
             'name' => 'PAUL ALFREDO ARCE ONTIVEROS',
-            'email' => 'ENAL@digitmail.xyz',
-            'rfc' => 'ENAL777959UAS',
+            'email' => 'OOUF@hotmail.com',
+            'rfc' => 'OOUF039667',
+            'curp' => 'OOUF039667',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ENAL732487AZONEP97')
+            'profile_photo_path' => 'profile-photos/00086',
+            'password' => Hash::make('OOUF369263146596'),
         ]);
         
         User::factory()->create([
             'name' => 'ELIAS NOE BAEZA AKE',
-            'email' => 'LESN@epicmail.com',
-            'rfc' => 'LESN636223FON',
+            'email' => 'OIEE@hushmail.com',
+            'rfc' => 'OIEE424195',
+            'curp' => 'OIEE424195',
             'direction' => 'CONGRESO DEL ESTADO',
             'position' => 'DIPUTADO',
             'sex' => 'masculino',
             'lvl' => '1',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LESN687178BNDJOO33')
+            'profile_photo_path' => 'profile-photos/00177',
+            'password' => Hash::make('OIEE405188864969'),
         ]);
         
         User::factory()->create([
             'name' => 'ALEJANDRO MOO CERVERA',
-            'email' => 'RDJC@skyemail.net',
-            'rfc' => 'RDJC678331BCR',
+            'email' => 'ANEA@outlook.com',
+            'rfc' => 'ANEA856259',
+            'curp' => 'ANEA856259',
             'direction' => 'SECRETARÍA GENERAL',
             'position' => 'SECRETARIO GENERAL',
             'sex' => 'masculino',
             'lvl' => '2',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RDJC044808JVLXFL24')
+            'profile_photo_path' => 'profile-photos/00606',
+            'password' => Hash::make('ANEA129224120613'),
         ]);
         
         User::factory()->create([
             'name' => 'OSCAR JOSUE MUÑOZ SIMA',
-            'email' => 'MESC@safeinbox.net',
-            'rfc' => 'MESC104791RPS',
+            'email' => 'SUIO@gmx.com',
+            'rfc' => 'SUIO104020',
+            'curp' => 'SUIO104020',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'TITULAR ORGANO INTERNO DE CONTROL',
             'sex' => 'masculino',
             'lvl' => '2',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MESC792238GIBIXT53')
+            'profile_photo_path' => 'profile-photos/00098',
+            'password' => Hash::make('SUIO759250107753'),
         ]);
         
         User::factory()->create([
             'name' => 'ANA ELISA VARGAS ROSADO',
-            'email' => 'EAVN@cybermail.io',
-            'rfc' => 'EAVN856602CWY',
+            'email' => 'SAAA@protonmail.com',
+            'rfc' => 'SAAA376239',
+            'curp' => 'SAAA376239',
             'direction' => 'COORDINACIÓN DE ASESORES',
             'position' => 'ASESOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '3',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EAVN402147UJHUSM63')
+            'profile_photo_path' => 'profile-photos/00740',
+            'password' => Hash::make('SAAA264566413179'),
         ]);
         
         User::factory()->create([
-            'name' => 'IVÁN ALEJANDRO   ARA ANGULO',
-            'email' => 'ADVN@airmail.cc',
-            'rfc' => 'ADVN544620REX',
+            'name' => 'IVÁN ALEJANDRO ARA ANGULO',
+            'email' => 'RILA@mail.com',
+            'rfc' => 'RILA293889',
+            'curp' => 'RILA293889',
             'direction' => 'DIRECCIÓN DE ARCHIVO LEGISLATIVO',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ADVN848670ZBQQKZ95')
+            'profile_photo_path' => 'profile-photos/00392',
+            'password' => Hash::make('RILA454816049569'),
         ]);
         
         User::factory()->create([
             'name' => 'SERGIO MANUEL VEGA CARRILLO',
-            'email' => 'LSOV@runbox.com',
-            'rfc' => 'LSOV098898NIQ',
+            'email' => 'RCIA@live.com',
+            'rfc' => 'RCIA048267',
+            'curp' => 'RCIA048267',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LSOV754055ZLOEDB10')
+            'profile_photo_path' => 'profile-photos/00567',
+            'password' => Hash::make('RCIA446444719411'),
         ]);
         
         User::factory()->create([
             'name' => 'IVAN ALEJANDRO ARA ANGULO',
-            'email' => 'OUNJ@mailplan.io',
-            'rfc' => 'OUNJ082021OUY',
+            'email' => 'VIRA@msn.com',
+            'rfc' => 'VIRA695316',
+            'curp' => 'VIRA695316',
             'direction' => 'DIRECCIÓN DE ARCHIVO DEL PODER LEGISLATIVO',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OUNJ962882KMKETG04')
+            'profile_photo_path' => 'profile-photos/00291',
+            'password' => Hash::make('VIRA487674732389'),
         ]);
         
         User::factory()->create([
             'name' => 'GILBERTO REYES CUEVAS',
-            'email' => 'ILST@safeinbox.net',
-            'rfc' => 'ILST701388QBY',
+            'email' => 'GEEE@icloud.com',
+            'rfc' => 'GEEE940774',
+            'curp' => 'GEEE940774',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ILST592351JDIVDA34')
+            'profile_photo_path' => 'profile-photos/00489',
+            'password' => Hash::make('GEEE674550141484'),
         ]);
         
         User::factory()->create([
             'name' => 'FRANCISCO JULIAN TAMAY CHI',
-            'email' => 'IJFR@yandex.com',
-            'rfc' => 'IJFR533152CCH',
+            'email' => 'OHNU@mail.com',
+            'rfc' => 'OHNU127285',
+            'curp' => 'OHNU127285',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IJFR265338KFLUKC25')
+            'profile_photo_path' => 'profile-photos/00477',
+            'password' => Hash::make('OHNU876489719984'),
         ]);
         
         User::factory()->create([
             'name' => 'JORGE ANTONIO BAZAN ZUBELDIA',
-            'email' => 'ZJIN@aol.com',
-            'rfc' => 'ZJIN361938UED',
+            'email' => 'AOEU@icloud.com',
+            'rfc' => 'AOEU283123',
+            'curp' => 'AOEU283123',
             'direction' => 'UNIDAD DE TRANSPARENCIA',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZJIN942336TRXJYS65')
+            'profile_photo_path' => 'profile-photos/00550',
+            'password' => Hash::make('AOEU240484559702'),
         ]);
         
         User::factory()->create([
             'name' => 'ADRIANA GEORGINA SANDOVAL MARTINEZ',
-            'email' => 'VZMI@disroot.org',
-            'rfc' => 'VZMI490203KGG',
+            'email' => 'SMSI@aol.com',
+            'rfc' => 'SMSI174169',
+            'curp' => 'SMSI174169',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('VZMI417121WRHVOK97')
+            'profile_photo_path' => 'profile-photos/00865',
+            'password' => Hash::make('SMSI902949251302'),
         ]);
         
         User::factory()->create([
             'name' => 'NESTOR MAURICIO BARRERA ESQUIVEL',
-            'email' => 'TEAN@epicmail.com',
-            'rfc' => 'TEAN767381FNA',
+            'email' => 'UNAR@msn.com',
+            'rfc' => 'UNAR014084',
+            'curp' => 'UNAR014084',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TEAN381842GSNDOQ75')
+            'profile_photo_path' => 'profile-photos/00280',
+            'password' => Hash::make('UNAR168529886089'),
         ]);
         
         User::factory()->create([
             'name' => 'SONIA ALEJANDRA CASTILLO PERALTA',
-            'email' => 'JCRS@darkmail.xyz',
-            'rfc' => 'JCRS779319RMT',
+            'email' => 'RLAN@aol.com',
+            'rfc' => 'RLAN060368',
+            'curp' => 'RLAN060368',
             'direction' => 'DIRECCIÓN DE APOYO PARLAMENTARIO',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JCRS583928GIKIDZ07')
+            'profile_photo_path' => 'profile-photos/00827',
+            'password' => Hash::make('RLAN691069803440'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA DE LOS ANGELES ZAMORA MAYA',
-            'email' => 'SGLI@aol.com',
-            'rfc' => 'SGLI900475EXS',
+            'email' => 'SMLL@gmx.com',
+            'rfc' => 'SMLL763737',
+            'curp' => 'SMLL763737',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SGLI035467IHECKG77')
+            'profile_photo_path' => 'profile-photos/00191',
+            'password' => Hash::make('SMLL376850306325'),
         ]);
         
         User::factory()->create([
             'name' => 'MINERVA GUADALUPE REJON MENA',
-            'email' => 'JLVD@zoho.com',
-            'rfc' => 'JLVD586841HKV',
+            'email' => 'IDLN@hotmail.com',
+            'rfc' => 'IDLN993450',
+            'curp' => 'IDLN993450',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JLVD955568ZCKSEL00')
+            'profile_photo_path' => 'profile-photos/00052',
+            'password' => Hash::make('IDLN333880081586'),
         ]);
         
         User::factory()->create([
             'name' => 'KAREN VIETMEIER CAHUICH',
-            'email' => 'KMHU@gmx.com',
-            'rfc' => 'KMHU263943TEE',
+            'email' => 'IRER@zoho.com',
+            'rfc' => 'IRER583965',
+            'curp' => 'IRER583965',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('KMHU242816XFHXOV53')
+            'profile_photo_path' => 'profile-photos/00803',
+            'password' => Hash::make('IRER135799247773'),
         ]);
         
         User::factory()->create([
             'name' => 'MIGUEL GONZALEZ FLORES',
-            'email' => 'LRMF@airmail.cc',
-            'rfc' => 'LRMF970224RVJ',
+            'email' => 'LELR@yandex.com',
+            'rfc' => 'LELR589462',
+            'curp' => 'LELR589462',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LRMF581146EAYSZM58')
+            'profile_photo_path' => 'profile-photos/00559',
+            'password' => Hash::make('LELR286006177129'),
         ]);
         
         User::factory()->create([
             'name' => 'RUBEN EDUARDO JIMENEZ JUAREZ',
-            'email' => 'DURZ@safeinbox.net',
-            'rfc' => 'DURZ659430JFH',
+            'email' => 'OMNE@mail.com',
+            'rfc' => 'OMNE014224',
+            'curp' => 'OMNE014224',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'DIRECTOR',
             'sex' => 'masculino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DURZ102283CGWNMP61')
+            'profile_photo_path' => 'profile-photos/00564',
+            'password' => Hash::make('OMNE773517594683'),
         ]);
         
         User::factory()->create([
             'name' => 'MARITZA DEL CARMEN ARCOS CRUZ',
-            'email' => 'TORS@skyemail.net',
-            'rfc' => 'TORS972603XYV',
+            'email' => 'ENEE@yandex.com',
+            'rfc' => 'ENEE112605',
+            'curp' => 'ENEE112605',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TORS868980YYKLDG04')
+            'profile_photo_path' => 'profile-photos/00794',
+            'password' => Hash::make('ENEE364187968374'),
         ]);
         
         User::factory()->create([
             'name' => 'IRLANDA JAQUELINE FIERROS BOJORQUEZ',
-            'email' => 'IFUJ@driftmail.net',
-            'rfc' => 'IFUJ870298GPY',
+            'email' => 'QOQR@yahoo.com',
+            'rfc' => 'QOQR067055',
+            'curp' => 'QOQR067055',
             'direction' => 'JUNTA DE GOBIERNO Y ADMINISTRACIÓN',
             'position' => 'DIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '4',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IFUJ596632PLRLZZ82')
+            'profile_photo_path' => 'profile-photos/00453',
+            'password' => Hash::make('QOQR964417806766'),
         ]);
         
         User::factory()->create([
             'name' => 'EMILIO RODRIGUEZ HERRERA',
-            'email' => 'MGHD@aol.com',
-            'rfc' => 'MGHD582157WHF',
+            'email' => 'EZIR@fastmail.com',
+            'rfc' => 'EZIR619162',
+            'curp' => 'EZIR619162',
             'direction' => 'DIRECCIÓN DE ARCHIVO DEL PODER LEGISLATIVO',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MGHD108866VVEUAX40')
+            'profile_photo_path' => 'profile-photos/00286',
+            'password' => Hash::make('EZIR224137066123'),
         ]);
         
         User::factory()->create([
             'name' => 'EMMANUEL JESUS TURRIZA AGUILAR',
-            'email' => 'ZITJ@gmail.com',
-            'rfc' => 'ZITJ817719SEH',
+            'email' => 'RUUS@mail.com',
+            'rfc' => 'RUUS531143',
+            'curp' => 'RUUS531143',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZITJ034735IMQNRW74')
+            'profile_photo_path' => 'profile-photos/00701',
+            'password' => Hash::make('RUUS785077300549'),
         ]);
         
         User::factory()->create([
             'name' => 'ANDRES DE JESUS ALEJANDRE RODRIGUEZ',
-            'email' => 'IZDR@stormmail.net',
-            'rfc' => 'IZDR897507UNX',
+            'email' => 'RAEO@msn.com',
+            'rfc' => 'RAEO519864',
+            'curp' => 'RAEO519864',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IZDR048752EVDOYR76')
+            'profile_photo_path' => 'profile-photos/00935',
+            'password' => Hash::make('RAEO832525012652'),
         ]);
         
         User::factory()->create([
             'name' => 'BENJAMIN PINZON QUINTANA',
-            'email' => 'OPZA@zoho.com',
-            'rfc' => 'OPZA714459UCN',
+            'email' => 'PAAJ@yahoo.com',
+            'rfc' => 'PAAJ980632',
+            'curp' => 'PAAJ980632',
             'direction' => 'SECRETARÍA GENERAL',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OPZA389921HVIRSZ55')
+            'profile_photo_path' => 'profile-photos/00535',
+            'password' => Hash::make('PAAJ546642428660'),
         ]);
         
         User::factory()->create([
             'name' => 'LAURA NOEMI UC NAAL',
-            'email' => 'ELUN@hotmail.com',
-            'rfc' => 'ELUN457103SQH',
+            'email' => 'AUOI@hotmail.com',
+            'rfc' => 'AUOI588411',
+            'curp' => 'AUOI588411',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ELUN719576AJNMFH68')
+            'profile_photo_path' => 'profile-photos/00543',
+            'password' => Hash::make('AUOI578149339319'),
         ]);
         
         User::factory()->create([
             'name' => 'SONIA DE LA LUZ ALPUCHE SIERRA',
-            'email' => 'IDZR@invisimail.org',
-            'rfc' => 'IDZR394383PAU',
+            'email' => 'EIES@gmail.com',
+            'rfc' => 'EIES099574',
+            'curp' => 'EIES099574',
             'direction' => 'SECRETARÍA GENERAL',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IDZR255314XRMJMP76')
+            'profile_photo_path' => 'profile-photos/00480',
+            'password' => Hash::make('EIES691670256957'),
         ]);
         
         User::factory()->create([
             'name' => 'MADELEYNE DE LOS ANGELES ACEVEDO PEREZ',
-            'email' => 'DEPL@nightpost.io',
-            'rfc' => 'DEPL669838LGD',
+            'email' => 'EEEE@me.com',
+            'rfc' => 'EEEE627459',
+            'curp' => 'EEEE627459',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DEPL169207HAJMPR24')
+            'profile_photo_path' => 'profile-photos/00955',
+            'password' => Hash::make('EEEE598566640512'),
         ]);
         
         User::factory()->create([
             'name' => 'GENESIS BELEN CASTILLO MAAS',
-            'email' => 'MTBS@gmx.com',
-            'rfc' => 'MTBS979126EOA',
+            'email' => 'GEII@pm.me',
+            'rfc' => 'GEII309799',
+            'curp' => 'GEII309799',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MTBS173139AXICWB61')
+            'profile_photo_path' => 'profile-photos/00628',
+            'password' => Hash::make('GEII027041748436'),
         ]);
         
         User::factory()->create([
             'name' => 'ANDRES ALBERTO CHAN COUOH',
-            'email' => 'ATSB@digitmail.xyz',
-            'rfc' => 'ATSB048690EZG',
+            'email' => 'AORO@icloud.com',
+            'rfc' => 'AORO945626',
+            'curp' => 'AORO945626',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ATSB162699FWDQUP33')
+            'profile_photo_path' => 'profile-photos/00411',
+            'password' => Hash::make('AORO000052870532'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIO ENRIQUE MORENO RAMOS',
-            'email' => 'NMUO@zoho.com',
-            'rfc' => 'NMUO777679ZBV',
+            'email' => 'QOEI@rocketmail.com',
+            'rfc' => 'QOEI503682',
+            'curp' => 'QOEI503682',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NMUO791185HFZCPY46')
+            'profile_photo_path' => 'profile-photos/00737',
+            'password' => Hash::make('QOEI220034075966'),
         ]);
         
         User::factory()->create([
             'name' => 'ELIUD JOKSAN RIOS MANZANILLA',
-            'email' => 'ADKJ@tutanota.com',
-            'rfc' => 'ADKJ802517NLS',
+            'email' => 'UZIS@inbox.com',
+            'rfc' => 'UZIS409494',
+            'curp' => 'UZIS409494',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ADKJ069227PDHUOS47')
+            'profile_photo_path' => 'profile-photos/00544',
+            'password' => Hash::make('UZIS403112364966'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE LUIS SANSORES PEREZ',
-            'email' => 'JPRI@bubblemail.org',
-            'rfc' => 'JPRI622547MEI',
+            'email' => 'NSJR@inbox.com',
+            'rfc' => 'NSJR759109',
+            'curp' => 'NSJR759109',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JPRI178228MZCYFH37')
+            'profile_photo_path' => 'profile-photos/00227',
+            'password' => Hash::make('NSJR249864037233'),
         ]);
         
         User::factory()->create([
             'name' => 'JHONI ARMANDO PULIDO YAH',
-            'email' => 'ANOP@waveboxmail.com',
-            'rfc' => 'ANOP911940BCV',
+            'email' => 'ANOJ@pm.me',
+            'rfc' => 'ANOJ881353',
+            'curp' => 'ANOJ881353',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'SUBDIRECTOR',
             'sex' => 'masculino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ANOP761951LAOZML61')
+            'profile_photo_path' => 'profile-photos/00022',
+            'password' => Hash::make('ANOJ602514574547'),
         ]);
         
         User::factory()->create([
             'name' => 'KERREL DICLAUDIA VILLARINO PERERA',
-            'email' => 'EODU@gmx.com',
-            'rfc' => 'EODU893581RSL',
+            'email' => 'VEOC@icloud.com',
+            'rfc' => 'VEOC081358',
+            'curp' => 'VEOC081358',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EODU537866HIWXPK84')
+            'profile_photo_path' => 'profile-photos/00242',
+            'password' => Hash::make('VEOC800947931512'),
         ]);
         
         User::factory()->create([
             'name' => 'RUSBY AZUL DAMIAN PLASCENCIA',
-            'email' => 'ABNY@tutanota.com',
-            'rfc' => 'ABNY350852RYG',
+            'email' => 'LCPA@icloud.com',
+            'rfc' => 'LCPA576970',
+            'curp' => 'LCPA576970',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ABNY634289XHHKAN83')
+            'profile_photo_path' => 'profile-photos/00610',
+            'password' => Hash::make('LCPA592586820795'),
         ]);
         
         User::factory()->create([
             'name' => 'JULIA ESPERANZA RUIZ CASTELLOT',
-            'email' => 'ILCU@nightpost.io',
-            'rfc' => 'ILCU229294INN',
+            'email' => 'LTAU@hotmail.com',
+            'rfc' => 'LTAU336648',
+            'curp' => 'LTAU336648',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ILCU901825AIFXXP20')
+            'profile_photo_path' => 'profile-photos/00848',
+            'password' => Hash::make('LTAU615137496919'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA GUADALUPE CORINA POZOS LANZ',
-            'email' => 'DALO@posteo.net',
-            'rfc' => 'DALO984650NHZ',
+            'email' => 'MAAG@fastmail.com',
+            'rfc' => 'MAAG956786',
+            'curp' => 'MAAG956786',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'SUBDIRECTOR',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '5',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DALO137217SFCQHA02')
+            'profile_photo_path' => 'profile-photos/00223',
+            'password' => Hash::make('MAAG804657449237'),
         ]);
         
         User::factory()->create([
             'name' => 'GUADALUPE DEL SOCORRO SOSA HUCHIN',
-            'email' => 'DLOU@yandex.com',
-            'rfc' => 'DLOU277241BWJ',
+            'email' => 'OHEE@gmx.com',
+            'rfc' => 'OHEE218343',
+            'curp' => 'OHEE218343',
             'direction' => 'DIRECCIÓN DE ARCHIVO DEL PODER LEGISLATIVO',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DLOU626240HLJWSS73')
+            'profile_photo_path' => 'profile-photos/00469',
+            'password' => Hash::make('OHEE230696076712'),
         ]);
         
         User::factory()->create([
             'name' => 'SILVIA DEL CARMEN KUMUL MENDOZA',
-            'email' => 'DMKO@gmail.com',
-            'rfc' => 'DMKO426952DSN',
+            'email' => 'UUEA@outlook.com',
+            'rfc' => 'UUEA808445',
+            'curp' => 'UUEA808445',
             'direction' => 'COORDINACIÓN DE ASESORES',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DMKO348350NSLXMR81')
+            'profile_photo_path' => 'profile-photos/00286',
+            'password' => Hash::make('UUEA937779478324'),
         ]);
         
         User::factory()->create([
             'name' => 'JUAN DIAZ ORTEGA',
-            'email' => 'JDTZ@fusionmail.cc',
-            'rfc' => 'JDTZ135341GQP',
+            'email' => 'EZGU@pm.me',
+            'rfc' => 'EZGU208948',
+            'curp' => 'EZGU208948',
             'direction' => 'COORDINACIÓN DE ASESORES',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JDTZ590470WPJIWC63')
+            'profile_photo_path' => 'profile-photos/00683',
+            'password' => Hash::make('EZGU308009804212'),
         ]);
         
         User::factory()->create([
             'name' => 'LAURA DEL CARMEN GUERRERO GARCIA',
-            'email' => 'DLAN@mailxpress.org',
-            'rfc' => 'DLAN505802RYG',
+            'email' => 'ALCE@tutanota.com',
+            'rfc' => 'ALCE263163',
+            'curp' => 'ALCE263163',
             'direction' => 'DIRECCIÓN DE APOYO PARLAMENTARIO',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DLAN100425NCFBRW42')
+            'profile_photo_path' => 'profile-photos/00481',
+            'password' => Hash::make('ALCE974155088629'),
         ]);
         
         User::factory()->create([
             'name' => 'FLOR DE MARIA GUADALUPE COLLI EK',
-            'email' => 'UCAG@hey.com',
-            'rfc' => 'UCAG480056UEL',
+            'email' => 'EIUG@hotmail.com',
+            'rfc' => 'EIUG218140',
+            'curp' => 'EIUG218140',
             'direction' => 'DIRECCIÓN DE APOYO PARLAMENTARIO',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UCAG885968UILLOI03')
+            'profile_photo_path' => 'profile-photos/00932',
+            'password' => Hash::make('EIUG517263339923'),
         ]);
         
         User::factory()->create([
             'name' => 'LYDIA MARGARITA CORTEZ ZUBIETA',
-            'email' => 'LRZA@fastmail.com',
-            'rfc' => 'LRZA041509UKK',
+            'email' => 'GRZO@yahoo.com',
+            'rfc' => 'GRZO564148',
+            'curp' => 'GRZO564148',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LRZA794885UGLKHS05')
+            'profile_photo_path' => 'profile-photos/00012',
+            'password' => Hash::make('GRZO056756606117'),
         ]);
         
         User::factory()->create([
             'name' => 'NYLDA MARIA JONGUITUD PEREZ',
-            'email' => 'APYU@digitmail.xyz',
-            'rfc' => 'APYU615788QNE',
+            'email' => 'IIPA@yandex.com',
+            'rfc' => 'IIPA175513',
+            'curp' => 'IIPA175513',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('APYU728692QXMQAG40')
+            'profile_photo_path' => 'profile-photos/00617',
+            'password' => Hash::make('IIPA115469502444'),
         ]);
         
         User::factory()->create([
             'name' => 'ROBERTO EDUARDO CARRILLO GONZALEZ',
-            'email' => 'TZNA@zonemail.co',
-            'rfc' => 'TZNA639351CLG',
+            'email' => 'OOOR@fastmail.com',
+            'rfc' => 'OOOR747933',
+            'curp' => 'OOOR747933',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TZNA011096YEDVOI83')
+            'profile_photo_path' => 'profile-photos/00270',
+            'password' => Hash::make('OOOR141159135347'),
         ]);
         
         User::factory()->create([
-            'name' => 'JOSUE DAVID CASTILLO',
-            'email' => 'OEID@letterbox.org',
-            'rfc' => 'OEID421588GWC',
+            'name' => 'JOSUE DAVID CASTILLO ',
+            'email' => 'JAUS@live.com',
+            'rfc' => 'JAUS064947',
+            'curp' => 'JAUS064947',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OEID365256DZYYEI61')
+            'profile_photo_path' => 'profile-photos/00853',
+            'password' => Hash::make('JAUS994847668283'),
         ]);
         
         User::factory()->create([
             'name' => 'VICTOR ROMAN ORTIZ ABREU',
             'email' => 'vroa74@gmail.com',
-            'rfc' => 'VRAB839549LQG',
+            'rfc' => 'ZOOZ401477',
+            'curp' => 'ZOOZ401477',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
-            'tipo' => 1,
-            'status' => true,
-            'password' => Hash::make('Campeche1974.')
+            'tipo' => 3,
+            'profile_photo_path' => 'profile-photos/00040',
+            'password' => Hash::make('Campeche2024.'),
         ]);
         
         User::factory()->create([
             'name' => 'GLORIA DEL ROSARIO JIMENEZ CUPUL',
-            'email' => 'ERLP@netpostbox.com',
-            'rfc' => 'ERLP653974AGH',
+            'email' => 'CEPD@gmail.com',
+            'rfc' => 'CEPD136743',
+            'curp' => 'CEPD136743',
             'direction' => 'SECRETARÍA GENERAL',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ERLP350852SLUNVX53')
+            'profile_photo_path' => 'profile-photos/00229',
+            'password' => Hash::make('CEPD300605149554'),
         ]);
         
         User::factory()->create([
             'name' => 'LAURA DEL JESUS COLLI AKE',
-            'email' => 'KEJA@zonemail.co',
-            'rfc' => 'KEJA783925PMN',
+            'email' => 'LSIK@icloud.com',
+            'rfc' => 'LSIK800215',
+            'curp' => 'LSIK800215',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('KEJA337538DJVMPC22')
+            'profile_photo_path' => 'profile-photos/00301',
+            'password' => Hash::make('LSIK537870416572'),
         ]);
         
         User::factory()->create([
             'name' => 'GLADYS MARGARITA GRAMAJO PIEDRASANTA',
-            'email' => 'PNGI@mailfence.com',
-            'rfc' => 'PNGI891120YGG',
+            'email' => 'RSIA@yandex.com',
+            'rfc' => 'RSIA027300',
+            'curp' => 'RSIA027300',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'JEFE DE DEPARTAMENTO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PNGI301302CNGXYY93')
+            'profile_photo_path' => 'profile-photos/00691',
+            'password' => Hash::make('RSIA040767498084'),
         ]);
         
         User::factory()->create([
             'name' => 'JAVIER DAVID ROMERO TUN',
-            'email' => 'RJAM@mail.com',
-            'rfc' => 'RJAM017399PMX',
+            'email' => 'UARM@mail.com',
+            'rfc' => 'UARM074568',
+            'curp' => 'UARM074568',
             'direction' => 'DIRECCIÓN DE APOYO PARLAMENTARIO',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RJAM833368KOHNKD95')
+            'profile_photo_path' => 'profile-photos/00810',
+            'password' => Hash::make('UARM723955881355'),
         ]);
         
         User::factory()->create([
             'name' => 'RAFAEL ARMANDO DZIB AVILA',
-            'email' => 'AVED@protonmail.com',
-            'rfc' => 'AVED437202CLZ',
+            'email' => 'MAOM@me.com',
+            'rfc' => 'MAOM507599',
+            'curp' => 'MAOM507599',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AVED501506BJDQEM40')
+            'profile_photo_path' => 'profile-photos/00524',
+            'password' => Hash::make('MAOM936845315025'),
         ]);
         
         User::factory()->create([
             'name' => 'ROMAN LEON HERRERA',
-            'email' => 'NRMO@openmailbox.org',
-            'rfc' => 'NRMO238884NTQ',
+            'email' => 'ENOR@yandex.com',
+            'rfc' => 'ENOR964997',
+            'curp' => 'ENOR964997',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NRMO639898VAWDTE23')
+            'profile_photo_path' => 'profile-photos/00084',
+            'password' => Hash::make('ENOR564315317780'),
         ]);
         
         User::factory()->create([
             'name' => 'VICTOR HUGO ZAMORANO RUIZ',
-            'email' => 'ZICR@mailxpress.org',
-            'rfc' => 'ZICR465268ZHG',
+            'email' => 'UMUN@fastmail.com',
+            'rfc' => 'UMUN869549',
+            'curp' => 'UMUN869549',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZICR917242NGLMNE64')
+            'profile_photo_path' => 'profile-photos/00208',
+            'password' => Hash::make('UMUN938947882597'),
         ]);
         
         User::factory()->create([
             'name' => 'GERARDO DANIEL MUÑOZ CHAN',
-            'email' => 'NOEG@gmx.com',
-            'rfc' => 'NOEG235453ZXI',
+            'email' => 'AENA@hotmail.com',
+            'rfc' => 'AENA265432',
+            'curp' => 'AENA265432',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NOEG853976ZSGXDF17')
+            'profile_photo_path' => 'profile-photos/00385',
+            'password' => Hash::make('AENA117350969111'),
         ]);
         
         User::factory()->create([
             'name' => 'JORGE ALBERTO XOOL VILLARREAL',
-            'email' => 'LXAR@mail.com',
-            'rfc' => 'LXAR253727ZHM',
+            'email' => 'ETLE@gmx.com',
+            'rfc' => 'ETLE742306',
+            'curp' => 'ETLE742306',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'JEFE DE DEPARTAMENTO',
             'sex' => 'masculino',
             'lvl' => '7',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LXAR188251MKJWOX27')
+            'profile_photo_path' => 'profile-photos/00525',
+            'password' => Hash::make('ETLE124919381150'),
         ]);
         
         User::factory()->create([
             'name' => 'ADDA MARISOL RAMOS TORRES',
-            'email' => 'LSIM@neonmail.biz',
-            'rfc' => 'LSIM159219LNB',
+            'email' => 'MRSR@msn.com',
+            'rfc' => 'MRSR801185',
+            'curp' => 'MRSR801185',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LSIM012054QHWLWC87')
+            'profile_photo_path' => 'profile-photos/00133',
+            'password' => Hash::make('MRSR426618584926'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE MANUEL HERNANDEZ VALLE',
-            'email' => 'LZNE@securemailbox.org',
-            'rfc' => 'LZNE508520TKH',
+            'email' => 'UORS@hushmail.com',
+            'rfc' => 'UORS200642',
+            'curp' => 'UORS200642',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LZNE445848ZXBKJB72')
+            'profile_photo_path' => 'profile-photos/00573',
+            'password' => Hash::make('UORS676177421610'),
         ]);
         
         User::factory()->create([
             'name' => 'CLAUDIA MARIELA CAN VAZQUEZ',
-            'email' => 'VNQC@darkmail.xyz',
-            'rfc' => 'VNQC169006JYP',
+            'email' => 'MLUD@mail.com',
+            'rfc' => 'MLUD945357',
+            'curp' => 'MLUD945357',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('VNQC136797AGGJIH88')
+            'profile_photo_path' => 'profile-photos/00613',
+            'password' => Hash::make('MLUD004263236175'),
         ]);
         
         User::factory()->create([
             'name' => 'RICARDO FRANCISCO RODRIGUEZ CERVERA',
-            'email' => 'OSIN@startmail.com',
-            'rfc' => 'OSIN572680AZT',
+            'email' => 'CFID@hotmail.com',
+            'rfc' => 'CFID191501',
+            'curp' => 'CFID191501',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OSIN308715AEZTZG71')
+            'profile_photo_path' => 'profile-photos/00696',
+            'password' => Hash::make('CFID333347347522'),
         ]);
         
         User::factory()->create([
             'name' => 'TERESITA DE JESUS DELGADO NOVELO',
-            'email' => 'OVIA@aol.com',
-            'rfc' => 'OVIA425096QGV',
+            'email' => 'DSAD@outlook.com',
+            'rfc' => 'DSAD888104',
+            'curp' => 'DSAD888104',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OVIA620399GUUXXM39')
+            'profile_photo_path' => 'profile-photos/00440',
+            'password' => Hash::make('DSAD687699324594'),
         ]);
         
         User::factory()->create([
             'name' => 'JONHNI ABRAHAM BUZON VERA',
-            'email' => 'EIMO@mailplan.io',
-            'rfc' => 'EIMO042602OSI',
+            'email' => 'VNMR@live.com',
+            'rfc' => 'VNMR623249',
+            'curp' => 'VNMR623249',
             'direction' => 'DIRECCIÓN DE ARCHIVO DEL PODER LEGISLATIVO',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EIMO901167SPRTNN26')
+            'profile_photo_path' => 'profile-photos/00518',
+            'password' => Hash::make('VNMR582416946060'),
         ]);
         
         User::factory()->create([
             'name' => 'LILIA MARGARITA PEREZ CAAMAL',
-            'email' => 'ZALG@safeinbox.net',
-            'rfc' => 'ZALG752261ZRQ',
+            'email' => 'AAIA@yahoo.com',
+            'rfc' => 'AAIA468390',
+            'curp' => 'AAIA468390',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZALG147676DWNLXM40')
+            'profile_photo_path' => 'profile-photos/00250',
+            'password' => Hash::make('AAIA735549238464'),
         ]);
         
         User::factory()->create([
             'name' => 'EDUARDO MARTIN VERA REYES',
-            'email' => 'STDR@mail.com',
-            'rfc' => 'STDR599372LUP',
+            'email' => 'EAVD@gmail.com',
+            'rfc' => 'EAVD613966',
+            'curp' => 'EAVD613966',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('STDR053364EWDXLN92')
+            'profile_photo_path' => 'profile-photos/00176',
+            'password' => Hash::make('EAVD586983545560'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL FRANCISCO SOSA HUICAB',
-            'email' => 'FORM@aol.com',
-            'rfc' => 'FORM957522SKZ',
+            'email' => 'RCAR@yahoo.com',
+            'rfc' => 'RCAR935408',
+            'curp' => 'RCAR935408',
             'direction' => 'DIRECCIÓN DE INFORMÁTICA',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('FORM933248YVXGUY25')
+            'profile_photo_path' => 'profile-photos/00049',
+            'password' => Hash::make('RCAR322965573678'),
         ]);
         
         User::factory()->create([
             'name' => 'LUIS FERNANDO ALAYOLA MOO',
-            'email' => 'DYFR@stormmail.net',
-            'rfc' => 'DYFR000900CZL',
+            'email' => 'MSAA@gmx.com',
+            'rfc' => 'MSAA357214',
+            'curp' => 'MSAA357214',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DYFR291161VAFZKO32')
+            'profile_photo_path' => 'profile-photos/00384',
+            'password' => Hash::make('MSAA871836577424'),
         ]);
         
         User::factory()->create([
             'name' => 'ANA LILIA HERRERA CHI',
-            'email' => 'NIEL@darkmail.xyz',
-            'rfc' => 'NIEL638342SSA',
+            'email' => 'RELE@yandex.com',
+            'rfc' => 'RELE533829',
+            'curp' => 'RELE533829',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NIEL439434GJSQEO72')
+            'profile_photo_path' => 'profile-photos/00646',
+            'password' => Hash::make('RELE223284287508'),
         ]);
         
         User::factory()->create([
             'name' => 'ROXANA YOMARA SOLIS GARRIDO',
-            'email' => 'RGYL@netpostbox.com',
-            'rfc' => 'RGYL079889IRU',
+            'email' => 'AARR@zoho.com',
+            'rfc' => 'AARR235456',
+            'curp' => 'AARR235456',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RGYL710614KOMTVW33')
+            'profile_photo_path' => 'profile-photos/00176',
+            'password' => Hash::make('AARR407239082389'),
         ]);
         
         User::factory()->create([
             'name' => 'PATRICIA DEL CARMEN HERNANDEZ BAAS',
-            'email' => 'RHCB@runbox.com',
-            'rfc' => 'RHCB936765CMU',
+            'email' => 'NLET@msn.com',
+            'rfc' => 'NLET885408',
+            'curp' => 'NLET885408',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RHCB115480NQINDU89')
+            'profile_photo_path' => 'profile-photos/00152',
+            'password' => Hash::make('NLET282443458522'),
         ]);
         
         User::factory()->create([
             'name' => 'LETICIA DE MONSERRAT LARA GUERRERO',
-            'email' => 'GTDU@fastmail.com',
-            'rfc' => 'GTDU133544WLZ',
+            'email' => 'TRLR@tutanota.com',
+            'rfc' => 'TRLR826176',
+            'curp' => 'TRLR826176',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GTDU303999HAQSAM35')
+            'profile_photo_path' => 'profile-photos/00066',
+            'password' => Hash::make('TRLR230438722209'),
         ]);
         
         User::factory()->create([
             'name' => 'HUGO DANIEL MORA CASANOVA',
-            'email' => 'MOAS@myinbox.net',
-            'rfc' => 'MOAS767307HEX',
+            'email' => 'AAIM@hotmail.com',
+            'rfc' => 'AAIM210456',
+            'curp' => 'AAIM210456',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MOAS138826NWSALA23')
+            'profile_photo_path' => 'profile-photos/00868',
+            'password' => Hash::make('AAIM244650429686'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE ISRAEL LUNA ARJONA',
-            'email' => 'IOJS@invisimail.org',
-            'rfc' => 'IOJS810984FSI',
+            'email' => 'SOLE@msn.com',
+            'rfc' => 'SOLE227919',
+            'curp' => 'SOLE227919',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IOJS388361WBNULM96')
+            'profile_photo_path' => 'profile-photos/00492',
+            'password' => Hash::make('SOLE067946016474'),
         ]);
         
         User::factory()->create([
             'name' => 'LUISA DEL ROSARIO GUERRERO GARCIA',
-            'email' => 'DLEA@waveboxmail.com',
-            'rfc' => 'DLEA128199DDQ',
+            'email' => 'AIER@yahoo.com',
+            'rfc' => 'AIER759610',
+            'curp' => 'AIER759610',
             'direction' => 'UNIDAD DE TRANSPARENCIA',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DLEA698896LKMYPC57')
+            'profile_photo_path' => 'profile-photos/00311',
+            'password' => Hash::make('AIER877030298186'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE DEL CARMEN MARTINEZ NUÑEZ',
-            'email' => 'LOCJ@altinbox.net',
-            'rfc' => 'LOCJ008219URF',
+            'email' => 'AMÑT@tutanota.com',
+            'rfc' => 'AMÑT002306',
+            'curp' => 'AMÑT002306',
             'direction' => 'ÓRGANO INTERNO DE CONTROL',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LOCJ976464ALOURU46')
+            'profile_photo_path' => 'profile-photos/00724',
+            'password' => Hash::make('AMÑT537747904164'),
         ]);
         
         User::factory()->create([
             'name' => 'EDUARDO MARTIN SOBERANIS MONTALVO',
-            'email' => 'LVBE@posteo.net',
-            'rfc' => 'LVBE878006HJG',
+            'email' => 'ATOS@hotmail.com',
+            'rfc' => 'ATOS809864',
+            'curp' => 'ATOS809864',
             'direction' => 'DIRECCIÓN DE ARCHIVO DEL PODER LEGISLATIVO',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LVBE615858WKRLTZ43')
+            'profile_photo_path' => 'profile-photos/00272',
+            'password' => Hash::make('ATOS988968296147'),
         ]);
         
         User::factory()->create([
             'name' => 'FRYNE DEL SOCORRO CRUZ YERBES',
-            'email' => 'ZNDL@gmail.com',
-            'rfc' => 'ZNDL753369NPM',
+            'email' => 'EERC@protonmail.com',
+            'rfc' => 'EERC224296',
+            'curp' => 'EERC224296',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA ESPECIALIZADO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZNDL042819RTTTLC37')
+            'profile_photo_path' => 'profile-photos/00771',
+            'password' => Hash::make('EERC192930787432'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE FERNANDO PUC YE',
-            'email' => 'UFRE@fusionmail.cc',
-            'rfc' => 'UFRE462522HRM',
+            'email' => 'CNOU@yahoo.com',
+            'rfc' => 'CNOU732514',
+            'curp' => 'CNOU732514',
             'direction' => 'SECRETARÍA GENERAL',
             'position' => 'ANALISTA ESPECIALIZADO',
             'sex' => 'masculino',
             'lvl' => '8',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UFRE918478NKQWRA26')
+            'profile_photo_path' => 'profile-photos/00950',
+            'password' => Hash::make('CNOU791206280138'),
         ]);
         
         User::factory()->create([
             'name' => 'ENRIQUE HUMBERTO LARA PARRAO',
-            'email' => 'BHQN@cybermail.io',
-            'rfc' => 'BHQN725138UDB',
+            'email' => 'AOER@yandex.com',
+            'rfc' => 'AOER640291',
+            'curp' => 'AOER640291',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('BHQN634406PMAFRH50')
+            'profile_photo_path' => 'profile-photos/00172',
+            'password' => Hash::make('AOER500723330813'),
         ]);
         
         User::factory()->create([
             'name' => 'ROCIO VERONICA UC MASS',
-            'email' => 'MUSC@bubblemail.org',
-            'rfc' => 'MUSC559896MPI',
+            'email' => 'ARAC@msn.com',
+            'rfc' => 'ARAC263018',
+            'curp' => 'ARAC263018',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MUSC057230DFLFLU34')
+            'profile_photo_path' => 'profile-photos/00792',
+            'password' => Hash::make('ARAC889144387192'),
         ]);
         
         User::factory()->create([
             'name' => 'CHRISTIAN ALEXANDER BE PECH',
-            'email' => 'IETA@fusionmail.cc',
-            'rfc' => 'IETA813851TUJ',
+            'email' => 'EPRE@zoho.com',
+            'rfc' => 'EPRE363705',
+            'curp' => 'EPRE363705',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IETA897041UGDRPD95')
+            'profile_photo_path' => 'profile-photos/00643',
+            'password' => Hash::make('EPRE732606538932'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE EDUARDO CHAVARRIA SOLER',
-            'email' => 'HJIA@zonemail.co',
-            'rfc' => 'HJIA363833AAD',
+            'email' => 'SAAR@rocketmail.com',
+            'rfc' => 'SAAR238987',
+            'curp' => 'SAAR238987',
             'direction' => 'SECRETARÍA TÉCNICA',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('HJIA161393BJVFXE76')
+            'profile_photo_path' => 'profile-photos/00893',
+            'password' => Hash::make('SAAR037748864270'),
         ]);
         
         User::factory()->create([
             'name' => 'LIGIA DEL JESUS SEGOVIA PRESUEL',
-            'email' => 'ELAV@aol.com',
-            'rfc' => 'ELAV234511FIS',
+            'email' => 'GEAA@yahoo.com',
+            'rfc' => 'GEAA144746',
+            'curp' => 'GEAA144746',
             'direction' => 'DIRECCIÓN DE GESTIÓN SOCIAL',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ELAV050238WLGSMQ33')
+            'profile_photo_path' => 'profile-photos/00029',
+            'password' => Hash::make('GEAA095485141106'),
         ]);
         
         User::factory()->create([
             'name' => 'HENRY RENE TUZ BALAN',
-            'email' => 'TYUZ@neonmail.biz',
-            'rfc' => 'TYUZ986059NYV',
+            'email' => 'HYYA@yandex.com',
+            'rfc' => 'HYYA076211',
+            'curp' => 'HYYA076211',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TYUZ598486TFAHWU89')
+            'profile_photo_path' => 'profile-photos/00863',
+            'password' => Hash::make('HYYA927755371353'),
         ]);
         
         User::factory()->create([
             'name' => 'PERLA LETICIA YAN QUIJANO',
-            'email' => 'NCER@fusionmail.cc',
-            'rfc' => 'NCER657490CRS',
+            'email' => 'AIAI@rocketmail.com',
+            'rfc' => 'AIAI221840',
+            'curp' => 'AIAI221840',
             'direction' => 'DIRECCION DE CONTROL DE PROCESOS LEGISLATIVOS',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NCER106316CYDEMP38')
+            'profile_photo_path' => 'profile-photos/00652',
+            'password' => Hash::make('AIAI319073128942'),
         ]);
         
         User::factory()->create([
             'name' => 'LAURA MARTINA ZAPATA ARCHIVOR',
-            'email' => 'ALUI@hey.com',
-            'rfc' => 'ALUI515638DPE',
+            'email' => 'NZAV@zoho.com',
+            'rfc' => 'NZAV864249',
+            'curp' => 'NZAV864249',
             'direction' => 'COORDINACIÓN DE ASESORES',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ALUI824538YHDOJX60')
+            'profile_photo_path' => 'profile-photos/00698',
+            'password' => Hash::make('NZAV662199937181'),
         ]);
         
         User::factory()->create([
             'name' => 'NORMA GUADALUPE CORONEL DIAZ',
-            'email' => 'RECO@epicmail.com',
-            'rfc' => 'RECO819824YKM',
+            'email' => 'GRAI@zoho.com',
+            'rfc' => 'GRAI709012',
+            'curp' => 'GRAI709012',
             'direction' => 'DIRECCIÓN DE COMUNICACIÓN SOCIAL',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RECO725418SMOBDB14')
+            'profile_photo_path' => 'profile-photos/00665',
+            'password' => Hash::make('GRAI687136305843'),
         ]);
         
         User::factory()->create([
             'name' => 'MARDONIO CARMONA NOLASCO',
-            'email' => 'SRLC@securemailbox.org',
-            'rfc' => 'SRLC860048TPY',
+            'email' => 'NIAN@gmail.com',
+            'rfc' => 'NIAN714187',
+            'curp' => 'NIAN714187',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SRLC511388AWTCQS97')
+            'profile_photo_path' => 'profile-photos/00069',
+            'password' => Hash::make('NIAN028340738053'),
         ]);
         
         User::factory()->create([
             'name' => 'ALONSO PUC YE',
-            'email' => 'YAEC@posteo.net',
-            'rfc' => 'YAEC094594VDF',
+            'email' => 'ASUU@me.com',
+            'rfc' => 'ASUU753132',
+            'curp' => 'ASUU753132',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'ANALISTA',
             'sex' => 'masculino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('YAEC043667NAVAYN22')
+            'profile_photo_path' => 'profile-photos/00316',
+            'password' => Hash::make('ASUU163487159463'),
         ]);
         
         User::factory()->create([
             'name' => 'BERENICE YANET XOOL VILLARREAL',
-            'email' => 'EYRX@fastmail.com',
-            'rfc' => 'EYRX924442VCO',
+            'email' => 'EILN@aol.com',
+            'rfc' => 'EILN944789',
+            'curp' => 'EILN944789',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EYRX884061POCYUE18')
+            'profile_photo_path' => 'profile-photos/00806',
+            'password' => Hash::make('EILN406819587796'),
         ]);
         
         User::factory()->create([
             'name' => 'ALBA JAEL MOO RAMIREZ',
-            'email' => 'REZL@yahoo.com',
-            'rfc' => 'REZL037555AAI',
+            'email' => 'BRLO@gmx.com',
+            'rfc' => 'BRLO629403',
+            'curp' => 'BRLO629403',
             'direction' => 'DIRECCIÓN DE FINANZAS',
             'position' => 'ANALISTA',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '9',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('REZL323547MQFFXX25')
+            'profile_photo_path' => 'profile-photos/00659',
+            'password' => Hash::make('BRLO621034845835'),
         ]);
         
         User::factory()->create([
             'name' => 'SILVIA VERONICA GONZALEZ MUÑOZ',
-            'email' => 'CNIL@openmailbox.org',
-            'rfc' => 'CNIL507651GOL',
+            'email' => 'ÑOVZ@fastmail.com',
+            'rfc' => 'ÑOVZ629787',
+            'curp' => 'ÑOVZ629787',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('CNIL664998ELZXQI21')
+            'profile_photo_path' => 'profile-photos/00238',
+            'password' => Hash::make('ÑOVZ945937464530'),
         ]);
         
         User::factory()->create([
             'name' => 'MARLENE DE JESUS GRAMAJO PIEDRASANTA',
-            'email' => 'NTRL@gmx.com',
-            'rfc' => 'NTRL360101CGI',
+            'email' => 'RSRS@protonmail.com',
+            'rfc' => 'RSRS986853',
+            'curp' => 'RSRS986853',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NTRL346615TVQNMF88')
+            'profile_photo_path' => 'profile-photos/00363',
+            'password' => Hash::make('RSRS589674227779'),
         ]);
         
         User::factory()->create([
             'name' => 'CARMEN ILIANA PEREZ PUERTO',
-            'email' => 'LNCI@aol.com',
-            'rfc' => 'LNCI375787FRY',
+            'email' => 'AUIR@yandex.com',
+            'rfc' => 'AUIR921117',
+            'curp' => 'AUIR921117',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LNCI215095PXRZRM98')
+            'profile_photo_path' => 'profile-photos/00543',
+            'password' => Hash::make('AUIR122864041254'),
         ]);
         
         User::factory()->create([
             'name' => 'DANIEL DZIB CANCHE',
-            'email' => 'LEZN@airmail.cc',
-            'rfc' => 'LEZN098691ZSZ',
+            'email' => 'HDZC@hotmail.com',
+            'rfc' => 'HDZC414145',
+            'curp' => 'HDZC414145',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
             'sex' => 'masculino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LEZN627074PTZQOQ74')
+            'profile_photo_path' => 'profile-photos/00265',
+            'password' => Hash::make('HDZC059455469043'),
         ]);
         
         User::factory()->create([
             'name' => 'MARCOS ELIAS CHE UC',
-            'email' => 'AOIE@letterbox.org',
-            'rfc' => 'AOIE455119MJH',
+            'email' => 'SMEL@yahoo.com',
+            'rfc' => 'SMEL910666',
+            'curp' => 'SMEL910666',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
             'sex' => 'masculino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AOIE511872WRZVWA88')
+            'profile_photo_path' => 'profile-photos/00719',
+            'password' => Hash::make('SMEL323022917613'),
         ]);
         
         User::factory()->create([
             'name' => 'MIREYA LUCELY RIVERO PEREZ',
-            'email' => 'IUZL@cryptomail.io',
-            'rfc' => 'IUZL747355MZO',
+            'email' => 'RERR@icloud.com',
+            'rfc' => 'RERR711839',
+            'curp' => 'RERR711839',
             'direction' => 'UNIDAD DE TRANSPARENCIA',
             'position' => 'JEFE DE GRUPO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IUZL147338TECSFX74')
+            'profile_photo_path' => 'profile-photos/00932',
+            'password' => Hash::make('RERR529998665113'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE LUIS MONTENEGRO CU',
-            'email' => 'LTOM@zonemail.co',
-            'rfc' => 'LTOM329416BGB',
+            'email' => 'SIJO@tutanota.com',
+            'rfc' => 'SIJO902300',
+            'curp' => 'SIJO902300',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
             'sex' => 'masculino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LTOM901704VIMCJC68')
+            'profile_photo_path' => 'profile-photos/00930',
+            'password' => Hash::make('SIJO666081588135'),
         ]);
         
         User::factory()->create([
             'name' => 'DAVID AGUILAR ESCAMILLA',
-            'email' => 'RGLC@blazemail.co',
-            'rfc' => 'RGLC756559YZO',
+            'email' => 'DLIC@tutanota.com',
+            'rfc' => 'DLIC219207',
+            'curp' => 'DLIC219207',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
             'sex' => 'masculino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RGLC978913GZREPF26')
+            'profile_photo_path' => 'profile-photos/00239',
+            'password' => Hash::make('DLIC817332973480'),
         ]);
         
         User::factory()->create([
             'name' => 'FRANCISCO DEL CARMEN MEZA CAAMAL',
-            'email' => 'CNEL@runbox.com',
-            'rfc' => 'CNEL911731QAT',
+            'email' => 'ECRD@hotmail.com',
+            'rfc' => 'ECRD910878',
+            'curp' => 'ECRD910878',
             'direction' => 'DIRECCIÓN DE SERVICIOS ADMINISTRATIVOS',
             'position' => 'JEFE DE GRUPO',
             'sex' => 'masculino',
             'lvl' => '10',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('CNEL652375ZHDCOK53')
+            'profile_photo_path' => 'profile-photos/00886',
+            'password' => Hash::make('ECRD912523256039'),
         ]);
         
         User::factory()->create([
             'name' => 'ALESSANDRA GUADALUPE MARTINEZ VELA',
-            'email' => 'SZDM@driftmail.net',
-            'rfc' => 'SZDM270289PIS',
+            'email' => 'AGLD@msn.com',
+            'rfc' => 'AGLD269616',
+            'curp' => 'AGLD269616',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SZDM255149OTURZJ54')
+            'profile_photo_path' => 'profile-photos/00400',
+            'password' => Hash::make('AGLD940902800185'),
         ]);
         
         User::factory()->create([
             'name' => 'BIANCA GRACIELA CHAN CAB',
-            'email' => 'GCAE@yahoo.com',
-            'rfc' => 'GCAE762952PGK',
+            'email' => 'EHCR@gmail.com',
+            'rfc' => 'EHCR314953',
+            'curp' => 'EHCR314953',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GCAE665072JOXVEJ04')
+            'profile_photo_path' => 'profile-photos/00729',
+            'password' => Hash::make('EHCR642019725351'),
         ]);
         
         User::factory()->create([
             'name' => 'JULIO CESAR CHAVELAS GUERRERO',
-            'email' => 'HSRE@bubblemail.org',
-            'rfc' => 'HSRE238275NXA',
+            'email' => 'USER@outlook.com',
+            'rfc' => 'USER494650',
+            'curp' => 'USER494650',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('HSRE166858LJBLTS08')
+            'profile_photo_path' => 'profile-photos/00738',
+            'password' => Hash::make('USER238987785053'),
         ]);
         
         User::factory()->create([
             'name' => 'SURI YARELI GUZMAN PECH',
-            'email' => 'ACPU@myinbox.net',
-            'rfc' => 'ACPU073372ZQC',
+            'email' => 'EUCI@rocketmail.com',
+            'rfc' => 'EUCI589108',
+            'curp' => 'EUCI589108',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ACPU352353PRJBBK43')
+            'profile_photo_path' => 'profile-photos/00414',
+            'password' => Hash::make('EUCI758990819348'),
         ]);
         
         User::factory()->create([
             'name' => 'LEOPOLDO SUTTEN MENDOZA',
-            'email' => 'NLPZ@digitmail.xyz',
-            'rfc' => 'NLPZ526782MRO',
+            'email' => 'SOZT@tutanota.com',
+            'rfc' => 'SOZT603777',
+            'curp' => 'SOZT603777',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NLPZ597372OQPRSM77')
+            'profile_photo_path' => 'profile-photos/00819',
+            'password' => Hash::make('SOZT173018565575'),
         ]);
         
         User::factory()->create([
             'name' => 'FABIAN ZAYD ROQUE MARTINEZ',
-            'email' => 'IYRT@startmail.com',
-            'rfc' => 'IYRT887410JEN',
+            'email' => 'NANE@tutanota.com',
+            'rfc' => 'NANE996661',
+            'curp' => 'NANE996661',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IYRT383909ZARDTK73')
+            'profile_photo_path' => 'profile-photos/00490',
+            'password' => Hash::make('NANE613760796076'),
         ]);
         
         User::factory()->create([
             'name' => 'LUISA FERNANDA PACHECO VALLADARES',
-            'email' => 'DRVO@bubblemail.org',
-            'rfc' => 'DRVO969537QJX',
+            'email' => 'ESRD@pm.me',
+            'rfc' => 'ESRD255789',
+            'curp' => 'ESRD255789',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DRVO008914JYJZQX97')
+            'profile_photo_path' => 'profile-photos/00456',
+            'password' => Hash::make('ESRD143636687303'),
         ]);
         
         User::factory()->create([
             'name' => 'MARLENE SARAI GOMEZ LOPEZ',
-            'email' => 'PMRE@epicmail.com',
-            'rfc' => 'PMRE472688TWV',
+            'email' => 'MLOE@protonmail.com',
+            'rfc' => 'MLOE317369',
+            'curp' => 'MLOE317369',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PMRE158523BCGSPI69')
+            'profile_photo_path' => 'profile-photos/00894',
+            'password' => Hash::make('MLOE049630873422'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL FERNANDO VALLE PINZON',
-            'email' => 'APIE@fusionmail.cc',
-            'rfc' => 'APIE879177MPJ',
+            'email' => 'LURU@yahoo.com',
+            'rfc' => 'LURU159989',
+            'curp' => 'LURU159989',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('APIE741575RAXJWZ92')
+            'profile_photo_path' => 'profile-photos/00851',
+            'password' => Hash::make('LURU801371591926'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA JOSE DE LOS ANGELES GARCIA DE LA CRUZ',
-            'email' => 'ZSJM@nightpost.io',
-            'rfc' => 'ZSJM014043TQC',
+            'email' => 'IODU@aol.com',
+            'rfc' => 'IODU182253',
+            'curp' => 'IODU182253',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZSJM757048DRWDUM21')
+            'profile_photo_path' => 'profile-photos/00464',
+            'password' => Hash::make('IODU518386911885'),
         ]);
         
         User::factory()->create([
             'name' => 'FLOR ILEANA RAMIREZ MAY',
-            'email' => 'MFNL@mailfence.com',
-            'rfc' => 'MFNL811761ARU',
+            'email' => 'OEMM@gmail.com',
+            'rfc' => 'OEMM176083',
+            'curp' => 'OEMM176083',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MFNL724271AAUGDT73')
+            'profile_photo_path' => 'profile-photos/00945',
+            'password' => Hash::make('OEMM382756585364'),
         ]);
         
         User::factory()->create([
             'name' => 'BLANCA LETICIA MIJARES ALEJANDRO',
-            'email' => 'RANI@onemail.co',
-            'rfc' => 'RANI218869QCH',
+            'email' => 'AAEI@gmx.com',
+            'rfc' => 'AAEI406090',
+            'curp' => 'AAEI406090',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RANI916602UHCORM36')
+            'profile_photo_path' => 'profile-photos/00881',
+            'password' => Hash::make('AAEI685758782991'),
         ]);
         
         User::factory()->create([
             'name' => 'KATHERYN ROMERO YANEZ',
-            'email' => 'RKEZ@yandex.com',
-            'rfc' => 'RKEZ248578RDB',
+            'email' => 'EETT@hotmail.com',
+            'rfc' => 'EETT582573',
+            'curp' => 'EETT582573',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RKEZ216597ZXLVGX38')
+            'profile_photo_path' => 'profile-photos/00449',
+            'password' => Hash::make('EETT310726124843'),
         ]);
         
         User::factory()->create([
             'name' => 'ESTEFANIA ABRAHAM DOMINGUEZ',
-            'email' => 'GZAF@safeinbox.net',
-            'rfc' => 'GZAF112951HQO',
+            'email' => 'MRUF@protonmail.com',
+            'rfc' => 'MRUF683500',
+            'curp' => 'MRUF683500',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GZAF510547SHARZX94')
+            'profile_photo_path' => 'profile-photos/00641',
+            'password' => Hash::make('MRUF268142259340'),
         ]);
         
         User::factory()->create([
             'name' => 'EMILIANO PATRON GONZALEZ',
-            'email' => 'LIPN@startmail.com',
-            'rfc' => 'LIPN747553DEB',
+            'email' => 'IINO@protonmail.com',
+            'rfc' => 'IINO489887',
+            'curp' => 'IINO489887',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LIPN469658QBGGWH69')
+            'profile_photo_path' => 'profile-photos/00485',
+            'password' => Hash::make('IINO857011903389'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA CONCEPCION ARCOS JIMENEZ',
-            'email' => 'OZEM@yahoo.com',
-            'rfc' => 'OZEM545557UTR',
+            'email' => 'MPCE@aol.com',
+            'rfc' => 'MPCE555713',
+            'curp' => 'MPCE555713',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OZEM570239TRLYCB53')
+            'profile_photo_path' => 'profile-photos/00035',
+            'password' => Hash::make('MPCE749030079580'),
         ]);
         
         User::factory()->create([
             'name' => 'SALVADOR JAUREGUI GONZALEZ',
-            'email' => 'GALV@blazemail.co',
-            'rfc' => 'GALV509908YOJ',
+            'email' => 'AEIL@hotmail.com',
+            'rfc' => 'AEIL426840',
+            'curp' => 'AEIL426840',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GALV828552QIEDNZ18')
+            'profile_photo_path' => 'profile-photos/00790',
+            'password' => Hash::make('AEIL121648209643'),
         ]);
         
         User::factory()->create([
             'name' => 'JEANCARLO DE JESUS SANCHEZ BOLON',
-            'email' => 'NEZR@waveboxmail.com',
-            'rfc' => 'NEZR770931WWT',
+            'email' => 'AOAE@yandex.com',
+            'rfc' => 'AOAE268377',
+            'curp' => 'AOAE268377',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NEZR694708LXIAYM85')
+            'profile_photo_path' => 'profile-photos/00578',
+            'password' => Hash::make('AOAE876093384008'),
         ]);
         
         User::factory()->create([
             'name' => 'ANAMITA OCAÑA FRANCO',
-            'email' => 'RÑCO@fastmail.com',
-            'rfc' => 'RÑCO629532XXN',
+            'email' => 'MAOA@yandex.com',
+            'rfc' => 'MAOA348451',
+            'curp' => 'MAOA348451',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RÑCO727359FQMFKM11')
+            'profile_photo_path' => 'profile-photos/00768',
+            'password' => Hash::make('MAOA067684164442'),
         ]);
         
         User::factory()->create([
             'name' => 'GLADYS BEATRIZ SOSA GARCIA',
-            'email' => 'ZRCB@airmail.cc',
-            'rfc' => 'ZRCB829276HSB',
+            'email' => 'GCLS@hushmail.com',
+            'rfc' => 'GCLS568763',
+            'curp' => 'GCLS568763',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZRCB124401NYBWHW70')
+            'profile_photo_path' => 'profile-photos/00036',
+            'password' => Hash::make('GCLS539265054049'),
         ]);
         
         User::factory()->create([
             'name' => 'IRVING HOWARD AC CHI',
-            'email' => 'RDIW@posteo.net',
-            'rfc' => 'RDIW730203EST',
+            'email' => 'VVWR@rocketmail.com',
+            'rfc' => 'VVWR126309',
+            'curp' => 'VVWR126309',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RDIW410091EGJGGP08')
+            'profile_photo_path' => 'profile-photos/00506',
+            'password' => Hash::make('VVWR617679247940'),
         ]);
         
         User::factory()->create([
             'name' => 'FATIMA DEL ROSARIO PEREZ GUTIERREZ',
-            'email' => 'GDIA@startmail.com',
-            'rfc' => 'GDIA680494DCC',
+            'email' => 'TORT@gmail.com',
+            'rfc' => 'TORT290353',
+            'curp' => 'TORT290353',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GDIA320305UCAATH88')
+            'profile_photo_path' => 'profile-photos/00475',
+            'password' => Hash::make('TORT640144625241'),
         ]);
         
         User::factory()->create([
             'name' => 'LUIS GABRIEL CANCHE CANUL',
-            'email' => 'UGIC@mailplan.io',
-            'rfc' => 'UGIC440232YZO',
+            'email' => 'ENCC@hotmail.com',
+            'rfc' => 'ENCC947439',
+            'curp' => 'ENCC947439',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UGIC392311KASXTD48')
+            'profile_photo_path' => 'profile-photos/00734',
+            'password' => Hash::make('ENCC274148349801'),
         ]);
         
         User::factory()->create([
             'name' => 'JUAN DANIEL HERNANDEZ HERNANDEZ',
-            'email' => 'ZJUL@hey.com',
-            'rfc' => 'ZJUL276977UGM',
+            'email' => 'NZDN@gmx.com',
+            'rfc' => 'NZDN632181',
+            'curp' => 'NZDN632181',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZJUL064267OFPTMD62')
+            'profile_photo_path' => 'profile-photos/00907',
+            'password' => Hash::make('NZDN340227988457'),
         ]);
         
         User::factory()->create([
             'name' => 'EMMA MARTINEZ FLORES',
-            'email' => 'ZMAE@nightpost.io',
-            'rfc' => 'ZMAE186599LBZ',
+            'email' => 'INRO@icloud.com',
+            'rfc' => 'INRO702894',
+            'curp' => 'INRO702894',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ZMAE505182ETZKVM24')
+            'profile_photo_path' => 'profile-photos/00094',
+            'password' => Hash::make('INRO642104823672'),
         ]);
         
         User::factory()->create([
             'name' => 'FREDY DEL CARMEN VILLANUEVA JIMENEZ',
-            'email' => 'EAIY@bubblemail.org',
-            'rfc' => 'EAIY180492VSB',
+            'email' => 'URDE@fastmail.com',
+            'rfc' => 'URDE622409',
+            'curp' => 'URDE622409',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EAIY840704GZBTPJ97')
+            'profile_photo_path' => 'profile-photos/00209',
+            'password' => Hash::make('URDE228982276142'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSIAS JOSMAR CORDOVA BAEZA',
-            'email' => 'AIBR@cryptomail.io',
-            'rfc' => 'AIBR124269SCA',
+            'email' => 'IMRR@me.com',
+            'rfc' => 'IMRR665261',
+            'curp' => 'IMRR665261',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AIBR682754VEMDQM55')
+            'profile_photo_path' => 'profile-photos/00495',
+            'password' => Hash::make('IMRR146405219057'),
         ]);
         
         User::factory()->create([
             'name' => 'GILBERTO MATUS ZARATE',
-            'email' => 'TROU@yandex.com',
-            'rfc' => 'TROU376359BMD',
+            'email' => 'ARGT@outlook.com',
+            'rfc' => 'ARGT879261',
+            'curp' => 'ARGT879261',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TROU089062AKNPUF62')
+            'profile_photo_path' => 'profile-photos/00676',
+            'password' => Hash::make('ARGT200909709448'),
         ]);
         
         User::factory()->create([
             'name' => 'JESSICA MARIA MAYOR PEREZ',
-            'email' => 'PCRA@epicmail.com',
-            'rfc' => 'PCRA206510KQT',
+            'email' => 'SCRC@me.com',
+            'rfc' => 'SCRC142191',
+            'curp' => 'SCRC142191',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PCRA414786WCVEXD00')
+            'profile_photo_path' => 'profile-photos/00359',
+            'password' => Hash::make('SCRC411295100957'),
         ]);
         
         User::factory()->create([
             'name' => 'ANGEL EDUARDO LEZAMA CANUL',
-            'email' => 'UECM@letterbox.org',
-            'rfc' => 'UECM590105DZH',
+            'email' => 'LREA@pm.me',
+            'rfc' => 'LREA611934',
+            'curp' => 'LREA611934',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UECM788890VFKSQV76')
+            'profile_photo_path' => 'profile-photos/00077',
+            'password' => Hash::make('LREA361869401306'),
         ]);
         
         User::factory()->create([
             'name' => 'CARLOS RAMIRO SOSA PACHECO',
-            'email' => 'MILE@ninjaemail.com',
-            'rfc' => 'MILE850401USC',
+            'email' => 'CIOA@mail.com',
+            'rfc' => 'CIOA872722',
+            'curp' => 'CIOA872722',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MILE480584QERPGU02')
+            'profile_photo_path' => 'profile-photos/00702',
+            'password' => Hash::make('CIOA170818342875'),
         ]);
         
         User::factory()->create([
             'name' => 'IVETTE DEL CARMEN MOLINA QUE',
-            'email' => 'RAQC@mailxpress.org',
-            'rfc' => 'RAQC949845ZXT',
+            'email' => 'MIVU@inbox.com',
+            'rfc' => 'MIVU684318',
+            'curp' => 'MIVU684318',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RAQC405966FQNWWA86')
+            'profile_photo_path' => 'profile-photos/00262',
+            'password' => Hash::make('MIVU747419467332'),
         ]);
         
         User::factory()->create([
             'name' => 'LILIANA LIZETH GAMBOA MATOS',
-            'email' => 'BSLM@driftmail.net',
-            'rfc' => 'BSLM489413MOK',
+            'email' => 'LGAH@gmx.com',
+            'rfc' => 'LGAH061911',
+            'curp' => 'LGAH061911',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('BSLM529829FZSSKO31')
+            'profile_photo_path' => 'profile-photos/00595',
+            'password' => Hash::make('LGAH883686745999'),
         ]);
         
         User::factory()->create([
             'name' => 'EDGAR ALEJANDRO ALMEYDA MALDONADO',
-            'email' => 'JDLG@mail.com',
-            'rfc' => 'JDLG447638VPT',
+            'email' => 'YEAA@msn.com',
+            'rfc' => 'YEAA978433',
+            'curp' => 'YEAA978433',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JDLG739059IWHFWW24')
+            'profile_photo_path' => 'profile-photos/00658',
+            'password' => Hash::make('YEAA207118841564'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL ALBERTO ORDOÑEZ MARTINEZ',
-            'email' => 'OZÑL@disroot.org',
-            'rfc' => 'OZÑL952006QKX',
+            'email' => 'LAOÑ@hotmail.com',
+            'rfc' => 'LAOÑ603159',
+            'curp' => 'LAOÑ603159',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OZÑL406030NXXIES86')
+            'profile_photo_path' => 'profile-photos/00409',
+            'password' => Hash::make('LAOÑ599400938633'),
         ]);
         
         User::factory()->create([
             'name' => 'DANIEL JEZLEEL VILLARREAL HUCHIN',
-            'email' => 'REUA@zoho.com',
-            'rfc' => 'REUA279851ODY',
+            'email' => 'RLAV@gmail.com',
+            'rfc' => 'RLAV045894',
+            'curp' => 'RLAV045894',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('REUA015518NOCEAR83')
+            'profile_photo_path' => 'profile-photos/00000',
+            'password' => Hash::make('RLAV804569999170'),
         ]);
         
         User::factory()->create([
             'name' => 'ELIEZER ISAI CRUZ LOPEZ',
-            'email' => 'SRLO@yahoo.com',
-            'rfc' => 'SRLO921074RVS',
+            'email' => 'ILEE@zoho.com',
+            'rfc' => 'ILEE886651',
+            'curp' => 'ILEE886651',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SRLO989285FAZUOY76')
+            'profile_photo_path' => 'profile-photos/00865',
+            'password' => Hash::make('ILEE975502064474'),
         ]);
         
         User::factory()->create([
             'name' => 'HILDA DEL ROSARIO DE LA CRUZ POOT',
-            'email' => 'LIHC@yandex.com',
-            'rfc' => 'LIHC050726PPJ',
+            'email' => 'LLRA@hotmail.com',
+            'rfc' => 'LLRA058636',
+            'curp' => 'LLRA058636',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LIHC787704PRZJIC34')
+            'profile_photo_path' => 'profile-photos/00699',
+            'password' => Hash::make('LLRA863606773778'),
         ]);
         
         User::factory()->create([
             'name' => 'LUIS MARIO UITZ POOT',
-            'email' => 'OLAT@aol.com',
-            'rfc' => 'OLAT084100KFJ',
+            'email' => 'SLMO@rocketmail.com',
+            'rfc' => 'SLMO412148',
+            'curp' => 'SLMO412148',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OLAT531727IWHQDI21')
+            'profile_photo_path' => 'profile-photos/00397',
+            'password' => Hash::make('SLMO695000985513'),
         ]);
         
         User::factory()->create([
             'name' => 'BRISA YAJAIRA DE LA CRUZ SALAZAR',
-            'email' => 'UCZJ@outlook.com',
-            'rfc' => 'UCZJ168145CLD',
+            'email' => 'JZLR@mail.com',
+            'rfc' => 'JZLR893999',
+            'curp' => 'JZLR893999',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UCZJ345469WHGEJC04')
+            'profile_photo_path' => 'profile-photos/00353',
+            'password' => Hash::make('JZLR141266102662'),
         ]);
         
         User::factory()->create([
             'name' => 'EDITH DEL CARMEN HERNANDEZ PEREZ',
-            'email' => 'ALEC@posteo.net',
-            'rfc' => 'ALEC664719AAF',
+            'email' => 'EHEE@icloud.com',
+            'rfc' => 'EHEE226435',
+            'curp' => 'EHEE226435',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ALEC985011DAEZIU88')
+            'profile_photo_path' => 'profile-photos/00501',
+            'password' => Hash::make('EHEE362828548840'),
         ]);
         
         User::factory()->create([
             'name' => 'BENNY DEL JESUS MORENO ZARATE',
-            'email' => 'NUBR@hey.com',
-            'rfc' => 'NUBR967637OYH',
+            'email' => 'SLSN@aol.com',
+            'rfc' => 'SLSN994377',
+            'curp' => 'SLSN994377',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NUBR192295GJAQVO40')
+            'profile_photo_path' => 'profile-photos/00516',
+            'password' => Hash::make('SLSN764140805264'),
         ]);
         
         User::factory()->create([
             'name' => 'ROMAN DEL ANGEL TRUJILLO MIJANGOS',
-            'email' => 'JAOU@onemail.co',
-            'rfc' => 'JAOU031945HZD',
+            'email' => 'ODOI@aol.com',
+            'rfc' => 'ODOI112627',
+            'curp' => 'ODOI112627',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JAOU666758HOVODS68')
+            'profile_photo_path' => 'profile-photos/00644',
+            'password' => Hash::make('ODOI124985652339'),
         ]);
         
         User::factory()->create([
             'name' => 'CESAR ALBERTO CHI PEREYRA',
-            'email' => 'HRLY@stormmail.net',
-            'rfc' => 'HRLY375437OAS',
+            'email' => 'REEE@fastmail.com',
+            'rfc' => 'REEE579016',
+            'curp' => 'REEE579016',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('HRLY821203WHBYTH28')
+            'profile_photo_path' => 'profile-photos/00348',
+            'password' => Hash::make('REEE104024362331'),
         ]);
         
         User::factory()->create([
             'name' => 'NICOLAS US CAHUICH',
-            'email' => 'IUON@ninjaemail.com',
-            'rfc' => 'IUON559131TQD',
+            'email' => 'CUUU@me.com',
+            'rfc' => 'CUUU997022',
+            'curp' => 'CUUU997022',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IUON095216MQXBOV96')
+            'profile_photo_path' => 'profile-photos/00343',
+            'password' => Hash::make('CUUU104049406211'),
         ]);
         
         User::factory()->create([
             'name' => 'LUIS ALBERTO MAY CHUC',
-            'email' => 'UOTE@startmail.com',
-            'rfc' => 'UOTE352920ZPL',
+            'email' => 'UAUM@me.com',
+            'rfc' => 'UAUM142836',
+            'curp' => 'UAUM142836',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UOTE385398BQCGYD26')
+            'profile_photo_path' => 'profile-photos/00486',
+            'password' => Hash::make('UAUM488023079312'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL DE JESUS RIVERO SALAZAR',
-            'email' => 'LOMN@netpostbox.com',
-            'rfc' => 'LOMN339859QVL',
+            'email' => 'EEEN@yandex.com',
+            'rfc' => 'EEEN578678',
+            'curp' => 'EEEN578678',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LOMN669480HHLRJV44')
+            'profile_photo_path' => 'profile-photos/00034',
+            'password' => Hash::make('EEEN055467070843'),
         ]);
         
         User::factory()->create([
             'name' => 'IRVIN AZIEL ABAN CORTEZ',
-            'email' => 'BCNZ@sparkmail.org',
-            'rfc' => 'BCNZ669288BKG',
+            'email' => 'BENE@gmx.com',
+            'rfc' => 'BENE211676',
+            'curp' => 'BENE211676',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('BCNZ581525KUDTXC39')
+            'profile_photo_path' => 'profile-photos/00124',
+            'password' => Hash::make('BENE257803512027'),
         ]);
         
         User::factory()->create([
             'name' => 'MIGUEL ANGEL ESPINO SEGURA',
-            'email' => 'AEOG@hotmail.com',
-            'rfc' => 'AEOG490301VXP',
+            'email' => 'IOAL@yahoo.com',
+            'rfc' => 'IOAL319446',
+            'curp' => 'IOAL319446',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AEOG670900HVVHOX63')
+            'profile_photo_path' => 'profile-photos/00312',
+            'password' => Hash::make('IOAL899616100542'),
         ]);
         
         User::factory()->create([
             'name' => 'JUAN MANUEL BAEZA CHAVARRIA',
-            'email' => 'CUJH@invisimail.org',
-            'rfc' => 'CUJH041373YOC',
+            'email' => 'HAIU@fastmail.com',
+            'rfc' => 'HAIU109297',
+            'curp' => 'HAIU109297',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('CUJH792714FPEEQS32')
+            'profile_photo_path' => 'profile-photos/00054',
+            'password' => Hash::make('HAIU504398359031'),
         ]);
         
         User::factory()->create([
             'name' => 'JENNIFER OSORIO ASCENCIO',
-            'email' => 'AEFS@mailxpress.org',
-            'rfc' => 'AEFS748709ZPB',
+            'email' => 'CNII@fastmail.com',
+            'rfc' => 'CNII630190',
+            'curp' => 'CNII630190',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AEFS662187ATWPWW97')
+            'profile_photo_path' => 'profile-photos/00756',
+            'password' => Hash::make('CNII542409909458'),
         ]);
         
         User::factory()->create([
             'name' => 'GARY HOUDINE CERVERA MONTERO',
-            'email' => 'CAGI@runbox.com',
-            'rfc' => 'CAGI355802GWW',
+            'email' => 'EHER@yandex.com',
+            'rfc' => 'EHER256809',
+            'curp' => 'EHER256809',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('CAGI352734KMRKKQ80')
+            'profile_photo_path' => 'profile-photos/00166',
+            'password' => Hash::make('EHER572687747933'),
         ]);
         
         User::factory()->create([
             'name' => 'ALEJANDRA GUADALUPE RODRIGUEZ BARRERA',
-            'email' => 'OJUB@posteo.net',
-            'rfc' => 'OJUB243567HUL',
+            'email' => 'ARNN@outlook.com',
+            'rfc' => 'ARNN822604',
+            'curp' => 'ARNN822604',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OJUB247686ZSOVAN68')
+            'profile_photo_path' => 'profile-photos/00677',
+            'password' => Hash::make('ARNN879513932321'),
         ]);
         
         User::factory()->create([
             'name' => 'DARWIN ERNESTO ZAVALA MARTINEZ',
-            'email' => 'ESLA@darkmail.xyz',
-            'rfc' => 'ESLA915936JVI',
+            'email' => 'RSOL@pm.me',
+            'rfc' => 'RSOL563654',
+            'curp' => 'RSOL563654',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ESLA525382SBVOZG96')
+            'profile_photo_path' => 'profile-photos/00928',
+            'password' => Hash::make('RSOL868246771703'),
         ]);
         
         User::factory()->create([
             'name' => 'JESUS ALBERTO DZUL LOPEZ',
-            'email' => 'PEAJ@neonmail.biz',
-            'rfc' => 'PEAJ581383CZF',
+            'email' => 'SPJZ@rocketmail.com',
+            'rfc' => 'SPJZ251837',
+            'curp' => 'SPJZ251837',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PEAJ454541MDGFPS95')
+            'profile_photo_path' => 'profile-photos/00825',
+            'password' => Hash::make('SPJZ595132917505'),
         ]);
         
         User::factory()->create([
             'name' => 'EDUARDO ENRIQUE MAY LOPEZ',
-            'email' => 'NMIY@zoho.com',
-            'rfc' => 'NMIY668581HSI',
+            'email' => 'ADOE@tutanota.com',
+            'rfc' => 'ADOE479019',
+            'curp' => 'ADOE479019',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NMIY325343WIGDRP25')
+            'profile_photo_path' => 'profile-photos/00786',
+            'password' => Hash::make('ADOE139584079850'),
         ]);
         
         User::factory()->create([
             'name' => 'DIANA GISSELLE GONZALEZ AVILA',
-            'email' => 'NLVE@startmail.com',
-            'rfc' => 'NLVE845985SZX',
+            'email' => 'AIAS@pm.me',
+            'rfc' => 'AIAS366334',
+            'curp' => 'AIAS366334',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NLVE067295FHTNDD31')
+            'profile_photo_path' => 'profile-photos/00062',
+            'password' => Hash::make('AIAS619664964514'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL JESUS GUTIERREZ CAMPOS',
-            'email' => 'UIRN@blazemail.co',
-            'rfc' => 'UIRN866774HLR',
+            'email' => 'IEUI@inbox.com',
+            'rfc' => 'IEUI875302',
+            'curp' => 'IEUI875302',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UIRN566536BGOIGS49')
+            'profile_photo_path' => 'profile-photos/00571',
+            'password' => Hash::make('IEUI508090119130'),
         ]);
         
         User::factory()->create([
             'name' => 'PRISSILA BEATRIZ MALDONADO FERRAEZ',
-            'email' => 'SAOP@airmail.cc',
-            'rfc' => 'SAOP331365VIC',
+            'email' => 'SEOL@msn.com',
+            'rfc' => 'SEOL129941',
+            'curp' => 'SEOL129941',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SAOP693220IPCZZQ95')
+            'profile_photo_path' => 'profile-photos/00158',
+            'password' => Hash::make('SEOL580579777468'),
         ]);
         
         User::factory()->create([
             'name' => 'VICENTE HERNANDEZ CABAÑAS',
-            'email' => 'RECA@icloud.com',
-            'rfc' => 'RECA113202DYX',
+            'email' => 'CÑCN@live.com',
+            'rfc' => 'CÑCN943198',
+            'curp' => 'CÑCN943198',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RECA380144XRAJRG74')
+            'profile_photo_path' => 'profile-photos/00737',
+            'password' => Hash::make('CÑCN128722630035'),
         ]);
         
         User::factory()->create([
             'name' => 'EMILIO GABRIEL HUCHIN HERNANDEZ',
-            'email' => 'NGAE@neonmail.biz',
-            'rfc' => 'NGAE170205QHW',
+            'email' => 'LHNH@msn.com',
+            'rfc' => 'LHNH099938',
+            'curp' => 'LHNH099938',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NGAE810560EBWQLJ55')
+            'profile_photo_path' => 'profile-photos/00229',
+            'password' => Hash::make('LHNH459639916268'),
         ]);
         
         User::factory()->create([
             'name' => 'ORAIMA BARAJAS VILLASEÑOR',
-            'email' => 'IEBR@aol.com',
-            'rfc' => 'IEBR906942NRU',
+            'email' => 'SIAI@rocketmail.com',
+            'rfc' => 'SIAI057596',
+            'curp' => 'SIAI057596',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IEBR401622TFKJWX59')
+            'profile_photo_path' => 'profile-photos/00424',
+            'password' => Hash::make('SIAI494928202693'),
         ]);
         
         User::factory()->create([
             'name' => 'CARLOS ALBERTO BAUTISTA ARROYO',
-            'email' => 'TBLY@protonmail.com',
-            'rfc' => 'TBLY831299EPL',
+            'email' => 'ERLB@gmx.com',
+            'rfc' => 'ERLB902361',
+            'curp' => 'ERLB902361',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TBLY696029KISIFZ34')
+            'profile_photo_path' => 'profile-photos/00679',
+            'password' => Hash::make('ERLB039711725391'),
         ]);
         
         User::factory()->create([
             'name' => 'ALONDRA DEL ROSARIO MISS BALAM',
-            'email' => 'LMOA@darkmail.xyz',
-            'rfc' => 'LMOA832268CZC',
+            'email' => 'LBED@gmx.com',
+            'rfc' => 'LBED815043',
+            'curp' => 'LBED815043',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LMOA356918VXMSJI61')
+            'profile_photo_path' => 'profile-photos/00108',
+            'password' => Hash::make('LBED727091383370'),
         ]);
         
         User::factory()->create([
             'name' => 'JESUS DAVID CARRION MARTIN',
-            'email' => 'ODCR@mail.com',
-            'rfc' => 'ODCR899522INS',
+            'email' => 'NISE@mail.com',
+            'rfc' => 'NISE464432',
+            'curp' => 'NISE464432',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ODCR128160VIUYJR65')
+            'profile_photo_path' => 'profile-photos/00114',
+            'password' => Hash::make('NISE302516986320'),
         ]);
         
         User::factory()->create([
             'name' => 'HECTOR MANUEL PALOMO GONZALEZ',
-            'email' => 'MTUN@disroot.org',
-            'rfc' => 'MTUN890570KNN',
+            'email' => 'LNRP@zoho.com',
+            'rfc' => 'LNRP230653',
+            'curp' => 'LNRP230653',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MTUN550432PTTLFJ27')
+            'profile_photo_path' => 'profile-photos/00437',
+            'password' => Hash::make('LNRP228894639044'),
         ]);
         
         User::factory()->create([
             'name' => 'CRISTHEL EUNICE CU EK',
-            'email' => 'RNTC@airmail.cc',
-            'rfc' => 'RNTC712344WOQ',
+            'email' => 'CREU@inbox.com',
+            'rfc' => 'CREU601464',
+            'curp' => 'CREU601464',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RNTC751225CYPIZT75')
+            'profile_photo_path' => 'profile-photos/00846',
+            'password' => Hash::make('CREU181394165482'),
         ]);
         
         User::factory()->create([
             'name' => 'LAURA SURISADAI CRUZ MENDEZ',
-            'email' => 'NUIZ@runbox.com',
-            'rfc' => 'NUIZ332936MAL',
+            'email' => 'IISA@hotmail.com',
+            'rfc' => 'IISA381675',
+            'curp' => 'IISA381675',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NUIZ368712JMUFGQ03')
+            'profile_photo_path' => 'profile-photos/00665',
+            'password' => Hash::make('IISA587378299341'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE DANIEL VIRRUETA HIDALGO',
-            'email' => 'EOJU@mailfence.com',
-            'rfc' => 'EOJU687514MID',
+            'email' => 'ILAO@inbox.com',
+            'rfc' => 'ILAO017323',
+            'curp' => 'ILAO017323',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('EOJU134297PLDEFU37')
+            'profile_photo_path' => 'profile-photos/00736',
+            'password' => Hash::make('ILAO478407042660'),
         ]);
         
         User::factory()->create([
             'name' => 'MANUEL HUMBERTO FLORES GAMBOA',
-            'email' => 'SMUN@outlook.com',
-            'rfc' => 'SMUN720942BOR',
+            'email' => 'LERA@me.com',
+            'rfc' => 'LERA563378',
+            'curp' => 'LERA563378',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SMUN938362GHCBNZ00')
+            'profile_photo_path' => 'profile-photos/00035',
+            'password' => Hash::make('LERA366462381180'),
         ]);
         
         User::factory()->create([
             'name' => 'BRISEYDA XILONEN JIMENEZ CASTILLO',
-            'email' => 'JDOI@onemail.co',
-            'rfc' => 'JDOI103939LRV',
+            'email' => 'SBXI@pm.me',
+            'rfc' => 'SBXI780744',
+            'curp' => 'SBXI780744',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('JDOI552539WJZWBN07')
+            'profile_photo_path' => 'profile-photos/00732',
+            'password' => Hash::make('SBXI244551280484'),
         ]);
         
         User::factory()->create([
             'name' => 'SAMANTA JOSEFINA MEDINA R DE LA GALA',
-            'email' => 'FMST@ninjaemail.com',
-            'rfc' => 'FMST713065TPJ',
+            'email' => 'MIAN@yahoo.com',
+            'rfc' => 'MIAN840063',
+            'curp' => 'MIAN840063',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('FMST349205ZKFGZV02')
+            'profile_photo_path' => 'profile-photos/00373',
+            'password' => Hash::make('MIAN442952789165'),
         ]);
         
         User::factory()->create([
             'name' => 'KARINA LIZETH AGUILAR RODRIGUEZ',
-            'email' => 'RTAZ@gmail.com',
-            'rfc' => 'RTAZ729907YDW',
+            'email' => 'UHKI@me.com',
+            'rfc' => 'UHKI001076',
+            'curp' => 'UHKI001076',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RTAZ061421WZXALZ83')
+            'profile_photo_path' => 'profile-photos/00384',
+            'password' => Hash::make('UHKI247433229468'),
         ]);
         
         User::factory()->create([
             'name' => 'KARLA GUADALUPE PEREZ LLANOS',
-            'email' => 'GZKA@netpostbox.com',
-            'rfc' => 'GZKA963568MRG',
+            'email' => 'LERD@icloud.com',
+            'rfc' => 'LERD115634',
+            'curp' => 'LERD115634',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GZKA619970TTGXDC44')
+            'profile_photo_path' => 'profile-photos/00610',
+            'password' => Hash::make('LERD300222668565'),
         ]);
         
         User::factory()->create([
             'name' => 'IRIS GABRIELA GARCIA MORENO',
-            'email' => 'MEBN@darkmail.xyz',
-            'rfc' => 'MEBN116562XIA',
+            'email' => 'IRIR@hushmail.com',
+            'rfc' => 'IRIR381740',
+            'curp' => 'IRIR381740',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MEBN220440NPDTAB06')
+            'profile_photo_path' => 'profile-photos/00406',
+            'password' => Hash::make('IRIR774228736321'),
         ]);
         
         User::factory()->create([
             'name' => 'EZEQUIAS HERNANDEZ TORRES',
-            'email' => 'TQIA@zoho.com',
-            'rfc' => 'TQIA301055SFS',
+            'email' => 'REEI@live.com',
+            'rfc' => 'REEI070581',
+            'curp' => 'REEI070581',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('TQIA800165CLAMUV40')
+            'profile_photo_path' => 'profile-photos/00454',
+            'password' => Hash::make('REEI297395022384'),
         ]);
         
         User::factory()->create([
             'name' => 'BRIANDA ISABEL COYOC TORRES',
-            'email' => 'LARD@yahoo.com',
-            'rfc' => 'LARD167487LAL',
+            'email' => 'CERO@pm.me',
+            'rfc' => 'CERO786590',
+            'curp' => 'CERO786590',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('LARD654318CRYDRF28')
+            'profile_photo_path' => 'profile-photos/00706',
+            'password' => Hash::make('CERO090805242207'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE URIEL EUAN PECH',
-            'email' => 'SELU@mailplan.io',
-            'rfc' => 'SELU472698XCL',
+            'email' => 'CJEC@outlook.com',
+            'rfc' => 'CJEC089698',
+            'curp' => 'CJEC089698',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('SELU649497KTSPWX13')
+            'profile_photo_path' => 'profile-photos/00206',
+            'password' => Hash::make('CJEC803901720628'),
         ]);
         
         User::factory()->create([
             'name' => 'JESSICA HERNANDEZ LEON',
-            'email' => 'NLRH@fastmail.com',
-            'rfc' => 'NLRH072854KTL',
+            'email' => 'ONLH@tutanota.com',
+            'rfc' => 'ONLH489348',
+            'curp' => 'ONLH489348',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NLRH242826LEIJHD45')
+            'profile_photo_path' => 'profile-photos/00310',
+            'password' => Hash::make('ONLH757762300202'),
         ]);
         
         User::factory()->create([
             'name' => 'DIANA RUBI DELGADO PLASCENCIA',
-            'email' => 'PUGB@outlook.com',
-            'rfc' => 'PUGB124629QFA',
+            'email' => 'LNGA@mail.com',
+            'rfc' => 'LNGA960017',
+            'curp' => 'LNGA960017',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('PUGB872002EGUACZ12')
+            'profile_photo_path' => 'profile-photos/00507',
+            'password' => Hash::make('LNGA228227709737'),
         ]);
         
         User::factory()->create([
             'name' => 'FATIMA GUTIERREZ PEREZ',
-            'email' => 'ETIF@darkmail.xyz',
-            'rfc' => 'ETIF652356VTZ',
+            'email' => 'RTER@protonmail.com',
+            'rfc' => 'RTER929407',
+            'curp' => 'RTER929407',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ETIF245779XCDNAU52')
+            'profile_photo_path' => 'profile-photos/00147',
+            'password' => Hash::make('RTER337205901338'),
         ]);
         
         User::factory()->create([
             'name' => 'SERGIO AGUSTIN EK CHE',
-            'email' => 'GIAR@tutanota.com',
-            'rfc' => 'GIAR154288VBC',
+            'email' => 'TSAH@icloud.com',
+            'rfc' => 'TSAH423335',
+            'curp' => 'TSAH423335',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('GIAR481942OIDEGY21')
+            'profile_photo_path' => 'profile-photos/00249',
+            'password' => Hash::make('TSAH945280942226'),
         ]);
         
         User::factory()->create([
             'name' => 'RAMON ALFONSO MENA PINZON',
-            'email' => 'FSAO@safeinbox.net',
-            'rfc' => 'FSAO903531FVU',
+            'email' => 'MALP@protonmail.com',
+            'rfc' => 'MALP244632',
+            'curp' => 'MALP244632',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('FSAO720482FNZXUB90')
+            'profile_photo_path' => 'profile-photos/00458',
+            'password' => Hash::make('MALP279525989555'),
         ]);
         
         User::factory()->create([
             'name' => 'HOENER DEL CARMEN COLLI CASANOVA',
-            'email' => 'DLOH@ninjaemail.com',
-            'rfc' => 'DLOH835121ZRA',
+            'email' => 'SVRC@me.com',
+            'rfc' => 'SVRC591128',
+            'curp' => 'SVRC591128',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('DLOH222121LYYXOF99')
+            'profile_photo_path' => 'profile-photos/00547',
+            'password' => Hash::make('SVRC012901644081'),
         ]);
         
         User::factory()->create([
             'name' => 'ALEJANDRO DEL JESUS RAMIREZ MAY',
-            'email' => 'MUAS@ninjaemail.com',
-            'rfc' => 'MUAS395376KRV',
+            'email' => 'EMNZ@outlook.com',
+            'rfc' => 'EMNZ182754',
+            'curp' => 'EMNZ182754',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MUAS743416TEGSAS72')
+            'profile_photo_path' => 'profile-photos/00575',
+            'password' => Hash::make('EMNZ532268229322'),
         ]);
         
         User::factory()->create([
             'name' => 'NICHELDDI CUEVAS VARGAS',
-            'email' => 'ANSE@safeinbox.net',
-            'rfc' => 'ANSE124831VSE',
+            'email' => 'SDVA@aol.com',
+            'rfc' => 'SDVA180379',
+            'curp' => 'SDVA180379',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ANSE435663PKBIQT36')
+            'profile_photo_path' => 'profile-photos/00254',
+            'password' => Hash::make('SDVA109627742057'),
         ]);
         
         User::factory()->create([
             'name' => 'RAFAEL ENRIQUE FONOY CALDERON',
-            'email' => 'AUYQ@zoho.com',
-            'rfc' => 'AUYQ393623RBX',
+            'email' => 'NAYC@pm.me',
+            'rfc' => 'NAYC277463',
+            'curp' => 'NAYC277463',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('AUYQ152384WBQRFV18')
+            'profile_photo_path' => 'profile-photos/00301',
+            'password' => Hash::make('NAYC213944722042'),
         ]);
         
         User::factory()->create([
             'name' => 'LEON FELIPE REYES PEREZ',
-            'email' => 'YLIE@fusionmail.cc',
-            'rfc' => 'YLIE797723GIV',
+            'email' => 'EPRO@gmail.com',
+            'rfc' => 'EPRO725717',
+            'curp' => 'EPRO725717',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('YLIE604987IDAVBZ84')
+            'profile_photo_path' => 'profile-photos/00340',
+            'password' => Hash::make('EPRO852755553876'),
         ]);
         
         User::factory()->create([
             'name' => 'JOSE FRANCISCO LOPEZ CORTES',
-            'email' => 'NPRJ@warpbox.com',
-            'rfc' => 'NPRJ536610HHZ',
+            'email' => 'ROCC@aol.com',
+            'rfc' => 'ROCC569007',
+            'curp' => 'ROCC569007',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NPRJ615306XWMYEP92')
+            'profile_photo_path' => 'profile-photos/00816',
+            'password' => Hash::make('ROCC691490061012'),
         ]);
         
         User::factory()->create([
             'name' => 'JESUS ALEJANDRO BAUTISTA CHAN',
-            'email' => 'IBAC@letterbox.org',
-            'rfc' => 'IBAC065284DYK',
+            'email' => 'HASB@icloud.com',
+            'rfc' => 'HASB818665',
+            'curp' => 'HASB818665',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IBAC109118RPQFDA31')
+            'profile_photo_path' => 'profile-photos/00274',
+            'password' => Hash::make('HASB558893211903'),
         ]);
         
         User::factory()->create([
             'name' => 'EDGAR DAMIAN CARRION MARTIN',
-            'email' => 'RNMI@mailplan.io',
-            'rfc' => 'RNMI883029JBA',
+            'email' => 'AIIC@aol.com',
+            'rfc' => 'AIIC001986',
+            'curp' => 'AIIC001986',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RNMI189219ILPXML00')
+            'profile_photo_path' => 'profile-photos/00255',
+            'password' => Hash::make('AIIC289046023353'),
         ]);
         
         User::factory()->create([
             'name' => 'FILIBERTO MIGUEL HERNANDEZ ROJAS',
-            'email' => 'RFAO@runbox.com',
-            'rfc' => 'RFAO406575LNJ',
+            'email' => 'GERM@tutanota.com',
+            'rfc' => 'GERM502958',
+            'curp' => 'GERM502958',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RFAO316773OVFMTL49')
+            'profile_photo_path' => 'profile-photos/00613',
+            'password' => Hash::make('GERM807350567666'),
         ]);
         
         User::factory()->create([
             'name' => 'JESUS ALBERTO HEREDIA MAGAÑA',
-            'email' => 'ESIO@outlook.com',
-            'rfc' => 'ESIO142390TSB',
+            'email' => 'ILRE@gmx.com',
+            'rfc' => 'ILRE060027',
+            'curp' => 'ILRE060027',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('ESIO940157NASRNH49')
+            'profile_photo_path' => 'profile-photos/00815',
+            'password' => Hash::make('ILRE089423108426'),
         ]);
         
         User::factory()->create([
             'name' => 'RIBIN CASTRO CORONADO',
-            'email' => 'IDRC@sparkmail.org',
-            'rfc' => 'IDRC569520GDL',
+            'email' => 'CDON@aol.com',
+            'rfc' => 'CDON535356',
+            'curp' => 'CDON535356',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('IDRC971525TOITJR94')
+            'profile_photo_path' => 'profile-photos/00233',
+            'password' => Hash::make('CDON980381498852'),
         ]);
         
         User::factory()->create([
             'name' => 'ROXANA GUADALUPE ESPINOSA CARREON',
-            'email' => 'OGIE@mail.com',
-            'rfc' => 'OGIE186140AOI',
+            'email' => 'ANOR@rocketmail.com',
+            'rfc' => 'ANOR706809',
+            'curp' => 'ANOR706809',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('OGIE687642LTIADQ23')
+            'profile_photo_path' => 'profile-photos/00294',
+            'password' => Hash::make('ANOR165807938164'),
         ]);
         
         User::factory()->create([
             'name' => 'GUILLERMO RAMON DZIB QUEB',
-            'email' => 'UDRA@altinbox.net',
-            'rfc' => 'UDRA279406SUN',
+            'email' => 'NMGR@me.com',
+            'rfc' => 'NMGR322410',
+            'curp' => 'NMGR322410',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UDRA695293FSUJFE72')
+            'profile_photo_path' => 'profile-photos/00328',
+            'password' => Hash::make('NMGR865237012455'),
         ]);
         
         User::factory()->create([
             'name' => 'ALBERTO DE JESUS CASTILLO MENDOZA',
-            'email' => 'NLCS@stormmail.net',
-            'rfc' => 'NLCS819905FYB',
+            'email' => 'SMUC@me.com',
+            'rfc' => 'SMUC107068',
+            'curp' => 'SMUC107068',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('NLCS852213LEZKET50')
+            'profile_photo_path' => 'profile-photos/00209',
+            'password' => Hash::make('SMUC348170851922'),
         ]);
         
         User::factory()->create([
             'name' => 'NATALI CONCEPCION GONZALEZ MOO',
-            'email' => 'MNAI@gmail.com',
-            'rfc' => 'MNAI543483DRB',
+            'email' => 'CNCM@tutanota.com',
+            'rfc' => 'CNCM530906',
+            'curp' => 'CNCM530906',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('MNAI357436DASHVX18')
+            'profile_photo_path' => 'profile-photos/00044',
+            'password' => Hash::make('CNCM575530941256'),
         ]);
         
         User::factory()->create([
             'name' => 'MARIA DE LOURDES ROSADO BRITO',
-            'email' => 'UREA@yahoo.com',
-            'rfc' => 'UREA681294RVT',
+            'email' => 'SRDA@live.com',
+            'rfc' => 'SRDA042446',
+            'curp' => 'SRDA042446',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
-            'sex' => 'masculino',
+            'sex' => 'femenino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('UREA924931CBPLAZ73')
+            'profile_photo_path' => 'profile-photos/00497',
+            'password' => Hash::make('SRDA723204755511'),
         ]);
         
         User::factory()->create([
             'name' => 'GERARDO DE JESUS MEX AVILA',
-            'email' => 'RGLI@mail.com',
-            'rfc' => 'RGLI297960LYQ',
+            'email' => 'AEDX@me.com',
+            'rfc' => 'AEDX575337',
+            'curp' => 'AEDX575337',
             'direction' => '',
             'position' => 'PERSONAL DE APOYO',
             'sex' => 'masculino',
             'lvl' => '1114',
             'tipo' => 3,
-            'status' => true,
-            'password' => Hash::make('RGLI447419QGKSFP74')
+            'profile_photo_path' => 'profile-photos/00756',
+            'password' => Hash::make('AEDX464037955568'),
         ]);
-
-        @php
-            dd(config('jetstream.features'), Laravel\Jetstream\Jetstream::managesProfilePhotos());
-        @endphp
+        
+        
+        
+        
+        
     }
 }
+

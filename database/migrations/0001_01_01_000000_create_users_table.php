@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('rfc', 13)->unique()->nullable();
+            $table->string('curp', 13)->unique()->nullable();
             $table->string('direction', 250)->nullable();
             $table->string('position', 35)->nullable();
             $table->enum('sex', ['masculino', 'femenino'])->nullable();
-            $table->string('lvl', 15)->nullable();
+            $table->string('lvl', 10)->nullable();
             $table->integer('tipo')->default(3);   // acá estaba mal escrito 'interger' y el segundo parámetro no va
             $table->boolean('status')->default(true);
             $table->string('email')->unique();

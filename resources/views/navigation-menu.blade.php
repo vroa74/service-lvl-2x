@@ -20,17 +20,19 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
-                        {{ __('Usuarios (CRUD)') }}
-                    </x-nav-link>
+                    {{-- <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
+                        <i class="ri-group-3-fill"></i>   {{ __('Usuarios (CRUD)') }}
+                    </x-nav-link> --}}
+                    @if(auth()->user()->tipo == 1)
                     <x-nav-link href="{{ route('usuarios.livewire') }}" :active="request()->routeIs('usuarios.livewire')">
-                        {{ __('Gestión de Usuarios') }}
+                        <i class="ri-group-3-fill"></i>   {{ __('Gestión de Usuarios') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link href="{{ route('servicios.index') }}" :active="request()->routeIs('servicios.index')">
-                        {{ __('Gestión de Servicios') }}
+                        <i class="ri-service-fill"></i>  {{ __('Gestión de Servicios') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('inventario.index') }}" :active="request()->routeIs('inventario.index')">
-                        {{ __('Gestión de Inventarios') }}
+                        <i class="ri-list-settings-line"></i>  {{ __('Gestión de Inventarios') }}
                     </x-nav-link>
 
                 </div>

@@ -314,6 +314,11 @@ class Index extends Component
         $this->dispatch('openPdfInNewTab', url: route('test.pdf'));
     }
 
+    private function NameQrCode($string)
+    {
+        return preg_replace('/[^0-9]/', '', $string);
+    }
+
     private function cleanString($string)
     {
         if (empty($string)) {

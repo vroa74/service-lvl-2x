@@ -101,24 +101,24 @@
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-xs font-medium text-white"> id: {{ $user->id }}</div>
-                                            <div class="text-sm font-medium text-white">{{ $user->name }}</div>
-                                            <div class="text-sm text-gray-400">{{ $user->email }}</div>
+                                            <div class="text-sm font-medium text-white"> nombre: {{ $user->name }}</div>
+                                            <div class="text-sm text-gray-400"> email: {{ $user->email }}</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                    {{ $user->rfc ?? 'N/A' }}
+                                    rfc: {{ $user->rfc ?? 'N/A' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                     <div class="max-w-md">
                                         @if($user->direction)
                                             <div class="font-medium text-white" title="{{ $user->direction }}">
-                                                {{ Str::limit($user->direction, 50) }}
+                                                dir: {{ Str::limit($user->direction, 50) }}
                                             </div>
                                         @endif
                                         @if($user->position)
                                             <div class="text-gray-400 text-xs" title="{{ $user->position }}">
-                                                {{ Str::limit($user->position, 50) }}
+                                                pos: {{ Str::limit($user->position, 50) }}
                                             </div>
                                         @endif
                                         @if(!$user->direction && !$user->position)
@@ -161,7 +161,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                                    {{ $user->lvl ?? 'N/A' }}
+                                    lvl: {{ $user->lvl ?? 'N/A' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                                     @switch($user->tipo)

@@ -677,7 +677,7 @@
                         <span class="font-bold ml-5 text-sm"> Observaciones </span>
                     </div> <br>
                     <span class="text-xs text-justify">
-                        {{ $service->observaciones ?? 'N/A' }}
+                        {!! $service->observaciones ?? 'N/A' !!}
                     </span>
                 </div>
             </td>
