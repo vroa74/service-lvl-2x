@@ -29,6 +29,7 @@ class Index extends Component
     public $email = '';
     public $password = '';
     public $password_confirmation = '';
+    public $photo = null;
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -41,6 +42,7 @@ class Index extends Component
         'status' => 'boolean',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8|confirmed',
+        'photo' => 'nullable|image|max:1024',
     ];
 
     protected $messages = [
@@ -52,6 +54,8 @@ class Index extends Component
         'password.min' => 'La contraseña debe tener al menos 8 caracteres',
         'password.confirmed' => 'Las contraseñas no coinciden',
         'rfc.unique' => 'El RFC ya está registrado',
+        'photo.image' => 'El archivo debe ser una imagen',
+        'photo.max' => 'La imagen no debe superar 1MB',
     ];
 
     public function updatedSearch()
@@ -82,6 +86,7 @@ class Index extends Component
         $this->email = $user->email;
         $this->password = '';
         $this->password_confirmation = '';
+        $this->photo = null;
 
         $this->showModal = true;
         $this->editing = true;
@@ -93,6 +98,8 @@ class Index extends Component
             $this->rules['email'] = 'required|email|unique:users,email,' . $this->userId;
             $this->rules['rfc'] = 'nullable|string|max:13|unique:users,rfc,' . $this->userId;
             $this->rules['password'] = 'nullable|min:8|confirmed';
+        } else {
+            $this->rules['password'] = 'required|min:8|confirmed';
         }
 
         $this->validate();
@@ -105,10 +112,23 @@ class Index extends Component
         }
 
         if ($this->editing) {
-            User::find($this->userId)->update($validatedData);
+            $user = User::find($this->userId);
+            $user->update($validatedData);
+            
+            // Actualizar foto de perfil si se proporcionó una nueva
+            if ($this->photo) {
+                $user->updateProfilePhoto($this->photo);
+            }
+            
             session()->flash('message', 'Usuario actualizado correctamente.');
         } else {
-            User::create($validatedData);
+            $user = User::create($validatedData);
+            
+            // Establecer foto de perfil si se proporcionó una
+            if ($this->photo) {
+                $user->updateProfilePhoto($this->photo);
+            }
+            
             session()->flash('message', 'Usuario creado correctamente.');
         }
 
@@ -136,6 +156,17 @@ class Index extends Component
         session()->flash('message', 'Sexo del usuario actualizado.');
     }
 
+    public function deleteProfilePhoto()
+    {
+        if ($this->editing && $this->userId) {
+            $user = User::find($this->userId);
+            if ($user && $user->profile_photo_path) {
+                $user->deleteProfilePhoto();
+                session()->flash('message', 'Foto de perfil eliminada correctamente.');
+            }
+        }
+    }
+
     public function closeModal()
     {
         $this->showModal = false;
@@ -156,6 +187,7 @@ class Index extends Component
         $this->email = '';
         $this->password = '';
         $this->password_confirmation = '';
+        $this->photo = null;
         $this->editing = false;
         $this->resetValidation();
     }

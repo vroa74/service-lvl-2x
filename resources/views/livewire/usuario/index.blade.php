@@ -277,6 +277,79 @@
                             @error('name') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
 
+                        <!-- Foto de Perfil -->
+                        <div x-data="{photoName: null, photoPreview: null}">
+                            <label for="photo" class="block text-sm font-medium text-gray-300 mb-2">
+                                Foto de Perfil
+                            </label>
+                            
+                            <!-- Input de archivo oculto -->
+                            <input 
+                                type="file" 
+                                id="photo" 
+                                class="hidden"
+                                wire:model.live="photo"
+                                x-ref="photo"
+                                accept="image/*"
+                                x-on:change="
+                                    if ($refs.photo.files[0]) {
+                                        photoName = $refs.photo.files[0].name;
+                                        const reader = new FileReader();
+                                        reader.onload = (e) => {
+                                            photoPreview = e.target.result;
+                                        };
+                                        reader.readAsDataURL($refs.photo.files[0]);
+                                    }
+                                "
+                            />
+
+                            <!-- Foto actual (solo en edición) -->
+                            @if($editing && $userId)
+                                @php
+                                    $currentUser = \App\Models\User::find($userId);
+                                @endphp
+                                <div class="mt-2" x-show="! photoPreview">
+                                    @if($currentUser && $currentUser->profile_photo_url)
+                                        <img src="{{ $currentUser->profile_photo_url }}" alt="{{ $currentUser->name }}" class="rounded-full size-20 object-cover">
+                                    @else
+                                        <div class="rounded-full size-20 bg-gray-600 flex items-center justify-center">
+                                            <x-lucide name="user" class="w-8 h-8 text-gray-300" />
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+
+                            <!-- Vista previa de la nueva foto -->
+                            <div class="mt-2" x-show="photoPreview" style="display: none;">
+                                <span class="block rounded-full size-20 bg-cover bg-no-repeat bg-center"
+                                      x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                                </span>
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="mt-2 flex gap-2">
+                                <button 
+                                    type="button" 
+                                    x-on:click.prevent="$refs.photo.click()"
+                                    class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white text-sm rounded-lg transition-colors"
+                                >
+                                    {{ $editing ? 'Cambiar Foto' : 'Seleccionar Foto' }}
+                                </button>
+                                
+                                @if($editing && $userId && $currentUser && $currentUser->profile_photo_path)
+                                    <button 
+                                        type="button" 
+                                        wire:click="deleteProfilePhoto"
+                                        class="px-3 py-1 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg transition-colors"
+                                    >
+                                        Eliminar Foto
+                                    </button>
+                                @endif
+                            </div>
+
+                            @error('photo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+
                         <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-300 mb-2">
