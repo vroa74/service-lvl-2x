@@ -22,7 +22,7 @@ class Edit extends Component
     // ======================= INICIO: Propiedades del componente =======================
     // ID del servicio a editar
     public $serviceId;
-
+    public $contenido = '';
     // Campos del formulario
     public $id_s = '';
     public $F_serv = '';
@@ -432,6 +432,13 @@ class Edit extends Component
                 'auth_id' => Auth::id()
             ]);
 
+            // Sanitizar campos antes de guardar
+            $allowedTags = '<ul><li><ol><b><i><u><br><strong><em>';
+            $this->obj_sol = strip_tags($this->obj_sol, $allowedTags);
+            $this->actividades = strip_tags($this->actividades, $allowedTags);
+            $this->mantenimiento = strip_tags($this->mantenimiento, $allowedTags);
+            $this->observaciones = strip_tags($this->observaciones, $allowedTags);
+
             $updateData = [
                 'id_s' => $this->id_s,
                 'F_serv' => $this->F_serv,
@@ -573,4 +580,21 @@ class Edit extends Component
         ]);
     }
     // ======================= FIN: Render y utilitarios =======================
+
+    protected function sanitizeInput($input)
+    {
+        // Elimina scripts y eventos on*
+        $input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
+        $input = preg_replace('/on\w+="[^"]*"/i', '', $input);
+        return $input;
+    }
+
+    function cleanAttributes($input) {
+        // Elimina cualquier atributo on* (ej: onclick, onmouseover, etc.)
+        $input = preg_replace('/on\w+="[^"]*"/i', '', $input);
+        $input = preg_replace("/on\w+='[^']*'/i", '', $input);
+        // Elimina cualquier <script>...</script>
+        $input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
+        return $input;
+    }
 }

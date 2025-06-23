@@ -104,21 +104,21 @@
                             <td class="px-3 py-4 text-sm text-gray-300">
                                 <div class="text-center">
                                     <p class="font-medium text-white break-words">
-                                        {{ $service->obj_sol ?? 'N/A' }}
+                                        {!! $service->obj_sol ?? 'N/A' !!}
                                     </p>
                                 </div>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300">
                                 <div class="text-center">
                                     <p class="font-medium text-white break-words">
-                                        {{ $service->actividades ?? 'N/A' }}
+                                        {!! $service->actividades ?? 'N/A' !!}
                                     </p>
                                 </div>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300">
                                 <div class="text-center">
                                     <p class="font-medium text-white break-words">
-                                        {{ $service->observaciones ?? 'N/A' }}
+                                        {!! $service->observaciones ?? 'N/A' !!}
                                     </p>
                                 </div>
                             </td>
