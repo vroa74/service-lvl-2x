@@ -8,9 +8,10 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         @php
-            $randomFavicon = 'favicon_' . rand(1, 7) . '.png';
+            $favicons = ['favicon_1.png', 'favicon_2.png', 'favicon_3.png', 'favicon_4.png', 'favicon_5.png', 'favicon_6.png', 'favicon_7.png'];
+            $randomFavicon = $favicons[array_rand($favicons)];
         @endphp
-        <link rel="icon" type="image/png" href="{{ asset($randomFavicon) }}">
+        <link rel="icon" type="image/png" href="{{ asset($randomFavicon) }}?v={{ time() }}">
         
 
         <!-- Fonts -->
