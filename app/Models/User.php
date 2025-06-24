@@ -172,4 +172,28 @@ class User extends Authenticatable
             set: fn ($value) => mb_convert_encoding($value, 'UTF-8', 'auto')
         );
     }
+
+    /**
+     * Responsivas creadas por este usuario.
+     */
+    public function responsivasCreadas()
+    {
+        return $this->hasMany(Responsiva::class, 'user_id');
+    }
+
+    /**
+     * Responsivas donde es responsable.
+     */
+    public function responsivasResponsable()
+    {
+        return $this->hasMany(Responsiva::class, 'responsable_id');
+    }
+
+    /**
+     * Responsivas donde es informático.
+     */
+    public function responsivasInformatica()
+    {
+        return $this->hasMany(Responsiva::class, 'informatica_id');
+    }
 }

@@ -70,4 +70,20 @@ class Inventory extends Model
     {
         return $this->belongsTo(User::class, 'res_id');
     }
+
+    /**
+     * InventoryResponsivas asociadas a este inventario.
+     */
+    public function inventoryResponsivas()
+    {
+        return $this->hasMany(InventoryResponsiva::class);
+    }
+
+    /**
+     * Fotos asociadas a este inventario.
+     */
+    public function photos()
+    {
+        return $this->hasMany(InventoryPhoto::class);
+    }
 }

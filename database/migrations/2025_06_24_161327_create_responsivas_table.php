@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('responsivas', function (Blueprint $table) {
             $table->id();
-                // usuario que recibe el equipo (puede ser null)
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            // responsable
-            $table->foreignId('responsable_id')->constrained('users')->nullOnDelete();
-            // informático
-            $table->foreignId('informatica_id')->constrained('users')->nullOnDelete();
-            $table->date('fecha')->nullable(); // fecha de emisión
-            $table->string('codigo', 20)->unique(); // generado por el user, por ejemplo: RESP-0001
-            $table->boolean('auditoria')->default(false); // auditoría sí o no
+            $table->foreignId('responsable_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('informatica_id')->nullable()->constrained('users')->nullOnDelete();
+        
+            $table->date('fecha')->nullable();
+            $table->string('codigo', 20)->unique();
+            $table->boolean('auditoria')->default(false);
             $table->timestamps();
         });
     }

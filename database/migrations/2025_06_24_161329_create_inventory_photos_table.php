@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('inventory_photos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
+            $table->string('path'); // ruta de la imagen
+            $table->string('description')->nullable();        
             $table->timestamps();
         });
     }

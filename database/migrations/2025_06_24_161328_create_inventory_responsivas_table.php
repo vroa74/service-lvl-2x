@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('inventory_responsivas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('responsiva_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();        
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
