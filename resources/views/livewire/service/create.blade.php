@@ -61,9 +61,17 @@
                     class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
                     <x-lucide name="list-search" class="w-4 h-4" />
                 </button>
+                <!-- Botón de prueba temporal -->
+                <button
+                    type="button"
+                    wire:click="testUpdateObjSol"
+                    class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
+                    TEST
+                </button>
             </div>
             <textarea
                 wire:model.defer="obj_sol"
+                wire:blur="$refresh"
                 id="obj_sol"
                 rows="3"
                 class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -94,6 +102,7 @@
                 </div>
                 <textarea
                     wire:model.defer="actividades"
+                    wire:blur="$refresh"
                     id="actividades"
                     rows="3"
                     class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -121,7 +130,8 @@
                     </button>
                 </div>
                 <textarea
-                    wire:model="observaciones"
+                    wire:model.defer="observaciones"
+                    wire:blur="$refresh"
                     id="observaciones"
                     rows="3"
                     class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -268,7 +278,8 @@
                 </button>
             </div>
             <textarea
-                wire:model="mantenimiento"
+                wire:model.defer="mantenimiento"
+                wire:blur="$refresh"
                 id="mantenimiento"
                 rows="2"
                 class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -678,6 +689,20 @@
     @livewireStyles
 @livewireScripts
 
+<script>
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('update-textarea', (event) => {
+            const field = event.field;
+            const value = event.value;
+            const textarea = document.getElementById(field);
+            if (textarea) {
+                textarea.value = value;
+                // Disparar evento para que Livewire detecte el cambio
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        });
+    });
+</script>
 
 </div>
 

@@ -124,6 +124,7 @@ class Create extends Component
             } else {
                 $this->obj_sol = $info;
             }
+            $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
         }
         //==============================================================================
         if ($this->inventoryModalType === 'actividades') {
@@ -133,6 +134,7 @@ class Create extends Component
             } else {
                 $this->actividades = $info;
             }
+            $this->dispatch('update-textarea', field: 'actividades', value: $this->actividades);
         }
         //==============================================================================
         if ($this->inventoryModalType === 'observaciones') {
@@ -142,6 +144,7 @@ class Create extends Component
             } else {
                 $this->observaciones = $info;
             }
+            $this->dispatch('update-textarea', field: 'observaciones', value: $this->observaciones);
         }
         //==============================================================================    /*  */
         if ($this->inventoryModalType === 'mantenimiento') {
@@ -151,6 +154,7 @@ class Create extends Component
             } else {
                 $this->mantenimiento = $info;
             }
+            $this->dispatch('update-textarea', field: 'mantenimiento', value: $this->mantenimiento);
         }
         //==============================================================================    mantenimiento
         $this->closeInventoryModal();
@@ -223,6 +227,12 @@ class Create extends Component
     }
 
     // --- INICIO: Métodos Modal Usuario ---
+    public function testUpdateObjSol()
+    {
+        $this->obj_sol = "PRUEBA CREATE: " . now()->format('H:i:s') . " - Esto es una prueba directa";
+        $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
+    }
+
     public function openUserModal($type, $param1 = null, $param2 = null, $param3 = null, $param4 = null)
     {
         $this->modalType = $type;
@@ -281,6 +291,7 @@ class Create extends Component
             } else {
                 $this->obj_sol = $userInfo;
             }
+            $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
         } elseif ($this->modalType === 'actividades') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->actividades)) {
@@ -288,6 +299,7 @@ class Create extends Component
             } else {
                 $this->actividades = $userInfo;
             }
+            $this->dispatch('update-textarea', field: 'actividades', value: $this->actividades);
         } elseif ($this->modalType === 'observaciones') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->observaciones)) {
@@ -295,6 +307,7 @@ class Create extends Component
             } else {
                 $this->observaciones = $userInfo;
             }
+            $this->dispatch('update-textarea', field: 'observaciones', value: $this->observaciones);
         }elseif ($this->modalType === 'mantenimiento') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->mantenimiento)) {
@@ -302,6 +315,7 @@ class Create extends Component
             } else {
                 $this->mantenimiento = $userInfo;
             }
+            $this->dispatch('update-textarea', field: 'mantenimiento', value: $this->mantenimiento);
         }
 
         $this->closeModal();   //mantenimiento 

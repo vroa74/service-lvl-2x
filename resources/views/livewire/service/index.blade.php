@@ -202,7 +202,7 @@
                     <!-- Tipo de Reporte -->
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Tipo de Reporte</label>
-                        <select wire:model="reportType" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select wire:model.defer="reportType" wire:blur="$refresh" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="general">Reporte General</option>
                             <option value="por_usuario">Por Usuario</option>
                             <option value="por_tipo">Por Tipo de Servicio</option>
@@ -214,18 +214,18 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Desde</label>
-                            <input wire:model="reportDateFrom" type="date" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input wire:model.defer="reportDateFrom" wire:blur="$refresh" type="date" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-2">Hasta</label>
-                            <input wire:model="reportDateTo" type="date" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input wire:model.defer="reportDateTo" wire:blur="$refresh" type="date" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
 
                     <!-- Filtro por Usuario -->
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Usuario (Opcional)</label>
-                        <select wire:model="reportUser" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select wire:model.defer="reportUser" wire:blur="$refresh" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="">Todos los usuarios</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -236,7 +236,7 @@
                     <!-- Filtro por Estado -->
                     <div>
                         <label class="block text-sm font-medium text-gray-300 mb-2">Estado (Opcional)</label>
-                        <select wire:model="reportStatus" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select wire:model.defer="reportStatus" wire:blur="$refresh" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                             <option value="">Todos los estados</option>
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
