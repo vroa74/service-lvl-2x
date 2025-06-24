@@ -381,6 +381,11 @@ alias gitup
 
 ========================================================================================================
 
+cartas resposivas
+
+php artisan make:model Responsiva -m
+php artisan make:model InventoryResponsiva -m
+php artisan make:model InventoryPhoto -m
 
 
 ========================================================================================================

@@ -40,13 +40,13 @@
                 <x-lucide name="users" class="w-5 h-5" />
                 Por Usuario
             </a>
-            <button 
+            {{-- <button 
                 wire:click="openReportModal('general')"
                 class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-2 transition-colors"
                 title="Generar Reporte">
                 <x-lucide name="file-text" class="w-5 h-5" />
                 Reportes
-            </button>
+            </button> --}}
             <a href="{{ route('inventario.create') }}"
                 class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center gap-2 transition-colors">
                 <x-lucide name="plus" class="w-5 h-5" />
