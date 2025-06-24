@@ -136,6 +136,7 @@ class Edit extends Component
             } else {
                 $this->obj_sol = $info;
             }
+            $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
         }
         //==============================================================================
         if ($this->inventoryModalType === 'actividades') {
@@ -145,6 +146,7 @@ class Edit extends Component
             } else {
                 $this->actividades = $info;
             }
+            $this->dispatch('update-textarea', field: 'actividades', value: $this->actividades);
         }
         //==============================================================================
         if ($this->inventoryModalType === 'observaciones') {
@@ -154,6 +156,7 @@ class Edit extends Component
             } else {
                 $this->observaciones = $info;
             }
+            $this->dispatch('update-textarea', field: 'observaciones', value: $this->observaciones);
         }
         //==============================================================================    /*  */
         if ($this->inventoryModalType === 'mantenimiento') {
@@ -163,6 +166,7 @@ class Edit extends Component
             } else {
                 $this->mantenimiento = $info;
             }
+            $this->dispatch('update-textarea', field: 'mantenimiento', value: $this->mantenimiento);
         }
         //==============================================================================    mantenimiento
         $this->closeInventoryModal();
@@ -287,8 +291,16 @@ class Edit extends Component
     // ======================= FIN: Carga de datos en mount =======================
 
     // ======================= INICIO: Métodos Modal Usuario =======================
+    public function testUpdateObjSol()
+    {
+        $this->obj_sol = "PRUEBA: " . now()->format('H:i:s') . " - Esto es una prueba directa";
+        $this->dispatch('textarea-updated', field: 'obj_sol');
+        $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
+    }
+
     public function openUserModal($type, $param1 = null, $param2 = null, $param3 = null, $param4 = null)
     {
+        Log::info('openUserModal ejecutado', ['type' => $type, 'param1' => $param1, 'param2' => $param2, 'param3' => $param3, 'param4' => $param4]);
         $this->modalType = $type;
         $this->modalParam1 = ($param1 === 'null') ? '' : $param1;
         $this->modalParam2 = ($param2 === 'null') ? '' : $param2;
@@ -312,11 +324,11 @@ class Edit extends Component
         $this->showModal = true;
         $this->selectedUserId = null;
         $this->selectedUserName = '';
+        Log::info('Modal abierto', ['modalType' => $this->modalType, 'showModal' => $this->showModal]);
     }
     
     public function selectUser($userId, $userName)
     {
-        Log::info('selectUser ejecutado', ['id' => $userId, 'name' => $userName, 'modalType' => $this->modalType]);
         $miperfil = User::find($userId);
         $this->selectedUserId = $userId;
         $this->selectedUserName = $userName;
@@ -338,13 +350,14 @@ class Edit extends Component
             $this->vobo_position = $miperfil->position;
             $this->vobo_direction = $miperfil->direction;
         } elseif ($this->modalType === 'objetivo') {
-            // Concatenar a obj_sol
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->obj_sol)) {
                 $this->obj_sol .= "\n" . $userInfo;
             } else {
                 $this->obj_sol = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'obj_sol');
+            $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
         } elseif ($this->modalType === 'actividades') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->actividades)) {
@@ -352,6 +365,8 @@ class Edit extends Component
             } else {
                 $this->actividades = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'actividades');
+            $this->dispatch('update-textarea', field: 'actividades', value: $this->actividades);
         } elseif ($this->modalType === 'observaciones') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->observaciones)) {
@@ -359,6 +374,8 @@ class Edit extends Component
             } else {
                 $this->observaciones = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'observaciones');
+            $this->dispatch('update-textarea', field: 'observaciones', value: $this->observaciones);
         } elseif ($this->modalType === 'mantenimiento') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->mantenimiento)) {
@@ -366,6 +383,8 @@ class Edit extends Component
             } else {
                 $this->mantenimiento = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'mantenimiento');
+            $this->dispatch('update-textarea', field: 'mantenimiento', value: $this->mantenimiento);
         }
 
         $this->closeModal();
@@ -389,8 +408,6 @@ class Edit extends Component
     // ======================= INICIO: Guardar Edición de Servicio =======================
     public function saveService()
     {
-        Log::info('Iniciando saveService', ['serviceId' => $this->serviceId]);
-        
         // Forzar todos los campos booleanos a ser booleanos antes de validar
         $this->correctivo = (bool) $this->correctivo;
         $this->preventivo = (bool) $this->preventivo;
@@ -420,17 +437,7 @@ class Edit extends Component
                 return;
             }
 
-            Log::info('Validación pasada, buscando servicio', ['serviceId' => $this->serviceId]);
-            
             $service = Service::findOrFail($this->serviceId);
-            
-            Log::info('Servicio encontrado, preparando datos para update', [
-                'serviceId' => $this->serviceId,
-                'solicitante_id' => $this->solicitante_id,
-                'efectuo_id' => $this->efectuo_id,
-                'vobo_id' => $this->vobo_id,
-                'auth_id' => Auth::id()
-            ]);
 
             // Sanitizar campos antes de guardar
             $allowedTags = '<ul><li><ol><b><i><u><br><strong><em>';
@@ -465,76 +472,23 @@ class Edit extends Component
                 'impressions' => $this->impressions,
             ];
 
-            Log::info('Ejecutando update', $updateData);
-            
             $result = $service->update($updateData);
-            
-            Log::info('Resultado del update', ['success' => $result]);
 
             if ($result) {
                 session()->flash('message', 'Servicio actualizado correctamente.');
-                Log::info('Servicio actualizado exitosamente, redirigiendo');
-                
                 // En Livewire, usamos redirect() en lugar de return redirect()
                 return $this->redirect(route('servicios.index'));
             } else {
-                Log::error('El update no se ejecutó correctamente');
                 $this->addError('general', 'No se pudo actualizar el servicio. Inténtalo de nuevo.');
             }
-            
+
         } catch (\Exception $e) {
-            Log::error('Error en saveService', [
-                'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'serviceId' => $this->serviceId
-            ]);
-            
             $this->addError('general', 'Error al guardar el servicio: ' . $e->getMessage());
         }
     }
-
-    // ======================= INICIO: Método de prueba para guardado =======================
-    public function testSave()
-    {
-        Log::info('Método testSave ejecutado');
-        
-        try {
-            $service = Service::findOrFail($this->serviceId);
-            
-            // Actualizar solo un campo para probar
-            $result = $service->update([
-                'observaciones' => 'Prueba de guardado - ' . now()->format('Y-m-d H:i:s')
-            ]);
-            
-            Log::info('Resultado de testSave', ['success' => $result]);
-            
-            if ($result) {
-                session()->flash('message', 'Prueba de guardado exitosa.');
-                $this->observaciones = $service->observaciones;
-            } else {
-                $this->addError('general', 'La prueba de guardado falló.');
-            }
-            
-        } catch (\Exception $e) {
-            Log::error('Error en testSave', [
-                'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine()
-            ]);
-            
-            $this->addError('general', 'Error en prueba: ' . $e->getMessage());
-        }
-    }
-    // ======================= FIN: Método de prueba para guardado =======================
     // ======================= FIN: Guardar Edición de Servicio =======================
 
     // ======================= INICIO: Render y utilitarios =======================
-    public function testClick()
-    {
-        Log::info('¡Click recibido en testClick!');
-    }
-
     public function render()
     {
         $users = User::where('status', true)->orderBy('name')->get();

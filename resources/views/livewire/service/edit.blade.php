@@ -86,15 +86,22 @@
                         class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
                         <x-lucide name="list-search" class="w-4 h-4" />
                     </button>
+                    <!-- Botón de prueba temporal -->
+                    <button
+                        type="button"
+                        wire:click="testUpdateObjSol"
+                        class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
+                        TEST
+                    </button>
                 </div>
                 <textarea
                     wire:model.defer="obj_sol"
+                    wire:blur="$refresh"
                     id="obj_sol"
                     rows="3"
                     class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Describa el objetivo de la solicitud"
-                ></textarea> 
-               
+                ></textarea>
                 @error('obj_sol') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
 
             </div>
@@ -123,6 +130,7 @@
                     </div>
                     <textarea
                         wire:model.defer="actividades"
+                        wire:blur="$refresh"
                         id="actividades"
                         rows="3"
                         class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -150,7 +158,8 @@
                         </button>
                     </div>
                     <textarea
-                        wire:model="observaciones"
+                        wire:model.defer="observaciones"
+                        wire:blur="$refresh"
                         id="observaciones"
                         rows="3"
                         class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -298,7 +307,8 @@
                     </button>
                 </div>
                 <textarea
-                    wire:model="mantenimiento"
+                    wire:model.defer="mantenimiento"
+                    wire:blur="$refresh"
                     id="mantenimiento"
                     rows="2"
                     class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -390,15 +400,6 @@
                 >
                     Cancelar
                 </a>
-                {{-- Botón de prueba temporal --}}
-                <button
-                    type="button"
-                    wire:click="testSave"
-                    class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                >
-                    <x-lucide name="test-tube" class="w-4 h-4" />
-                    Probar Guardado
-                </button>
                 <button
                     type="submit"
                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
@@ -718,10 +719,23 @@
         @livewireStyles
         @livewireScripts
         {{-- ======================= FIN: Scripts Livewire ======================= --}}
+
+        <script>
+            document.addEventListener('livewire:init', () => {
+                Livewire.on('update-textarea', (event) => {
+                    const field = event.field;
+                    const value = event.value;
+                    const textarea = document.getElementById(field);
+                    if (textarea) {
+                        textarea.value = value;
+                        // Disparar evento para que Livewire detecte el cambio
+                        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                });
+            });
+        </script>
     </div>
     {{-- ======================= FIN: Contenedor Principal ======================= --}}
-<!-- TinyMCE CDN -->
-    
 
 </div>
 
