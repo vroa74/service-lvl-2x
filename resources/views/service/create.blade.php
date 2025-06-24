@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-1">
+    <div class="py-4">
         <div class="w-full px-4 sm:px-6 lg:px-8">
             <livewire:service.create />
         </div>

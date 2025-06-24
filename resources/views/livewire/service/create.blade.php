@@ -62,12 +62,12 @@
                     <x-lucide name="list-search" class="w-4 h-4" />
                 </button>
                 <!-- Botón de prueba temporal -->
-                <button
+                {{-- <button
                     type="button"
                     wire:click="testUpdateObjSol"
                     class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
                     TEST
-                </button>
+                </button> --}}
             </div>
             <textarea
                 wire:model.defer="obj_sol"
