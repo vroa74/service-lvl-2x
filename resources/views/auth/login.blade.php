@@ -46,3 +46,5 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+<body style="background: url('https://www.w3schools.com/w3css/img_lights.jpg') no-repeat center center fixed; background-size: cover;">

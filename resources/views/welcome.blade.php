@@ -54,7 +54,7 @@
                         @endif
                     </div>
                     <div class="w-full flex justify-end items-start pt-2 pr-8 fixed top-20 left-0 z-40">
-                        <h1 class="text-red-600 text-2xl font-bold">{{ $bgNumber }}.jpg</h1>
+                        {{-- <h1 class="text-red-600 text-2xl font-bold">{{ $bgNumber }}.jpg</h1> --}}
                     </div>
 
                     <main class="mt-6">

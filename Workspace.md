@@ -387,10 +387,10 @@ php artisan make:model Responsiva -m
 php artisan make:model InventoryResponsiva -m
 php artisan make:model InventoryPhoto -m
 
-
+ pa make:livewire cartasresponsivas.create 
 ========================================================================================================
 
-
+divide el total de la pagina en 3 columnas en la primera que deben del mismo tamaño var a pones el formulario actual la segunda y la tercera estaran pendiente.@Create.php @create.blade.php 
 
 ========================================================================================================
 

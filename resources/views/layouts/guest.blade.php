@@ -17,8 +17,8 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="bg-gray-900">
-        <div class="font-sans text-gray-200 antialiased">
+    <body style="background: url('{{ asset('bg/nuevo_fondo.svg') }}') no-repeat center center fixed; background-size: cover;">
+        <div class="font-sans text-gray-200 antialiased" style="background: none;">
             {{ $slot }}
         </div>
 
