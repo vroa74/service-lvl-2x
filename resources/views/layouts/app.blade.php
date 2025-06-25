@@ -26,6 +26,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
     </head>
     <body class="font-sans antialiased bg-gray-900 text-gray-100">
         <x-banner />
@@ -54,5 +55,6 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         {{-- <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script> --}}
         @livewireScripts
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     </body>
 </html>

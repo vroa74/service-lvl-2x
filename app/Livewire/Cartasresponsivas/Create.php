@@ -40,6 +40,12 @@ class Create extends Component
     public $photoPreview = [];
     public $photoDescription = [];
     public $openPhotoAccordion = [];
+    public $showAddPhotoForm = [];
+
+    public $showPhotoModal = [];
+    public $modalPhoto = [];
+    public $modalPhotoPreview = [];
+    public $modalPhotoDescription = [];
 
     protected $rules = [
         'user_id' => 'required|exists:users,id',
@@ -59,6 +65,8 @@ class Create extends Component
         $this->users = User::where('status', true)->orderBy('name')->get();
         $this->inventories = Inventory::where('status', true)->orderBy('id', 'desc')->get();
         $this->filteredInventories = $this->inventories;
+        $this->fecha = now()->format('Y-m-d');
+        $this->codigo = 'CR/' . now()->format('Ymd/His');
     }
 
     public function openInventoryModal()
@@ -85,6 +93,7 @@ class Create extends Component
         if (!in_array($inventoryId, $this->selected_inventories)) {
             $this->selected_inventories[] = $inventoryId;
             $this->inventoryDescriptions[$inventoryId] = '';
+            
         }
         $this->closeInventoryModal();
     }
@@ -102,7 +111,8 @@ class Create extends Component
 
     public function getSelectedInventoryItems()
     {
-        return Inventory::whereIn('id', $this->selected_inventories)->get();
+        $items = Inventory::whereIn('id', $this->selected_inventories)->get()->keyBy('id');
+        return collect($this->selected_inventories)->map(fn($id) => $items[$id])->filter();
     }
 
     public function getFilteredInventoriesPaginated()
@@ -129,6 +139,7 @@ class Create extends Component
         $this->openPhotoAccordion[$inventoryId] = true;
         $this->selectedInventoryForPhotos = $inventoryId;
         $this->resetPhotoForm($inventoryId);
+        $this->showAddPhotoForm[$inventoryId] = true;
     }
 
     public function resetPhotoForm($inventoryId)
@@ -160,8 +171,16 @@ class Create extends Component
             'path' => $path,
             'description' => $this->photoDescription[$inventoryId],
         ]);
-        $this->resetPhotoForm($inventoryId);
+        $this->photo[$inventoryId] = null;
+        $this->photoPreview[$inventoryId] = null;
+        $this->photoDescription[$inventoryId] = '';
+        $this->showAddPhotoForm[$inventoryId] = false;
         session()->flash('message', 'Foto agregada correctamente.');
+    }
+
+    public function showAddPhotoForm($inventoryId)
+    {
+        $this->showAddPhotoForm[$inventoryId] = true;
     }
 
     public function deletePhoto($photoId)
@@ -179,6 +198,47 @@ class Create extends Component
             return InventoryPhoto::where('inventory_id', $this->selectedInventoryForPhotos)->get();
         }
         return collect();
+    }
+
+    public function openPhotoModal($inventoryId)
+    {
+        $this->showPhotoModal[$inventoryId] = true;
+        $this->modalPhoto[$inventoryId] = null;
+        $this->modalPhotoPreview[$inventoryId] = null;
+        $this->modalPhotoDescription[$inventoryId] = '';
+    }
+
+    public function closePhotoModal($inventoryId)
+    {
+        $this->showPhotoModal[$inventoryId] = false;
+        $this->modalPhoto[$inventoryId] = null;
+        $this->modalPhotoPreview[$inventoryId] = null;
+        $this->modalPhotoDescription[$inventoryId] = '';
+    }
+
+    public function updatedModalPhoto($value, $name)
+    {
+        $parts = explode('.', $name);
+        $inventoryId = $parts[1] ?? null;
+        if ($inventoryId && isset($this->modalPhoto[$inventoryId])) {
+            $this->modalPhotoPreview[$inventoryId] = $this->modalPhoto[$inventoryId]->temporaryUrl();
+        }
+    }
+
+    public function savePhotoFromModal($inventoryId)
+    {
+        $this->validate([
+            'modalPhoto.' . $inventoryId => 'required|image|max:2048',
+            'modalPhotoDescription.' . $inventoryId => 'nullable|string|max:255',
+        ]);
+        $path = $this->modalPhoto[$inventoryId]->store('inventory_photos', 'public');
+        InventoryPhoto::create([
+            'inventory_id' => $inventoryId,
+            'path' => $path,
+            'description' => $this->modalPhotoDescription[$inventoryId],
+        ]);
+        $this->closePhotoModal($inventoryId);
+        session()->flash('message', 'Foto agregada correctamente.');
     }
 
     public function save()

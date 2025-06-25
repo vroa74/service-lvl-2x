@@ -39,12 +39,12 @@
                     </div>
                     <div>
                         <label class="block text-gray-200 mb-1">Fecha</label>
-                        <input type="date" wire:model="fecha" class="w-full rounded p-2 bg-gray-900 text-gray-100">
+                        <input type="date" wire:model="fecha" class="w-full rounded p-2 bg-gray-900 text-gray-100" value="{{ now()->format('Y-m-d') }}" disabled>
                         @error('fecha') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
                     </div>
                     <div>
                         <label class="block text-gray-200 mb-1">Código</label>
-                        <input type="text" wire:model="codigo" class="w-full rounded p-2 bg-gray-900 text-gray-100">
+                        <input type="text" wire:model="codigo" class="w-full rounded p-2 bg-gray-900 text-gray-100" readonly>
                         @error('codigo') <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
                     </div>
                     <div class="flex items-center gap-2">
@@ -90,8 +90,12 @@
                             </thead>
                             <tbody class="divide-y divide-gray-600">
                                 @foreach($this->getSelectedInventoryItems() as $inventory)
+                                    @php
+                                        $photos = $inventory->photos;
+                                    @endphp
                                     <tr class="hover:bg-gray-600 transition-colors">
                                         <td class="px-3 py-2 text-sm text-gray-200">
+                                            <div class="font-medium">{{ $inventory->id ?? 'N/A' }}</div>
                                             <div class="font-medium">{{ $inventory->articulo ?? 'N/A' }}</div>
                                             <div class="text-xs text-gray-400">{{ $inventory->marca ?? 'N/A' }} {{ $inventory->modelo ?? 'N/A' }}</div>
                                         </td>
@@ -108,6 +112,7 @@
                                         <td class="px-3 py-2 text-center flex flex-col gap-2 items-center">
                                             <div class="flex gap-1">
                                                 <button 
+                                                    wire:click="selectInventoryForPhotos({{ $inventory->id }})"
                                                     class="px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded transition-colors flex items-center gap-1"
                                                     title="Agregar foto"
                                                 >
@@ -233,61 +238,124 @@
             </div>
         @endif
 
-        <!-- Tercera columna - Acordeón de fotos (33%) -->
+        <!-- Tercera columna - Acordeón de fotos (Flowbite) (33%) -->
         <div class="w-[33%]">
             <div class="p-6 bg-gray-800 rounded-lg shadow h-full overflow-y-auto">
                 <h3 class="text-gray-200 text-lg font-medium mb-4">Fotos de Inventarios</h3>
-                <div class="space-y-4">
-                    @foreach($openPhotoAccordion as $invId => $open)
-                        @php
-                            $inv = $this->getSelectedInventoryItems()->firstWhere('id', $invId);
-                        @endphp
-                        @if($open && $inv)
-                        <div class="border border-gray-700 rounded-lg bg-gray-700">
-                            <button type="button" class="w-full flex justify-between items-center px-4 py-3 bg-gray-700 rounded-t-lg focus:outline-none" @click="openPhotoAccordion[{{ $invId }}] = !openPhotoAccordion[{{ $invId }}]">
-                                <span class="font-semibold text-gray-100 text-sm">{{ $inv->articulo }} (NI: {{ $inv->ni }})</span>
-                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                            </button>
-                            <div class="px-4 py-3 space-y-3">
-                                <!-- Formulario de subida de foto -->
-                                <form wire:submit.prevent="addPhoto({{ $invId }})" class="space-y-2">
-                                    <div>
-                                        <label class="block text-xs text-gray-300 mb-1">Seleccionar imagen</label>
-                                        <input type="file" wire:model="photo.{{ $invId }}" accept="image/*" class="block w-full text-xs text-gray-200 bg-gray-800 border border-gray-600 rounded" />
-                                        @error('photo.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                                    </div>
-                                    @if(isset($photoPreview[$invId]) && $photoPreview[$invId])
-                                        <div class="mb-2">
-                                            <img src="{{ $photoPreview[$invId] }}" alt="Vista previa" class="h-24 rounded border border-gray-500 mx-auto" />
-                                        </div>
+                <div class="border border-gray-700 rounded-xl bg-gray-800">
+                    <div id="accordion-inventarios" data-accordion="collapse" class="w-full text-center">
+                        @foreach($openPhotoAccordion as $invId => $open)
+                        
+                            @php
+                            $index = $loop->index;
+                                $inv = $this->getSelectedInventoryItems()->firstWhere('id', $invId);
+                                $photos = $inv->photos;
+                            @endphp
+                            @if($inv)
+                                <h2 id="accordion-heading-{{ $invId }}">
+                                    @if($index != 0)
+                                    <hr class="h-[3px] bg-gray-500 border-0 rounded w-full" />
                                     @endif
-                                    <div>
-                                        <label class="block text-xs text-gray-300 mb-1">Descripción (opcional)</label>
-                                        <input type="text" wire:model="photoDescription.{{ $invId }}" class="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs placeholder-gray-400" placeholder="Descripción de la foto..." />
-                                        @error('photoDescription.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-xs">Agregar Foto</button>
-                                    </div>
-                                </form>
-                                <!-- Aquí podrías mostrar la lista de fotos ya subidas para este inventario -->
-                                <div class="mt-2">
-                                    <h4 class="text-xs text-gray-300 mb-1 font-semibold">Fotos subidas</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        @foreach($this->getPhotosForSelectedInventory() as $photo)
-                                            @if($photo->inventory_id == $invId)
-                                                <div class="relative">
-                                                    <img src="{{ asset('storage/' . $photo->path) }}" alt="Foto" class="h-16 w-16 object-cover rounded border border-gray-500" />
-                                                    <button wire:click="deletePhoto({{ $photo->id }})" class="absolute top-0 right-0 bg-red-700 text-white rounded-full px-1 text-xs" title="Eliminar foto">×</button>
+                                        <button type="button"
+                                        class="flex items-center justify-between w-full p-4 font-medium text-left text-gray-100 
+                                        bg-transparent dark:bg-blue-700 dark:hover:bg-blue-900  dark:hover:text-gray-100 dark:text-black font-bold"
+                                        data-accordion-target="#accordion-body-{{ $invId }}"
+                                        aria-expanded="true"
+                                        aria-controls="accordion-body-{{ $invId }}">
+                                        <span>{{ $inv->ni }}</span>
+                                    </button>
+                                </h2>
+                                <div id="accordion-body-{{ $invId }}" class="block" aria-labelledby="accordion-heading-{{ $invId }}">
+                                    <hr class="h-[3px] bg-gray-500 border-0 rounded w-full" />
+                                    <div class="p-4 bg-transparent">
+                                        {{-- Galería de fotos --}}
+                                        <div class="mb-2 overflow-x-auto">
+                                            <div class="inline-block min-w-full align-middle">
+                                                <div class="border border-gray-600 rounded-lg overflow-hidden">
+                                                    <table class="min-w-full border-collapse">
+                                                        <tbody>
+                                                            @foreach($photos->chunk(3) as $row)
+                                                                <tr>                                                                    
+                                                                    @foreach($row as $photo)
+                                                                        <td class="border border-gray-600 p-2 align-top bg-gray-900" style="width: 140px; position: relative;">
+                                                                            <div class="flex flex-col items-center relative group">
+                                                                                <img src="{{ asset('storage/' . $photo->path) }}" alt="Foto"
+                                                                                    style="height:128px; width:auto; object-fit:contain;"
+                                                                                    class="rounded bg-black mx-auto" />
+                                                                                <button
+                                                                                    wire:click="deletePhoto({{ $photo->id }})"
+                                                                                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 flex items-center justify-center text-base transition-all duration-200 z-10"
+                                                                                    title="Eliminar foto"
+                                                                                    style="display: flex; align-items: center; justify-content: center;">
+                                                                                    &times;
+                                                                                </button>
+                                                                                @if($photo->description)
+                                                                                    <div class="mt-1 text-gray-300 text-[7px] text-center w-full truncate">{{ $photo->description }}</div>
+                                                                                @endif
+                                                                            </div>
+                                                                        </td>
+                                                                    @endforeach
+                                                                    {{-- Si la fila tiene menos de 3 fotos, rellena las celdas vacías --}}
+                                                                    @for($i = $row->count(); $i < 3; $i++)
+                                                                        <td class="border border-gray-600 bg-gray-900"></td>
+                                                                    @endfor
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            @endif
-                                        @endforeach
+                                            </div>
+                                        </div>
+                                        {{-- Botón para agregar foto --}}
+                                        <div class="pt-2 text-center">
+                                            <button wire:click="openPhotoModal({{ $invId }})"
+                                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-xs flex items-center justify-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                                </svg>
+                                                <span>Agregar foto</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        @endif
-                    @endforeach
+                                {{-- Modal para agregar foto --}}
+                                @if($showPhotoModal[$invId] ?? false)
+                                    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" wire:click.self="closePhotoModal({{ $invId }})">
+                                        <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-6 relative">
+                                            <div class="flex justify-between items-center mb-4">
+                                                <h4 class="text-gray-200 text-lg font-medium">Agregar foto a {{ $inv->ni }}</h4>
+                                                <button wire:click="closePhotoModal({{ $invId }})" class="text-gray-400 hover:text-white transition-colors text-xl">×</button>
+                                            </div>
+                                            <form wire:submit.prevent="savePhotoFromModal({{ $invId }})" class="space-y-4">
+                                                <div>
+                                                    <label class="block text-xs text-gray-300 mb-1">Seleccionar imagen</label>
+                                                    <input type="file" wire:model="modalPhoto.{{ $invId }}" accept="image/*" class="block w-full text-xs text-gray-200 bg-gray-800 border border-gray-600 rounded" />
+                                                    @error('modalPhoto.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                                                </div>
+                                                @if(isset($modalPhotoPreview[$invId]) && $modalPhotoPreview[$invId])
+                                                    <div class="text-center">
+                                                        <label class="block text-xs text-gray-300 mb-2">Vista previa:</label>
+                                                        <div class="inline-block border-2 border-blue-500 rounded-lg p-1">
+                                                            <img src="{{ $modalPhotoPreview[$invId] }}" alt="Vista previa" class="h-64 max-w-full object-contain rounded" style="max-width:100%;" />
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div>
+                                                    <label class="block text-xs text-gray-300 mb-1">Descripción (opcional)</label>
+                                                    <input type="text" wire:model="modalPhotoDescription.{{ $invId }}" class="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs placeholder-gray-400" placeholder="Descripción de la foto..." />
+                                                    @error('modalPhotoDescription.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="flex justify-end gap-2">
+                                                    <button type="button" wire:click="closePhotoModal({{ $invId }})" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1 rounded text-xs">Cancelar</button>
+                                                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-xs">Aceptar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
