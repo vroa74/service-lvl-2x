@@ -5,10 +5,12 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-4">
         {{-- <div class="max-w-full mx-auto sm:px-6 lg:px-8"> --}}
             {{-- <div class="bg-gray-900 overflow-hidden shadow-xl sm:rounded-lg"> --}}
+                @livewire('inventory.index')
                 @livewire('cartasresponsivas.create')
+
             {{-- </div> --}}
         {{-- </div> --}}
     </div>

@@ -16,6 +16,8 @@ class Create extends Component
 {
     use WithPagination, WithFileUploads;
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
     public $user_id;
     public $responsable_id;
     public $informatica_id;
@@ -46,6 +48,11 @@ class Create extends Component
     public $modalPhoto = [];
     public $modalPhotoPreview = [];
     public $modalPhotoDescription = [];
+
+    public $showUserModal = false;
+    public $userModalTarget = null; // 'user_id', 'responsable_id', 'informatica_id'
+    public $userModalFilter = '';
+    public $userModalList = [];
 
     protected $rules = [
         'user_id' => 'required|exists:users,id',
@@ -93,7 +100,9 @@ class Create extends Component
         if (!in_array($inventoryId, $this->selected_inventories)) {
             $this->selected_inventories[] = $inventoryId;
             $this->inventoryDescriptions[$inventoryId] = '';
-            
+            $this->openPhotoAccordion[$inventoryId] = true;
+            $this->showAddPhotoForm[$inventoryId] = true;
+            $this->openPhotoModal($inventoryId);
         }
         $this->closeInventoryModal();
     }
@@ -202,10 +211,11 @@ class Create extends Component
 
     public function openPhotoModal($inventoryId)
     {
-        $this->showPhotoModal[$inventoryId] = true;
+        $this->showPhotoModal = array_merge($this->showPhotoModal, [$inventoryId => true]);
         $this->modalPhoto[$inventoryId] = null;
         $this->modalPhotoPreview[$inventoryId] = null;
         $this->modalPhotoDescription[$inventoryId] = '';
+        $this->dispatch('$refresh');
     }
 
     public function closePhotoModal($inventoryId)
@@ -239,6 +249,48 @@ class Create extends Component
         ]);
         $this->closePhotoModal($inventoryId);
         session()->flash('message', 'Foto agregada correctamente.');
+    }
+
+    public function openUserModal($target)
+    {
+        logger('openUserModal called', ['target' => $target]);
+        $this->userModalTarget = $target;
+        $this->userModalFilter = '';
+        $this->showUserModal = true;
+        $this->updateUserModalList();
+    }
+
+    public function closeUserModal()
+    {
+        $this->showUserModal = false;
+        $this->userModalTarget = null;
+        $this->userModalFilter = '';
+        $this->userModalList = [];
+    }
+
+    public function updatedUserModalFilter()
+    {
+        $this->updateUserModalList();
+    }
+
+    public function updateUserModalList()
+    {
+        $query = User::where('status', true);
+        if (!empty($this->userModalFilter)) {
+            $search = strtolower($this->userModalFilter);
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . $search . '%'])
+                  ->orWhereRaw('LOWER(email) LIKE ?', ['%' . $search . '%']);
+        }
+        $this->userModalList = $query->orderBy('name')->limit(20)->get();
+    }
+
+    public function selectUserFromModal($userId)
+    {
+        $user = User::find($userId);
+        if ($user && in_array($this->userModalTarget, ['user_id', 'responsable_id', 'informatica_id'])) {
+            $this->{$this->userModalTarget} = $user->id;
+        }
+        $this->closeUserModal();
     }
 
     public function save()

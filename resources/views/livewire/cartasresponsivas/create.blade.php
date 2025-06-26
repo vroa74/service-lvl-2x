@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gray-900 p-6">
+<div class="min-h-screen bg-gray-900 p-4">
     <div class="flex gap-6 h-full">
         <!-- Primera columna - Formulario actual (34%) -->
-        <div class="w-[34%]">
-            <div class="max-w-full p-6 bg-gray-800 rounded-lg shadow">
+        <div class="w-[30%]">
+            <div class="max-w-full p-4 bg-gray-800 rounded-lg shadow">
                 @if (session()->has('message'))
                     <div class="mb-4 p-3 bg-green-600 text-white rounded">{{ session('message') }}</div>
                 @endif
@@ -11,6 +11,7 @@
                         <label class="block text-gray-200 mb-1">Usuario que genera</label>
                         <select wire:model="user_id" class="w-full rounded p-2 bg-gray-900 text-gray-100">
                             <option value="">Seleccione...</option>
+                            <option value="null">Sin usuario</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
@@ -59,7 +60,7 @@
         </div>
 
         <!-- Segunda columna - Tabla de Inventarios (33%) -->
-        <div class="w-[33%]">
+        <div class="w-[37%]">
             <div class="p-6 bg-gray-800 rounded-lg shadow h-full overflow-y-auto">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-gray-200 text-lg font-medium">Inv. de la Carta Responsiva</h3>
@@ -83,7 +84,7 @@
                                 <tr>
                                     <th class="px-3 py-2 text-left text-xs font-medium text-gray-300">Artículo</th>
                                     <th class="px-3 py-2 text-left text-xs font-medium text-gray-300">NI</th>
-                                    <th class="px-3 py-2 text-left text-xs font-medium text-gray-300">SN</th>
+                                    {{-- <th class="px-3 py-2 text-left text-xs font-medium text-gray-300">SN</th> --}}
                                     <th class="px-3 py-2 text-left text-xs font-medium text-gray-300">Descripción</th>
                                     <th class="px-3 py-2 text-center text-xs font-medium text-gray-300 w-16">Acción</th>
                                 </tr>
@@ -95,12 +96,12 @@
                                     @endphp
                                     <tr class="hover:bg-gray-600 transition-colors">
                                         <td class="px-3 py-2 text-sm text-gray-200">
-                                            <div class="font-medium">{{ $inventory->id ?? 'N/A' }}</div>
-                                            <div class="font-medium">{{ $inventory->articulo ?? 'N/A' }}</div>
-                                            <div class="text-xs text-gray-400">{{ $inventory->marca ?? 'N/A' }} {{ $inventory->modelo ?? 'N/A' }}</div>
+                                            <div class="font-medium">id: {{ $inventory->id ?? 'N/A' }}</div>
+                                            <div class="font-medium">art. {{ $inventory->articulo ?? 'N/A' }}</div>
+                                            <div class="text-8px text-gray-400">marca: {{ $inventory->marca ?? 'N/A' }} {{ $inventory->modelo ?? 'N/A' }}</div>
                                         </td>
-                                        <td class="px-3 py-2 text-sm text-gray-200">{{ $inventory->ni ?? 'N/A' }}</td>
-                                        <td class="px-3 py-2 text-sm text-gray-200">{{ $inventory->ns ?? 'N/A' }}</td>
+                                        <td class="px-3 py-2 text-11px text-gray-200">ni: {{ $inventory->ni ?? 'N/A' }} <br> ns: {{ $inventory->ns ?? 'N/A' }} </td>
+                                        {{-- <td class="px-3 py-2 text-sm text-gray-200"> </td> --}}
                                         <td class="px-3 py-2">
                                             <textarea 
                                                 wire:model="inventoryDescriptions.{{ $inventory->id }}"
@@ -258,7 +259,7 @@
                                     @endif
                                         <button type="button"
                                         class="flex items-center justify-between w-full p-4 font-medium text-left text-gray-100 
-                                        bg-transparent dark:bg-blue-700 dark:hover:bg-blue-900  dark:hover:text-gray-100 dark:text-black font-bold"
+                                        bg-transparent dark:bg-blue-700 dark:hover:bg-blue-900  dark:hover:text-gray-100 dark:text-black font-bold{{ $index == 0 ? ' rounded-t-2xl' : '' }}"
                                         data-accordion-target="#accordion-body-{{ $invId }}"
                                         aria-expanded="true"
                                         aria-controls="accordion-body-{{ $invId }}">
@@ -271,7 +272,7 @@
                                         {{-- Galería de fotos --}}
                                         <div class="mb-2 overflow-x-auto">
                                             <div class="inline-block min-w-full align-middle">
-                                                <div class="border border-gray-600 rounded-lg overflow-hidden">
+                                                <div class="border border-gray-600 rounded-2xl overflow-hidden">
                                                     <table class="min-w-full border-collapse">
                                                         <tbody>
                                                             @foreach($photos->chunk(3) as $row)
@@ -280,8 +281,8 @@
                                                                         <td class="border border-gray-600 p-2 align-top bg-gray-900" style="width: 140px; position: relative;">
                                                                             <div class="flex flex-col items-center relative group">
                                                                                 <img src="{{ asset('storage/' . $photo->path) }}" alt="Foto"
-                                                                                    style="height:128px; width:auto; object-fit:contain;"
-                                                                                    class="rounded bg-black mx-auto" />
+                                                                                    style="height:96px; width:auto; object-fit:contain;"
+                                                                                    class="rounded-lg bg-black mx-auto" />
                                                                                 <button
                                                                                     wire:click="deletePhoto({{ $photo->id }})"
                                                                                     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-red-600 hover:bg-red-700 text-white rounded-full w-4 h-4 flex items-center justify-center text-base transition-all duration-200 z-10"
@@ -318,40 +319,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- Modal para agregar foto --}}
                                 @if($showPhotoModal[$invId] ?? false)
-                                    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" wire:click.self="closePhotoModal({{ $invId }})">
-                                        <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-6 relative">
-                                            <div class="flex justify-between items-center mb-4">
-                                                <h4 class="text-gray-200 text-lg font-medium">Agregar foto a {{ $inv->ni }}</h4>
-                                                <button wire:click="closePhotoModal({{ $invId }})" class="text-gray-400 hover:text-white transition-colors text-xl">×</button>
-                                            </div>
-                                            <form wire:submit.prevent="savePhotoFromModal({{ $invId }})" class="space-y-4">
-                                                <div>
-                                                    <label class="block text-xs text-gray-300 mb-1">Seleccionar imagen</label>
-                                                    <input type="file" wire:model="modalPhoto.{{ $invId }}" accept="image/*" class="block w-full text-xs text-gray-200 bg-gray-800 border border-gray-600 rounded" />
-                                                    @error('modalPhoto.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                                                </div>
-                                                @if(isset($modalPhotoPreview[$invId]) && $modalPhotoPreview[$invId])
-                                                    <div class="text-center">
-                                                        <label class="block text-xs text-gray-300 mb-2">Vista previa:</label>
-                                                        <div class="inline-block border-2 border-blue-500 rounded-lg p-1">
-                                                            <img src="{{ $modalPhotoPreview[$invId] }}" alt="Vista previa" class="h-64 max-w-full object-contain rounded" style="max-width:100%;" />
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                <div>
-                                                    <label class="block text-xs text-gray-300 mb-1">Descripción (opcional)</label>
-                                                    <input type="text" wire:model="modalPhotoDescription.{{ $invId }}" class="w-full px-2 py-1 bg-gray-800 border border-gray-600 rounded text-white text-xs placeholder-gray-400" placeholder="Descripción de la foto..." />
-                                                    @error('modalPhotoDescription.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
-                                                </div>
-                                                <div class="flex justify-end gap-2">
-                                                    <button type="button" wire:click="closePhotoModal({{ $invId }})" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1 rounded text-xs">Cancelar</button>
-                                                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-xs">Aceptar</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <!-- Modal de agregar foto -->
                                 @endif
                             @endif
                         @endforeach
@@ -361,3 +330,50 @@
         </div>
     </div>
 </div>
+
+{{-- Modal de selección de usuario (fuera de la estructura principal) --}}
+@if($showUserModal)
+    <div wire:ignore.self class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-1" wire:key="user-modal">
+        <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-gray-700 flex-shrink-0 flex justify-between items-center">
+                <h3 class="text-gray-200 text-lg font-medium">Seleccionar usuario</h3>
+                <button wire:click="closeUserModal" class="text-gray-400 hover:text-white transition-colors text-xl">×</button>
+            </div>
+            <div class="p-4 flex-shrink-0">
+                <input type="text" wire:model.debounce.300ms="userModalFilter" placeholder="Buscar por nombre o email..."
+                    class="w-full rounded p-2 bg-gray-700 text-gray-100 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+            </div>
+            <div class="flex-1 overflow-y-auto">
+                <table class="w-full text-sm text-gray-200">
+                    <thead>
+                        <tr class="bg-gray-700">
+                            <th class="p-2 text-left">Nombre</th>
+                            <th class="p-2 text-left">Email</th>
+                            <th class="p-2 text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($userModalList as $user)
+                            <tr class="border-b border-gray-700 hover:bg-gray-600">
+                                <td class="p-2">{{ $user->name }}</td>
+                                <td class="p-2">{{ $user->email }}</td>
+                                <td class="p-2 text-center">
+                                    <button wire:click="selectUserFromModal({{ $user->id }})" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        Seleccionar
+                                    </button>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="p-4 text-center text-gray-400">No se encontraron usuarios.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endif
