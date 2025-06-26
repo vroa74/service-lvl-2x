@@ -77,7 +77,8 @@
                     @forelse($services as $service)
                         <tr class="hover:bg-gray-700 transition-colors">
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
-                                {{ $service->id_s ?? 'N/A' }} <br> { {{ $this->NameQrCode($service->id_s) }}  }
+                                {{ $service->id_s ?? 'N/A' }} <br> 
+                                <span class="text-xs text-red-600"> {  <span  class="text-10px text-yellow-300"> {{ $this->NameQrCode($service->id_s) }}  </span>   } </span>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
                                 {{ $service->F_serv ? $service->F_serv->format('d/m/Y') : 'N/A' }}
@@ -150,13 +151,13 @@
                                     >
                                         <x-lucide name="edit" class="w-4 h-4" />
                                     </button>
-                                    <button 
+                                    {{-- <button 
                                         wire:click="toggleStatus({{ $service->id }})"
                                         class="text-yellow-400 hover:text-yellow-300 transition-colors"
                                         title="{{ $service->status ? 'Desactivar' : 'Activar' }}"
                                     >
                                         <x-lucide name="toggle-left" class="w-4 h-4" />
-                                    </button>
+                                    </button> --}}
                                     <button 
                                         wire:click="generateIndividualServiceReport({{ $service->id }})"
                                         class="text-orange-400 hover:text-red-500 transition-colors"

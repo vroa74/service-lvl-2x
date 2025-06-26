@@ -1,25 +1,33 @@
 <div>
     <!-- Mensaje de éxito -->
     @if (session()->has('message'))
-        <div class="mb-4">
-            <div id="message" class="mb-4 p-4 bg-green-600 text-white rounded-lg flex items-center justify-between">
-                <span>{{ session('message') }}</span>
-                <button type="button" class="text-white hover:text-gray-200" onclick="this.parentElement.remove()">
-                    <x-lucide name="x" class="w-5 h-5" />
-                </button>
-            </div>
-            <script>
-                setTimeout(function() {
-                    const message = document.getElementById('message');
-                    if (message) {
-                        message.style.transition = 'opacity 0.5s ease-out';
-                        message.style.opacity = '0';
-                        setTimeout(function() {
-                            message.remove();
-                        }, 500);
-                    }
-                }, 5000);
-            </script>
+        <div 
+            x-data="{ show: true }" 
+            x-init="setTimeout(() => show = false, 5000)" 
+            x-show="show"
+            x-transition
+            class="mb-4 p-4 bg-green-600 text-white rounded-lg flex items-center justify-between"
+        >
+            <span>{{ session('message') }}</span>
+            <button type="button" class="text-white hover:text-gray-200" @click="show = false">
+                <x-lucide name="x" class="w-5 h-5" />
+            </button>
+        </div>
+    @endif
+
+    <!-- Mensaje de error -->
+    @if (session()->has('error'))
+        <div 
+            x-data="{ show: true }" 
+            x-init="setTimeout(() => show = false, 5000)" 
+            x-show="show"
+            x-transition
+            class="mb-4 p-4 bg-red-600 text-white rounded-lg flex items-center justify-between"
+        >
+            <span>{{ session('error') }}</span>
+            <button type="button" class="text-white hover:text-gray-200" @click="show = false">
+                <x-lucide name="x" class="w-5 h-5" />
+            </button>
         </div>
     @endif
 
@@ -206,13 +214,13 @@
                                     >
                                         <x-lucide name="edit" class="w-4 h-4" />
                                     </button>
-                                    <button 
+                                    {{-- <button 
                                         wire:click="toggleStatus({{ $user->id }})"
                                         class="text-yellow-400 hover:text-yellow-300 transition-colors"
                                         title="{{ $user->status ? 'Desactivar' : 'Activar' }}"
                                     >
                                         <x-lucide name="toggle-left" class="w-4 h-4" />
-                                    </button>
+                                    </button> --}}
                                 </div>
                             </td>
                         </tr>
@@ -380,13 +388,41 @@
                         <label for="direction" class="block text-sm font-medium text-gray-300 mb-2">
                             Dirección
                         </label>
-                        <textarea 
-                            wire:model="direction"
-                            id="direction"
-                            rows="2"
-                            class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="Ingrese la dirección (opcional)"
-                        ></textarea>
+                        <div class="flex gap-2">
+                            <select 
+                                wire:model="direction"
+                                id="direction"
+                                class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                x-on:change="
+                                    if ($event.target.value === '__new__') {
+                                        $event.target.value = '';
+                                        $wire.set('direction', '');
+                                        $refs.newDirectionInput.style.display = 'block';
+                                        $refs.newDirectionInput.focus();
+                                    } else {
+                                        $refs.newDirectionInput.style.display = 'none';
+                                    }
+                                "
+                            >
+                                <option value="">Seleccionar dirección...</option>
+                                @foreach($uniqueDirections as $dir)
+                                    <option value="{{ $dir }}">{{ $dir }}</option>
+                                @endforeach
+                                <option value="__new__">+ Agregar nueva dirección</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Campo de texto para nueva dirección -->
+                        <div class="mt-2" x-ref="newDirectionInput" style="display: none;">
+                            <input 
+                                type="text" 
+                                id="new_direction"
+                                placeholder="Escribir nueva dirección..."
+                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                x-on:input="$wire.set('direction', $event.target.value)"
+                            >
+                        </div>
+                        
                         @error('direction') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                     </div>
 
@@ -396,13 +432,38 @@
                             <label for="position" class="block text-sm font-medium text-gray-300 mb-2">
                                 Posición
                             </label>
-                            <input 
+                            <select 
                                 wire:model="position"
-                                type="text" 
                                 id="position"
-                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Ingrese la posición"
+                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                x-on:change="
+                                    if ($event.target.value === '__new__') {
+                                        $event.target.value = '';
+                                        $wire.set('position', '');
+                                        $wire.set('lvl', '');
+                                        $refs.newPositionInput.style.display = 'block';
+                                        $refs.newPositionInput.focus();
+                                    } else {
+                                        $refs.newPositionInput.style.display = 'none';
+                                    }
+                                "
                             >
+                                <option value="">Seleccionar posición...</option>
+                                @foreach($uniquePositions as $pos)
+                                    <option value="{{ $pos }}">{{ $pos }}</option>
+                                @endforeach
+                                <option value="__new__">+ Agregar nueva posición</option>
+                            </select>
+                            <!-- Campo de texto para nueva posición -->
+                            <div class="mt-2" x-ref="newPositionInput" style="display: none;">
+                                <input 
+                                    type="text" 
+                                    id="new_position"
+                                    placeholder="Escribir nueva posición..."
+                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    x-on:input="$wire.set('position', $event.target.value)"
+                                >
+                            </div>
                             @error('position') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
 
@@ -427,15 +488,16 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="lvl" class="block text-sm font-medium text-gray-300 mb-2">
-                                Nivel
+                                Nivel (Automático)
                             </label>
                             <input 
                                 wire:model="lvl"
                                 type="text" 
                                 id="lvl"
-                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 placeholder="Ingrese el nivel"
                             >
+                            <p class="text-xs text-gray-500 mt-1">Puede editar el nivel manualmente</p>
                             @error('lvl') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                         </div>
 
@@ -552,3 +614,24 @@
         </div>
     @endif
 </div>
+
+<script>
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('showMessage', message => {
+            window.dispatchEvent(new CustomEvent('show-livewire-message', { detail: { message } }));
+        });
+    });
+
+    window.addEventListener('show-livewire-message', event => {
+        const msg = event.detail.message;
+        let div = document.createElement('div');
+        div.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+        div.textContent = msg;
+        document.body.appendChild(div);
+        setTimeout(() => {
+            div.style.transition = 'opacity 0.5s';
+            div.style.opacity = '0';
+            setTimeout(() => div.remove(), 500);
+        }, 5000);
+    });
+</script>

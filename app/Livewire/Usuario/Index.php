@@ -31,6 +31,27 @@ class Index extends Component
     public $password_confirmation = '';
     public $photo = null;
 
+    // Propiedad para almacenar las direcciones únicas
+    public $uniqueDirections = [];
+    
+    // Propiedad para almacenar las posiciones únicas
+    public $uniquePositions = [];
+    
+    // Mapeo de posiciones a niveles (actualizado según la imagen proporcionada)
+    protected $positionLevelMap = [
+        'DIPUTADO' => '1',
+        'JEFE DE GRUPO' => '10',
+        'PERSONAL DE APOYO' => '1114',
+        'SECRETARIO GENERAL' => '2',
+        'TITULAR ORGANO INTERNO DE CONTROL' => '2',
+        'ASESOR' => '3',
+        'DIRECTOR' => '4',
+        'SUBDIRECTOR' => '5',
+        'JEFE DE DEPARTAMENTO' => '7',
+        'ANALISTA ESPECIALIZADO' => '8',
+        'ANALISTA' => '9',
+    ];
+
     protected $rules = [
         'name' => 'required|string|max:255',
         'rfc' => 'nullable|string|max:13|unique:users,rfc',
@@ -58,6 +79,34 @@ class Index extends Component
         'photo.max' => 'La imagen no debe superar 1MB',
     ];
 
+    public function mount()
+    {
+        $this->loadUniqueDirections();
+        $this->loadUniquePositions();
+    }
+
+    public function loadUniqueDirections()
+    {
+        $this->uniqueDirections = User::whereNotNull('direction')
+            ->where('direction', '!=', '')
+            ->distinct()
+            ->pluck('direction')
+            ->sort()
+            ->values()
+            ->toArray();
+    }
+
+    public function loadUniquePositions()
+    {
+        $this->uniquePositions = User::whereNotNull('position')
+            ->where('position', '!=', '')
+            ->distinct()
+            ->pluck('position')
+            ->sort()
+            ->values()
+            ->toArray();
+    }
+
     public function updatedSearch()
     {
         $this->resetPage();
@@ -66,6 +115,8 @@ class Index extends Component
     public function openModal()
     {
         $this->resetForm();
+        $this->loadUniqueDirections();
+        $this->loadUniquePositions();
         $this->showModal = true;
         $this->editing = false;
     }
@@ -88,6 +139,8 @@ class Index extends Component
         $this->password_confirmation = '';
         $this->photo = null;
 
+        $this->loadUniqueDirections();
+        $this->loadUniquePositions();
         $this->showModal = true;
         $this->editing = true;
     }
@@ -120,7 +173,7 @@ class Index extends Component
                 $user->updateProfilePhoto($this->photo);
             }
             
-            session()->flash('message', 'Usuario actualizado correctamente.');
+            $this->dispatch('showMessage', 'Usuario actualizado correctamente.');
         } else {
             $user = User::create($validatedData);
             
@@ -129,9 +182,12 @@ class Index extends Component
                 $user->updateProfilePhoto($this->photo);
             }
             
-            session()->flash('message', 'Usuario creado correctamente.');
+            $this->dispatch('showMessage', 'Usuario creado correctamente.');
         }
 
+        // Recargar las direcciones únicas después de guardar
+        $this->loadUniqueDirections();
+        $this->loadUniquePositions();
         $this->closeModal();
     }
 
@@ -145,7 +201,8 @@ class Index extends Component
     {
         $user = User::find($userId);
         $user->update(['status' => !$user->status]);
-        session()->flash('message', 'Estado del usuario actualizado.');
+        $status = $user->status ? 'activo' : 'inactivo';
+        $this->dispatch('showMessage', "El usuario ahora está $status.");
     }
 
     public function toggleSex($userId)
@@ -164,6 +221,14 @@ class Index extends Component
                 $user->deleteProfilePhoto();
                 session()->flash('message', 'Foto de perfil eliminada correctamente.');
             }
+        }
+    }
+
+    public function updatedDirection()
+    {
+        // Si se selecciona "Agregar nueva dirección", limpiar el valor
+        if ($this->direction === '__new__') {
+            $this->direction = '';
         }
     }
 
@@ -210,7 +275,9 @@ class Index extends Component
             ->paginate(10);
 
         return view('livewire.usuario.index', [
-            'users' => $users
+            'users' => $users,
+            'uniqueDirections' => $this->uniqueDirections,
+            'uniquePositions' => $this->uniquePositions
         ]);
     }
 }
