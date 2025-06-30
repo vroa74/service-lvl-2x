@@ -74,13 +74,22 @@
                     </tr>
                 </thead>
                 
-                <tbody class="bg-gray-800 divide-y divide-gray-700">
+                <tbody class="bg-gray-700 divide-y divide-gray-600">
+                    
                     @forelse($services as $service)
-                    @if($service->status && $service->impressions)
-                        <tr class="hover:bg-gray-900 bg-black transition-colors">
-                    @else
-                        <tr class="hover:bg-gray-700 transition-colors">
-                    @endif
+                        @php
+                            $bgColor = 'bg-gray-700';
+                            $hoverColor = 'hover:bg-gray-600';
+                            
+                            if ($service->status && $service->impressions) {
+                                $bgColor = 'bg-black';
+                                $hoverColor = 'hover:bg-gray-900';
+                            } elseif ($service->status && !$service->impressions) {
+                                $bgColor = 'bg-green-800';
+                                $hoverColor = 'hover:bg-green-700';
+                            }
+                        @endphp
+                        <tr class="{{ $bgColor }} {{ $hoverColor }} transition-colors">
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
                                 id: {{ $service->id ?? 'N/A' }} <br> 
                                 serv:{{ $service->id_s ?? 'N/A' }} <br> 

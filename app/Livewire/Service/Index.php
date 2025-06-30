@@ -194,10 +194,19 @@ class Index extends Component
     public function generateIndividualServiceReport($serviceId)
     {
         try {
+            // Buscar el servicio y actualizar los campos
+            $service = Service::find($serviceId);
+            if ($service) {
+                $service->update([
+                    'impressions' => true,
+                    'status' => true
+                ]);
+            }
+            
             // Emitir evento inmediatamente para abrir el PDF en nueva pestaña
             $this->dispatch('openPdfInNewTab', url: route('service.pdf', $serviceId));
             
-            session()->flash('message', 'Reporte del servicio generado correctamente.');
+            session()->flash('message', 'Reporte del servicio generado correctamente. Los campos de impresión y estado han sido actualizados.');
             
         } catch (\Exception $e) {
             session()->flash('error', 'Error al generar el reporte del servicio: ' . $e->getMessage());
@@ -353,8 +362,8 @@ class Index extends Component
                       ->orWhere('capturo', 'like', '%' . $this->search . '%');
                 });
             })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->orderBy('id', 'desc')
+            ->paginate(15);
 
         $users = User::where('status', true)->orderBy('name')->get();
 
