@@ -73,11 +73,17 @@
                         </th>
                     </tr>
                 </thead>
+                
                 <tbody class="bg-gray-800 divide-y divide-gray-700">
                     @forelse($services as $service)
+                    @if($service->status && $service->impressions)
+                        <tr class="hover:bg-gray-900 bg-black transition-colors">
+                    @else
                         <tr class="hover:bg-gray-700 transition-colors">
+                    @endif
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">
-                                {{ $service->id_s ?? 'N/A' }} <br> 
+                                id: {{ $service->id ?? 'N/A' }} <br> 
+                                serv:{{ $service->id_s ?? 'N/A' }} <br> 
                                 <span class="text-xs text-red-600"> {  <span  class="text-10px text-yellow-300"> {{ $this->NameQrCode($service->id_s) }}  </span>   } </span>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300 whitespace-nowrap">

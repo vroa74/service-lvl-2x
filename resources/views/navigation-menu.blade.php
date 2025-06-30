@@ -34,7 +34,9 @@
                     <x-nav-link href="{{ route('inventario.index') }}" :active="request()->routeIs('inventario.index')">
                         <i class="ri-list-settings-line"></i>  {{ __('Gestión de Inventarios') }}
                     </x-nav-link>
-
+                    <x-nav-link href="{{ route('cartasresponsivas.index') }}" :active="request()->routeIs('cartasresponsivas.index')">
+                        <i class="ri-list-settings-line"></i>  {{ __('Gestión de Cartas Responsivas') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -95,7 +97,7 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                                 <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="size-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    <img class="size-6 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -172,7 +174,7 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 me-3">
-                        <img class="size-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        <img class="size-6 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 

@@ -4,9 +4,9 @@
     <div class="p-1 border-b border-gray-700">
         <div class="flex items-center justify-between">
             <h3 class="text-lg font-medium text-white">
-                Editar Servicio
+                Editar Artículo de Inventario
             </h3>
-            <a href="{{ route('servicios.index') }}"
+            <a href="{{ route('inventario.index') }}"
                 class="text-gray-400 hover:text-white transition-colors">
                 <x-lucide name="x" class="w-6 h-6" />
             </a>
@@ -18,6 +18,12 @@
     @if (session()->has('message'))
         <div class="p-4 mb-4 bg-green-600 border border-green-500 rounded-lg">
             <p class="text-white">{{ session('message') }}</p>
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="p-4 mb-4 bg-red-600 border border-red-500 rounded-lg">
+            <p class="text-white">{{ session('error') }}</p>
         </div>
     @endif
 
@@ -33,687 +39,405 @@
     {{-- ======================= FIN: Mensajes de éxito y error ======================= --}}
 
     {{-- ======================= INICIO: Formulario de Edición ======================= --}}
-    <form wire:submit.prevent="saveService" class="p-6 space-y-6">
+    <form wire:submit.prevent="saveInventory" class="p-6 space-y-6">
         {{-- ======================= INICIO: Información básica ======================= --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-                <label for="id_s" class="block text-sm font-medium text-gray-300 mb-2">
-                    ID Servicio
+                <label for="fecha_inv" class="block text-sm font-medium text-gray-300 mb-2">
+                    Fecha de Inventario
                 </label>
                 <input
-                    wire:model="id_s"
-                    type="text"
-                    id="id_s"
-                    readonly
-                    class="w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-lg text-white placeholder-gray-400 cursor-not-allowed"
-                    placeholder="ID del servicio">
-                @error('id_s') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="F_serv" class="block text-sm font-medium text-gray-300 mb-2">
-                    Fecha de Servicio
-                </label>
-                <input
-                    wire:model="F_serv"
+                    wire:model="fecha_inv"
                     type="date"
-                    id="F_serv"
+                    id="fecha_inv"
                     class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                @error('F_serv') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                @error('fecha_inv') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="fecha" class="block text-sm font-medium text-gray-300 mb-2">
+                    Fecha
+                </label>
+                <input
+                    wire:model="fecha"
+                    type="date"
+                    id="fecha"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                @error('fecha') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="dir" class="block text-sm font-medium text-gray-300 mb-2">
+                    Dirección/Ubicación
+                </label>
+                <input
+                    wire:model="dir"
+                    type="text"
+                    id="dir"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Dirección o ubicación"
+                >
+                @error('dir') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
         {{-- ======================= FIN: Información básica ======================= --}}
 
-        {{-- ======================= INICIO: Descripción del servicio ======================= --}}
-        <div>
-            <div class="flex items-center gap-2 mb-2">
-                <label for="obj_sol" class="block text-sm font-medium text-gray-300">
-                    Objetivo de la Solicitud
-                </label>
-                <button
-                    type="button"
-                    wire:click="openUserModal('objetivo', 'null', 'null', null, 'null')"
-                    class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                    <x-lucide name="users" class="w-4 h-4" />
-                </button>
-                <!-- Botón para abrir el modal de inventario -->
-                <button
-                    type="button"
-                    wire:click="openInventoryModal('objetivo')"
-                    class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                    <x-lucide name="list-search" class="w-4 h-4" />
-                </button>
+        {{-- ======================= INICIO: Usuarios ======================= --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <label for="user" class="block text-sm font-medium text-gray-300">
+                        Usuario
+                    </label>
+                    <button
+                        type="button"
+                        wire:click="openUserModal('user')"
+                        class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
+                        <x-lucide name="users" class="w-4 h-4" />
+                    </button>
+                </div>
+                <input
+                    wire:model="user"
+                    type="text"
+                    id="user"
+                    readonly
+                    class="w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-lg text-white placeholder-gray-400 cursor-not-allowed"
+                    placeholder="Seleccionar usuario"
+                >
+                @error('user') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <label for="resguardante" class="block text-sm font-medium text-gray-300">
+                        Resguardante
+                    </label>
+                    <button
+                        type="button"
+                        wire:click="openUserModal('responsible')"
+                        class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
+                        <x-lucide name="users" class="w-4 h-4" />
+                    </button>
+                </div>
+                <input
+                    wire:model="resguardante"
+                    type="text"
+                    id="resguardante"
+                    readonly
+                    class="w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-lg text-white placeholder-gray-400 cursor-not-allowed"
+                    placeholder="Seleccionar resguardante"
+                >
+                @error('resguardante') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        {{-- ======================= FIN: Usuarios ======================= --}}
+
+        {{-- ======================= INICIO: Información del artículo ======================= --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="articulo" class="block text-sm font-medium text-gray-300 mb-2">
+                    Artículo
+                </label>
+                <input
+                    wire:model="articulo"
+                    type="text"
+                    id="articulo"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nombre del artículo"
+                >
+                @error('articulo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="type" class="block text-sm font-medium text-gray-300 mb-2">
+                    Tipo
+                </label>
+                <input
+                    wire:model="type"
+                    type="text"
+                    id="type"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Tipo de artículo"
+                >
+                @error('type') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label for="ni" class="block text-sm font-medium text-gray-300 mb-2">
+                    Número de Inventario (NI)
+                </label>
+                <input
+                    wire:model="ni"
+                    type="text"
+                    id="ni"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Número de inventario"
+                >
+                @error('ni') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="ns" class="block text-sm font-medium text-gray-300 mb-2">
+                    Número de Serie (NS)
+                </label>
+                <input
+                    wire:model="ns"
+                    type="text"
+                    id="ns"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Número de serie"
+                >
+                @error('ns') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="marca" class="block text-sm font-medium text-gray-300 mb-2">
+                    Marca
+                </label>
+                <input
+                    wire:model="marca"
+                    type="text"
+                    id="marca"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Marca del artículo"
+                >
+                @error('marca') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="modelo" class="block text-sm font-medium text-gray-300 mb-2">
+                    Modelo
+                </label>
+                <input
+                    wire:model="modelo"
+                    type="text"
+                    id="modelo"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Modelo del artículo"
+                >
+                @error('modelo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="nombres" class="block text-sm font-medium text-gray-300 mb-2">
+                    Nombres
+                </label>
+                <input
+                    wire:model="nombres"
+                    type="text"
+                    id="nombres"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nombres adicionales"
+                >
+                @error('nombres') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        {{-- ======================= FIN: Información del artículo ======================= --}}
+
+        {{-- ======================= INICIO: Información de PC ======================= --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="flex items-center">
+                    <input
+                        wire:model="is_pc"
+                        type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
+                    >
+                    <span class="ml-2 text-sm text-gray-300">Es PC</span>
+                </label>
+            </div>
+            <div>
+                <label for="gpo" class="block text-sm font-medium text-gray-300 mb-2">
+                    Grupo
+                </label>
+                <input
+                    wire:model="gpo"
+                    type="text"
+                    id="gpo"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Grupo"
+                >
+                @error('gpo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="disp" class="block text-sm font-medium text-gray-300 mb-2">
+                    Dispositivo
+                </label>
+                <input
+                    wire:model="disp"
+                    type="text"
+                    id="disp"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Dispositivo"
+                >
+                @error('disp') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="gpo_pc_user" class="block text-sm font-medium text-gray-300 mb-2">
+                    Grupo PC Usuario
+                </label>
+                <input
+                    wire:model="gpo_pc_user"
+                    type="text"
+                    id="gpo_pc_user"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Grupo PC usuario"
+                >
+                @error('gpo_pc_user') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        {{-- ======================= FIN: Información de PC ======================= --}}
+
+        {{-- ======================= INICIO: Información adicional ======================= --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="apa" class="block text-sm font-medium text-gray-300 mb-2">
+                    APA
+                </label>
+                <input
+                    wire:model="apa"
+                    type="text"
+                    id="apa"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="APA"
+                >
+                @error('apa') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="ama" class="block text-sm font-medium text-gray-300 mb-2">
+                    AMA
+                </label>
+                <input
+                    wire:model="ama"
+                    type="text"
+                    id="ama"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="AMA"
+                >
+                @error('ama') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="fullname" class="block text-sm font-medium text-gray-300 mb-2">
+                    Nombre Completo
+                </label>
+                <input
+                    wire:model="fullname"
+                    type="text"
+                    id="fullname"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nombre completo"
+                >
+                @error('fullname') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="esp" class="block text-sm font-medium text-gray-300 mb-2">
+                    Especificaciones
+                </label>
+                <input
+                    wire:model="esp"
+                    type="text"
+                    id="esp"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Especificaciones"
+                >
+                @error('esp') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+        </div>
+
+        <div>
+            <label for="software_instalado" class="block text-sm font-medium text-gray-300 mb-2">
+                Software Instalado
+            </label>
             <textarea
-                wire:model.defer="obj_sol"
-                id="obj_sol"
+                wire:model="software_instalado"
+                id="software_instalado"
                 rows="3"
                 class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Describa el objetivo de la solicitud"
+                placeholder="Software instalado"
             ></textarea>
-            @error('obj_sol') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            @error('software_instalado') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
         </div>
-        {{-- ======================= FIN: Descripción del servicio ======================= --}}
 
-        {{-- ======================= INICIO: Actividades y Observaciones ======================= --}}
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <div class="flex items-center gap-2 mb-2">
-                    <label for="actividades" class="block text-sm font-medium text-gray-300 mb-2">
-                        Actividades Realizadas
-                    </label>
-                        <button
-                        type="button"
-                        wire:click="openUserModal('actividades', 'null', 'null', null, 'null')"
-                        class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                        <x-lucide name="users" class="w-4 h-4" />
-                    </button>
-                    <!-- Botón para abrir el modal de inventario -->
-                    <button
-                        type="button"
-                        wire:click="openInventoryModal('actividades')"
-                        class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                        <x-lucide name="list-search" class="w-4 h-4" />
-                    </button>
-                </div>
-                <textarea
-                    wire:model.defer="actividades"
-                    id="actividades"
-                    rows="3"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Describa las actividades realizadas"
-                ></textarea>
-                @error('actividades') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <div class="flex items-center gap-2 mb-2">
-                    <label for="observaciones" class="block text-sm font-medium text-gray-300 mb-2">
-                        Observaciones
-                    </label>
-                    <button
-                        type="button"
-                        wire:click="openUserModal('observaciones', 'null', 'null', null, 'null')"
-                        class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                        <x-lucide name="users" class="w-4 h-4" />
-                    </button>
-                    <!-- Botón para abrir el modal de inventario -->
-                    <button
-                        type="button"
-                        wire:click="openInventoryModal('observaciones')"
-                        class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                        <x-lucide name="list-search" class="w-4 h-4" />
-                    </button>
-                </div>
-                <textarea
-                    wire:model="observaciones"
-                    id="observaciones"
-                    rows="3"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Observaciones adicionales"
-                ></textarea>
-                @error('observaciones') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-        </div>
-        {{-- ======================= FIN: Actividades y Observaciones ======================= --}}
-
-        {{-- ======================= INICIO: Tipo de Servicio y Via de Solicitud ======================= --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Tipo de servicio -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-3">
-                    Tipo de Servicio
-                </label>
-                <div class="flex flex-wrap gap-3 items-center">
-                    <label class="flex items-center">
-                        <input
-                            wire:model="correctivo"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Correctivo</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="preventivo"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Preventivo</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="transparencia"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Transparencia</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="a_tec"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">A. Técnico</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="web_ins"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Web/Ins</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="print"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Print</span>
-                    </label>
-                </div>
-                @error('tipo_servicio')
-                    <span class="text-red-400 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-            <!-- Via de solicitud -->
-            <div>
-                <label class="block text-sm font-medium text-gray-300 mb-3">
-                    Via de Solicitud
-                </label>
-                <div class="flex flex-wrap gap-3 items-center">
-                    <label class="flex items-center">
-                        <input
-                            wire:model="email"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Email</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="tel"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Teléfono</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="sol_ser"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Solicitud de Servicio</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model="oficio"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Oficio</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input
-                            wire:model.live="calendario"
-                            type="checkbox"
-                            class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                        >
-                        <span class="ml-2 text-sm text-gray-300">Calendario</span>
-                    </label>
-                </div>
-                @error('via_solicitud')
-                    <span class="text-red-400 text-sm">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        {{-- ======================= FIN: Tipo de Servicio y Via de Solicitud ======================= --}}
-
-        {{-- ======================= INICIO: Mantenimiento (condicional) ======================= --}}
-        @if($calendario)
         <div>
-            <div class="flex items-center gap-2 mb-2">
-                <label for="observaciones" class="block text-sm font-medium text-gray-300 mb-2">
-                    Mantenimiento
-                </label>
-                <button
-                    type="button"
-                    wire:click="openUserModal('mantenimiento', 'null', 'null', null, 'null')"
-                    class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                    <x-lucide name="users" class="w-4 h-4" />
-                </button>
-                <!-- Botón para abrir el modal de inventario -->
-                <button
-                    type="button"
-                    wire:click="openInventoryModal('mantenimiento')"
-                    class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                    <x-lucide name="list-search" class="w-4 h-4" />
-                </button>
-            </div>
-            <textarea
-                wire:model="mantenimiento"
-                id="mantenimiento"
-                rows="2"
-                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Detalles de mantenimiento"
-            ></textarea>
-            @error('mantenimiento') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-        </div>
-        @endif
-        {{-- ======================= FIN: Mantenimiento (condicional) ======================= --}}
-
-        {{-- ======================= INICIO: Usuarios involucrados ======================= --}}
-        <div>
-            <label class="block text-sm font-medium text-gray-300 mb-3">
-                Usuarios Involucrados
+            <label for="info" class="block text-sm font-medium text-gray-300 mb-2">
+                Información Adicional
             </label>
-            <!-- Tabla de 3 columnas para Solicitante, Efectuó y VºBº -->
-            <div class="w-full flex gap-2 mb-6">
-                <div class="flex-1 bg-gray-700 rounded-lg p-4 text-center">
-                    <div class="font-semibold text-gray-200 mb-2 flex flex-col items-center justify-center">
-                        <div class="flex items-center gap-2">
-                            <label for="obj_sol" class="block text-sm font-medium text-gray-300">
-                                Solicitante
-                            </label>
-                            <button
-                                type="button"
-                                wire:click="openUserModal('Solicitante', 'null', 'null', null, 'null')"
-                                class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                                <x-lucide name="users" class="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="text-gray-400">
-                        {{ $solicitante_name }}
-                        {{ $solicitante_position }}
-                        {{ $solicitante_direction }}
-                        @error('solicitante_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-                <div class="flex-1 bg-gray-700 rounded-lg p-4 text-center">
-                    <div class="font-semibold text-gray-200 mb-2 flex flex-col items-center justify-center">
-                        <div class="flex items-center gap-2">
-                            <label class="block text-sm font-medium text-gray-300">
-                                Efectuó
-                            </label>
-                            <button
-                                type="button"                                
-                                wire:click="openUserModal('efectuo', 'null', 'infor', null, 'null')"
-                                class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                                <x-lucide name="users" class="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="text-gray-400">
-                        {{ $efectuo_name }}
-                        {{ $efectuo_position }}
-                        {{ $efectuo_direction }}
-                        @error('efectuo_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-                <div class="flex-1 bg-gray-700 rounded-lg p-4 text-center">
-                    <div class="font-semibold text-gray-200 mb-2 flex flex-col items-center justify-center">
-                        <div class="flex items-center gap-2">
-                            <label class="block text-sm font-medium text-gray-300">
-                                VºBº
-                            </label>
-                            <button
-                                type="button"
-                                wire:click="openUserModal('vobo', 'null', 'infor', 4, 'null')"
-                                class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors flex items-center gap-1">
-                                <x-lucide name="users" class="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                    <div class="text-gray-400">
-                        {{ $vobo_name }}
-                        {{ $vobo_position }}
-                        {{ $vobo_direction }}
-                        @error('vobo_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-            </div>
+            <textarea
+                wire:model="info"
+                id="info"
+                rows="3"
+                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Información adicional"
+            ></textarea>
+            @error('info') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
         </div>
-        {{-- ======================= FIN: Usuarios involucrados ======================= --}}
+
+        <div>
+            <label class="flex items-center">
+                <input
+                    wire:model="status"
+                    type="checkbox"
+                    class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
+                >
+                <span class="ml-2 text-sm text-gray-300">Activo</span>
+            </label>
+        </div>
+        {{-- ======================= FIN: Información adicional ======================= --}}
 
         {{-- ======================= INICIO: Botones de acción ======================= --}}
-        <div class="flex justify-end gap-3 pt-4 border-t border-gray-700">
-            <a href="{{ route('servicios.index') }}"
-                class="px-4 py-2 text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-            >
+        <div class="flex justify-end gap-4 pt-6 border-t border-gray-700">
+            <a href="{{ route('inventario.index') }}"
+                class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">
                 Cancelar
             </a>
-            {{-- Botón de prueba temporal --}}
-            <button
-                type="button"
-                wire:click="testSave"
-                class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition-colors flex items-center gap-2"
-            >
-                <x-lucide name="test-tube" class="w-4 h-4" />
-                Probar Guardado
-            </button>
-            <button
-                type="submit"
-                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-            >
-                <x-lucide name="save" class="w-4 h-4" />
-                Guardar Edición Servicio
+            <button type="submit"
+                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                Guardar Cambios
             </button>
         </div>
         {{-- ======================= FIN: Botones de acción ======================= --}}
     </form>
     {{-- ======================= FIN: Formulario de Edición ======================= --}}
 
-    {{-- ======================= INICIO: Modal de Selección de Usuario ======================= --}}
+    {{-- ======================= INICIO: Modal de Usuarios ======================= --}}
     @if($showModal)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-full max-h-[90vh] overflow-y-auto">
-                <div class="p-6 border-b border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-medium text-white">
-                            Selección de Usuario
-                            <div class="text-xs text-gray-400 font-normal mt-1">
-                                {{ $modalType ?? '' }},
-                                {{ $modalParam1 ?? '' }},
-                                {{ $modalParam2 ?? '' }},
-                                {{ $modalParam4 ?? '' }},
-                            </div>
-                        </h3>
-                        <button
-                            wire:click="closeModal"
-                            class="text-gray-400 hover:text-white transition-colors"
-                        >
-                            <x-lucide name="x" class="w-6 h-6" />
-                        </button>
-                    </div>
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-gray-800 rounded-lg p-6 w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-white">{{ $modalTitle }}</h3>
+                    <button wire:click="closeModal" class="text-gray-400 hover:text-white">
+                        <x-lucide name="x" class="w-6 h-6" />
+                    </button>
                 </div>
-                <div class="p-6">
-                    <!-- Campos de búsqueda -->
-                    <div class="mb-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por Nombre
-                                </label>
-                                <input
-                                    wire:model.live="userSearchName"
-                                    type="text"
-                                    placeholder="Nombre..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por Posición
-                                </label>
-                                <input
-                                    wire:model.live="userSearchPosition"
-                                    type="text"
-                                    placeholder="Posición..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por Dirección
-                                </label>
-                                <input
-                                    wire:model.live="userSearchDirection"
-                                    type="text"
-                                    placeholder="Dirección..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por Nivel
-                                </label>
-                                <input
-                                    wire:model.live="userSearchLvl"
-                                    type="text"
-                                    placeholder="Nivel..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tabla de usuarios -->
-                    <div class="bg-gray-700 rounded-3xl overflow-hidden border border-gray-600">
-                        <div class="overflow-x-auto">
-                            <table class="w-full rounded-3xl overflow-hidden">
-                                <thead class="bg-gray-600">
-                                    <tr>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs rounded-tl-3xl">
-                                            Nombre
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            RFC
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            Posición
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            Dirección
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            Sexo
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            Tipo
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs">
-                                            Nivel
-                                        </th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider text-xs rounded-tr-3xl">
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-700 divide-y divide-gray-600">
-                                    @forelse($filteredUsers as $user)
-                                    {{-- para que el el regitro del modal pueda funciona es obligatori usar el wire:key --}}
-                                        <tr wire:key="user-{{ $user->id }}" class="hover:bg-gray-600 transition-colors">
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                <div class="font-medium text-white text-xs">{{ $user->name }}</div>
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->rfc ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->position ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->direction ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->sex ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->tipo ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs text-gray-300">
-                                                {{ $user->lvl ?? 'N/A' }}
-                                            </td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-xs font-medium">
-                                                <button
-                                                    wire:click="selectUser({{ $user->id }}, @js($user->name))"
-                                                    class="text-blue-400 hover:text-blue-300 transition-colors"
-                                                    title="Seleccionar" >
-                                                    <x-lucide name="check" class="w-4 h-4" />
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="8" class="px-6 py-12 text-center text-gray-400">
-                                                <x-lucide name="user-x" class="w-12 h-12 mx-auto mb-4 text-gray-600" />
-                                                <p class="text-lg">No se encontraron usuarios</p>
-                                                <p class="text-sm">Intenta con otros términos de búsqueda</p>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Botones del modal -->
-                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-700 mt-4">
+
+                <div class="mb-4">
+                    <input
+                        wire:model.live="userSearch"
+                        type="text"
+                        placeholder="Buscar usuario..."
+                        class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                </div>
+
+                <div class="space-y-2 max-h-96 overflow-y-auto">
+                    @foreach($users as $user)
                         <button
-                            type="button"
-                            wire:click="closeModal"
-                            class="px-4 py-2 text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-                        >
-                            Cancelar
+                            wire:click="selectUser({{ $user->id }}, '{{ $user->name }}')"
+                            class="w-full p-3 text-left bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
+                            <div class="text-white font-medium">{{ $user->name }}</div>
+                            <div class="text-gray-400 text-sm">{{ $user->email }}</div>
                         </button>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     @endif
-    {{-- ======================= FIN: Modal de Selección de Usuario ======================= --}}
-
-    {{-- ======================= INICIO: Modal de Selección de Inventario ======================= --}}
-    @if($showInventoryModal)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto">
-                <div class="p-6 border-b border-gray-700">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-medium text-white">
-                            Selección de Inventario
-                            <div class="text-xs text-gray-400 font-normal mt-1">
-                                {{ $inventoryModalType ?? '' }},
-                                {{ $inventoryParam1 ?? '' }},
-                                {{ $inventoryParam2 ?? '' }},
-                                {{ $inventoryParam3 ?? '' }},
-                                {{ $inventoryParam4 ?? '' }},
-                                {{ $inventoryParam5 ?? '' }},
-                            </div>
-                        </h3>
-                        <button
-                            wire:click="closeInventoryModal"
-                            class="text-gray-400 hover:text-white transition-colors"
-                        >
-                            <x-lucide name="x" class="w-6 h-6" />
-                        </button>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <!-- Campos de búsqueda para inventario -->
-                    <div class="mb-4">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por NI
-                                </label>
-                                <input
-                                    wire:model.live="inventorySearchNi"
-                                    type="text"
-                                    placeholder="NI..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por SN
-                                </label>
-                                <input
-                                    wire:model.live="inventorySearchSn"
-                                    type="text"
-                                    placeholder="SN..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por TYPE
-                                </label>
-                                <input
-                                    wire:model.live="inventorySearchType"
-                                    type="text"
-                                    placeholder="TYPE..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-300 mb-2">
-                                    Buscar por ARTICULO
-                                </label>
-                                <input
-                                    wire:model.live="inventorySearchArticulo"
-                                    type="text"
-                                    placeholder="ARTICULO..."
-                                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Tabla de inventarios -->
-                    <div class="bg-gray-700 rounded-3xl overflow-hidden border border-gray-600">
-                        <div class="overflow-x-auto">
-                            <table class="w-full rounded-3xl overflow-hidden">
-                                <thead class="bg-gray-600">
-                                    <tr>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tl-3xl">NI</th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">SN</th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">TYPE</th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ARTICULO</th>
-                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider rounded-tr-3xl">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-700 divide-y divide-gray-600">
-                                    @forelse($filteredInventories as $inv)
-                                    <tr wire:key="inv-{{ $inv->id }}" class="hover:bg-gray-600 transition-colors">
-                                        <tr >
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{{ $inv->ni ?? 'N/A' }}</td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{{ $inv->ns ?? 'N/A' }}</td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{{ $inv->type ?? 'N/A' }}</td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{{ $inv->articulo ?? 'N/A' }}</td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                                                <button
-                                                    wire:click="selectInventory({{ $inv->id }})"
-                                                    class="text-green-400 hover:text-green-300 transition-colors"
-                                                    title="Seleccionar"
-                                                >
-                                                    <x-lucide name="check" class="w-4 h-4" />
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="px-6 py-12 text-center text-gray-400">
-                                                <x-lucide name="package-x" class="w-12 h-12 mx-auto mb-4 text-gray-600" />
-                                                <p class="text-lg">No se encontraron inventarios</p>
-                                                <p class="text-sm">Intenta con otros términos de búsqueda</p>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- Botones del modal -->
-                    <div class="flex justify-end gap-3 pt-4 border-t border-gray-700 mt-4">
-                        <button
-                            type="button"
-                            wire:click="closeInventoryModal"
-                            class="px-4 py-2 text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-                        >
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    {{-- ======================= FIN: Modal de Selección de Inventario ======================= --}}
-
-    {{-- ======================= INICIO: Scripts Livewire ======================= --}}
-    @livewireStyles
-    @livewireScripts
-    {{-- ======================= FIN: Scripts Livewire ======================= --}}
-
+    {{-- ======================= FIN: Modal de Usuarios ======================= --}}
 </div>
 {{-- ======================= FIN: Contenedor Principal ======================= --}}
 

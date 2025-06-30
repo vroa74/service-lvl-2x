@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\CartasResponsivasController;
+use App\Http\Controllers\CartasCesponsivasController;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 Route::get('/', function () {
@@ -148,7 +148,7 @@ Route::get('/inventory-pdf/{id}', function ($id) {
 
 Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'),'verified', ])->group(function () {
     
-    Route::resource('cartasresponsivas', CartasResponsivasController::class)->names('cartasresponsivas');
+    Route::resource('cartasresponsivas', CartasCesponsivasController::class)->names('cartasresponsivas');
     
     Route::resource('usuarios', UsuariosController::class)->names('usuarios');
     Route::resource('service', ServiceController::class)->names('servicios');

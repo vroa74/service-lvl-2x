@@ -43,7 +43,7 @@ class InventoryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('inventory.edit');
+        return view('inventory.edit', ['id' => $id]);
     }
 
     /**

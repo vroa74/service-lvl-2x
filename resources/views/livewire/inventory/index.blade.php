@@ -142,18 +142,6 @@
                                         <x-lucide name="edit" class="w-4 h-4" />
                                     </button>
                                     <button 
-                                        wire:click="openReportModal('general')"
-                                        class="text-green-400 hover:text-green-300 transition-colors"
-                                        title="Generar Reporte">
-                                        <i class="ri-printer-line"></i>
-                                    </button>
-                                    <button 
-                                        wire:click="toggleStatus({{ $item->id }})"
-                                        class="text-yellow-400 hover:text-yellow-300 transition-colors"
-                                        title="{{ $item->status ? 'Desactivar' : 'Activar' }}">
-                                        <x-lucide name="toggle-left" class="w-4 h-4" />
-                                    </button>
-                                    <button 
                                         wire:click="generateIndividualInventoryReport({{ $item->id }})"
                                         class="text-orange-400 hover:text-red-500 transition-colors"
                                         title="Generar el Reporte del Artículo">

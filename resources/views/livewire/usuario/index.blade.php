@@ -92,12 +92,12 @@
                         <tr class="hover:bg-gray-700 transition-colors">
                             <td class="px-3 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
+                                    <div class="flex-shrink-0 h-6 w-6">
                                         @if($user->profile_photo_url)
-                                            <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+                                            <img class="h-6 w-6 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
                                         @else
-                                            <div class="h-10 w-10 rounded-full bg-gray-600 flex items-center justify-center">
-                                                <x-lucide name="user" class="w-6 h-6 text-gray-300" />
+                                            <div class="h-6 w-6 rounded-full bg-gray-600 flex items-center justify-center">
+                                                <x-lucide name="user" class="w-4 h-4 text-gray-300" />
                                             </div>
                                         @endif
                                     </div>

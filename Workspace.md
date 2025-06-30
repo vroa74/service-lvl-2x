@@ -394,6 +394,9 @@ divide el total de la pagina en 3 columnas en la primera que deben del mismo tam
 
 ========================================================================================================
 
+php artisan make:livewire cartasresponsivas.edit
+php artisan make:livewire cartasresponsivas.show
+
 
 
 ========================================================================================================

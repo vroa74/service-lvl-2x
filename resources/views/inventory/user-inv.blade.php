@@ -6,8 +6,6 @@
     </x-slot>
 
     <div class="py-4">        
-            <div class="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg border border-gray-700">
-                <livewire:inventory.user-inv />
-            </div>        
+        <livewire:inventory.user-inv />
     </div>
 </x-app-layout>

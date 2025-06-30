@@ -9,7 +9,7 @@
         }
         #header {
             position: fixed;
-            top: -4.5cm;
+            top: -5cm;
             left: 0;
             width: 100%;
             text-align: center;
@@ -28,7 +28,7 @@
 
         #footer {
             position: fixed;            
-            bottom: -4.5cm;
+            bottom: -5cm;
             width: 100%;
             text-align: center;
             padding: 10px 0;
@@ -726,6 +726,11 @@
             </td>
         </tr>
     </table>
+    
+    <!-- Leyenda by VROA arriba de la imagen del footer -->
+    <div style="text-align: right; margin-bottom: 5px;">
+        <p class="text-5px" style="color: #d1d5db;">by VROA</p>
+    </div>
         
         @php
             $footImagePath = public_path('ple/foot.png');

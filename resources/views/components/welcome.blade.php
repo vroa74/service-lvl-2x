@@ -18,7 +18,7 @@
                 <h3 class="text-xl font-semibold text-gray-100">Documentación</h3>
             </div>
             <p class="text-gray-300">
-                Explora la documentación completa de Laravel para aprender más sobre el framework.
+                Explora la documentación completa  para aprender más...
             </p>
         </div>
 

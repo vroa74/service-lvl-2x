@@ -6,8 +6,6 @@
     </x-slot>
 
     <div class="py-4">
-        <div class="w-full px-4 sm:px-6 lg:px-8">
-            <livewire:usuario.index />
-        </div>
+        <livewire:usuario.index />
     </div>
 </x-app-layout>
