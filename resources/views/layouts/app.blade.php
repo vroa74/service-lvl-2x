@@ -35,11 +35,12 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-900">
-            @livewire('navigation-menu')
-
+            <div class="fixed top-0 left-0 right-0 z-50 h-16">
+                @livewire('navigation-menu')
+            </div>
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-gray-800 border-b border-steal-900 shadow-lg">
+                <header class="bg-gray-800 border-b border-steal-900 shadow-lg fixed top-16 left-0 right-0 z-40">
                     <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
                         <h2 class="font-semibold text-xl text-gray-100 leading-tight">
                             {{ $header }}
@@ -47,9 +48,8 @@
                     </div>
                 </header>
             @endif
-
             <!-- Page Content -->
-            <main class="bg-gray-900">
+            <main class="bg-gray-900 @if(isset($header)) pt-32 @else pt-16 @endif">
                 {{ $slot }}
             </main>
         </div>
