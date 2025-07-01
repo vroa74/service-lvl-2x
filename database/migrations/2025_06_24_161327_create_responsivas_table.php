@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('fecha')->nullable();
             $table->string('codigo', 20)->unique();
             $table->boolean('auditoria')->default(false);
+            $table->string('observacion')->nullable()->after('auditoria');
             $table->timestamps();
         });
     }

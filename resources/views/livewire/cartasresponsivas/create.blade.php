@@ -6,6 +6,15 @@
                 @if (session()->has('message'))
                     <div class="mb-4 p-3 bg-green-600 text-white rounded">{{ session('message') }}</div>
                 @endif
+                @if ($errors->any())
+                    <div class="mb-4">
+                        <ul class="text-red-400 text-xs">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form wire:submit.prevent="save" class="space-y-4">
                     <div>
                         <label class="block text-gray-200 mb-1">Usuario que genera</label>
@@ -309,7 +318,7 @@
                                         </div>
                                         {{-- Botón para agregar foto --}}
                                         <div class="pt-2 text-center">
-                                            <button wire:click="openPhotoModal({{ $invId }})"
+                                            <button wire:click="openPhotoForm({{ $invId }})"
                                                 class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-xs flex items-center justify-center gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -319,8 +328,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($showPhotoModal[$invId] ?? false)
-                                    <!-- Modal de agregar foto -->
+                                @if($activePhotoFormId === $invId)
+                                    <div class="mt-4 p-4 bg-gray-700 rounded-lg">
+                                        <div class="mb-2">
+                                            <label class="block text-gray-200 mb-1">Seleccionar imagen</label>
+                                            <input type="file" wire:model="modalPhoto.{{ $invId }}" class="w-full text-gray-100 bg-gray-900 rounded p-2" accept="image/*">
+                                            @error('modalPhoto.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="block text-gray-200 mb-1">Descripción (opcional)</label>
+                                            <input type="text" wire:model="modalPhotoDescription.{{ $invId }}" class="w-full text-gray-100 bg-gray-900 rounded p-2">
+                                            @error('modalPhotoDescription.' . $invId) <span class="text-red-400 text-xs">{{ $message }}</span> @enderror
+                                        </div>
+                                        @if(isset($modalPhotoPreview[$invId]) && $modalPhotoPreview[$invId])
+                                            <div class="mb-2">
+                                                <img src="{{ $modalPhotoPreview[$invId] }}" alt="Preview" class="max-h-40 mx-auto rounded">
+                                            </div>
+                                        @endif
+                                        <div class="flex justify-end gap-2">
+                                            <button wire:click="closePhotoForm" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">Cancelar</button>
+                                            <button wire:click="savePhotoFromModal({{ $invId }})" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Guardar Foto</button>
+                                        </div>
+                                    </div>
                                 @endif
                             @endif
                         @endforeach

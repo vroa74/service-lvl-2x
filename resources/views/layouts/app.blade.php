@@ -52,6 +52,10 @@
             <main class="bg-gray-900 @if(isset($header)) pt-32 @else pt-16 @endif">
                 {{ $slot }}
             </main>
+
+
+
+            
         </div>
         @stack('modals')
         

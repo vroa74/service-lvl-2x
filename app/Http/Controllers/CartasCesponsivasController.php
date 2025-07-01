@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class CartasCesponsivasController extends Controller
 {
+    public $activePhotoFormId = null;
+
     /**
      * Display a listing of the resource.
      */
@@ -19,7 +21,7 @@ class CartasCesponsivasController extends Controller
      */
     public function create()
     {
-        //
+        return view('cartasresponsivas.create');
     }
 
     /**
@@ -33,7 +35,7 @@ class CartasCesponsivasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
         //
     }
@@ -41,9 +43,9 @@ class CartasCesponsivasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( $id)
     {
-        //
+        return view('cartasresponsivas.edit', compact('id'));
     }
 
     /**
@@ -60,5 +62,30 @@ class CartasCesponsivasController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function save()
+    {
+        \Log::info('Livewire save ejecutado', [
+            'user_id' => $this->user_id,
+            'responsable_id' => $this->responsable_id,
+            'informatica_id' => $this->informatica_id,
+            'fecha' => $this->fecha,
+            'codigo' => $this->codigo,
+            'auditoria' => $this->auditoria,
+            'selected_inventories' => $this->selected_inventories,
+        ]);
+        // ... resto del método ...
+    }
+
+    public function openPhotoModal($inventoryId)
+    {
+        \Log::info('Abriendo modal de foto para inventario: ' . $inventoryId);
+        // ... resto del código ...
+    }
+
+    public function closePhotoForm()
+    {
+        $this->activePhotoFormId = null;
     }
 }

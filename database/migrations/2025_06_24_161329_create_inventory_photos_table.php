@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('inventory_id')->constrained('inventories')->cascadeOnDelete();
             $table->string('path'); // ruta de la imagen
-            $table->string('description')->nullable();        
+            $table->string('description')->nullable();    
+                
             $table->timestamps();
         });
     }

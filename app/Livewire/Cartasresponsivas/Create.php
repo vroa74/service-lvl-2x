@@ -11,6 +11,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class Create extends Component
 {
@@ -54,6 +55,8 @@ class Create extends Component
     public $userModalFilter = '';
     public $userModalList = [];
 
+    public $activePhotoFormId = null;
+
     protected $rules = [
         'user_id' => 'required|exists:users,id',
         'responsable_id' => 'required|exists:users,id',
@@ -63,8 +66,6 @@ class Create extends Component
         'auditoria' => 'boolean',
         'selected_inventories' => 'required|array|min:1',
         'selected_inventories.*' => 'exists:inventories,id',
-        'photo' => 'nullable|image|max:2048',
-        'photoDescription' => 'nullable|string|max:255',
     ];
 
     public function mount()
@@ -235,6 +236,19 @@ class Create extends Component
         }
     }
 
+    public function openPhotoForm($inventoryId)
+    {
+        $this->activePhotoFormId = $inventoryId;
+        $this->modalPhoto[$inventoryId] = null;
+        $this->modalPhotoPreview[$inventoryId] = null;
+        $this->modalPhotoDescription[$inventoryId] = '';
+    }
+
+    public function closePhotoForm()
+    {
+        $this->activePhotoFormId = null;
+    }
+
     public function savePhotoFromModal($inventoryId)
     {
         $this->validate([
@@ -247,7 +261,7 @@ class Create extends Component
             'path' => $path,
             'description' => $this->modalPhotoDescription[$inventoryId],
         ]);
-        $this->closePhotoModal($inventoryId);
+        $this->closePhotoForm();
         session()->flash('message', 'Foto agregada correctamente.');
     }
 
@@ -295,6 +309,15 @@ class Create extends Component
 
     public function save()
     {
+        Log::info('Livewire save ejecutado', [
+            'user_id' => $this->user_id,
+            'responsable_id' => $this->responsable_id,
+            'informatica_id' => $this->informatica_id,
+            'fecha' => $this->fecha,
+            'codigo' => $this->codigo,
+            'auditoria' => $this->auditoria,
+            'selected_inventories' => $this->selected_inventories,
+        ]);
         $this->validate();
         $responsiva = Responsiva::create([
             'user_id' => $this->user_id,
@@ -315,6 +338,8 @@ class Create extends Component
         
         session()->flash('message', 'Carta responsiva creada correctamente.');
         $this->reset(['user_id', 'responsable_id', 'informatica_id', 'fecha', 'codigo', 'auditoria', 'selected_inventories', 'inventoryDescriptions', 'selectedInventoryForPhotos', 'photo', 'photoDescription']);
+        
+        return $this->redirectRoute('cartasresponsivas.index');
     }
 
     public function render()
