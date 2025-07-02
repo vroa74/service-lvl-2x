@@ -5,7 +5,7 @@
     <title>Reporte Individual de Servicio</title>
     <style>
         @page {
-            margin: 5cm 0.5cm 5cm 0.5cm;
+            margin: 5cm 0.5cm 5.5cm 0.5cm;
         }
         #header {
             position: fixed;
@@ -525,164 +525,163 @@
         </tr>
     </table>
     
-    <div style="margin-top: 5px;"></div>
+    {{-- <div style="margin-top: 5px;"></div> --}}
     
-    <table class="tablaSection2">
-        <tr>
-            <td>
-                <div class="box">
-                    <span class="font-bold ml-5 text-sm">OBJETIVO DE LA SOLICITUD :</span> <br>
-                     <span class="text-xs">{!! $service->obj_sol ?? 'N/A' !!}</span>
-                </div>
-            </td>
-        </tr>
-    </table>
+                <table class="tablaSection2">
+                    <tr>
+                        <td>
+                            <div class="box">
+                                <span class="font-bold ml-5 text-sm">OBJETIVO DE LA SOLICITUD :</span> <br>
+                                <span class="text-xs">{!! $service->obj_sol ?? 'N/A' !!}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
     
-    <div style="margin-top: 8px;"></div>
+    {{-- <div style="margin-top: 8px;"></div> --}}
     
-    <table class="checklist">
-        <tr>
-            <td>
-                <div class="box">
-                    <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">TIPOS DE SERVICIO:</div>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->correctivo ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Mto. Correctivo</span>
-                                </div>
-                            </td>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->web_ins ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Web/Internet</span>
-                                </div>
-                            </td>
+                <table class="checklist">
+                    <tr>
+                        <td>
+                            <div class="box">
+                                <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">TIPOS DE SERVICIO:</div>
+                                <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->correctivo ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Mto. Correctivo</span>
+                                            </div>
+                                        </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->web_ins ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Web/Internet</span>
+                                            </div>
+                                        </td>
 
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->preventivo ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Mto. Preventivo</span>
-                                </div>
-                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->preventivo ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Mto. Preventivo</span>
+                                            </div>
+                                        </td>
 
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->print ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Impresión</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->transparencia ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Transparencia</span>
-                                </div>
-                            </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->print ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Impresión</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->transparencia ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Transparencia</span>
+                                            </div>
+                                        </td>
 
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->a_tec ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Asesoría Técnica</span>
-                                </div>
-                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->a_tec ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Asesoría Técnica</span>
+                                            </div>
+                                        </td>
 
-                    </table>
-                </div>
-            </td>
-            <td>
-                <div class="box">
-                    <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">VÍAS DE SOLICITUD:</div>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->email ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Correo</span>
-                                </div>
-                            </td>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->tel ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Teléfono</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->sol_ser ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Solicitud de Servicio</span>
-                                </div>
-                            </td>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->oficio ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Oficio</span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->calendario ? 'background-color: black;' : '' }}"></span>
-                                    <span style="vertical-align: middle;">Calendario</span>
-                                </div>
-                            </td>
-                            <td style="width: 50%; padding: 1px;">
-                                <!-- Espacio vacío para mantener la estructura -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 50%; padding: 1px;">
-                                <div style="white-space: nowrap;">
-                                    <br>
-                                    <span style="vertical-align: middle;"></span>
-                                </div>
-                            </td>
-                            <td style="width: 50%; padding: 1px;">
-                                <!-- Espacio vacío para mantener la estructura -->
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
+                                </table>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box">
+                                <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">VÍAS DE SOLICITUD:</div>
+                                <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->email ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Correo</span>
+                                            </div>
+                                        </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->tel ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Teléfono</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->sol_ser ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Solicitud de Servicio</span>
+                                            </div>
+                                        </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->oficio ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Oficio</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->calendario ? 'background-color: black;' : '' }}"></span>
+                                                <span style="vertical-align: middle;">Calendario</span>
+                                            </div>
+                                        </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <!-- Espacio vacío para mantener la estructura -->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <div style="white-space: nowrap;">
+                                                <br>
+                                                <span style="vertical-align: middle;"></span>
+                                            </div>
+                                        </td>
+                                        <td style="width: 50%; padding: 1px;">
+                                            <!-- Espacio vacío para mantener la estructura -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
-
-    <table class="Textareas">
-        <tr>
-            <td>
-                <div class="box">
-                    <!-- Contenido columna izquierda -->
-                    <div class="text-center ">
-                        <span class="font-bold ml-5 text-sm"> Actividades Realizadas </span>
-                    </div><br>
-                    <span  class="text-xs text-justify">
-                        {!! $service->actividades ?? 'N/A' !!}
-                    </span>
-                </div>
-            </td>
-            <td>
-                <div class="box">
-                    <!-- Contenido columna derecha -->
-                    <div class="text-center mb-2">
-                        <span class="font-bold ml-5 text-sm"> Observaciones </span>
-                    </div> <br>
-                    <span class="text-xs text-justify">
-                        {!! $service->observaciones ?? 'N/A' !!}
-                    </span>
-                </div>
-            </td>
-        </tr>
-    </table>
+                <table class="Textareas">
+                    <tr>
+                        <td>
+                            <div class="box">
+                                <!-- Contenido columna izquierda -->
+                                <div class="text-center ">
+                                    <span class="font-bold ml-5 text-sm"> Actividades Realizadas </span>
+                                </div><br>
+                                <span  class="text-xs text-justify">
+                                    {!! $service->actividades ?? 'N/A' !!}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box">
+                                <!-- Contenido columna derecha -->
+                                <div class="text-center mb-2">
+                                    <span class="font-bold ml-5 text-sm"> Observaciones </span>
+                                </div> <br>
+                                <span class="text-xs text-justify">
+                                    {!! $service->observaciones ?? 'N/A' !!}
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
     <div id="footer" style="border: none !important;">
             <!-- Tablas de firmas - Pie de página -->
@@ -729,7 +728,7 @@
     
     <!-- Leyenda by VROA arriba de la imagen del footer -->
     <div style="text-align: right; margin-bottom: 5px;">
-        <p class="text-5px" style="color: #d1d5db;">by VROA</p>
+        <p class="text-5px" style="color: #313131;">by VROA</p>
     </div>
         
         @php
