@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Responsiva;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class CartasCesponsivasController extends Controller
 {
-    public $activePhotoFormId = null;
+
 
     /**
      * Display a listing of the resource.
@@ -24,20 +27,26 @@ class CartasCesponsivasController extends Controller
         return view('cartasresponsivas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
-        //
+        try {
+            $responsiva = Responsiva::with([
+                'user',
+                'responsable', 
+                'informatica',
+                'inventoryResponsivas.inventory'
+            ])->findOrFail($id);
+
+            return view('cartasresponsivas.show', compact('responsiva'));
+        } catch (\Exception $e) {
+            Log::error('Error mostrando carta responsiva: ' . $e->getMessage());
+            abort(404, 'Carta responsiva no encontrada');
+        }
     }
 
     /**
@@ -48,44 +57,31 @@ class CartasCesponsivasController extends Controller
         return view('cartasresponsivas.edit', compact('id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+
 
     /**
-     * Remove the specified resource from storage.
+     * Generate PDF report for a specific responsiva
      */
-    public function destroy(string $id)
+    public function generatePdf($id)
     {
-        //
+        try {
+            Log::info('Iniciando generación de PDF para carta responsiva: ' . $id);
+            
+            // Primero probar con un PDF simple
+            $html = '<h1>Prueba PDF</h1><p>Carta Responsiva ID: ' . $id . '</p>';
+            
+            $pdf = PDF::loadHTML($html);
+            
+            Log::info('PDF de prueba generado exitosamente');
+            
+            return $pdf->stream('test.pdf');
+
+        } catch (\Exception $e) {
+            Log::error('Error generando PDF para carta responsiva ' . $id . ': ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+            abort(500, 'Error al generar el PDF: ' . $e->getMessage());
+        }
     }
 
-    public function save()
-    {
-        \Log::info('Livewire save ejecutado', [
-            'user_id' => $this->user_id,
-            'responsable_id' => $this->responsable_id,
-            'informatica_id' => $this->informatica_id,
-            'fecha' => $this->fecha,
-            'codigo' => $this->codigo,
-            'auditoria' => $this->auditoria,
-            'selected_inventories' => $this->selected_inventories,
-        ]);
-        // ... resto del método ...
-    }
 
-    public function openPhotoModal($inventoryId)
-    {
-        \Log::info('Abriendo modal de foto para inventario: ' . $inventoryId);
-        // ... resto del código ...
-    }
-
-    public function closePhotoForm()
-    {
-        $this->activePhotoFormId = null;
-    }
 }

@@ -13,6 +13,12 @@ class Responsiva extends Model
         'fecha',
         'codigo',
         'auditoria',
+        'observacion',
+    ];
+
+    protected $casts = [
+        'fecha' => 'date',
+        'auditoria' => 'boolean',
     ];
 
     public function user()
