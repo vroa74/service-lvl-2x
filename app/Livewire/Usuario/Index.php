@@ -263,12 +263,12 @@ class Index extends Component
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('name', 'like', '%' . $this->search . '%')
-                      ->orWhere('email', 'like', '%' . $this->search . '%')
-                      ->orWhere('rfc', 'like', '%' . $this->search . '%')
-                      ->orWhere('direction', 'like', '%' . $this->search . '%')
-                      ->orWhere('position', 'like', '%' . $this->search . '%')
-                      ->orWhere('sex', 'like', '%' . $this->search . '%')
-                      ->orWhere('lvl', 'like', '%' . $this->search . '%');
+                    ->orWhere('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('rfc', 'like', '%' . $this->search . '%')
+                    ->orWhere('direction', 'like', '%' . $this->search . '%')
+                    ->orWhere('position', 'like', '%' . $this->search . '%')
+                    ->orWhere('sex', 'like', '%' . $this->search . '%')
+                    ->orWhere('lvl', 'like', '%' . $this->search . '%');
                 });
             })
             ->orderBy('id')

@@ -556,7 +556,7 @@
                                         <td style="width: 50%; padding: 1px;">
                                             <div style="white-space: nowrap;">
                                                 <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->web_ins ? 'background-color: black;' : '' }}"></span>
-                                                <span style="vertical-align: middle;">Web/Internet</span>
+                                                <span style="vertical-align: middle;">Página Institucional </span>
                                             </div>
                                         </td>
 
@@ -589,7 +589,7 @@
                                         <td style="width: 50%; padding: 1px;">
                                             <div style="white-space: nowrap;">
                                                 <span style="display: inline-block; width: 8px; height: 8px; border: 1px solid black; margin-right: 3px; vertical-align: middle; {{ $service->a_tec ? 'background-color: black;' : '' }}"></span>
-                                                <span style="vertical-align: middle;">Asesoría Técnica</span>
+                                                <span style="vertical-align: middle;">Asistencia Técnica </span>
                                             </div>
                                         </td>
 
