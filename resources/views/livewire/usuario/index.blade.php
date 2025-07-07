@@ -402,7 +402,7 @@
                 </div>
 
                 <div class="max-h-[70vh] overflow-y-auto">
-                    <form wire:submit.prevent="saveUser" class="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <form wire:submit.prevent="saveUser" class="p-4 sm:p-6 space-y-4 sm:space-y-6">
                     <!-- Primera fila: Nombre, Email, RFC -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div>
@@ -754,60 +754,60 @@
         </div>
     @endif
 
-    <style>
-        /* Mejoras para móviles */
-        @media (max-width: 640px) {
-            .mobile-touch-target {
-                min-height: 44px;
-                min-width: 44px;
-            }
-            
-            .mobile-text {
-                font-size: 16px; /* Previene zoom en iOS */
-            }
-            
-            .mobile-card {
-                touch-action: manipulation;
-            }
+<style>
+    /* Mejoras para móviles */
+    @media (max-width: 640px) {
+        .mobile-touch-target {
+            min-height: 44px;
+            min-width: 44px;
         }
         
-        /* Mejoras para la tabla en móviles */
-        @media (max-width: 1024px) {
-            .table-responsive {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
+        .mobile-text {
+            font-size: 16px; /* Previene zoom en iOS */
         }
-    </style>
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('showMessage', message => {
-                window.dispatchEvent(new CustomEvent('show-livewire-message', { detail: { message } }));
-            });
-        });
-
-        window.addEventListener('show-livewire-message', event => {
-            const msg = event.detail.message;
-            let div = document.createElement('div');
-            div.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-[90vw] text-center';
-            div.textContent = msg;
-            document.body.appendChild(div);
-            setTimeout(() => {
-                div.style.transition = 'opacity 0.5s';
-                div.style.opacity = '0';
-                setTimeout(() => div.remove(), 500);
-            }, 5000);
-        });
         
-        // Prevenir zoom en inputs en iOS
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.fontSize = '16px';
-                });
+        .mobile-card {
+            touch-action: manipulation;
+        }
+    }
+    
+    /* Mejoras para la tabla en móviles */
+    @media (max-width: 1024px) {
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('showMessage', message => {
+            window.dispatchEvent(new CustomEvent('show-livewire-message', { detail: { message } }));
+        });
+    });
+
+    window.addEventListener('show-livewire-message', event => {
+        const msg = event.detail.message;
+        let div = document.createElement('div');
+        div.className = 'fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 max-w-[90vw] text-center';
+        div.textContent = msg;
+        document.body.appendChild(div);
+        setTimeout(() => {
+            div.style.transition = 'opacity 0.5s';
+            div.style.opacity = '0';
+            setTimeout(() => div.remove(), 500);
+        }, 5000);
+    });
+    
+    // Prevenir zoom en inputs en iOS
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.fontSize = '16px';
             });
         });
-    </script>
+    });
+</script>
 </div>

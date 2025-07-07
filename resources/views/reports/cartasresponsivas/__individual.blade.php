@@ -2,21 +2,25 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Individual de Servicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }}</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        /* Estilos para el reporte */
+        /* no borrar */
         @page {
-            margin: 7cm 2cm 1.5cm 2cm;  /* arrriba, derecha, abajo, izquierda */
+            margin: 5cm 0.5cm 5.5cm 0.5cm;
         }
         #header {
             position: fixed;
-            top: -7cm;
+            top: -5cm;
             left: 0;
             width: 100%;
             text-align: center;
             z-index: 1000;
             margin: 0;
             padding: 0;
-            /* background-color: #c7d1fc !important; */
+            /* background-color: #506ffc !important; */
         }
 
         body {
@@ -27,17 +31,16 @@
         }
 
         #footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
+            position: fixed;            
+            bottom: -5cm;
             width: 100%;
             text-align: center;
-            font-size: 12px;
-            color: #333;
-            background: #fff;
-            padding: 8px 0;
-            z-index: 1000;
-            /* background-color: #ee591e !important; */
+            padding: 10px 0;
+            /* border: 1px solid #000; */
+            font-size: 20px;
+            /* color: #fff; */
+            /* background-color: rgb(3, 26, 153); */
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
         }
 
         .tableclean {
@@ -191,7 +194,6 @@
 
         /* Estilo para texto en negrita */
         .font-bold {            font-weight: bold;        }
-        .text-bold {            font-weight: bold;        }
         /* Estilo para texto en cursiva */
         .italic {            font-style: italic;        }
         /* Estilo para texto subrayado */
@@ -482,147 +484,193 @@
                 font-size: 10px;
             }
         }
-    </style>
 
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+        }
+        
+        .info-section h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 5px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 3px;
+            font-size: 11px;
+        }
+        
+        .info-value {
+            color: #111827;
+            font-size: 12px;
+            padding: 5px 0;
+        }
+        
+        .table-container {
+            margin-top: 20px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .table th {
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            color: #374151;
+        }
+        
+        .table td {
+            border: 1px solid #d1d5db;
+            padding: 8px;
+            font-size: 11px;
+            color: #111827;
+        }
+        
+        .table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        
+        .status-inactive {
+            background-color: #fef2f2;
+            color: #dc2626;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
 </head>
 <body>
     <div id="header">
-        <table style="width:100%; border-collapse: collapse; margin: 0 auto;">
+        <table style="width:100%; background-color: orange; border-collapse: collapse; border: 2px solid black;">
             <tr>
-                <td style="width:20%;"></td>
-                <td style="width:60%; text-align: center;"></td>
-                <td style="width:20%;"></td>
+                <td style="width:20%; border: 2px solid black; background-color: orange;"></td>
+                <td style="width:60%; text-align: center; border: 2px solid black; background-color: orange;">
+                    <h1>CARTA RESPONSIVA</h1>
+                    <p>{{ $responsiva->codigo }}</p>
+                </td>
+                <td style="width:20%; border: 2px solid black; background-color: orange;"></td>
             </tr>
         </table>
-        <div style="width: 96%; display: flex; justify-content: center;">
-            <table class="tableclean">
-                <tr>
-                    <td style="width: 20%; text-align: center; vertical-align: middle;">
-                        @php
-                        $headImagePath = public_path('ple/head_cri.png');
-                        $headImageBase64 = base64_encode(file_get_contents($headImagePath));
-                    @endphp
-                    <img    src="data:image/png;base64,{{ $headImageBase64 }}" 
-                            alt="Logo izquierdo" style="max-width: 60%; height: auto;">
-
-                    </td>
-                    <td style="width: 56%; text-align: center; vertical-align: middle; padding: 10px;">
-                        <p style="margin: 5px 0; font-size: 12px; font-style: italic; color: #333;">{{ config('app.lema') }}</p>
-                        <p style="margin: 5px 0; font-size: 12px; font-style: italic; color: #333;">PODER LEGISLATIVO DEL ESTADO DE CAMPECHE 
-                        <p style="margin: 5px 0; font-size: 12px; font-style: italic; color: #333;">  DIRECCIÓN DE INFORMÁTICA                               </p>
-                        <p style="margin: 5px 0; font-size: 14px; font-style: italic; color: #333;">  CARTA RESPONSIVA </p>
-                        {{-- <h1 style="margin: 5px 0;">ORDEN DE SERVICIO</h1> --}}
-                    </td>
-                    <td style="width: 20%; text-align: center; vertical-align: middle;">
-                        @php
-                        $headImagePath = public_path('ple/head_crd.png');
-                        $headImageBase64 = base64_encode(file_get_contents($headImagePath));
-                    @endphp
-                    <img    src="data:image/png;base64,{{ $headImageBase64 }}" 
-                            alt="Logo izquierdo" style="max-width: 60%; height: auto;">                            
-                    </td>
-                </tr>
-            </table>
-            <p style="text-align: justify;">Por medio del presente hago constar que tengo conocimiento de mis funciones y responsabilidades establecidas en el artículo 7, fracción I y artículo 50 de la Ley General de Responsabilidades Administrativas, así como de lo dispuesto en el artículo 47, fracción VIII de la Ley de los Trabajadores al Servicio del Gobierno del Estado de Campeche.</p>
-            <p style="text-align: justify;">Razón por la cual manifiesto que tengo bajo mi responsabilidad, para el cumplimiento de mis funciones, el equipo de cómputo que se menciona a continuación:</p>   
-
-        </div>
     </div>
 
-
-    <div id="footer">
-        <!-- Tabla de auditoría de software practicado -->
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 8px; overflow: hidden; border: 2px solid #222; margin-bottom: 1rem;">
-            <tr>
-                <td rowspan="2" style="width: 70%; text-align: center; font-weight: bold; font-size: 1.1em; border-right: 1px solid #222; border-radius: 8px 0 0 8px;">AUDITORÍA DE SOFTWARE PRACTICADO</td>
-                <td style="width: 15%; text-align: center;  font-weight: bold; border-bottom: 1px solid #222; border-right: 1px solid #222;">SI</td>
-                <td style="width: 15%; text-align: center;  font-weight: bold; border-bottom: 1px solid #222; border-radius: 0 8px 0 0;">NO</td>
-            </tr>
-            <tr>
-                <td style="height: 2.5em; border-right: 1px solid #222;"></td>
-                <td style="text-align: center; font-weight: bold;">x</td>
-            </tr>
-        </table>
-
-        <p class="text-justify text-black text-bold" >El que me comprometo a cuidar, mantener en buen estado y utilizar única y exclusivamente para asuntos relacionados con mis funciones como servidor público del Congreso del Estado. En caso de su extravío, daño o destrucción por causas imputables al suscrito, me responsabilizo a pagar el costo de reparación o la reposición del equipo. Asumiendo además las responsabilidades que se deriven, en su caso, por el uso inadecuado del mismo. </p>
-        <p class="text-left text-bold" >FECHA: </p>
-        <p class="text-left text-bold" >NOMBRE DE USUARIO: </p>
-        <p class="text-left text-bold" >DIRECCIÓN: </p>
-
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0.5rem;">
-            <tr>
-                <td style="border: 2px solid #000; border-radius: 25px;  height: 3rem;"> <br> <br>
-                </td>
-                <td style="border: 2px solid #000; border-radius: 25px;  height: 3rem;"> <br> <br>
-
-                </td>
-                <td style="border: 2px solid #000; border-radius: 25px;  height: 3rem;"> <br> <br>
-
-                </td>
-            </tr>
-        </table>
-        <div style="margin-top: 0.5rem; color: #fff; font-weight: bold;">Poder Legislativo del Estado de Campeche - Dirección de Informática</div>
-    </div>
-    
-
-
-
-
-
-
-    <!-- === RESUMEN DE VARIABLES DE LA CARTA RESPONSIVA === -->
-    <div class="info-section" style="margin-top: 40px;">
-        <h2>Resumen de Datos de la Carta Responsiva</h2>
-        <table style="width:100%; border-collapse: collapse;">
-            <tr><td><strong>Código:</strong></td><td>{{ $responsiva->codigo ?? 'N/A' }}</td></tr>
-            <tr><td><strong>Fecha:</strong></td><td>{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</td></tr>
-            <tr><td><strong>Auditoría:</strong></td><td>{{ $responsiva->auditoria ? 'Sí' : 'No' }}</td></tr>
-            <tr><td><strong>Observación:</strong></td><td>{{ $responsiva->observacion ?? 'N/A' }}</td></tr>
-            <tr><td><strong>Usuario:</strong></td><td>{{ $responsiva->user->name ?? 'N/A' }}</td></tr>
-            <tr><td><strong>Responsable:</strong></td><td>{{ $responsiva->responsable->name ?? 'N/A' }}</td></tr>
-            <tr><td><strong>Informática:</strong></td><td>{{ $responsiva->informatica->name ?? 'N/A' }}</td></tr>
-            <tr><td><strong>Total Artículos:</strong></td><td>{{ isset($responsiva->inventoryResponsivas) ? $responsiva->inventoryResponsivas->count() : 0 }}</td></tr>
-            <tr><td><strong>Fecha de Creación:</strong></td><td>{{ $responsiva->created_at ? $responsiva->created_at->format('d/m/Y H:i:s') : 'N/A' }}</td></tr>
-            <tr><td><strong>Última Actualización:</strong></td><td>{{ $responsiva->updated_at ? $responsiva->updated_at->format('d/m/Y H:i:s') : 'N/A' }}</td></tr>
-        </table>
-    </div>
-    
-    <!-- === DATOS DE LA CARTA RESPONSIVA (Formato clásico) === -->
-    <div class="info-section" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
-        <div style="max-width: 800px; width: 100%;">
-            <h2 style="text-align: center;">Información General</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label">Código:</span>
-                    <span class="info-value">{{ $responsiva->codigo }}</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Fecha:</span>
-                    <span class="info-value">{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Auditoría:</span>
-                    <span class="info-value">
-                        @if($responsiva->auditoria)
-                            <span class="status-badge status-active">Sí</span>
-                        @else
-                            <span class="status-badge status-inactive">No</span>
-                        @endif
-                    </span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Total Artículos:</span>
-                    <span class="info-value">{{ $responsiva->inventoryResponsivas->count() }}</span>
-                </div>
+    <!-- Información General -->
+    <div class="info-section">
+        <h2>Información General</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Código:</span>
+                <span class="info-value">{{ $responsiva->codigo }}</span>
             </div>
-            @if($responsiva->observacion)
-            <div class="info-item" style="margin-top: 15px;">
-                <span class="info-label">Observaciones:</span>
-                <span class="info-value">{{ $responsiva->observacion }}</span>
+            <div class="info-item">
+                <span class="info-label">Fecha:</span>
+                <span class="info-value">{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</span>
             </div>
-            @endif
+            <div class="info-item">
+                <span class="info-label">Auditoría:</span>
+                <span class="info-value">
+                    @if($responsiva->auditoria)
+                        <span class="status-badge status-active">Sí</span>
+                    @else
+                        <span class="status-badge status-inactive">No</span>
+                    @endif
+                </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Total Artículos:</span>
+                <span class="info-value">{{ $responsiva->inventoryResponsivas->count() }}</span>
+            </div>
         </div>
+        
+        @if($responsiva->observacion)
+        <div class="info-item" style="margin-top: 15px;">
+            <span class="info-label">Observaciones:</span>
+            <span class="info-value">{{ $responsiva->observacion }}</span>
+        </div>
+        @endif
     </div>
+
+    <!-- Información de Usuarios -->
     <div class="info-section">
         <h2>Información de Usuarios</h2>
         <div class="info-grid">
@@ -661,6 +709,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Lista de Artículos -->
     @if($responsiva->inventoryResponsivas->count() > 0)
     <div class="info-section">
         <h2>Artículos Asignados</h2>
@@ -702,6 +752,8 @@
         <p style="color: #6b7280; font-style: italic;">No hay artículos asignados a esta carta responsiva.</p>
     </div>
     @endif
+
+    <!-- Información Adicional -->
     <div class="info-section">
         <h2>Información Adicional</h2>
         <div class="info-grid">
@@ -714,6 +766,11 @@
                 <span class="info-value">{{ $responsiva->updated_at->format('d/m/Y H:i:s') }}</span>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        <p>Este documento fue generado automáticamente por el sistema de gestión de inventarios.</p>
+        <p>Para cualquier consulta, contacte al administrador del sistema.</p>
     </div>
 </body>
 </html> 

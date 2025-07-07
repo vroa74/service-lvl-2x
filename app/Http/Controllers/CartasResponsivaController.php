@@ -67,7 +67,7 @@ class CartasResponsivaController extends Controller
             ];
 
             // Generar el PDF usando la misma vista que la página web
-            $pdf = PDF::loadView('reports.cartasresponsiva', $data)
+            $pdf = PDF::loadView('reports.cartasresponsivas.individual', $data)
                       ->setPaper('letter', 'portrait');
 
             Log::info('PDF generado exitosamente para carta responsiva: ' . $responsiva->codigo);
