@@ -54,6 +54,12 @@ class Index extends Component
     public $esp = '';
     public $status = false;
 
+    public $filterNi = '';
+    public $filterNs = '';
+    public $filterArticulo = '';
+    public $filterMarca = '';
+    public $filterModelo = '';
+
     protected $rules = [
         'fecha_inv' => 'nullable|date',
         'user_id' => 'nullable|exists:users,id',
@@ -337,6 +343,21 @@ class Index extends Component
                       ->orWhere('marca', 'like', '%' . $this->search . '%')
                       ->orWhere('resguardante', 'like', '%' . $this->search . '%');
                 });
+            })
+            ->when($this->filterNi, function ($query) {
+                $query->where('ni', 'like', '%' . $this->filterNi . '%');
+            })
+            ->when($this->filterNs, function ($query) {
+                $query->where('ns', 'like', '%' . $this->filterNs . '%');
+            })
+            ->when($this->filterArticulo, function ($query) {
+                $query->where('articulo', 'like', '%' . $this->filterArticulo . '%');
+            })
+            ->when($this->filterMarca, function ($query) {
+                $query->where('marca', 'like', '%' . $this->filterMarca . '%');
+            })
+            ->when($this->filterModelo, function ($query) {
+                $query->where('modelo', 'like', '%' . $this->filterModelo . '%');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);

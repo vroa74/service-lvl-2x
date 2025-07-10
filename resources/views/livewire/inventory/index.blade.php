@@ -1,4 +1,77 @@
 <div class="p-4">
+    <!-- Acordeón de Filtros -->
+    <div x-data="{ open: true }" class="mb-6">
+        <div 
+            @click="open = !open"
+            class="flex items-center justify-between bg-blue-900 text-gray-200 px-6 py-3 rounded-t-3xl cursor-pointer select-none"
+        >
+            <span class="font-semibold text-lg">Filtros</span>
+            <svg :class="{'transform rotate-180': open}" class="w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </div>
+        <div x-show="open" x-transition class="bg-blue-950 px-6 py-4 rounded-b-3xl border-t-0 border border-blue-800">
+            <!-- Tabla de filtros dentro del acordeón (simulada con grid para bordes y separación) -->
+            <div class="grid grid-cols-3 gap-4">
+                <div class="h-20 bg-gray-900 border-2 border-pink-400 rounded-3xl flex items-center justify-center text-2xl font-bold text-pink-300">
+                    1
+                </div>
+                <div class="h-20 bg-gray-900 border-2 border-cyan-400 rounded-3xl flex items-center justify-center">
+                    <input 
+                        type="text" 
+                        wire:model.live="filterNi" 
+                        placeholder="Filtrar por NI"
+                        class="w-5/6 px-3 py-2 bg-gray-800 border border-cyan-400 rounded-xl text-cyan-200 placeholder-cyan-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-base"
+                    >
+                </div>
+                <div class="h-20 bg-gray-900 border-2 border-yellow-400 rounded-3xl flex flex-col items-center justify-center gap-1">
+                    <input 
+                        type="text" 
+                        wire:model.live="filterNs" 
+                        placeholder="Filtrar por NS"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-yellow-400 rounded-lg text-yellow-200 placeholder-yellow-400 focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm mb-1"
+                    >
+                    <input 
+                        type="text" 
+                        wire:model.live="filterArticulo" 
+                        placeholder="Filtrar por Artículo"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-yellow-400 rounded-lg text-yellow-200 placeholder-yellow-400 focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-sm"
+                    >
+                </div>
+                <div class="h-20 bg-gray-900 border-2 border-pink-400 rounded-3xl flex flex-col items-center justify-center gap-1">
+                    <input 
+                        type="text" 
+                        wire:model.live="filterMarca" 
+                        placeholder="Filtrar por Marca"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-pink-400 rounded-lg text-pink-200 placeholder-pink-400 focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm mb-1"
+                    >
+                    <input 
+                        type="text" 
+                        wire:model.live="filterModelo" 
+                        placeholder="Filtrar por Modelo"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-pink-400 rounded-lg text-pink-200 placeholder-pink-400 focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm"
+                    >
+                </div>
+                <div class="h-20 bg-gray-900 border-2 border-cyan-400 rounded-3xl flex items-center justify-center text-2xl font-bold text-cyan-300">
+                    5
+                </div>
+                <div class="h-20 bg-gray-900 border-2 border-yellow-400 rounded-3xl flex flex-col items-center justify-center text-2xl font-bold text-yellow-300">
+                    {{ $inventories->total() }}
+                    <span class="block text-xs text-yellow-200 font-normal mt-1 text-center">
+                        @php
+                            // Mostrar el query si está disponible, si no, mostrar el filtro aplicado
+                            if (request()->has('search') && !empty($search)) {
+                                echo e("SELECT * FROM inventories WHERE articulo LIKE '%$search%' OR ni LIKE '%$search%' OR ns LIKE '%$search%' OR marca LIKE '%$search%' OR resguardante LIKE '%$search%'");
+                            } else {
+                                echo e('SELECT * FROM inventories');
+                            }
+                        @endphp
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mensaje de éxito -->
     @if (session()->has('message'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show"

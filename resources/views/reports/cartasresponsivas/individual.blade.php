@@ -5,11 +5,11 @@
     <title>Reporte Individual de Servicio</title>
     <style>
         @page {
-            margin: 7cm 2cm 1.5cm 2cm;  /* arrriba, derecha, abajo, izquierda */
+            margin: 8cm 2cm 9cm 2cm;  /* arrriba, derecha, abajo, izquierda */
         }
         #header {
             position: fixed;
-            top: -7cm;
+            top: -7.5cm;
             left: 0;
             width: 100%;
             text-align: center;
@@ -24,12 +24,13 @@
             font-size: 14px;
             margin: 0;
             padding: 0;
+            /* background-color: #fa52d0; */
         }
 
         #footer {
             position: fixed;
             left: 0;
-            bottom: 0;
+            bottom: -8.5cm;
             width: 100%;
             text-align: center;
             font-size: 12px;
@@ -573,7 +574,7 @@
     <!-- === RESUMEN DE VARIABLES DE LA CARTA RESPONSIVA === -->
     <div class="info-section" style="margin-top: 40px;">
         <h2>Resumen de Datos de la Carta Responsiva</h2>
-        <table style="width:100%; border-collapse: collapse;">
+        <table style="width:100%; border-collapse: collapse;" class="text-7px">
             <tr><td><strong>Código:</strong></td><td>{{ $responsiva->codigo ?? 'N/A' }}</td></tr>
             <tr><td><strong>Fecha:</strong></td><td>{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</td></tr>
             <tr><td><strong>Auditoría:</strong></td><td>{{ $responsiva->auditoria ? 'Sí' : 'No' }}</td></tr>
@@ -589,20 +590,20 @@
     
     <!-- === DATOS DE LA CARTA RESPONSIVA (Formato clásico) === -->
     <div class="info-section" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
-        <div style="max-width: 800px; width: 100%;">
+        <div style="max-width: 800px; width: 100%;" class="text-7px">
             <h2 style="text-align: center;">Información General</h2>
-            <div class="info-grid">
+            <div class="info-grid text-7px">
                 <div class="info-item">
-                    <span class="info-label">Código:</span>
-                    <span class="info-value">{{ $responsiva->codigo }}</span>
+                    <span class="info-label text-7px">Código:</span>
+                    <span class="info-value text-7px">{{ $responsiva->codigo }}</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Fecha:</span>
-                    <span class="info-value">{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</span>
+                    <span class="info-label text-7px">Fecha:</span>
+                    <span class="info-value text-7px">{{ $responsiva->fecha ? $responsiva->fecha->format('d/m/Y') : 'N/A' }}</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Auditoría:</span>
-                    <span class="info-value">
+                    <span class="info-label text-7px">Auditoría:</span>
+                    <span class="info-value text-7px">
                         @if($responsiva->auditoria)
                             <span class="status-badge status-active">Sí</span>
                         @else
@@ -611,24 +612,24 @@
                     </span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Total Artículos:</span>
-                    <span class="info-value">{{ $responsiva->inventoryResponsivas->count() }}</span>
+                    <span class="info-label text-7px">Total Artículos:</span>
+                    <span class="info-value text-7px">{{ $responsiva->inventoryResponsivas->count() }}</span>
                 </div>
             </div>
             @if($responsiva->observacion)
             <div class="info-item" style="margin-top: 15px;">
-                <span class="info-label">Observaciones:</span>
-                <span class="info-value">{{ $responsiva->observacion }}</span>
+                <span class="info-label text-7px">Observaciones:</span>
+                <span class="info-value text-7px">{{ $responsiva->observacion }}</span>
             </div>
             @endif
         </div>
     </div>
-    <div class="info-section">
+    <div class="info-section text-7px">
         <h2>Información de Usuarios</h2>
-        <div class="info-grid">
+        <div class="info-grid text-7px">
             <div class="info-item">
-                <span class="info-label">Usuario que Genera:</span>
-                <span class="info-value">
+                <span class="info-label text-7px">Usuario que Genera:</span>
+                <span class="info-value text-7px">
                     @if($responsiva->user)
                         {{ $responsiva->user->name }}<br>
                         <small style="color: #6b7280;">{{ $responsiva->user->email }}</small>
@@ -638,8 +639,8 @@
                 </span>
             </div>
             <div class="info-item">
-                <span class="info-label">Responsable:</span>
-                <span class="info-value">
+                <span class="info-label text-7px">Responsable:</span>
+                <span class="info-value text-7px">
                     @if($responsiva->responsable)
                         {{ $responsiva->responsable->name }}<br>
                         <small style="color: #6b7280;">{{ $responsiva->responsable->email }}</small>
@@ -649,8 +650,8 @@
                 </span>
             </div>
             <div class="info-item">
-                <span class="info-label">Informática:</span>
-                <span class="info-value">
+                <span class="info-label text-7px">Informática:</span>
+                <span class="info-value text-7px">
                     @if($responsiva->informatica)
                         {{ $responsiva->informatica->name }}<br>
                         <small style="color: #6b7280;">{{ $responsiva->informatica->email }}</small>
@@ -662,27 +663,27 @@
         </div>
     </div>
     @if($responsiva->inventoryResponsivas->count() > 0)
-    <div class="info-section">
+    <div class="info-section text-7px">
         <h2>Artículos Asignados</h2>
         <div class="table-container">
-            <table class="table">
+            <table class="table text-7px">
                 <thead>
                     <tr>
-                        <th>Artículo</th>
-                        <th>NI</th>
-                        <th>SN</th>
-                        <th>Marca/Modelo</th>
-                        <th>Descripción</th>
+                        <th class="text-7px">Artículo</th>
+                        <th class="text-7px">NI</th>
+                        <th class="text-7px">SN</th>
+                        <th class="text-7px">Marca/Modelo</th>
+                        <th class="text-7px">Descripción</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($responsiva->inventoryResponsivas as $inventoryResponsiva)
                         @if($inventoryResponsiva->inventory)
                         <tr>
-                            <td>{{ $inventoryResponsiva->inventory->articulo ?? 'N/A' }}</td>
-                            <td>{{ $inventoryResponsiva->inventory->ni ?? 'N/A' }}</td>
-                            <td>{{ $inventoryResponsiva->inventory->ns ?? 'N/A' }}</td>
-                            <td>
+                            <td class="text-7px">{{ $inventoryResponsiva->inventory->articulo ?? 'N/A' }}</td>
+                            <td class="text-7px">{{ $inventoryResponsiva->inventory->ni ?? 'N/A' }}</td>
+                            <td class="text-7px">{{ $inventoryResponsiva->inventory->ns ?? 'N/A' }}</td>
+                            <td class="text-7px">
                                 {{ $inventoryResponsiva->inventory->marca ?? 'N/A' }}
                                 @if($inventoryResponsiva->inventory->modelo)
                                     / {{ $inventoryResponsiva->inventory->modelo }}
@@ -698,20 +699,20 @@
     </div>
     @else
     <div class="info-section">
-        <h2>Artículos Asignados</h2>
-        <p style="color: #6b7280; font-style: italic;">No hay artículos asignados a esta carta responsiva.</p>
+        <h2 class="text-7px">Artículos Asignados</h2>
+        <p class="text-7px" style="color: #6b7280; font-style: italic;">No hay artículos asignados a esta carta responsiva.</p>
     </div>
     @endif
     <div class="info-section">
-        <h2>Información Adicional</h2>
-        <div class="info-grid">
-            <div class="info-item">
-                <span class="info-label">Fecha de Creación:</span>
-                <span class="info-value">{{ $responsiva->created_at->format('d/m/Y H:i:s') }}</span>
+        <h2 class="text-7px">Información Adicional</h2>
+        <div class="info-grid text-7px">
+            <div class="info-item text-7px">
+                <span class="info-label text-7px">Fecha de Creación:</span>
+                <span class="info-value text-7px">{{ $responsiva->created_at->format('d/m/Y H:i:s') }}</span>
             </div>
-            <div class="info-item">
-                <span class="info-label">Última Actualización:</span>
-                <span class="info-value">{{ $responsiva->updated_at->format('d/m/Y H:i:s') }}</span>
+            <div class="info-item text-7px">
+                <span class="info-label text-7px">Última Actualización:</span>
+                <span class="info-value text-7px">{{ $responsiva->updated_at->format('d/m/Y H:i:s') }}</span>
             </div>
         </div>
     </div>
