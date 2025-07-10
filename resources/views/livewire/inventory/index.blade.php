@@ -52,8 +52,25 @@
                         class="w-11/12 px-2 py-1 bg-gray-800 border border-pink-400 rounded-lg text-pink-200 placeholder-pink-400 focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm"
                     >
                 </div>
-                <div class="h-20 bg-gray-900 border-2 border-cyan-400 rounded-3xl flex items-center justify-center text-2xl font-bold text-cyan-300">
-                    5
+                <div class="h-20 bg-gray-900 border-2 border-cyan-400 rounded-3xl flex flex-col items-center justify-center gap-1">
+                    <select 
+                        wire:model.live="filterFechaInv"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-cyan-400 rounded-lg text-cyan-200 focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm mb-1"
+                    >
+                        <option value="">Todas las fechas</option>
+                        @foreach($uniqueFechasInv as $fecha)
+                            <option value="{{ $fecha }}">{{ $fecha }}</option>
+                        @endforeach
+                    </select>
+                    <select 
+                        wire:model.live="perPage"
+                        class="w-11/12 px-2 py-1 bg-gray-800 border border-cyan-400 rounded-lg text-cyan-200 focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
+                    >
+                        <option value="10">10 por página</option>
+                        <option value="25">25 por página</option>
+                        <option value="50">50 por página</option>
+                        <option value="100">100 por página</option>
+                    </select>
                 </div>
                 <div class="h-20 bg-gray-900 border-2 border-yellow-400 rounded-3xl flex flex-col items-center justify-center text-2xl font-bold text-yellow-300">
                     {{ $inventories->total() }}

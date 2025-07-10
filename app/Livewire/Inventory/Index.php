@@ -59,6 +59,8 @@ class Index extends Component
     public $filterArticulo = '';
     public $filterMarca = '';
     public $filterModelo = '';
+    public $filterFechaInv = '';
+    public $perPage = 10;
 
     protected $rules = [
         'fecha_inv' => 'nullable|date',
@@ -359,14 +361,19 @@ class Index extends Component
             ->when($this->filterModelo, function ($query) {
                 $query->where('modelo', 'like', '%' . $this->filterModelo . '%');
             })
+            ->when($this->filterFechaInv, function ($query) {
+                $query->where('fecha_inv', $this->filterFechaInv);
+            })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate($this->perPage);
 
         $users = User::where('status', true)->orderBy('name')->get();
+        $uniqueFechasInv = Inventory::query()->select('fecha_inv')->distinct()->orderBy('fecha_inv', 'desc')->pluck('fecha_inv')->filter()->values();
 
         return view('livewire.inventory.index', [
             'inventories' => $inventories,
-            'users' => $users
+            'users' => $users,
+            'uniqueFechasInv' => $uniqueFechasInv,
         ]);
     }
 } 
