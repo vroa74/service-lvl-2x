@@ -19,10 +19,10 @@ class Create extends Component
     public $solicitante_id = '';
     public $efectuo_id = '';
     public $vobo_id = '';
-    public $obj_sol = 'se instalaron dos nodos de res en el área de archivo histórico.';
-    public $actividades = 'Para hacer esta tarea, se necesito aproximadamente 50 metro de cable, 2 canaletas auto aderibles y 5 plug';
+    public $obj_sol = '';
+    public $actividades = '';
     public $mantenimiento = '';
-    public $observaciones = 'uno de los plug ya estaba ponchado o estaba defectuoso';
+    public $observaciones = '';
     public $solicitante_name = '';
     public $solicitante_position = '';
     public $solicitante_direction = '';
