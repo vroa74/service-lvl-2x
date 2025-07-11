@@ -404,11 +404,7 @@ php artisan make:model OldInventy -mcr
 php artisan migrate --force
 
 ========================================================================================================
-
-
-
-========================================================================================================
-
+junto al input inserta un boton que cuando se presione verifique que en la tabla user solo tenga un registro y en la tablas inventory todos los registroe que se muestren tengan el mismo dato en el campos resguardante, su pasa esas 2 condiciones de la tabla inventory cambiara el valor de user_id y res_id por el id que este omo unico campo en la tabla user  antes de hacer esto con un mensaje de sweetaler2 que se van hacer calbion en la tabla inventory si en sweetalert2 presionan si o caceptar los cambios se aplicaran si ponen no o cancelar no se hara nada cuando termine mandara un mensaje que disga los cambion se han aplicado si es que aceptaron hacer los cambios en caso contrario manda un mensaje que los cambion fueron cancelados
 
 
 ========================================================================================================

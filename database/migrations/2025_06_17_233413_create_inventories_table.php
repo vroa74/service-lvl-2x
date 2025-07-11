@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('gpo', 20)->nullable();
             $table->string('disp', 30)->nullable();
             $table->string('type', 30)->nullable();
-            $table->string('articulo', 35)->nullable();
+            $table->string('articulo', 70)->nullable();
             $table->string('ni', 35)->unique();
-            $table->string('marca', 35)->nullable();
-            $table->string('modelo', 35)->nullable();
+            $table->string('marca', 50)->nullable();
+            $table->string('modelo', 50)->nullable();
             $table->string('ns', 35)->nullable();
             $table->string('nombres', 50)->nullable();
             $table->string('apa', 35)->nullable();

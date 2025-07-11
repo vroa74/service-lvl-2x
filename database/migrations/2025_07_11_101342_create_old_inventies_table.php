@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('old_inventies', function (Blueprint $table) {
+        Schema::create('old_inventories', function (Blueprint $table) {
             $table->id();
             $table->string('fecha_inv', 12)->nullable();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); // relación con users
@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('gpo', 20)->nullable();
             $table->string('disp', 30)->nullable();
             $table->string('type', 30)->nullable();
-            $table->string('articulo', 35)->nullable();
+            $table->string('articulo', 70)->nullable();
             $table->string('ni', 35)->nullable();
-            $table->string('marca', 35)->nullable();
-            $table->string('modelo', 35)->nullable();
+            $table->string('marca', 50)->nullable();
+            $table->string('modelo', 50)->nullable();
             $table->string('ns', 35)->nullable();
             $table->string('nombres', 50)->nullable();
             $table->string('apa', 35)->nullable();
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('old_inventies');
+        Schema::dropIfExists('old_inventories');
     }
 };

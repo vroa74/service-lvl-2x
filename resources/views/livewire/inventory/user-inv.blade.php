@@ -1,273 +1,46 @@
 <div class="p-4">
-    <!-- Mensaje de éxito -->
-    @if (session()->has('message'))
-        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show"
-             class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg flex justify-between items-center">
-            <span>{{ session('message') }}</span>
-            <button @click="show = false" class="text-green-700 hover:text-green-900">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    @endif
-
-    <!-- Mensaje de error -->
-    @if (session()->has('error'))
-        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <!-- Acordeón con tabla de filtros -->
-    <div x-data="{ open: true }" class="mb-6">
+    <!-- Acordeón con tabla de filtros (solo vista, sin funcionalidad) -->
+    <div x-data="{ open: true }" class="mb-2">
         <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-700">
             <!-- Encabezado del acordeón -->
-            <button @click="open = !open" class="w-full px-6 py-4 bg-gray-700 hover:bg-gray-600 transition-colors flex items-center justify-between" :class="{ 'rounded-b-3xl': !open && open === false }">
+            <button class="w-full px-2 py-1 bg-gray-700 hover:bg-gray-600 transition-colors flex items-center justify-between">
                 <h3 class="text-lg font-medium text-white">Filtros de Inventario</h3>
-                <svg class="w-5 h-5 text-gray-300 transform transition-transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-5 h-5 text-gray-300 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
-            
-            <!-- Contenido del acordeón - Tabla de filtros -->
-            <template x-if="open">
-                <div x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" class="p-6">
-                    <div class="overflow-x-auto rounded-3xl overflow-hidden">
-                        <table class="min-w-full">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Usuario
-                                    </th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Resguardante
-                                    </th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        NI
-                                    </th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Artículo
-                                    </th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider bg-gray-700/50">
-                                        Información
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-gray-800">
-                                <tr>
-                                    <td class="px-4 py-3">
-                                        <div class="relative">
-                                            <input 
-                                                wire:model.live="userNameFilter" 
-                                                type="text" 
-                                                placeholder="Buscar por usuario..." 
-                                                class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            >
-                                            <button
-                                                x-show="$wire.userNameFilter"
-                                                wire:click="$set('userNameFilter', '')"
-                                                type="button"
-                                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
-                                                aria-label="Limpiar búsqueda"
-                                                x-cloak
-                                            >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                            </button>
+            <div class="p-2">
+                <div class="overflow-x-auto rounded-3xl">
+                    <table class="min-w-full border-separate border-spacing-4 bg-transparent table-fixed">
+                        <tbody>
+                            <tr>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-pink-400 rounded-3xl text-center align-middle text-pink-300 p-0">
+                                    <div class="flex flex-col justify-center items-center h-full w-full px-2">
+                                        <label class="text-xs text-pink-200 mb-0.5 text-center w-full">Resguardante</label>
+                                        <div class="flex items-center w-full justify-center gap-2">
+                                            <input type="text"
+                                                placeholder="Buscar..."
+                                                class="w-3/4 max-w-xs px-3 py-1 rounded-full bg-gray-800 border border-pink-400 text-pink-200 placeholder-pink-400 focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm mx-auto"
+                                                style="min-width: 60px;"
+                                                disabled
+                                            />
+                                            <button type="button" 
+                                                    class="ml-1 px-2 py-1 rounded-lg bg-pink-500 text-white text-xs font-semibold opacity-60 cursor-not-allowed" disabled>Asignar</button>
                                         </div>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="relative">
-                                            <input 
-                                                wire:model.live="resguardanteSearch" 
-                                                type="text" 
-                                                placeholder="Buscar por resguardante..." 
-                                                class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            >
-                                            <button
-                                                x-show="$wire.resguardanteSearch"
-                                                wire:click="$set('resguardanteSearch', '')"
-                                                type="button"
-                                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
-                                                aria-label="Limpiar búsqueda"
-                                                x-cloak
-                                            >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="relative">
-                                            <input 
-                                                wire:model.live="filterNi" 
-                                                type="text" 
-                                                placeholder="Buscar por NI..." 
-                                                class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            >
-                                            <button
-                                                x-show="$wire.filterNi"
-                                                wire:click="$set('filterNi', '')"
-                                                type="button"
-                                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
-                                                aria-label="Limpiar búsqueda"
-                                                x-cloak
-                                            >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="relative">
-                                            <input 
-                                                wire:model.live="filterArticulo" 
-                                                type="text" 
-                                                placeholder="Buscar por artículo..." 
-                                                class="w-full pl-3 pr-10 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            >
-                                            <button
-                                                x-show="$wire.filterArticulo"
-                                                wire:click="$set('filterArticulo', '')"
-                                                type="button"
-                                                class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white transition-colors"
-                                                aria-label="Limpiar búsqueda"
-                                                x-cloak
-                                            >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-3 text-sm text-white">
-                                        <div class="flex flex-col items-center justify-center space-y-2">
-                                            <div class="text-center">
-                                                <span class="block text-xs font-semibold text-gray-400">Usuarios</span>
-                                                <span class="block text-lg font-bold">{{ $users->total() }}</span>
-                                            </div>
-                                            <div class="text-center">
-                                                <span class="block text-xs font-semibold text-gray-400">Inventario</span>
-                                                <span class="block text-lg font-bold">{{ $inventories->total() }}</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5" class="px-4 py-3">
-                                        <div class="flex items-center justify-center gap-6">
-                                            <!-- Checkbox para Usuario -->
-                                            <label for="withUserId" class="flex items-center space-x-2 cursor-pointer">
-                                                <input 
-                                                    id="withUserId"
-                                                    type="checkbox" 
-                                                    wire:model.live="showWithUserId"
-                                                    class="h-4 w-4 bg-gray-600 border-gray-500 text-blue-500 focus:ring-blue-500 rounded"
-                                                >
-                                                <span class="text-gray-300 text-sm">Con Usuario Asignado</span>
-                                            </label>
-
-                                            <!-- Checkbox para Resguardante -->
-                                            <label for="withResId" class="flex items-center space-x-2 cursor-pointer">  
-                                                <input 
-                                                    id="withResId"
-                                                    type="checkbox" 
-                                                    wire:model.live="showWithResId"
-                                                    class="h-4 w-4 bg-gray-600 border-gray-500 text-blue-500 focus:ring-blue-500 rounded"
-                                                >
-                                                <span class="text-gray-300 text-sm">Con Resguardante</span>
-                                            </label>
-                                            
-                                            <!-- Botón para Marcar como PC -->
-                                            <button
-                                                type="button"
-                                                @click="
-                                                    Swal.fire({
-                                                        title: '¿Estás seguro?',
-                                                        text: 'Esta acción marcará todos los registros filtrados como PC. Esta acción no se puede deshacer.',
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#D946EF',
-                                                        cancelButtonColor: '#EF4444',
-                                                        confirmButtonText: 'Sí, ¡marcar como PC!',
-                                                        cancelButtonText: 'Cancelar'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            $wire.dispatch('confirmMarkAsPc');
-                                                        }
-                                                    })
-                                                "
-                                                class="px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                                            >
-                                                <x-lucide name="laptop" class="w-4 h-4" />
-                                                Es una computadora
-                                            </button>
-
-                                            <!-- Botón para Asignar Responsable -->
-                                            <button
-                                                type="button"
-                                                @click="
-                                                    Swal.fire({
-                                                        title: '¿Asignar Responsable?',
-                                                        text: 'Esto asignará el usuario filtrado como responsable de todos los registros de inventario filtrados. ¿Continuar?',
-                                                        icon: 'question',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#10B981',
-                                                        cancelButtonColor: '#EF4444',
-                                                        confirmButtonText: 'Sí, ¡asignar!',
-                                                        cancelButtonText: 'Cancelar'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            $wire.dispatch('confirmAssignResponsible');
-                                                        }
-                                                    })
-                                                "
-                                                class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                                            >
-                                                <x-lucide name="user-check" class="w-4 h-4" />
-                                                Asignar Responsable
-                                            </button>
-
-                                            <!-- Botón para Asignar Usuario -->
-                                            <button
-                                                type="button"
-                                                @click="
-                                                    Swal.fire({
-                                                        title: '¿Asignar Usuario?',
-                                                        text: 'Esto asignará el usuario filtrado a todos los registros de inventario filtrados. ¿Continuar?',
-                                                        icon: 'question',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#3B82F6',
-                                                        cancelButtonColor: '#EF4444',
-                                                        confirmButtonText: 'Sí, ¡asignar!',
-                                                        cancelButtonText: 'Cancelar'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            $wire.dispatch('confirmAssignUser');
-                                                        }
-                                                    })
-                                                "
-                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                                            >
-                                                <x-lucide name="user-plus" class="w-4 h-4" />
-                                                Asignar Usuario
-                                            </button>
-
-                                            <!-- Botón Limpiar Filtros -->
-                                            <button 
-                                                wire:click="clearFilters"
-                                                class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors flex items-center gap-2"
-                                            >
-                                                <x-lucide name="x" class="w-4 h-4" />
-                                                Limpiar Filtros
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                </td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-cyan-400 rounded-3xl text-center align-middle text-cyan-300 font-bold text-lg">2</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-yellow-400 rounded-3xl text-center align-middle text-yellow-300 font-bold text-lg">3</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-green-400 rounded-3xl text-center align-middle text-green-300 font-bold text-lg">4</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-blue-400 rounded-3xl text-center align-middle text-blue-300 font-bold text-lg">5</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-red-400 rounded-3xl text-center align-middle text-red-300 font-bold text-lg">6</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </template>
+            </div>
         </div>
     </div>
-
     <!-- Contenedor de las dos tablas lado a lado -->
     <div class="flex gap-4">
         <!-- Tabla de Usuarios (25% del ancho) -->
@@ -280,23 +53,18 @@
                     <table class="min-w-full border-2 border-gray-700 rounded-3xl">
                         <thead class="bg-gray-700/50 sticky top-0">
                             <tr class="rounded-3xl border-2 border-gray-700">
-                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    ID
-                                </th>
-                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Nombre
-                                </th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">ID</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nombre</th>
                             </tr>
                         </thead>
                         <tbody class="bg-gray-800 divide-y divide-gray-700">
                             @forelse($users as $user)
-                                <tr class="hover:bg-gray-700 transition-colors cursor-pointer {{ $selectedUserId == $user->id ? 'bg-blue-900/30' : '' }}"
-                                    wire:click="selectUser({{ $user->id }})">
-                                    <td class="px-3 py-2 text-sm text-gray-300">
-                                        {{ $user->id }}
-                                    </td>
+                                <tr class="hover:bg-gray-700 transition-colors cursor-pointer">
+                                    <td class="px-3 py-2 text-sm text-gray-300">{{ $user->id }}</td>
                                     <td class="px-3 py-2 text-sm text-white font-medium">
                                         {{ $user->name }}
+                                        <div class="text-xs text-yellow-300">{{ $user->position ?? 'Sin cargo' }}</div>
+                                        <div class="text-xs text-cyan-300">{{ $user->direction ?? 'Sin dirección' }}</div>
                                     </td>
                                 </tr>
                             @empty
@@ -310,8 +78,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- Paginación de Usuarios -->
                 @if($users->hasPages())
                     <div class="px-3 py-2 bg-gray-700 border-t border-gray-600">
                         {{ $users->links() }}
@@ -319,40 +85,24 @@
                 @endif
             </div>
         </div>
-
         <!-- Tabla de Inventario (75% del ancho) -->
         <div class="w-3/4 flex flex-col">
             <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-700 flex flex-col flex-1">
                 <div class="px-4 py-3 bg-gray-700 border-b border-gray-600">
                     <h3 class="text-lg font-medium text-white">
                         Inventario
-                        @if($selectedUserId)
-                            <span class="text-sm text-gray-400">- Usuario seleccionado</span>
-                        @endif
                     </h3>
                 </div>
                 <div class="overflow-x-auto flex-1">
                     <table class="min-w-full">
                         <thead class="bg-gray-700/50 sticky top-0">
                             <tr>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Artículo
-                                </th>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Detalles
-                                </th>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Resguardante
-                                </th>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Ubicación
-                                </th>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Tipo
-                                </th>
-                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                    Estado
-                                </th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Artículo</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Detalles</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Resguardante</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Ubicación</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Tipo</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Estado</th>
                             </tr>
                         </thead>
                         <tbody class="bg-gray-800 divide-y divide-gray-700">
@@ -425,18 +175,10 @@
                                     <td colspan="6" class="px-3 py-12 text-center text-gray-400">
                                         <x-lucide name="database-zap" class="w-12 h-12 mx-auto mb-4 text-gray-600" />
                                         <p class="text-lg">
-                                            @if($selectedUserId)
-                                                No se encontraron artículos para este usuario
-                                            @else
-                                                Selecciona un usuario para ver su inventario
-                                            @endif
+                                            No se encontraron artículos para este usuario
                                         </p>
                                         <p class="text-sm">
-                                            @if($selectedUserId)
-                                                Este usuario no tiene artículos asignados
-                                            @else
-                                                Haz clic en un usuario de la lista
-                                            @endif
+                                            Este usuario no tiene artículos asignados
                                         </p>
                                     </td>
                                 </tr>
@@ -444,8 +186,6 @@
                         </tbody>
                     </table>
                 </div>
-                
-                <!-- Paginación -->
                 @if($inventories->hasPages())
                     <div class="px-3 py-4 bg-gray-700 border-t border-gray-600">
                         {{ $inventories->links() }}
@@ -456,16 +196,33 @@
     </div>
 </div>
 
-@script
+@push('scripts')
 <script>
-    document.addEventListener('livewire:initialized', () => {
-        @this.on('swal:alert', (event) => {
+    document.addEventListener('DOMContentLoaded', function () {
+        window.livewire.on('swal:confirm-asignacion-resguardante', function (data) {
             Swal.fire({
-                icon: event.icon,
-                title: event.title,
-                text: event.text,
+                title: '¿Asignar resguardante?',
+                text: 'Se actualizarán los campos user_id y res_id de los registros filtrados en inventario. ¿Deseas continuar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, aplicar cambios',
+                cancelButtonText: 'No, cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('asignarResguardante');
+                } else {
+                    window.livewire.emit('asignacionResguardanteCancelada');
+                }
+            });
+        });
+        window.livewire.on('swal:mensaje', function (data) {
+            Swal.fire({
+                title: data.titulo,
+                text: data.mensaje,
+                icon: data.tipo || 'info',
+                confirmButtonText: 'OK'
             });
         });
     });
 </script>
-@endscript 
+@endpush 

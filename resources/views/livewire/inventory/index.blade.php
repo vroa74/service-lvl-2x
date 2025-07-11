@@ -189,8 +189,20 @@
                                 </div>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300">
-                                <div class="font-medium text-white">{{ $item->resguardante ?? 'N/A' }}</div>
-                                <div class="text-xs text-gray-400">{{ $item->cargo ?? 'Sin cargo' }}</div>
+                                <div class="font-medium text-white">
+                                    @if($item->responsible)
+                                        {{ $item->responsible->name ?? 'SN' }}
+                                    @else
+                                        SN
+                                    @endif
+                                </div>
+                                <div class="text-xs text-gray-400">
+                                    @if($item->responsible && $item->responsible->position)
+                                        {{ $item->responsible->position }}
+                                    @else
+                                        S/C
+                                    @endif
+                                </div>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300">
                                 <div class="font-medium text-white">{{ $item->dir ?? 'N/A' }}</div>

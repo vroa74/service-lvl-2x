@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-4">        
+    <div class="py-2">        
         <livewire:inventory.user-inv />
     </div>
 </x-app-layout>
