@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responsivas', function (Blueprint $table) {
+       Schema::create('responsivas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('responsable_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('informatica_id')->nullable()->constrained('users')->nullOnDelete();
-        
+            
             $table->date('fecha')->nullable();
             $table->string('codigo', 20)->unique();
             $table->boolean('auditoria')->default(false);
-            $table->string('observacion')->nullable()->after('auditoria');
+            $table->string('observacion')->nullable(); // 👈 sin 'after'
+            
             $table->timestamps();
-        });
+            });
     }
 
     /**

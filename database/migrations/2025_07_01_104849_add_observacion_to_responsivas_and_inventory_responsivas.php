@@ -11,12 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('responsivas', function (Blueprint $table) {
-            $table->string('observacion')->nullable()->after('auditoria');
-        });
-        Schema::table('inventory_responsivas', function (Blueprint $table) {
-            $table->string('observacion')->nullable()->after('description');
-        });
+        // Solo agregar 'observacion' si no existe en 'responsivas'
+        if (!Schema::hasColumn('responsivas', 'observacion')) {
+            Schema::table('responsivas', function (Blueprint $table) {
+                $table->string('observacion')->nullable()->after('auditoria');
+            });
+        }
+
+        // Solo agregar 'observacion' si no existe en 'inventory_responsivas'
+        if (!Schema::hasColumn('inventory_responsivas', 'observacion')) {
+            Schema::table('inventory_responsivas', function (Blueprint $table) {
+                $table->string('observacion')->nullable()->after('description');
+            });
+        }
     }
 
     /**
@@ -24,11 +31,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('responsivas', function (Blueprint $table) {
-            $table->dropColumn('observacion');
-        });
-        Schema::table('inventory_responsivas', function (Blueprint $table) {
-            $table->dropColumn('observacion');
-        });
+        if (Schema::hasColumn('responsivas', 'observacion')) {
+            Schema::table('responsivas', function (Blueprint $table) {
+                $table->dropColumn('observacion');
+            });
+        }
+
+        if (Schema::hasColumn('inventory_responsivas', 'observacion')) {
+            Schema::table('inventory_responsivas', function (Blueprint $table) {
+                $table->dropColumn('observacion');
+            });
+        }
     }
 };
