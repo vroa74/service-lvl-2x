@@ -130,6 +130,14 @@
                 <x-lucide name="users" class="w-5 h-5" />
                 Por Usuario
             </a>
+            {{-- <a 
+            href="{{ route('inventory.responsables') }}"
+            class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center gap-2 transition-colors"
+            title="Ver inventario por usuario">
+            <x-lucide name="users" class="w-5 h-5" />
+            Por Usuario
+        </a> --}}
+
             {{-- <button 
                 wire:click="openReportModal('general')"
                 class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center gap-2 transition-colors"
@@ -160,8 +168,8 @@
                         <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[20%]">
                             Resguardante
                         </th>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[15%]">
-                            Ubicación
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[20%]">
+                            Usuarios
                         </th>
                         <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%]">
                             Tipo
@@ -169,7 +177,7 @@
                         <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%]">
                             Estado
                         </th>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[15%] rounded-tr-3xl">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%] rounded-tr-3xl">
                             Acciones
                         </th>
                     </tr>
@@ -205,7 +213,22 @@
                                 </div>
                             </td>
                             <td class="px-3 py-4 text-sm text-gray-300">
-                                <div class="font-medium text-white">{{ $item->dir ?? 'N/A' }}</div>
+                                <div class="space-y-2">
+                                    @if($item->assignedUser)
+                                        <div>
+                                            <div class="text-xs text-gray-400">Usuario:</div>
+                                            <div class="font-medium text-yellow-400">{{ $item->assignedUser->name ?? 'N/A' }}</div>
+                                            <div class="text-xs text-yellow-300">{{ $item->assignedUser->position ?? 'Sin posición' }}</div>
+                                        </div>
+                                    @endif
+                                    @if($item->responsible)
+                                        <div>
+                                            <div class="text-xs text-gray-400">Resguardante:</div>
+                                            <div class="font-medium text-pink-400">{{ $item->responsible->name ?? 'N/A' }}</div>
+                                            <div class="text-xs text-pink-300">{{ $item->responsible->position ?? 'Sin posición' }}</div>
+                                        </div>
+                                    @endif
+                                </div>
                             </td>
                             <td class="px-3 py-4 text-center">
                                 @if($item->is_pc)

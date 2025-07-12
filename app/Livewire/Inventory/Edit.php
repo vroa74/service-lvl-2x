@@ -29,6 +29,7 @@ class Edit extends Component
     public $fecha = '';
     public $dir = '';
     public $resguardante = '';
+    public $resguardante_edit = '';
     public $user = '';
     public $is_pc = false;
     public $gpo = '';
@@ -40,13 +41,7 @@ class Edit extends Component
     public $modelo = '';
     public $ns = '';
     public $nombres = '';
-    public $apa = '';
-    public $ama = '';
-    public $gpo_pc_user = '';
-    public $fullname = '';
-    public $software_instalado = '';
-    public $info = '';
-    public $esp = '';
+    public $observaciones = '';
     public $status = false;
 
     // Modal properties
@@ -59,38 +54,49 @@ class Edit extends Component
     public $modalParam1 = null;
 
     protected $rules = [
-        'fecha_inv' => 'nullable|date',
+        'fecha_inv' => 'nullable|date|before_or_equal:today',
         'user_id' => 'nullable|exists:users,id',
         'res_id' => 'nullable|exists:users,id',
-        'fecha' => 'nullable|date',
-        'dir' => 'nullable|string',
-        'resguardante' => 'nullable|string',
-        'user' => 'nullable|string',
+        'fecha' => 'nullable|date|before_or_equal:today',
+        'dir' => 'nullable|string|max:255',
+        'resguardante' => 'nullable|string|max:70',
+        'resguardante_edit' => 'nullable|string|max:255',
+        'user' => 'nullable|string|max:140',
         'is_pc' => 'boolean',
-        'gpo' => 'nullable|string',
-        'disp' => 'nullable|string',
-        'type' => 'nullable|string',
-        'articulo' => 'nullable|string',
-        'ni' => 'nullable|string',
-        'marca' => 'nullable|string',
-        'modelo' => 'nullable|string',
-        'ns' => 'nullable|string',
-        'nombres' => 'nullable|string',
-        'apa' => 'nullable|string',
-        'ama' => 'nullable|string',
-        'gpo_pc_user' => 'nullable|string',
-        'fullname' => 'nullable|string',
-        'software_instalado' => 'nullable|string',
-        'info' => 'nullable|string',
-        'esp' => 'nullable|string',
+        'gpo' => 'nullable|string|max:20',
+        'disp' => 'nullable|string|max:30',
+        'type' => 'nullable|string|max:30',
+        'articulo' => 'nullable|string|max:70',
+        'ni' => 'nullable|string|max:35',
+        'marca' => 'nullable|string|max:50',
+        'modelo' => 'nullable|string|max:50',
+        'ns' => 'nullable|string|max:35',
+        'nombres' => 'nullable|string|max:50',
+        'observaciones' => 'nullable|string|max:1000',
         'status' => 'boolean',
     ];
 
     protected $messages = [
-        'fecha_inv.date' => 'La fecha de inventario debe ser válida',
-        'fecha.date' => 'La fecha debe ser válida',
-        'user_id.exists' => 'El usuario debe ser válido',
-        'res_id.exists' => 'El responsable debe ser un usuario válido',
+        'fecha_inv.date' => 'La fecha de inventario debe ser una fecha válida.',
+        'fecha_inv.before_or_equal' => 'La fecha de inventario no puede ser futura.',
+        'fecha.date' => 'La fecha debe ser una fecha válida.',
+        'fecha.before_or_equal' => 'La fecha no puede ser futura.',
+        'user_id.exists' => 'El usuario seleccionado no existe en la base de datos.',
+        'res_id.exists' => 'El responsable seleccionado no existe en la base de datos.',
+        'dir.max' => 'La dirección no puede tener más de 255 caracteres.',
+        'resguardante.max' => 'El resguardante no puede tener más de 70 caracteres.',
+        'resguardante_edit.max' => 'El campo editar resguardante no puede tener más de 255 caracteres.',
+        'user.max' => 'El usuario no puede tener más de 140 caracteres.',
+        'gpo.max' => 'El grupo no puede tener más de 20 caracteres.',
+        'disp.max' => 'El dispositivo no puede tener más de 30 caracteres.',
+        'type.max' => 'El tipo no puede tener más de 30 caracteres.',
+        'articulo.max' => 'El artículo no puede tener más de 70 caracteres.',
+        'ni.max' => 'El número de inventario no puede tener más de 35 caracteres.',
+        'marca.max' => 'La marca no puede tener más de 50 caracteres.',
+        'modelo.max' => 'El modelo no puede tener más de 50 caracteres.',
+        'ns.max' => 'El número de serie no puede tener más de 35 caracteres.',
+        'nombres.max' => 'Los nombres no pueden tener más de 50 caracteres.',
+        'observaciones.max' => 'Las observaciones no pueden tener más de 1000 caracteres.',
     ];
 
     public function mount($id = null)
@@ -103,15 +109,19 @@ class Edit extends Component
 
     public function loadInventory()
     {
-        $inventory = Inventory::findOrFail($this->inventoryId);
+        $inventory = Inventory::with(['assignedUser', 'responsible'])->findOrFail($this->inventoryId);
         
         $this->fecha_inv = $inventory->fecha_inv;
         $this->user_id = $inventory->user_id;
         $this->res_id = $inventory->res_id;
         $this->fecha = $inventory->fecha;
         $this->dir = $inventory->dir;
-        $this->resguardante = $inventory->resguardante;
-        $this->user = $inventory->user;
+        // Cargar el nombre del resguardante desde la relación si existe
+        $this->resguardante = $inventory->responsible ? $inventory->responsible->name : $inventory->resguardante;
+        // Inicializar el campo de edición del resguardante con el valor del campo resguardante
+        $this->resguardante_edit = $inventory->resguardante;
+        // Cargar el nombre del usuario desde la relación si existe
+        $this->user = $inventory->assignedUser ? $inventory->assignedUser->name : $inventory->user;
         $this->is_pc = $inventory->is_pc;
         $this->gpo = $inventory->gpo;
         $this->disp = $inventory->disp;
@@ -122,13 +132,7 @@ class Edit extends Component
         $this->modelo = $inventory->modelo;
         $this->ns = $inventory->ns;
         $this->nombres = $inventory->nombres;
-        $this->apa = $inventory->apa;
-        $this->ama = $inventory->ama;
-        $this->gpo_pc_user = $inventory->gpo_pc_user;
-        $this->fullname = $inventory->fullname;
-        $this->software_instalado = $inventory->software_instalado;
-        $this->info = $inventory->info;
-        $this->esp = $inventory->esp;
+        $this->observaciones = $inventory->observaciones;
         $this->status = $inventory->status;
     }
 
@@ -136,7 +140,13 @@ class Edit extends Component
     {
         $this->modalType = $type;
         $this->modalParam1 = $param1;
-        $this->modalTitle = "Seleccionar Usuario - Tipo: {$type}";
+        
+        if ($type === 'user') {
+            $this->modalTitle = "Seleccionar Usuario";
+        } elseif ($type === 'responsible') {
+            $this->modalTitle = "Seleccionar Resguardante";
+        }
+        
         $this->showModal = true;
         $this->userSearch = '';
         $this->selectedUserId = null;
@@ -154,6 +164,7 @@ class Edit extends Component
         } elseif ($this->modalType === 'responsible') {
             $this->res_id = $userId;
             $this->resguardante = $userName;
+            $this->resguardante_edit = $userName;
         }
 
         $this->closeModal();
@@ -171,46 +182,103 @@ class Edit extends Component
 
     public function saveInventory()
     {
-        $this->validate();
-
         try {
+            // Validar los datos del formulario
+            $this->validate();
+
+            // Verificar que el inventario existe
             $inventory = Inventory::findOrFail($this->inventoryId);
             
-            $inventory->update([
-                'fecha_inv' => $this->fecha_inv,
-                'user_id' => $this->user_id,
-                'res_id' => $this->res_id,
-                'fecha' => $this->fecha,
-                'dir' => $this->dir,
-                'resguardante' => $this->resguardante,
-                'user' => $this->user,
+            // Preparar los datos para actualizar
+            $updateData = [
+                'fecha_inv' => $this->fecha_inv ?: null,
+                'user_id' => $this->user_id ?: null,
+                'res_id' => $this->res_id ?: null,
+                'fecha' => $this->fecha ?: null,
+                'dir' => $this->dir ?: null,
+                'resguardante' => $this->resguardante_edit ?: null,
+                'user' => $this->user ?: null,
                 'is_pc' => $this->is_pc,
-                'gpo' => $this->gpo,
-                'disp' => $this->disp,
-                'type' => $this->type,
-                'articulo' => $this->articulo,
-                'ni' => $this->ni,
-                'marca' => $this->marca,
-                'modelo' => $this->modelo,
-                'ns' => $this->ns,
-                'nombres' => $this->nombres,
-                'apa' => $this->apa,
-                'ama' => $this->ama,
-                'gpo_pc_user' => $this->gpo_pc_user,
-                'fullname' => $this->fullname,
-                'software_instalado' => $this->software_instalado,
-                'info' => $this->info,
-                'esp' => $this->esp,
+                'gpo' => $this->gpo ?: null,
+                'disp' => $this->disp ?: null,
+                'type' => $this->type ?: null,
+                'articulo' => $this->articulo ?: null,
+                'ni' => $this->ni ?: null,
+                'marca' => $this->marca ?: null,
+                'modelo' => $this->modelo ?: null,
+                'ns' => $this->ns ?: null,
+                'nombres' => $this->nombres ?: null,
+                'observaciones' => $this->observaciones ?: null,
                 'status' => $this->status,
-            ]);
+            ];
+
+            // Actualizar el inventario
+            $inventory->update($updateData);
 
             session()->flash('message', 'Artículo de inventario actualizado correctamente.');
             return redirect()->route('inventario.index');
 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Errores de validación
+            Log::error('Error de validación al actualizar inventario: ' . json_encode($e->errors()));
+            $errorMessages = [];
+            foreach ($e->errors() as $field => $errors) {
+                $errorMessages = array_merge($errorMessages, $errors);
+            }
+            session()->flash('error', 'Error de validación: ' . implode(', ', $errorMessages));
+            
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Inventario no encontrado
+            Log::error('Inventario no encontrado: ' . $this->inventoryId);
+            session()->flash('error', 'Error: El artículo de inventario no fue encontrado.');
+            
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Errores de base de datos
+            Log::error('Error de base de datos al actualizar inventario: ' . $e->getMessage());
+            
+            if (str_contains($e->getMessage(), 'foreign key constraint')) {
+                session()->flash('error', 'Error: El usuario o responsable seleccionado no existe en la base de datos.');
+            } elseif (str_contains($e->getMessage(), 'duplicate entry')) {
+                session()->flash('error', 'Error: Ya existe un artículo con los mismos datos únicos.');
+            } else {
+                session()->flash('error', 'Error de base de datos: ' . $e->getMessage());
+            }
+            
         } catch (\Exception $e) {
-            Log::error('Error al actualizar inventario: ' . $e->getMessage());
-            session()->flash('error', 'Error al actualizar el artículo de inventario.');
+            // Otros errores
+            Log::error('Error inesperado al actualizar inventario: ' . $e->getMessage());
+            session()->flash('error', 'Error inesperado: ' . $e->getMessage());
         }
+    }
+
+    public function updatedArticulo()
+    {
+        $this->validateOnly('articulo');
+    }
+
+    public function updatedFechaInv()
+    {
+        $this->validateOnly('fecha_inv');
+    }
+
+    public function updatedFecha()
+    {
+        $this->validateOnly('fecha');
+    }
+
+    public function updatedResguardanteEdit()
+    {
+        $this->validateOnly('resguardante_edit');
+    }
+
+    public function updatedDir()
+    {
+        $this->validateOnly('dir');
+    }
+
+    public function updatedType()
+    {
+        $this->validateOnly('type');
     }
 
     public function render()

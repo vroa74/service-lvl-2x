@@ -117,6 +117,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     
     Route::resource('inventario', InventoryController::class)->names('inventario');
     Route::get('/inventory-user-inv', [InventoryController::class, 'userinv'])->name('inventory.user-inv');
+    Route::get('/inventory-responsables', [InventoryController::class, 'responsables'])->name('inventory.responsables');
 
     // ========================================================================
     // GESTIÓN DE CARTAS RESPONSIVAS

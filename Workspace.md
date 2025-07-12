@@ -409,6 +409,7 @@ junto al input inserta un boton que cuando se presione verifique que en la tabla
 
 ========================================================================================================
 
+php artisan make:livewire inventory.responsables
 
 
 ========================================================================================================

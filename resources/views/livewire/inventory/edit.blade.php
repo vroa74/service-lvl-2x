@@ -17,77 +17,58 @@
     {{-- ======================= INICIO: Mensajes de éxito y error ======================= --}}
     @if (session()->has('message'))
         <div class="p-4 mb-4 bg-green-600 border border-green-500 rounded-lg">
-            <p class="text-white">{{ session('message') }}</p>
+            <div class="flex items-center justify-between">
+                <p class="text-white font-medium">{{ session('message') }}</p>
+                <button onclick="this.parentElement.parentElement.remove()" class="text-green-200 hover:text-white">
+                    <x-lucide name="x" class="w-5 h-5" />
+                </button>
+            </div>
         </div>
     @endif
 
     @if (session()->has('error'))
         <div class="p-4 mb-4 bg-red-600 border border-red-500 rounded-lg">
-            <p class="text-white">{{ session('error') }}</p>
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-white font-medium">Error al guardar:</p>
+                    <p class="text-red-200 text-sm mt-1">{{ session('error') }}</p>
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()" class="text-red-200 hover:text-white">
+                    <x-lucide name="x" class="w-5 h-5" />
+                </button>
+            </div>
         </div>
     @endif
 
     @if ($errors->any())
         <div class="p-4 mb-4 bg-red-600 border border-red-500 rounded-lg">
-            <ul class="text-white">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-white font-medium">Errores de validación:</p>
+                    <ul class="text-red-200 text-sm mt-1 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                <button onclick="this.parentElement.parentElement.remove()" class="text-red-200 hover:text-white">
+                    <x-lucide name="x" class="w-5 h-5" />
+                </button>
+            </div>
         </div>
     @endif
     {{-- ======================= FIN: Mensajes de éxito y error ======================= --}}
 
     {{-- ======================= INICIO: Formulario de Edición ======================= --}}
     <form wire:submit.prevent="saveInventory" class="p-6 space-y-6">
-        {{-- ======================= INICIO: Información básica ======================= --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <label for="fecha_inv" class="block text-sm font-medium text-gray-300 mb-2">
-                    Fecha de Inventario
-                </label>
-                <input
-                    wire:model="fecha_inv"
-                    type="date"
-                    id="fecha_inv"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                @error('fecha_inv') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="fecha" class="block text-sm font-medium text-gray-300 mb-2">
-                    Fecha
-                </label>
-                <input
-                    wire:model="fecha"
-                    type="date"
-                    id="fecha"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                @error('fecha') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="dir" class="block text-sm font-medium text-gray-300 mb-2">
-                    Dirección/Ubicación
-                </label>
-                <input
-                    wire:model="dir"
-                    type="text"
-                    id="dir"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Dirección o ubicación"
-                >
-                @error('dir') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-        </div>
-        {{-- ======================= FIN: Información básica ======================= --}}
+
 
         {{-- ======================= INICIO: Usuarios ======================= --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <div class="flex items-center gap-2 mb-2">
                     <label for="user" class="block text-sm font-medium text-gray-300">
-                        Usuario
+                        Usuario (user_id)
                     </label>
                     <button
                         type="button"
@@ -104,12 +85,13 @@
                     class="w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-lg text-white placeholder-gray-400 cursor-not-allowed"
                     placeholder="Seleccionar usuario"
                 >
+                @error('user_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                 @error('user') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
             <div>
                 <div class="flex items-center gap-2 mb-2">
                     <label for="resguardante" class="block text-sm font-medium text-gray-300">
-                        Resguardante
+                        Resguardante (res_id)
                     </label>
                     <button
                         type="button"
@@ -126,7 +108,21 @@
                     class="w-full px-3 py-2 bg-gray-600 border border-gray-600 rounded-lg text-white placeholder-gray-400 cursor-not-allowed"
                     placeholder="Seleccionar resguardante"
                 >
+                @error('res_id') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
                 @error('resguardante') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            </div>
+            <div>
+                <label for="resguardante_edit" class="block text-sm font-medium text-gray-300 mb-2">
+                    Nombre del Resguardante
+                </label>
+                <input
+                    wire:model="resguardante_edit"
+                    type="text"
+                    id="resguardante_edit"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Nombre del resguardante"
+                >
+                @error('resguardante_edit') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
         {{-- ======================= FIN: Usuarios ======================= --}}
@@ -135,29 +131,29 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="articulo" class="block text-sm font-medium text-gray-300 mb-2">
-                    Artículo
+                    Artículo <span class="text-red-400">*</span>
                 </label>
                 <input
-                    wire:model="articulo"
+                    wire:model.live="articulo"
                     type="text"
                     id="articulo"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('articulo') border-red-500 @enderror"
                     placeholder="Nombre del artículo"
                 >
-                @error('articulo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                @error('articulo') <span class="text-red-400 text-sm mt-1 block">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label for="type" class="block text-sm font-medium text-gray-300 mb-2">
                     Tipo
                 </label>
                 <input
-                    wire:model="type"
+                    wire:model.live="type"
                     type="text"
                     id="type"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('type') border-red-500 @enderror"
                     placeholder="Tipo de artículo"
                 >
-                @error('type') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                @error('type') <span class="text-red-400 text-sm mt-1 block">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -203,7 +199,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
             <div>
                 <label for="modelo" class="block text-sm font-medium text-gray-300 mb-2">
                     Modelo
@@ -216,19 +212,6 @@
                     placeholder="Modelo del artículo"
                 >
                 @error('modelo') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="nombres" class="block text-sm font-medium text-gray-300 mb-2">
-                    Nombres
-                </label>
-                <input
-                    wire:model="nombres"
-                    type="text"
-                    id="nombres"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Nombres adicionales"
-                >
-                @error('nombres') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
         {{-- ======================= FIN: Información del artículo ======================= --}}
@@ -274,107 +257,22 @@
                 >
                 @error('disp') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
             </div>
-            <div>
-                <label for="gpo_pc_user" class="block text-sm font-medium text-gray-300 mb-2">
-                    Grupo PC Usuario
-                </label>
-                <input
-                    wire:model="gpo_pc_user"
-                    type="text"
-                    id="gpo_pc_user"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Grupo PC usuario"
-                >
-                @error('gpo_pc_user') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
         </div>
         {{-- ======================= FIN: Información de PC ======================= --}}
 
         {{-- ======================= INICIO: Información adicional ======================= --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="apa" class="block text-sm font-medium text-gray-300 mb-2">
-                    APA
-                </label>
-                <input
-                    wire:model="apa"
-                    type="text"
-                    id="apa"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="APA"
-                >
-                @error('apa') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="ama" class="block text-sm font-medium text-gray-300 mb-2">
-                    AMA
-                </label>
-                <input
-                    wire:model="ama"
-                    type="text"
-                    id="ama"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="AMA"
-                >
-                @error('ama') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="fullname" class="block text-sm font-medium text-gray-300 mb-2">
-                    Nombre Completo
-                </label>
-                <input
-                    wire:model="fullname"
-                    type="text"
-                    id="fullname"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Nombre completo"
-                >
-                @error('fullname') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-            <div>
-                <label for="esp" class="block text-sm font-medium text-gray-300 mb-2">
-                    Especificaciones
-                </label>
-                <input
-                    wire:model="esp"
-                    type="text"
-                    id="esp"
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Especificaciones"
-                >
-                @error('esp') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-            </div>
-        </div>
-
         <div>
-            <label for="software_instalado" class="block text-sm font-medium text-gray-300 mb-2">
-                Software Instalado
+            <label for="observaciones" class="block text-sm font-medium text-gray-300 mb-2">
+                Observaciones
             </label>
             <textarea
-                wire:model="software_instalado"
-                id="software_instalado"
+                wire:model="observaciones"
+                id="observaciones"
                 rows="3"
                 class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Software instalado"
+                placeholder="Observaciones adicionales"
             ></textarea>
-            @error('software_instalado') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
-        </div>
-
-        <div>
-            <label for="info" class="block text-sm font-medium text-gray-300 mb-2">
-                Información Adicional
-            </label>
-            <textarea
-                wire:model="info"
-                id="info"
-                rows="3"
-                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Información adicional"
-            ></textarea>
-            @error('info') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+            @error('observaciones') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
@@ -396,8 +294,12 @@
                 Cancelar
             </a>
             <button type="submit"
-                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
-                Guardar Cambios
+                wire:loading.attr="disabled"
+                wire:loading.class="opacity-50 cursor-not-allowed"
+                class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2">
+                <span wire:loading.remove>Guardar Cambios</span>
+                <span wire:loading>Guardando...</span>
+                <div wire:loading class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
             </button>
         </div>
         {{-- ======================= FIN: Botones de acción ======================= --}}

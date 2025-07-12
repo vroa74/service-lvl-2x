@@ -547,19 +547,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('SAAA264566413179'),
         ]);
         
-        User::factory()->create([
-            'name' => 'IVÁN ALEJANDRO ARA ANGULO',
-            'email' => 'RILA@mail.com',
-            'rfc' => 'RILA293889',
-            'curp' => 'RILA293889',
-            'direction' => 'DIRECCIÓN DE ARCHIVO LEGISLATIVO',
-            'position' => 'DIRECTOR',
-            'sex' => 'masculino',
-            'lvl' => '4',
-            'tipo' => 3,
-            'profile_photo_path' => 'profile-photos/00392',
-            'password' => Hash::make('RILA454816049569'),
-        ]);
         
         User::factory()->create([
             'name' => 'SERGIO MANUEL VEGA CARRILLO',

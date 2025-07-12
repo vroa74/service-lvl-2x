@@ -61,8 +61,12 @@ class InventoryController extends Controller
     {
         //
     }
-    public function userinv()     {
+    public function userinv() {
         return view('inventory.user-inv');
+    }
+
+    public function responsables() {
+        return view('inventory.responsables');
     }
 
     

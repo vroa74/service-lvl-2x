@@ -14,15 +14,16 @@ class UserInv extends Component
     protected $listeners = [
         'asignarResguardante',
         'asignacionResguardanteCancelada',
+        'refresh' => '$refresh',
     ];
 
-    public $selectedUserId = null;
     public $resguardanteFilter = '';
 
-    public function selectUser($userId)
+    public function updatedResguardanteFilter()
     {
-        $this->selectedUserId = $userId;
+        $this->resetPage('usersPage');
         $this->resetPage('inventoryPage');
+        $this->emitSelf('refresh'); // Fuerza el refresco del componente
     }
 
     public function render()
@@ -38,12 +39,6 @@ class UserInv extends Component
 
         $inventories = Inventory::query()
             ->with(['assignedUser', 'responsible'])
-            ->when($this->selectedUserId, function ($query) {
-                $query->where(function ($subQuery) {
-                    $subQuery->where('user_id', $this->selectedUserId)
-                             ->orWhere('res_id', $this->selectedUserId);
-                });
-            })
             ->when($this->resguardanteFilter, function ($query) {
                 $valor = strtolower($this->resguardanteFilter);
                 $query->where(function ($subQuery) use ($valor) {

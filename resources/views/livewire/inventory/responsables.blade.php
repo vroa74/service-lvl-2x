@@ -1,4 +1,18 @@
 <div class="p-4">
+    <!-- Mensajes de estado -->
+    @if($mensaje)
+        <div x-data="{ show: true }" 
+             x-show="show" 
+             x-init="setTimeout(() => { show = false; $wire.set('mensaje', ''); $wire.set('tipoMensaje', ''); }, 5000)"
+             class="mb-4 p-4 rounded-lg {{ $tipoMensaje === 'success' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700' }} flex items-center justify-between">
+            <span>{{ $mensaje }}</span>
+            <button @click="show = false; $wire.set('mensaje', ''); $wire.set('tipoMensaje', '')" 
+                    class="ml-4 text-{{ $tipoMensaje === 'success' ? 'green' : 'red' }}-500 hover:text-{{ $tipoMensaje === 'success' ? 'green' : 'red' }}-700 font-bold text-xl">
+                ×
+            </button>
+        </div>
+    @endif
+
     <!-- Acordeón con tabla de filtros (solo vista, sin funcionalidad) -->
     <div x-data="{ open: true }" class="mb-2">
         <div class="bg-gray-800 rounded-3xl overflow-hidden shadow-lg border border-gray-700">
@@ -19,20 +33,46 @@
                                         <label class="text-xs text-pink-200 mb-0.5 text-center w-full">Resguardante</label>
                                         <div class="flex items-center w-full justify-center gap-2">
                                             <input type="text"
+                                                    id="filtromombre"
                                                 placeholder="Buscar..."
                                                 class="w-3/4 max-w-xs px-3 py-1 rounded-full bg-gray-800 border border-pink-400 text-pink-200 placeholder-pink-400 focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm mx-auto"
                                                 style="min-width: 60px;"
-                                                disabled
+                                                wire:model.live="resguardanteFilter"
                                             />
-                                            <button type="button" class="ml-1 px-2 py-1 rounded-lg bg-pink-500 text-white text-xs font-semibold opacity-60 cursor-not-allowed" disabled>Asignar</button>
+                                            <button type="button" 
+                                                    wire:click="asignarUsuario"
+                                                    class="ml-1 px-2 py-1 rounded-lg bg-pink-500 hover:bg-pink-600 text-white text-xs font-semibold transition-colors">
+                                                Asignar
+                                            </button>
                                         </div>
                                         </div>
                                     </td>
-                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-cyan-400 rounded-3xl text-center align-middle text-cyan-300 font-bold text-lg">2</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-cyan-400 rounded-3xl text-center align-middle text-cyan-300 p-0">
+                                    <div class="flex flex-col justify-center items-center h-full w-full px-2">
+                                        <label class="text-xs text-cyan-200 mb-1 text-center w-full">Filtro Usuario</label>
+                                        <div class="flex items-center justify-center gap-2">
+                                            <input type="checkbox" 
+                                                   wire:model.live="filtroConUsuario"
+                                                   class="w-4 h-4 text-cyan-600 bg-gray-800 border-cyan-400 rounded focus:ring-cyan-500 focus:ring-2">
+                                            <span class="text-xs text-cyan-200">
+                                                {{ $filtroConUsuario ? 'Con Usuario' : 'Sin Usuario' }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="w-1/6 h-16 bg-gray-900 border-2 border-yellow-400 rounded-3xl text-center align-middle text-yellow-300 font-bold text-lg">3</td>
                                 <td class="w-1/6 h-16 bg-gray-900 border-2 border-green-400 rounded-3xl text-center align-middle text-green-300 font-bold text-lg">4</td>
                                 <td class="w-1/6 h-16 bg-gray-900 border-2 border-blue-400 rounded-3xl text-center align-middle text-blue-300 font-bold text-lg">5</td>
-                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-red-400 rounded-3xl text-center align-middle text-red-300 font-bold text-lg">6</td>
+                                <td class="w-1/6 h-16 bg-gray-900 border-2 border-red-400 rounded-3xl text-center align-middle text-red-300 p-0">
+                                    <div class="flex flex-col justify-center items-center h-full w-full px-1">
+                                        <div class="text-xs text-red-200 font-bold">
+                                            {{ $inventories->count() }} / {{ $totalAbsoluto }}
+                                        </div>
+                                        <div class="text-xs text-red-300 mt-1 truncate w-full text-center" title="{{ $querySQL }}">
+                                            {{ Str::limit($querySQL, 20) }}
+                                        </div>
+                                    </div>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -201,33 +241,3 @@
     </div>
 </div>
 
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        window.livewire.on('swal:confirm-asignacion-resguardante', function (data) {
-            Swal.fire({
-                title: '¿Asignar resguardante?',
-                text: 'Se actualizarán los campos user_id y res_id de los registros filtrados en inventario. ¿Deseas continuar?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, aplicar cambios',
-                cancelButtonText: 'No, cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.livewire.emit('asignarResguardante');
-                } else {
-                    window.livewire.emit('asignacionResguardanteCancelada');
-                }
-            });
-        });
-        window.livewire.on('swal:mensaje', function (data) {
-            Swal.fire({
-                title: data.titulo,
-                text: data.mensaje,
-                icon: data.tipo || 'info',
-                confirmButtonText: 'OK'
-            });
-        });
-    });
-</script>
-@endpush 
