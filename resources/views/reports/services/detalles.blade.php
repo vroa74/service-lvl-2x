@@ -5,18 +5,18 @@
     <title>Reporte Detallado de Servicio</title>
     <style>
         @page {
-            margin: 5cm 0.5cm 4cm 0.5cm;
+            margin: 4cm 0.5cm 2cm 0.5cm;
         }
         #header {
             position: fixed;
-            top: -4.5cm;
+            top: -4cm;
             left: 0;
             width: 100%;
             text-align: center;
             z-index: 1000;
-            margin: 0;
-            padding: 2px 0;
-            /* background-color: #5b6af0; */
+            margin-top: -0.3cm;
+            padding: 2px 0; 
+            background-color: #5b6af0; 
         }
 
         body {
@@ -27,30 +27,18 @@
             background-color: #01fc72;
         }
         #footer {
-    position: fixed;
-    bottom: 0cm;
-    height: 3cm;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 20px;
-    background-color: rgb(238, 198, 21);
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    z-index: 999;
-}
-
-        /* #footer {
-            position: fixed;            
-            bottom: -4cm;
-            width: 100%;            
+            position: fixed;
+            bottom: -1.5cm;
+            margin-bottom: 0.3cm;
+            /* height: 3cm; */
+            width: 100%; 
             text-align: center;
             padding: 10px 0;
-            /* border: 1px solid #000; */
             font-size: 20px;
-            /* color: #fff; */
             background-color: rgb(238, 198, 21);
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        } */
+            z-index: 999;
+        }
         .section {
             margin: 2px 0;
             padding: 15px;
@@ -198,7 +186,17 @@
             vertical-align: middle;
             padding: 2px;
         }
-
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.bloque{
+    height: 1cm;
+    width: 2cm;
+    margin: 0.2cm;
+    background-color: #d0ff00;
+}
     </style>
 </head>
 <body>
@@ -223,103 +221,17 @@
     </div>
 
     <!-- Detalles del Servicio -->
-    <div class="section">
-        {{-- <div class="title">DETALLES DEL SERVICIO</div> --}}
-        @if($service->mantenimiento && !empty(trim($service->mantenimiento)))
-        <table>
-            <tr>
-                <td><strong>Mantenimiento:</strong></td>
-                <td>{{ $service->mantenimiento }}</td>
-            </tr>
-        </table>
-        @endif
-    </div>
-
-    <!-- Fotos del Servicio -->
-    <div class="section">
-        <div class="title">FOTOS DEL SERVICIO</div>
-        @if($service->photos && $service->photos->count() > 0)
-            {{-- <p style="margin-bottom: 15px; color: #666; font-weight: bold;">Total de fotos: {{ $service->photos->count() }}</p> --}}
-            <div class="photo-grid">
-                @foreach($service->photos->chunk(2) as $photoRow)
-                <div class="photo-row">
-                    @foreach($photoRow as $photo)
-                    <div class="photo-card">
-                        @php
-                            // Enfoque híbrido: base64 para imágenes pequeñas, URL para grandes
-                            $photoPath = storage_path('app/public/' . $photo->photo_path);
-                            $photoBase64 = '';
-                            $useBase64 = false;
-                            
-                            if (file_exists($photoPath)) {
-                                $fileSize = filesize($photoPath);
-                                // Solo usar base64 para imágenes menores a 200KB
-                                if ($fileSize <= 200 * 1024) {
-                                    try {
-                                        $photoBase64 = base64_encode(file_get_contents($photoPath));
-                                        $imageInfo = getimagesize($photoPath);
-                                        $mimeType = $imageInfo['mime'] ?? 'image/jpeg';
-                                        $useBase64 = true;
-                                    } catch (Exception $e) {
-                                        $useBase64 = false;
-                                    }
-                                }
-                            }
-                            
-                            $photoUrl = asset('storage/' . $photo->photo_path);
-                        @endphp
-                        @if($useBase64 && $photoBase64)
-                            <img src="data:{{ $mimeType }};base64,{{ $photoBase64 }}" 
-                                 alt="Foto del servicio" 
-                                 class="photo-image">
-                        @elseif(file_exists($photoPath))
-                            <img src="{{ $photoUrl }}" 
-                                 alt="Foto del servicio" 
-                                 class="photo-image"
-                                 style="max-width: 100%; height: auto;">
-                        @else
-                            <div class="photo-image" style="background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;">
-                                Imagen no disponible
-                            </div>
-                        @endif
-                        <div class="photo-details">
-                            <div class="photo-description">
-                                @if($photo->description)
-                                    {{ $photo->description }}
-                                @else
-                                    <span style="color: #999; font-style: italic;">Sin descripción</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    @if($photoRow->count() == 1)
-                    <div class="photo-card" style="border: none; background: none; width: 48%;"></div>
-                    @endif
-                </div>
-                @endforeach
-            </div>
-        @else
-            <div class="no-photos">
-                <p>No hay fotos registradas para este servicio.</p>
-            </div>
-        @endif
-    </div>
 
 
 
-    <div id="footer" style="border: none !important;">
-
-
+    <div id="footer"
         <div style="text-align: right; margin-bottom: 5px;">
             <p class="text-5px" style="color: #313131;">by VROA</p>
         </div>
-    
-        @php
+            @php
             $footImagePath = public_path('ple/foot.png');
             $footImageBase64 = file_exists($footImagePath) ? base64_encode(file_get_contents($footImagePath)) : '';
-        @endphp
-    
+        @endphp    
         @if($footImageBase64)
             <img    src="data:image/png;base64,{{ $footImageBase64 }}" 
             alt="Pie de página" 
@@ -328,5 +240,91 @@
     
     </div>
 
+    <div class="container">
+        <div class="section">
+            {{-- <div class="title">DETALLES DEL SERVICIO</div> --}}
+            @if($service->mantenimiento && !empty(trim($service->mantenimiento)))
+            <table>
+                <tr>
+                    <td><strong>Mantenimiento:</strong></td>
+                    <td>{{ $service->mantenimiento }}</td>
+                </tr>
+            </table>
+            @endif
+        </div>
+    
+        <!-- Fotos del Servicio -->
+        <div class="section">
+            <div class="title">FOTOS DEL SERVICIO</div>
+            @if($service->photos && $service->photos->count() > 0)
+                {{-- <p style="margin-bottom: 15px; color: #666; font-weight: bold;">Total de fotos: {{ $service->photos->count() }}</p> --}}
+                <div class="photo-grid">
+                    @foreach($service->photos->chunk(2) as $photoRow)
+                    <div class="photo-row">
+                        @foreach($photoRow as $photo)
+                        <div class="photo-card">
+                            @php
+                                // Enfoque híbrido: base64 para imágenes pequeñas, URL para grandes
+                                $photoPath = storage_path('app/public/' . $photo->photo_path);
+                                $photoBase64 = '';
+                                $useBase64 = false;
+                                
+                                if (file_exists($photoPath)) {
+                                    $fileSize = filesize($photoPath);
+                                    // Solo usar base64 para imágenes menores a 200KB
+                                    if ($fileSize <= 200 * 1024) {
+                                        try {
+                                            $photoBase64 = base64_encode(file_get_contents($photoPath));
+                                            $imageInfo = getimagesize($photoPath);
+                                            $mimeType = $imageInfo['mime'] ?? 'image/jpeg';
+                                            $useBase64 = true;
+                                        } catch (Exception $e) {
+                                            $useBase64 = false;
+                                        }
+                                    }
+                                }
+                                
+                                $photoUrl = asset('storage/' . $photo->photo_path);
+                            @endphp
+                            @if($useBase64 && $photoBase64)
+                                <img src="data:{{ $mimeType }};base64,{{ $photoBase64 }}" 
+                                     alt="Foto del servicio" 
+                                     class="photo-image">
+                            @elseif(file_exists($photoPath))
+                                <img src="{{ $photoUrl }}" 
+                                     alt="Foto del servicio" 
+                                     class="photo-image"
+                                     style="max-width: 100%; height: auto;">
+                            @else
+                                <div class="photo-image" style="background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;">
+                                    Imagen no disponible
+                                </div>
+                            @endif
+                            <div class="photo-details">
+                                <div class="photo-description">
+                                    @if($photo->description)
+                                        {{ $photo->description }}
+                                    @else
+                                        <span style="color: #999; font-style: italic;">Sin descripción</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @if($photoRow->count() == 1)
+                        <div class="photo-card" style="border: none; background: none; width: 48%;"></div>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="no-photos">
+                    <p>No hay fotos registradas para este servicio.</p>
+                </div>
+            @endif
+        </div>
+    
+    </div>
+    
 </body>
 </html> 
