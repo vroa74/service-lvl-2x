@@ -166,19 +166,20 @@
                                     >
                                         <x-lucide name="edit" class="w-4 h-4" />
                                     </button>
-                                    {{-- <button 
-                                        wire:click="toggleStatus({{ $service->id }})"
-                                        class="text-yellow-400 hover:text-yellow-300 transition-colors"
-                                        title="{{ $service->status ? 'Desactivar' : 'Activar' }}"
-                                    >
-                                        <x-lucide name="toggle-left" class="w-4 h-4" />
-                                    </button> --}}
                                     <button 
                                         wire:click="generateIndividualServiceReport({{ $service->id }})"
                                         class="text-orange-400 hover:text-red-500 transition-colors"
                                         title="Generar el Reporte del Servicio">
                                         <i class="ri-printer-line"></i>
                                     </button>
+                                    @if($service->photos && $service->photos->count() > 0)
+                                    <button 
+                                        wire:click="generateDetailsServiceReport({{ $service->id }})"
+                                        class="text-blue-400 hover:text-blue-300 transition-colors"
+                                        title="Generar Reporte Detallado">
+                                        <i class="ri-printer-line"></i>
+                                    </button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -223,15 +224,6 @@
                             <option value="por_usuario">Por Usuario</option>
                             <option value="por_tipo">Por Tipo de Servicio</option>
                             <option value="por_fecha">Por Fecha</option>
-                        </select>
-                    </div>
-
-                    <!-- Plantilla de Reporte -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Plantilla de Reporte</label>
-                        <select wire:model.defer="reportTemplate" wire:blur="$refresh" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="template1">Plantilla 1 (Clásica)</option>
-                            <option value="template2">Plantilla 2 (Moderno)</option>
                         </select>
                     </div>
 

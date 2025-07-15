@@ -398,7 +398,7 @@
                 <!-- Contenedor de fotos -->
                 <div class="border border-gray-500 rounded-xl bg-gray-900 px-2 py-3 mb-4">
                     @if(count($servicePhotos) > 0)
-                        <div class="grid grid-cols-3 gap-2 mb-3">
+                        <div class="grid grid-cols-3 gap-2 mb-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
                             @foreach($servicePhotos as $index => $photo)
                                 <div class="flex flex-col items-center w-full h-[140px] bg-gray-800 border border-gray-600 rounded-lg p-2 relative" wire:dblclick="openPhotoForm({{ $index }})">
                                     <img src="{{ $photo['preview'] }}" alt="Foto del servicio"

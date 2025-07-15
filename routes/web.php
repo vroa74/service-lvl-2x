@@ -6,7 +6,6 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\CartasCesponsivasController;
 use App\Http\Controllers\CartasResponsivaController;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,63 +30,14 @@ Route::get('/', function () {
 // RUTAS DE REPORTES PDF (PÚBLICAS PARA PRUEBAS)
 // ============================================================================
 
-// Ruta para acceder a reportes temporales
-Route::get('/storage/temp/{filename}', function ($filename) {
-    $path = storage_path('app/public/temp/' . $filename);
-    
-    if (file_exists($path)) {
-        return response()->file($path, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $filename . '"'
-        ]);
-    }
-    
-    abort(404, 'Archivo no encontrado');
-})->name('temp.report');
-
 // Reporte individual de servicio
-Route::get('/service-pdf/{id}', function ($id) {
-    try {
-        $service = \App\Models\Service::with(['solicitante', 'efectuo', 'vobo', 'capturo'])->findOrFail($id);
-        
-        $data = [
-            'service' => $service,
-            'title' => 'Reporte Individual de Servicio',
-            'generatedAt' => now()->format('d/m/Y H:i:s'),
-        ];
-        
-        $pdf = PDF::loadView('reports.services.individual', $data)
-                  ->setPaper('letter', 'portrait');
-        
-        return $pdf->stream('reporte_servicio_' . preg_replace('/[^A-Za-z0-9_-]/', '_', $service->id_s) . '.pdf');
-        
-    } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::error('Error generando PDF para servicio ' . $id . ': ' . $e->getMessage());
-        abort(500, 'Error al generar el PDF. Por favor, revise los logs.');
-    }
-})->name('service.pdf');
+Route::get('/service-pdf/{id}', [ServiceController::class, 'generatePdf'])->name('service.pdf');
+
+// Reporte detallado de servicio
+Route::get('/service-details-pdf/{id}', [ServiceController::class, 'generateDetailsPdf'])->name('service.details.pdf');
 
 // Reporte individual de inventario
-Route::get('/inventory-pdf/{id}', function ($id) {
-    try {
-        $inventory = \App\Models\Inventory::with(['assignedUser', 'responsible'])->findOrFail($id);
-        
-        $data = [
-            'inventory' => $inventory,
-            'title' => 'Reporte Individual de Inventario',
-            'generatedAt' => now()->format('d/m/Y H:i:s'),
-        ];
-        
-        $pdf = PDF::loadView('reports.inventory.individual', $data)
-                  ->setPaper('letter', 'portrait');
-        
-        return $pdf->stream('reporte_inventario_' . $inventory->id . '.pdf');
-        
-    } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::error('Error generando PDF para inventario ' . $id . ': ' . $e->getMessage());
-        abort(500, 'Error al generar el PDF. Por favor, revise los logs.');
-    }
-})->name('inventory.pdf');
+Route::get('/inventory-pdf/{id}', [InventoryController::class, 'generatePdf'])->name('inventory.pdf');
 
 // ============================================================================
 // RUTAS PROTEGIDAS (REQUIEREN AUTENTICACIÓN)

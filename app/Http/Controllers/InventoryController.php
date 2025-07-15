@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Inventory;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class InventoryController extends Controller
 {
@@ -61,6 +64,7 @@ class InventoryController extends Controller
     {
         //
     }
+    
     public function userinv() {
         return view('inventory.user-inv');
     }
@@ -69,5 +73,28 @@ class InventoryController extends Controller
         return view('inventory.responsables');
     }
 
-    
+    /**
+     * Generate PDF for individual inventory
+     */
+    public function generatePdf($id)
+    {
+        try {
+            $inventory = Inventory::with(['assignedUser', 'responsible'])->findOrFail($id);
+            
+            $data = [
+                'inventory' => $inventory,
+                'title' => 'Reporte Individual de Inventario',
+                'generatedAt' => now()->format('d/m/Y H:i:s'),
+            ];
+            
+            $pdf = PDF::loadView('reports.inventory.individual', $data)
+                      ->setPaper('letter', 'portrait');
+            
+            return $pdf->stream('reporte_inventario_' . $inventory->id . '.pdf');
+            
+        } catch (\Exception $e) {
+            Log::error('Error generando PDF para inventario ' . $id . ': ' . $e->getMessage());
+            abort(500, 'Error al generar el PDF. Por favor, revise los logs.');
+        }
+    }
 }

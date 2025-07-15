@@ -22,7 +22,6 @@ class Index extends Component
     // Propiedades para reportes
     public $showReportModal = false;
     public $reportType = '';
-    public $reportTemplate = 'template1'; // Nueva propiedad para seleccionar plantilla
     public $reportDateFrom = '';
     public $reportDateTo = '';
     public $reportUser = '';
@@ -117,7 +116,6 @@ class Index extends Component
     public function openReportModal($type = 'general')
     {
         $this->reportType = $type;
-        $this->reportTemplate = 'template1'; // Plantilla por defecto
         $this->reportDateFrom = now()->startOfMonth()->format('Y-m-d');
         $this->reportDateTo = now()->format('Y-m-d');
         $this->reportUser = '';
@@ -129,7 +127,6 @@ class Index extends Component
     {
         $this->showReportModal = false;
         $this->reportType = '';
-        $this->reportTemplate = 'template1';
         $this->reportDateFrom = '';
         $this->reportDateTo = '';
         $this->reportUser = '';
@@ -139,7 +136,7 @@ class Index extends Component
     public function generateReport()
     {
         try {
-            $query = Service::with(['solicitante', 'efectuo', 'vobo', 'capturo', 'photos']);
+            $query = Service::with(['solicitante', 'efectuo', 'vobo', 'capturo']);
 
             // Aplicar filtros según el tipo de reporte
             if ($this->reportDateFrom && $this->reportDateTo) {
@@ -161,7 +158,7 @@ class Index extends Component
 
             $services = $query->orderBy('F_serv', 'desc')->get();
 
-            // Generar el reporte según el tipo y plantilla
+            // Generar el reporte según el tipo
             switch ($this->reportType) {
                 case 'general':
                     $filename = $this->generateGeneralReport($services);
@@ -216,6 +213,29 @@ class Index extends Component
         }
     }
 
+    // Método para generar reporte detallado de servicio
+    public function generateDetailsServiceReport($serviceId)
+    {
+        try {
+            // Buscar el servicio y actualizar los campos
+            $service = Service::find($serviceId);
+            if ($service) {
+                $service->update([
+                    'impressions' => true,
+                    'status' => true
+                ]);
+            }
+            
+            // Emitir evento inmediatamente para abrir el PDF en nueva pestaña
+            $this->dispatch('openPdfInNewTab', url: route('service.details.pdf', $serviceId));
+            
+            session()->flash('message', 'Reporte detallado del servicio generado correctamente. Los campos de impresión y estado han sido actualizados.');
+            
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al generar el reporte detallado del servicio: ' . $e->getMessage());
+        }
+    }
+
     private function generateGeneralReport($services)
     {
         $data = [
@@ -225,14 +245,10 @@ class Index extends Component
             'totalServices' => $services->count(),
             'activeServices' => $services->where('status', true)->count(),
             'inactiveServices' => $services->where('status', false)->count(),
-            'template' => $this->reportTemplate,
         ];
 
-        // Seleccionar plantilla según la opción elegida
-        $template = $this->reportTemplate === 'template2' ? 'reports.services.general_template2' : 'reports.services.general';
-        
-        $pdf = PDF::loadView($template, $data);
-        $filename = 'reporte_general_servicios_' . $this->reportTemplate . '_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.services.general', $data);
+        $filename = 'reporte_general_servicios_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -252,14 +268,10 @@ class Index extends Component
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
             'userServices' => $userServices,
             'totalServices' => $services->count(),
-            'template' => $this->reportTemplate,
         ];
 
-        // Seleccionar plantilla según la opción elegida
-        $template = $this->reportTemplate === 'template2' ? 'reports.services.by_user_template2' : 'reports.services.by_user';
-        
-        $pdf = PDF::loadView($template, $data);
-        $filename = 'reporte_servicios_por_usuario_' . $this->reportTemplate . '_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.services.by_user', $data);
+        $filename = 'reporte_servicios_por_usuario_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -287,14 +299,10 @@ class Index extends Component
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
             'typeStats' => $typeStats,
             'totalServices' => $services->count(),
-            'template' => $this->reportTemplate,
         ];
 
-        // Seleccionar plantilla según la opción elegida
-        $template = $this->reportTemplate === 'template2' ? 'reports.services.by_type_template2' : 'reports.services.by_type';
-        
-        $pdf = PDF::loadView($template, $data);
-        $filename = 'reporte_servicios_por_tipo_' . $this->reportTemplate . '_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.services.by_type', $data);
+        $filename = 'reporte_servicios_por_tipo_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -317,14 +325,10 @@ class Index extends Component
             'dateRange' => $this->reportDateFrom . ' - ' . $this->reportDateTo,
             'dateStats' => $dateStats,
             'totalServices' => $services->count(),
-            'template' => $this->reportTemplate,
         ];
 
-        // Seleccionar plantilla según la opción elegida
-        $template = $this->reportTemplate === 'template2' ? 'reports.services.by_date_template2' : 'reports.services.by_date';
-        
-        $pdf = PDF::loadView($template, $data);
-        $filename = 'reporte_servicios_por_fecha_' . $this->reportTemplate . '_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+        $pdf = PDF::loadView('reports.services.by_date', $data);
+        $filename = 'reporte_servicios_por_fecha_' . now()->format('Y-m-d_H-i-s') . '.pdf';
         
         // Guardar temporalmente el PDF
         $path = storage_path('app/public/temp/' . $filename);
@@ -372,7 +376,7 @@ class Index extends Component
     public function render()
     {
         $services = Service::query()
-            ->with(['solicitante', 'efectuo', 'vobo', 'capturo'])
+            ->with(['solicitante', 'efectuo', 'vobo', 'capturo', 'photos'])
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('id_s', 'like', '%' . $this->search . '%')

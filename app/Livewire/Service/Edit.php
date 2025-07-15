@@ -242,24 +242,50 @@ class Edit extends Component
 
     public function addPhoto()
     {
-        $this->validate([
-            'modalPhoto' => 'required|image|max:2048',
-            'modalPhotoDescription' => 'nullable|string|max:255',
-        ]);
+        try {
+            $this->validate([
+                'modalPhoto' => 'required|image|max:2048',
+                'modalPhotoDescription' => 'nullable|string|max:255',
+            ]);
 
-        $path = $this->modalPhoto->store('service_photos', 'public');
-        
-        // Track temporary photo for cleanup if service update fails
-        $this->temporaryPhotos[] = $path;
-        
-        $this->servicePhotos[] = [
-            'path' => $path,
-            'description' => $this->modalPhotoDescription,
-            'preview' => $this->modalPhotoPreview
-        ];
+            Log::info('Iniciando addPhoto', [
+                'modalPhoto' => $this->modalPhoto ? 'present' : 'null',
+                'modalPhotoDescription' => $this->modalPhotoDescription,
+                'modalPhotoPreview' => $this->modalPhotoPreview
+            ]);
 
-        $this->closePhotoForm();
-        session()->flash('message', 'Foto agregada correctamente.');
+            $path = $this->modalPhoto->store('service_photos', 'public');
+            
+            // Track temporary photo for cleanup if service update fails
+            $this->temporaryPhotos[] = $path;
+            
+            $photoData = [
+                'path' => $path,
+                'description' => $this->modalPhotoDescription,
+                'preview' => $this->modalPhotoPreview
+            ];
+            
+            $this->servicePhotos[] = $photoData;
+
+            // Log para debugging
+            Log::info('Foto agregada al array exitosamente', [
+                'path' => $path,
+                'description' => $this->modalPhotoDescription,
+                'totalPhotos' => count($this->servicePhotos),
+                'allPhotos' => $this->servicePhotos,
+                'photoData' => $photoData
+            ]);
+
+            $this->closePhotoForm();
+            session()->flash('message', 'Foto agregada correctamente.');
+            
+        } catch (\Exception $e) {
+            Log::error('Error en addPhoto', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
     }
 
     public function deletePhoto($index)
@@ -267,14 +293,11 @@ class Edit extends Component
         if (isset($this->servicePhotos[$index])) {
             $photo = $this->servicePhotos[$index];
             
-            // Si la foto tiene ID, eliminarla de la base de datos
-            if (isset($photo['id'])) {
-                $this->deletePhotoFromDatabase($photo['id']);
-            }
-            
-            // Eliminar archivo físico si existe
-            if (isset($photo['path']) && Storage::disk('public')->exists($photo['path'])) {
-                Storage::disk('public')->delete($photo['path']);
+            // Eliminar archivo físico si es una foto temporal
+            if (isset($photo['path']) && !isset($photo['id'])) {
+                if (Storage::disk('public')->exists($photo['path'])) {
+                    Storage::disk('public')->delete($photo['path']);
+                }
                 // Remove from temporary photos if it's there
                 $key = array_search($photo['path'], $this->temporaryPhotos);
                 if ($key !== false) {
@@ -284,6 +307,8 @@ class Edit extends Component
             
             unset($this->servicePhotos[$index]);
             $this->servicePhotos = array_values($this->servicePhotos); // Reindexar array
+            
+            Log::info('Foto eliminada del array', ['index' => $index, 'photo' => $photo]);
         }
     }
 
@@ -306,10 +331,13 @@ class Edit extends Component
                     'modalPhoto' => 'required|image|max:2048',
                 ]);
                 
-                // Delete old photo
+                // Delete old photo file if it's a temporary one
                 $oldPhoto = $this->servicePhotos[$this->editingPhotoIndex];
-                if (isset($oldPhoto['path']) && Storage::disk('public')->exists($oldPhoto['path'])) {
-                    Storage::disk('public')->delete($oldPhoto['path']);
+                if (isset($oldPhoto['path']) && !isset($oldPhoto['id'])) {
+                    // Solo eliminar si es una foto temporal (nueva)
+                    if (Storage::disk('public')->exists($oldPhoto['path'])) {
+                        Storage::disk('public')->delete($oldPhoto['path']);
+                    }
                     // Remove from temporary photos if it's there
                     $key = array_search($oldPhoto['path'], $this->temporaryPhotos);
                     if ($key !== false) {
@@ -328,11 +356,17 @@ class Edit extends Component
                 // If this was an existing photo, mark it as modified
                 if (isset($oldPhoto['id'])) {
                     $this->servicePhotos[$this->editingPhotoIndex]['modified'] = true;
+                    Log::info('Foto existente marcada como modificada', ['id' => $oldPhoto['id'], 'newPath' => $newPath]);
                 }
             }
             
             // Update description
             $this->servicePhotos[$this->editingPhotoIndex]['description'] = $this->modalPhotoDescription;
+            
+            Log::info('Descripción de foto actualizada', [
+                'index' => $this->editingPhotoIndex,
+                'description' => $this->modalPhotoDescription
+            ]);
             
             $this->editingPhotoIndex = null;
             $this->showPhotoForm = false;
@@ -463,6 +497,34 @@ class Edit extends Component
         $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
     }
 
+    public function testSavePhotos()
+    {
+        Log::info('=== PRUEBA DE GUARDADO DE FOTOS ===');
+        Log::info('Fotos en el array:', $this->servicePhotos);
+        
+        // Crear una foto de prueba
+        $testPhoto = [
+            'path' => 'test_photo_path_' . time() . '.jpg',
+            'description' => 'Foto de prueba ' . now()->format('H:i:s'),
+            'preview' => 'test_preview.jpg'
+        ];
+        
+        $this->servicePhotos[] = $testPhoto;
+        
+        Log::info('Foto de prueba agregada:', $testPhoto);
+        Log::info('Total de fotos después de agregar:', count($this->servicePhotos));
+        Log::info('Array completo de fotos:', $this->servicePhotos);
+        
+        // Verificar si hay fotos existentes en BD
+        $service = Service::find($this->serviceId);
+        if ($service) {
+            $dbPhotos = $service->photos;
+            Log::info('Fotos existentes en BD:', $dbPhotos->toArray());
+        }
+        
+        session()->flash('message', 'Prueba de fotos ejecutada. Revisa los logs.');
+    }
+
     public function openUserModal($type, $param1 = null, $param2 = null, $param3 = null, $param4 = null)
     {
         $this->modalType = $type;
@@ -582,6 +644,13 @@ class Edit extends Component
         }
 
         try {
+            // Log para debugging
+            Log::info('Iniciando actualización de servicio', [
+                'serviceId' => $this->serviceId,
+                'photosCount' => count($this->servicePhotos),
+                'photos' => $this->servicePhotos
+            ]);
+
             // Actualizar el servicio
             $service = Service::findOrFail($this->serviceId);
             $service->update([
@@ -610,30 +679,89 @@ class Edit extends Component
                 'impressions' => $this->impressions,
             ]);
 
-            // Guardar las nuevas fotos del servicio
+            // Procesar fotos del servicio
+            Log::info('Iniciando procesamiento de fotos', [
+                'servicePhotos' => $this->servicePhotos,
+                'count' => count($this->servicePhotos)
+            ]);
+            
+            // Obtener IDs de fotos existentes en el array actual
+            $currentPhotoIds = [];
             foreach ($this->servicePhotos as $photoData) {
+                if (isset($photoData['id'])) {
+                    $currentPhotoIds[] = $photoData['id'];
+                }
+            }
+            
+            // Eliminar fotos que ya no están en el array (solo las que existían en BD)
+            $existingPhotos = ServicePhoto::where('service_id', $service->id)->get();
+            foreach ($existingPhotos as $existingPhoto) {
+                if (!in_array($existingPhoto->id, $currentPhotoIds)) {
+                    Log::info('Eliminando foto existente que ya no está en el array', ['id' => $existingPhoto->id]);
+                    // Eliminar archivo físico
+                    if (Storage::disk('public')->exists($existingPhoto->photo_path)) {
+                        Storage::disk('public')->delete($existingPhoto->photo_path);
+                    }
+                    $existingPhoto->delete();
+                }
+            }
+            
+            // Procesar fotos del array
+            $newPhotosCreated = 0;
+            $existingPhotosUpdated = 0;
+            
+            foreach ($this->servicePhotos as $index => $photoData) {
+                Log::info("Procesando foto {$index}", $photoData);
+                
                 if (!isset($photoData['id'])) {
                     // Es una nueva foto
-                    ServicePhoto::create([
-                        'service_id' => $service->id,
-                        'photo_path' => $photoData['path'],
-                        'description' => $photoData['description'],
-                    ]);
+                    try {
+                        $newPhoto = ServicePhoto::create([
+                            'service_id' => $service->id,
+                            'photo_path' => $photoData['path'],
+                            'description' => $photoData['description'] ?? '',
+                        ]);
+                        $newPhotosCreated++;
+                        Log::info('Nueva foto creada exitosamente', ['id' => $newPhoto->id, 'path' => $photoData['path']]);
+                    } catch (\Exception $e) {
+                        Log::error('Error creando nueva foto', [
+                            'error' => $e->getMessage(),
+                            'photoData' => $photoData
+                        ]);
+                    }
                 } else {
-                    // Actualizar descripción de foto existente o foto modificada
-                    $existingPhoto = ServicePhoto::find($photoData['id']);
-                    if ($existingPhoto) {
-                        $updateData = ['description' => $photoData['description']];
-                        
-                        // If photo was modified (new image uploaded), update the path
-                        if (isset($photoData['modified']) && $photoData['modified']) {
-                            $updateData['photo_path'] = $photoData['path'];
+                    // Es una foto existente
+                    try {
+                        $existingPhoto = ServicePhoto::find($photoData['id']);
+                        if ($existingPhoto) {
+                            $updateData = [
+                                'description' => $photoData['description'] ?? ''
+                            ];
+                            
+                            // Si la foto fue modificada (nueva imagen), actualizar también el path
+                            if (isset($photoData['modified']) && $photoData['modified']) {
+                                $updateData['photo_path'] = $photoData['path'];
+                                Log::info('Actualizando imagen de foto existente', ['id' => $photoData['id'], 'newPath' => $photoData['path']]);
+                            }
+                            
+                            $existingPhoto->update($updateData);
+                            $existingPhotosUpdated++;
+                            Log::info('Foto existente actualizada', ['id' => $photoData['id']]);
                         }
-                        
-                        $existingPhoto->update($updateData);
+                    } catch (\Exception $e) {
+                        Log::error('Error actualizando foto existente', [
+                            'error' => $e->getMessage(),
+                            'photoData' => $photoData
+                        ]);
                     }
                 }
             }
+            
+            Log::info('Resumen de procesamiento de fotos', [
+                'newPhotosCreated' => $newPhotosCreated,
+                'existingPhotosUpdated' => $existingPhotosUpdated,
+                'totalProcessed' => count($this->servicePhotos)
+            ]);
 
             // Clear temporary photos tracking since service was updated successfully
             $this->temporaryPhotos = [];
@@ -644,6 +772,10 @@ class Edit extends Component
             return redirect()->route('servicios.index');
         } catch (\Exception $e) {
             // If service update fails, cleanup temporary photos
+            Log::error('Error al actualizar servicio', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             $this->cleanupTemporaryPhotos();
             throw $e;
         }
@@ -651,27 +783,42 @@ class Edit extends Component
 
     public function cleanupTemporaryPhotos()
     {
+        // SOLO limpiar fotos temporales que no se guardaron exitosamente
+        // NO eliminar fotos que ya están en el array servicePhotos
         foreach ($this->temporaryPhotos as $photoPath) {
-            if (Storage::disk('public')->exists($photoPath)) {
+            // Verificar si esta foto ya está en servicePhotos
+            $isInServicePhotos = false;
+            foreach ($this->servicePhotos as $photoData) {
+                if (isset($photoData['path']) && $photoData['path'] === $photoPath) {
+                    $isInServicePhotos = true;
+                    break;
+                }
+            }
+            
+            // Solo eliminar si no está en servicePhotos
+            if (!$isInServicePhotos && Storage::disk('public')->exists($photoPath)) {
                 Storage::disk('public')->delete($photoPath);
+                Log::info('Eliminando foto temporal no guardada', ['path' => $photoPath]);
             }
         }
         $this->temporaryPhotos = [];
     }
 
-    public function dehydrate()
-    {
-        // Cleanup temporary photos when component is destroyed
-        $this->cleanupTemporaryPhotos();
-    }
+    // COMENTADO: Este método estaba eliminando fotos cuando el componente se destruía
+    // public function dehydrate()
+    // {
+    //     // Cleanup temporary photos when component is destroyed
+    //     $this->cleanupTemporaryPhotos();
+    // }
 
-    public function updated($propertyName)
-    {
-        // If user navigates away without saving, cleanup temporary photos
-        if ($propertyName === 'servicePhotos' && empty($this->servicePhotos)) {
-            $this->cleanupTemporaryPhotos();
-        }
-    }
+    // COMENTADO: Este método estaba eliminando fotos cuando el array se vaciaba
+    // public function updated($propertyName)
+    // {
+    //     // If user navigates away without saving, cleanup temporary photos
+    //     if ($propertyName === 'servicePhotos' && empty($this->servicePhotos)) {
+    //         $this->cleanupTemporaryPhotos();
+    //     }
+    // }
 
     public function render()
     {
