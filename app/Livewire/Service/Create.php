@@ -3,11 +3,13 @@
 namespace App\Livewire\Service;
 
 use App\Models\Service;
+use App\Models\ServicePhoto;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class Create extends Component
 {
@@ -84,6 +86,46 @@ class Create extends Component
     public $inventoryParam3 = null;
     public $inventoryParam4 = null;
     public $inventoryParam5 = null;
+
+    // --- INICIO: Propiedades para Fotos ---=================================================
+    public $servicePhotos = [];
+    public $photoDescriptions = [];
+    public $photoPreview = [];
+    public $showPhotoForm = false;
+    public $activePhotoFormId = null;
+    public $modalPhoto = null;
+    public $modalPhotoPreview = null;
+    public $modalPhotoDescription = '';
+
+    // --- FIN: Propiedades para Fotos ---=================================================
+
+    public $editingPhotoDescriptionIndex = null;
+    public $editingPhotoDescriptionValue = '';
+    public $editingPhotoIndex = null;
+    
+    // Track temporary photos for cleanup
+    public $temporaryPhotos = [];
+
+    public function startEditingPhotoDescription($index)
+    {
+        $this->editingPhotoDescriptionIndex = $index;
+        $this->editingPhotoDescriptionValue = $this->servicePhotos[$index]['description'] ?? '';
+    }
+
+    public function saveEditingPhotoDescription()
+    {
+        if ($this->editingPhotoDescriptionIndex !== null) {
+            $this->servicePhotos[$this->editingPhotoDescriptionIndex]['description'] = $this->editingPhotoDescriptionValue;
+            $this->editingPhotoDescriptionIndex = null;
+            $this->editingPhotoDescriptionValue = '';
+        }
+    }
+
+    public function cancelEditingPhotoDescription()
+    {
+        $this->editingPhotoDescriptionIndex = null;
+        $this->editingPhotoDescriptionValue = '';
+    }
 
     public function openInventoryModal($type = 'inventario', $param1 = null, $param2 = null, $param3 = null, $param4 = null, $param5 = null)
     {
@@ -179,6 +221,138 @@ class Create extends Component
         $this->selectedInventory = null;
     }
     // --- FIN: Métodos Modal Inventario ---=================================================
+
+    // --- INICIO: Métodos para Fotos ---=================================================
+    public function openPhotoForm($index = null)
+    {
+        if ($index !== null) {
+            // Editar descripción de foto existente
+            $this->editingPhotoIndex = $index;
+            $this->modalPhotoDescription = $this->servicePhotos[$index]['description'] ?? '';
+            $this->modalPhotoPreview = $this->servicePhotos[$index]['preview'] ?? null;
+            $this->showPhotoForm = true;
+        } else {
+            // Agregar nueva foto
+            $this->editingPhotoIndex = null;
+            $this->showPhotoForm = true;
+            $this->modalPhoto = null;
+            $this->modalPhotoPreview = null;
+            $this->modalPhotoDescription = '';
+        }
+    }
+
+    public function closePhotoForm()
+    {
+        $this->showPhotoForm = false;
+        $this->modalPhoto = null;
+        $this->modalPhotoPreview = null;
+        $this->modalPhotoDescription = '';
+    }
+
+    public function updatedModalPhoto()
+    {
+        if ($this->modalPhoto) {
+            $this->modalPhotoPreview = $this->modalPhoto->temporaryUrl();
+        }
+    }
+
+    public function addPhoto()
+    {
+        $this->validate([
+            'modalPhoto' => 'required|image|max:2048',
+            'modalPhotoDescription' => 'nullable|string|max:255',
+        ]);
+
+        $path = $this->modalPhoto->store('service_photos', 'public');
+        
+        // Track temporary photo for cleanup if service creation fails
+        $this->temporaryPhotos[] = $path;
+        
+        $this->servicePhotos[] = [
+            'path' => $path,
+            'description' => $this->modalPhotoDescription,
+            'preview' => $this->modalPhotoPreview
+        ];
+
+        $this->closePhotoForm();
+        session()->flash('message', 'Foto agregada correctamente.');
+    }
+
+    public function deletePhoto($index)
+    {
+        if (isset($this->servicePhotos[$index])) {
+            $photo = $this->servicePhotos[$index];
+            if (isset($photo['path']) && Storage::disk('public')->exists($photo['path'])) {
+                Storage::disk('public')->delete($photo['path']);
+                // Remove from temporary photos if it's there
+                $key = array_search($photo['path'], $this->temporaryPhotos);
+                if ($key !== false) {
+                    unset($this->temporaryPhotos[$key]);
+                }
+            }
+            unset($this->servicePhotos[$index]);
+            $this->servicePhotos = array_values($this->servicePhotos); // Reindexar array
+        }
+    }
+
+    public function deletePhotoFromDatabase($photoId)
+    {
+        $photo = ServicePhoto::find($photoId);
+        if ($photo) {
+            Storage::disk('public')->delete($photo->photo_path);
+            $photo->delete();
+            session()->flash('message', 'Foto eliminada correctamente.');
+        }
+    }
+
+    public function savePhotoDescriptionEdit()
+    {
+        if ($this->editingPhotoIndex !== null) {
+            // If a new photo was uploaded, replace the old one
+            if ($this->modalPhoto) {
+                $this->validate([
+                    'modalPhoto' => 'required|image|max:2048',
+                ]);
+                
+                // Delete old photo
+                $oldPhoto = $this->servicePhotos[$this->editingPhotoIndex];
+                if (isset($oldPhoto['path']) && Storage::disk('public')->exists($oldPhoto['path'])) {
+                    Storage::disk('public')->delete($oldPhoto['path']);
+                    // Remove from temporary photos if it's there
+                    $key = array_search($oldPhoto['path'], $this->temporaryPhotos);
+                    if ($key !== false) {
+                        unset($this->temporaryPhotos[$key]);
+                    }
+                }
+                
+                // Store new photo
+                $newPath = $this->modalPhoto->store('service_photos', 'public');
+                $this->temporaryPhotos[] = $newPath;
+                
+                // Update photo data
+                $this->servicePhotos[$this->editingPhotoIndex]['path'] = $newPath;
+                $this->servicePhotos[$this->editingPhotoIndex]['preview'] = $this->modalPhotoPreview;
+            }
+            
+            // Update description
+            $this->servicePhotos[$this->editingPhotoIndex]['description'] = $this->modalPhotoDescription;
+            
+            $this->editingPhotoIndex = null;
+            $this->showPhotoForm = false;
+            $this->modalPhotoDescription = '';
+            $this->modalPhotoPreview = null;
+            $this->modalPhoto = null;
+        }
+    }
+
+    public function cancelPhotoDescriptionEdit()
+    {
+        $this->editingPhotoIndex = null;
+        $this->showPhotoForm = false;
+        $this->modalPhotoDescription = '';
+        $this->modalPhotoPreview = null;
+    }
+    // --- FIN: Métodos para Fotos ---=================================================
 
     protected $rules = [
         'id_s' => 'nullable|string|max:25',
@@ -351,35 +525,77 @@ class Create extends Component
             return;
         }
 
-        // Guardar el servicio
-        Service::create([
-            'id_s' => $this->id_s,
-            'F_serv' => $this->F_serv,
-            'solicitante_id' => $this->solicitante_id,
-            'efectuo_id' => $this->efectuo_id,
-            'vobo_id' => $this->vobo_id,
-            'obj_sol' => $this->obj_sol,
-            'actividades' => $this->actividades,
-            'mantenimiento' => $this->mantenimiento,
-            'observaciones' => $this->observaciones,
-            'correctivo' => $this->correctivo,
-            'preventivo' => $this->preventivo,
-            'transparencia' => $this->transparencia,
-            'a_tec' => $this->a_tec,
-            'web_ins' => $this->web_ins,
-            'print' => $this->print,
-            'email' => $this->email,
-            'tel' => $this->tel,
-            'sol_ser' => $this->sol_ser,
-            'oficio' => $this->oficio,
-            'calendario' => $this->calendario,
-            'capturo' => $this->capturo,
-            'status' => $this->status,
-            'impressions' => $this->impressions,
-        ]);
+        try {
+            // Guardar el servicio
+            $service = Service::create([
+                'id_s' => $this->id_s,
+                'F_serv' => $this->F_serv,
+                'solicitante_id' => $this->solicitante_id,
+                'efectuo_id' => $this->efectuo_id,
+                'vobo_id' => $this->vobo_id,
+                'obj_sol' => $this->obj_sol,
+                'actividades' => $this->actividades,
+                'mantenimiento' => $this->mantenimiento,
+                'observaciones' => $this->observaciones,
+                'correctivo' => $this->correctivo,
+                'preventivo' => $this->preventivo,
+                'transparencia' => $this->transparencia,
+                'a_tec' => $this->a_tec,
+                'web_ins' => $this->web_ins,
+                'print' => $this->print,
+                'email' => $this->email,
+                'tel' => $this->tel,
+                'sol_ser' => $this->sol_ser,
+                'oficio' => $this->oficio,
+                'calendario' => $this->calendario,
+                'capturo' => $this->capturo,
+                'status' => $this->status,
+                'impressions' => $this->impressions,
+            ]);
 
-        // Redirigir a la lista de servicios
-        return redirect()->route('servicios.index');
+            // Guardar las fotos del servicio
+            foreach ($this->servicePhotos as $photoData) {
+                ServicePhoto::create([
+                    'service_id' => $service->id,
+                    'photo_path' => $photoData['path'],
+                    'description' => $photoData['description'],
+                ]);
+            }
+
+            // Clear temporary photos tracking since service was saved successfully
+            $this->temporaryPhotos = [];
+
+            // Redirigir a la lista de servicios
+            return redirect()->route('servicios.index');
+        } catch (\Exception $e) {
+            // If service creation fails, cleanup temporary photos
+            $this->cleanupTemporaryPhotos();
+            throw $e;
+        }
+    }
+
+    public function cleanupTemporaryPhotos()
+    {
+        foreach ($this->temporaryPhotos as $photoPath) {
+            if (Storage::disk('public')->exists($photoPath)) {
+                Storage::disk('public')->delete($photoPath);
+            }
+        }
+        $this->temporaryPhotos = [];
+    }
+
+    public function dehydrate()
+    {
+        // Cleanup temporary photos when component is destroyed
+        $this->cleanupTemporaryPhotos();
+    }
+
+    public function updated($propertyName)
+    {
+        // If user navigates away without saving, cleanup temporary photos
+        if ($propertyName === 'servicePhotos' && empty($this->servicePhotos)) {
+            $this->cleanupTemporaryPhotos();
+        }
     }
 
     public function render()

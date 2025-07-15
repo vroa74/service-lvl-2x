@@ -31,6 +31,20 @@ Route::get('/', function () {
 // RUTAS DE REPORTES PDF (PÚBLICAS PARA PRUEBAS)
 // ============================================================================
 
+// Ruta para acceder a reportes temporales
+Route::get('/storage/temp/{filename}', function ($filename) {
+    $path = storage_path('app/public/temp/' . $filename);
+    
+    if (file_exists($path)) {
+        return response()->file($path, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"'
+        ]);
+    }
+    
+    abort(404, 'Archivo no encontrado');
+})->name('temp.report');
+
 // Reporte individual de servicio
 Route::get('/service-pdf/{id}', function ($id) {
     try {

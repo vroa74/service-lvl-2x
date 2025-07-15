@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('id_s', 25)->nullable();
+            $table->string('id_s', 25)->unique();
             $table->date('F_serv')->nullable();
             // FK: usuarios - CAMBIADOS A REQUERIDOS            
             $table->foreignId('solicitante_id')->constrained('users');

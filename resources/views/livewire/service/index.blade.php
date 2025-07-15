@@ -226,6 +226,15 @@
                         </select>
                     </div>
 
+                    <!-- Plantilla de Reporte -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Plantilla de Reporte</label>
+                        <select wire:model.defer="reportTemplate" wire:blur="$refresh" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="template1">Plantilla 1 (Clásica)</option>
+                            <option value="template2">Plantilla 2 (Moderno)</option>
+                        </select>
+                    </div>
+
                     <!-- Rango de Fechas -->
                     <div class="grid grid-cols-2 gap-4">
                         <div>

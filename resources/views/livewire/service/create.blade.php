@@ -1,17 +1,21 @@
-<div class="bg-gray-800 rounded-lg mb-1 shadow-xl w-full max-w-full px-8 mx-auto">
-    <div class="p-1 border-b border-gray-700">
-        <div class="flex items-center justify-between">
-            <h3 class="text-lg font-medium text-white">
-                Nuevo Servicio
-            </h3>
-            <a href="{{ route('servicios.index') }}"
-                class="text-gray-400 hover:text-white transition-colors">
-                <x-lucide name="x" class="w-6 h-6" />
-            </a>
-        </div>
-    </div>
-    {{-- ========================================================================================================================================================================================================= --}}
-    <form wire:submit.prevent="saveService" class="p-6 space-y-6">
+<div class="min-h-screen bg-gray-900 p-4">
+    <div class="flex gap-6 h-full">
+        <!-- Primera columna - Formulario actual (67%) -->
+        <div class="w-[67%]">
+            <div class="bg-gray-800 rounded-lg mb-1 shadow-xl w-full max-w-full px-8 mx-auto">
+                <div class="p-1 border-b border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-white">
+                            Nuevo Servicio
+                        </h3>
+                        <a href="{{ route('servicios.index') }}"
+                            class="text-gray-400 hover:text-white transition-colors">
+                            <x-lucide name="x" class="w-6 h-6" />
+                        </a>
+                    </div>
+                </div>
+                {{-- ========================================================================================================================================================================================================= --}}
+                <form wire:submit.prevent="saveService" class="p-6 space-y-6">
         <!-- Información básica -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -380,6 +384,56 @@
             </button>
         </div>
     </form>
+            </div>
+        </div>
+
+        <!-- Tercera columna - Fotos del Servicio (33%) -->
+        <div class="w-[33%]">
+            <div class="p-6 bg-gray-800 rounded-lg shadow h-full overflow-y-auto border border-gray-700">
+                <h3 class="text-gray-100 text-lg font-medium mb-4">Fotos de Servicios</h3>
+                <!-- Header azul con identificador -->
+                <div class="rounded-t-xl bg-blue-600 text-white text-base font-semibold px-4 py-2 mb-2 border border-blue-600">
+                    {{ $id_s }}
+                </div>
+                <!-- Contenedor de fotos -->
+                <div class="border border-gray-500 rounded-xl bg-gray-900 px-2 py-3 mb-4">
+                    @if(count($servicePhotos) > 0)
+                        <div class="grid grid-cols-3 gap-2 mb-3">
+                            @foreach($servicePhotos as $index => $photo)
+                                <div class="flex flex-col items-center w-full h-[140px] bg-gray-800 border border-gray-600 rounded-lg p-2 relative" wire:dblclick="openPhotoForm({{ $index }})">
+                                    <img src="{{ $photo['preview'] }}" alt="Foto del servicio"
+                                        class="w-[80px] h-[80px] object-contain rounded bg-black mx-auto" />
+                                    <button
+                                        wire:click="deletePhoto({{ $index }})"
+                                        class="absolute top-1 right-1 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs transition-all duration-200 z-10"
+                                        title="Eliminar foto">
+                                        &times;
+                                    </button>
+                                    <div class="mt-1 text-gray-300 text-[11px] text-center w-full truncate flex items-center justify-center gap-1 min-h-[20px]">
+                                        <span class="{{ empty($photo['description']) ? 'text-gray-400 italic' : '' }}">
+                                            {{ $photo['description'] ?: 'Agregar descripción' }}
+                                        </span>
+                                        <button type="button" wire:click="openPhotoForm({{ $index }})" class="ml-1 text-blue-400 hover:text-blue-300" title="Editar foto">
+                                            <x-lucide name="edit" class="w-3 h-3 inline" />
+                                        </button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                    <!-- Botón para agregar foto -->
+                    <div class="pt-2 text-left">
+                        <button type="button"
+                            wire:click="openPhotoForm"
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded text-sm flex items-center gap-2">
+                            <x-lucide name="plus" class="w-4 h-4 text-green-300" />
+                            Agregar foto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- ========================================================================================================================================================================================================= --}}
     {{-- ========================================================================================================================================================================================================= --}}
     {{--//==============================================================================================================================================================================--}}
@@ -686,6 +740,130 @@
     @endif
     {{--//==============================================================================================================================================================================--}}
     {{-- ========================================================================================================================================================================================================= --}}
+
+    <!-- Modal para agregar/editar fotos -->
+    @if($showPhotoForm)
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md">
+                <div class="p-6 border-b border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-medium text-white">
+                            @if($editingPhotoIndex !== null)
+                                Editar descripción de la foto
+                            @else
+                                Agregar Foto al Servicio
+                            @endif
+                        </h3>
+                        <button
+                            @if($editingPhotoIndex !== null)
+                                wire:click="cancelPhotoDescriptionEdit"
+                            @else
+                                wire:click="closePhotoForm"
+                            @endif
+                            class="text-gray-400 hover:text-white transition-colors"
+                        >
+                            <x-lucide name="x" class="w-6 h-6" />
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    @if($editingPhotoIndex !== null)
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">
+                                Cambiar imagen (opcional)
+                            </label>
+                            <input
+                                type="file"
+                                wire:model="modalPhoto"
+                                class="w-full text-gray-100 bg-gray-700 rounded p-2 border border-gray-600"
+                                accept="image/*"
+                            >
+                            @error('modalPhoto') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">
+                                Descripción
+                            </label>
+                            <input
+                                type="text"
+                                wire:model="modalPhotoDescription"
+                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Descripción de la foto..."
+                            >
+                        </div>
+                        <div class="mb-4">
+                            <img src="{{ $modalPhotoPreview }}" alt="Preview" class="max-h-40 mx-auto rounded">
+                        </div>
+                        <div class="flex justify-end gap-3 pt-4 border-t border-gray-700">
+                            <button
+                                type="button"
+                                wire:click="cancelPhotoDescriptionEdit"
+                                class="px-4 py-2 text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                wire:click="savePhotoDescriptionEdit"
+                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                            >
+                                <x-lucide name="save" class="w-4 h-4" />
+                                Guardar
+                            </button>
+                        </div>
+                    @else
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">
+                                Seleccionar imagen
+                            </label>
+                            <input
+                                type="file"
+                                wire:model="modalPhoto"
+                                class="w-full text-gray-100 bg-gray-700 rounded p-2 border border-gray-600"
+                                accept="image/*"
+                            >
+                            @error('modalPhoto') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-300 mb-2">
+                                Descripción (opcional)
+                            </label>
+                            <input
+                                type="text"
+                                wire:model="modalPhotoDescription"
+                                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Descripción de la foto..."
+                            >
+                            @error('modalPhotoDescription') <span class="text-red-400 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                        @if($modalPhotoPreview)
+                            <div class="mb-4">
+                                <img src="{{ $modalPhotoPreview }}" alt="Preview" class="max-h-40 mx-auto rounded">
+                            </div>
+                        @endif
+                        <div class="flex justify-end gap-3 pt-4 border-t border-gray-700">
+                            <button
+                                type="button"
+                                wire:click="closePhotoForm"
+                                class="px-4 py-2 text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                wire:click="addPhoto"
+                                class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center gap-2"
+                            >
+                                <x-lucide name="plus" class="w-4 h-4" />
+                                Agregar Foto
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
+
     @livewireStyles
 @livewireScripts
 

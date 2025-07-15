@@ -415,10 +415,24 @@ php artisan make:livewire inventory.responsables
 ========================================================================================================
 
 
+php artisan make:migration create_service_photos_table
 
 ========================================================================================================
 
+Schema::create('service_photos', function (Blueprint $table) {
+    $table->id();
+    
+    // FK hacia services
+    $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+    
+    // Ruta o nombre del archivo
+    $table->string('photo_path');
 
+    // Descripción breve
+    $table->string('description')->nullable();
+
+    $table->timestamps();
+});
 
 ========================================================================================================
 

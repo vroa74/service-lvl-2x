@@ -3,21 +3,26 @@
 namespace App\Livewire\Service;
 
 use App\Models\Service;
-use App\Models\ServicePhoto;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
+/**
+ * Componente Livewire para editar servicios existentes
+ * 
+ * Este componente está diseñado específicamente para la edición de servicios.
+ * Requiere un ID de servicio válido para funcionar correctamente.
+ */
 class Edit extends Component
 {
     use WithFileUploads;
 
+    // ======================= INICIO: Propiedades del componente =======================
     // ID del servicio a editar
     public $serviceId;
-
+    public $contenido = '';
     // Campos del formulario
     public $id_s = '';
     public $F_serv = '';
@@ -53,7 +58,7 @@ class Edit extends Component
     public $calendario = false;
 
     public $capturo = '';
-    public $status = false;
+    public $estatus_servicio = false;
     public $impressions = false;
 
     // Modal properties
@@ -89,28 +94,18 @@ class Edit extends Component
     public $inventoryParam3 = null;
     public $inventoryParam4 = null;
     public $inventoryParam5 = null;
+    // ======================= FIN: Propiedades del componente =======================
 
-    // --- INICIO: Propiedades para Fotos ---=================================================
+    // --- INICIO: Propiedades para Fotos ---
     public $servicePhotos = [];
-    public $photoDescriptions = [];
-    public $photoPreview = [];
     public $showPhotoForm = false;
-    public $activePhotoFormId = null;
     public $modalPhoto = null;
     public $modalPhotoPreview = null;
     public $modalPhotoDescription = '';
-
-    // --- FIN: Propiedades para Fotos ---=================================================
-
     public $editingPhotoIndex = null;
-    
-    // Track temporary photos for cleanup
-    public $temporaryPhotos = [];
+    // --- FIN: Propiedades para Fotos ---
 
-
-
-
-
+    // ======================= INICIO: Métodos Modal Inventario =======================
     public function openInventoryModal($type = 'inventario', $param1 = null, $param2 = null, $param3 = null, $param4 = null, $param5 = null)
     {
         $this->inventoryModalType = $type;
@@ -204,153 +199,9 @@ class Edit extends Component
         $this->selectedInventoryId = null;
         $this->selectedInventory = null;
     }
-    // --- FIN: Métodos Modal Inventario ---=================================================
+    // ======================= FIN: Métodos Modal Inventario =======================
 
-    // --- INICIO: Métodos para Fotos ---=================================================
-    public function openPhotoForm($index = null)
-    {
-        if ($index !== null) {
-            // Editar descripción de foto existente
-            $this->editingPhotoIndex = $index;
-            $this->modalPhotoDescription = $this->servicePhotos[$index]['description'] ?? '';
-            $this->modalPhotoPreview = $this->servicePhotos[$index]['preview'] ?? null;
-            $this->showPhotoForm = true;
-        } else {
-            // Agregar nueva foto
-            $this->editingPhotoIndex = null;
-            $this->showPhotoForm = true;
-            $this->modalPhoto = null;
-            $this->modalPhotoPreview = null;
-            $this->modalPhotoDescription = '';
-        }
-    }
-
-    public function closePhotoForm()
-    {
-        $this->showPhotoForm = false;
-        $this->modalPhoto = null;
-        $this->modalPhotoPreview = null;
-        $this->modalPhotoDescription = '';
-    }
-
-    public function updatedModalPhoto()
-    {
-        if ($this->modalPhoto) {
-            $this->modalPhotoPreview = $this->modalPhoto->temporaryUrl();
-        }
-    }
-
-    public function addPhoto()
-    {
-        $this->validate([
-            'modalPhoto' => 'required|image|max:2048',
-            'modalPhotoDescription' => 'nullable|string|max:255',
-        ]);
-
-        $path = $this->modalPhoto->store('service_photos', 'public');
-        
-        // Track temporary photo for cleanup if service update fails
-        $this->temporaryPhotos[] = $path;
-        
-        $this->servicePhotos[] = [
-            'path' => $path,
-            'description' => $this->modalPhotoDescription,
-            'preview' => $this->modalPhotoPreview
-        ];
-
-        $this->closePhotoForm();
-        session()->flash('message', 'Foto agregada correctamente.');
-    }
-
-    public function deletePhoto($index)
-    {
-        if (isset($this->servicePhotos[$index])) {
-            $photo = $this->servicePhotos[$index];
-            
-            // Si la foto tiene ID, eliminarla de la base de datos
-            if (isset($photo['id'])) {
-                $this->deletePhotoFromDatabase($photo['id']);
-            }
-            
-            // Eliminar archivo físico si existe
-            if (isset($photo['path']) && Storage::disk('public')->exists($photo['path'])) {
-                Storage::disk('public')->delete($photo['path']);
-                // Remove from temporary photos if it's there
-                $key = array_search($photo['path'], $this->temporaryPhotos);
-                if ($key !== false) {
-                    unset($this->temporaryPhotos[$key]);
-                }
-            }
-            
-            unset($this->servicePhotos[$index]);
-            $this->servicePhotos = array_values($this->servicePhotos); // Reindexar array
-        }
-    }
-
-    public function deletePhotoFromDatabase($photoId)
-    {
-        $photo = ServicePhoto::find($photoId);
-        if ($photo) {
-            Storage::disk('public')->delete($photo->photo_path);
-            $photo->delete();
-            session()->flash('message', 'Foto eliminada correctamente.');
-        }
-    }
-
-    public function savePhotoDescriptionEdit()
-    {
-        if ($this->editingPhotoIndex !== null) {
-            // If a new photo was uploaded, replace the old one
-            if ($this->modalPhoto) {
-                $this->validate([
-                    'modalPhoto' => 'required|image|max:2048',
-                ]);
-                
-                // Delete old photo
-                $oldPhoto = $this->servicePhotos[$this->editingPhotoIndex];
-                if (isset($oldPhoto['path']) && Storage::disk('public')->exists($oldPhoto['path'])) {
-                    Storage::disk('public')->delete($oldPhoto['path']);
-                    // Remove from temporary photos if it's there
-                    $key = array_search($oldPhoto['path'], $this->temporaryPhotos);
-                    if ($key !== false) {
-                        unset($this->temporaryPhotos[$key]);
-                    }
-                }
-                
-                // Store new photo
-                $newPath = $this->modalPhoto->store('service_photos', 'public');
-                $this->temporaryPhotos[] = $newPath;
-                
-                // Update photo data
-                $this->servicePhotos[$this->editingPhotoIndex]['path'] = $newPath;
-                $this->servicePhotos[$this->editingPhotoIndex]['preview'] = $this->modalPhotoPreview;
-                
-                // If this was an existing photo, mark it as modified
-                if (isset($oldPhoto['id'])) {
-                    $this->servicePhotos[$this->editingPhotoIndex]['modified'] = true;
-                }
-            }
-            
-            // Update description
-            $this->servicePhotos[$this->editingPhotoIndex]['description'] = $this->modalPhotoDescription;
-            
-            $this->editingPhotoIndex = null;
-            $this->showPhotoForm = false;
-            $this->modalPhotoDescription = '';
-            $this->modalPhotoPreview = null;
-            $this->modalPhoto = null;
-        }
-    }
-
-    public function cancelPhotoDescriptionEdit()
-    {
-        $this->editingPhotoIndex = null;
-        $this->showPhotoForm = false;
-        $this->modalPhotoDescription = '';
-        $this->modalPhotoPreview = null;
-    }
-    // --- FIN: Métodos para Fotos ---=================================================
-
+    // ======================= INICIO: Reglas y mensajes de validación =======================
     protected $rules = [
         'id_s' => 'nullable|string|max:25',
         'F_serv' => 'nullable|date',
@@ -372,8 +223,8 @@ class Edit extends Component
         'sol_ser' => 'boolean',
         'oficio' => 'boolean',
         'calendario' => 'boolean',
-        'capturo' => 'required|exists:users,id',
-        'status' => 'boolean',
+        'capturo' => 'nullable|exists:users,id',
+        'estatus_servicio' => 'boolean',
         'impressions' => 'boolean',
     ];
 
@@ -382,9 +233,10 @@ class Edit extends Component
         'solicitante_id.exists' => 'El solicitante debe ser un usuario válido',
         'efectuo_id.exists' => 'El usuario que efectuó debe ser válido',
         'vobo_id.exists' => 'El usuario de VºBº debe ser válido',
-        'capturo.exists' => 'El usuario que captura debe ser válido',
     ];
+    // ======================= FIN: Reglas y mensajes de validación =======================
 
+    // ======================= INICIO: Carga de datos en mount =======================
     public function mount($id = null, $componente = null)
     {
         if (!$id) {
@@ -438,33 +290,38 @@ class Edit extends Component
         $this->oficio = $service->oficio;
         $this->calendario = $service->calendario;
         
-        // Cargar otros campos
+        // Otros campos
         $this->capturo = $service->capturo;
-        $this->status = $service->status;
+        $this->estatus_servicio = $service->estatus_servicio;
         $this->impressions = $service->impressions;
 
         // Cargar fotos existentes
-        if ($service->photos) {
-            foreach ($service->photos as $photo) {
-                $this->servicePhotos[] = [
-                    'id' => $photo->id,
-                    'path' => $photo->photo_path,
-                    'description' => $photo->description,
-                    'preview' => asset('storage/' . $photo->photo_path)
-                ];
-            }
+        $this->servicePhotos = [];
+        foreach ($service->photos as $photo) {
+            $this->servicePhotos[] = [
+                'id' => $photo->id,
+                'path' => $photo->photo_path,
+                'description' => $photo->description,
+                'preview' => asset('storage/' . $photo->photo_path),
+                'is_existing' => true,
+            ];
         }
-    }
 
-    // --- INICIO: Métodos Modal Usuario ---
+        Log::info('ID recibido en mount', ['id' => $id]);
+    }
+    // ======================= FIN: Carga de datos en mount =======================
+
+    // ======================= INICIO: Métodos Modal Usuario =======================
     public function testUpdateObjSol()
     {
-        $this->obj_sol = "PRUEBA EDIT: " . now()->format('H:i:s') . " - Esto es una prueba directa";
+        $this->obj_sol = "PRUEBA: " . now()->format('H:i:s') . " - Esto es una prueba directa";
+        $this->dispatch('textarea-updated', field: 'obj_sol');
         $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
     }
 
     public function openUserModal($type, $param1 = null, $param2 = null, $param3 = null, $param4 = null)
     {
+        Log::info('openUserModal ejecutado', ['type' => $type, 'param1' => $param1, 'param2' => $param2, 'param3' => $param3, 'param4' => $param4]);
         $this->modalType = $type;
         $this->modalParam1 = ($param1 === 'null') ? '' : $param1;
         $this->modalParam2 = ($param2 === 'null') ? '' : $param2;
@@ -488,11 +345,11 @@ class Edit extends Component
         $this->showModal = true;
         $this->selectedUserId = null;
         $this->selectedUserName = '';
+        Log::info('Modal abierto', ['modalType' => $this->modalType, 'showModal' => $this->showModal]);
     }
     
     public function selectUser($userId, $userName)
     {
-        Log::info('selectUser ejecutado', ['id' => $userId, 'name' => $userName, 'modalType' => $this->modalType]);
         $miperfil = User::find($userId);
         $this->selectedUserId = $userId;
         $this->selectedUserName = $userName;
@@ -514,13 +371,13 @@ class Edit extends Component
             $this->vobo_position = $miperfil->position;
             $this->vobo_direction = $miperfil->direction;
         } elseif ($this->modalType === 'objetivo') {
-            // Concatenar a obj_sol
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->obj_sol)) {
                 $this->obj_sol .= "\n" . $userInfo;
             } else {
                 $this->obj_sol = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'obj_sol');
             $this->dispatch('update-textarea', field: 'obj_sol', value: $this->obj_sol);
         } elseif ($this->modalType === 'actividades') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
@@ -529,6 +386,7 @@ class Edit extends Component
             } else {
                 $this->actividades = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'actividades');
             $this->dispatch('update-textarea', field: 'actividades', value: $this->actividades);
         } elseif ($this->modalType === 'observaciones') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
@@ -537,18 +395,20 @@ class Edit extends Component
             } else {
                 $this->observaciones = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'observaciones');
             $this->dispatch('update-textarea', field: 'observaciones', value: $this->observaciones);
-        }elseif ($this->modalType === 'mantenimiento') {
+        } elseif ($this->modalType === 'mantenimiento') {
             $userInfo = "NOMBRE: {$miperfil->name}    DIRECCION: {$miperfil->direction}    CARGO: {$miperfil->position}";
             if (!empty($this->mantenimiento)) {
                 $this->mantenimiento .= "\n" . $userInfo;
             } else {
                 $this->mantenimiento = $userInfo;
             }
+            $this->dispatch('textarea-updated', field: 'mantenimiento');
             $this->dispatch('update-textarea', field: 'mantenimiento', value: $this->mantenimiento);
         }
 
-        $this->closeModal();   //mantenimiento 
+        $this->closeModal();
     }
 
     public function closeModal()
@@ -564,27 +424,50 @@ class Edit extends Component
         $this->selectedUserId = null;
         $this->selectedUserName = '';
     }
-    // --- FIN: Métodos Modal Usuario ---====================================================
+    // ======================= FIN: Métodos Modal Usuario =======================
 
-    public function updateService()
+    // ======================= INICIO: Guardar Edición de Servicio =======================
+    public function saveService()
     {
-        $this->validate();
-
-        // Validación personalizada: al menos una vía de solicitud
-        if (!($this->email || $this->tel || $this->sol_ser || $this->oficio || $this->calendario)) {
-            $this->addError('via_solicitud', 'Debes seleccionar al menos una opción en Vía de Solicitud.');
-            return;
-        }
-        // Validación personalizada: al menos un tipo de servicio
-        if (!($this->correctivo || $this->preventivo || $this->transparencia || $this->a_tec || $this->web_ins || $this->print)) {
-            $this->addError('tipo_servicio', 'Debes seleccionar al menos una opción en Tipo de Servicio.');
-            return;
-        }
+        // Forzar todos los campos booleanos a ser booleanos antes de validar
+        $this->correctivo = (bool) $this->correctivo;
+        $this->preventivo = (bool) $this->preventivo;
+        $this->transparencia = (bool) $this->transparencia;
+        $this->a_tec = (bool) $this->a_tec;
+        $this->web_ins = (bool) $this->web_ins;
+        $this->print = (bool) $this->print;
+        $this->email = (bool) $this->email;
+        $this->tel = (bool) $this->tel;
+        $this->sol_ser = (bool) $this->sol_ser;
+        $this->oficio = (bool) $this->oficio;
+        $this->calendario = (bool) $this->calendario;
+        $this->estatus_servicio = (bool) $this->estatus_servicio;
+        $this->impressions = (bool) $this->impressions;
 
         try {
-            // Actualizar el servicio
+            $this->validate();
+
+            // Validación personalizada: al menos una vía de solicitud
+            if (!($this->email || $this->tel || $this->sol_ser || $this->oficio || $this->calendario)) {
+                $this->addError('via_solicitud', 'Debes seleccionar al menos una opción en Vía de Solicitud.');
+                return;
+            }
+            // Validación personalizada: al menos un tipo de servicio
+            if (!($this->correctivo || $this->preventivo || $this->transparencia || $this->a_tec || $this->web_ins || $this->print)) {
+                $this->addError('tipo_servicio', 'Debes seleccionar al menos una opción en Tipo de Servicio.');
+                return;
+            }
+
             $service = Service::findOrFail($this->serviceId);
-            $service->update([
+
+            // Sanitizar campos antes de guardar
+            $allowedTags = '<ul><li><ol><b><i><u><br><strong><em>';
+            $this->obj_sol = strip_tags($this->obj_sol, $allowedTags);
+            $this->actividades = strip_tags($this->actividades, $allowedTags);
+            $this->mantenimiento = strip_tags($this->mantenimiento, $allowedTags);
+            $this->observaciones = strip_tags($this->observaciones, $allowedTags);
+
+            $updateData = [
                 'id_s' => $this->id_s,
                 'F_serv' => $this->F_serv,
                 'solicitante_id' => $this->solicitante_id,
@@ -605,74 +488,99 @@ class Edit extends Component
                 'sol_ser' => $this->sol_ser,
                 'oficio' => $this->oficio,
                 'calendario' => $this->calendario,
-                'capturo' => $this->capturo,
-                'status' => $this->status,
+                'capturo' => Auth::id(),
+                'estatus_servicio' => $this->estatus_servicio,
                 'impressions' => $this->impressions,
-            ]);
+            ];
 
-            // Guardar las nuevas fotos del servicio
-            foreach ($this->servicePhotos as $photoData) {
-                if (!isset($photoData['id'])) {
-                    // Es una nueva foto
-                    ServicePhoto::create([
-                        'service_id' => $service->id,
-                        'photo_path' => $photoData['path'],
-                        'description' => $photoData['description'],
-                    ]);
-                } else {
-                    // Actualizar descripción de foto existente o foto modificada
-                    $existingPhoto = ServicePhoto::find($photoData['id']);
-                    if ($existingPhoto) {
-                        $updateData = ['description' => $photoData['description']];
-                        
-                        // If photo was modified (new image uploaded), update the path
-                        if (isset($photoData['modified']) && $photoData['modified']) {
-                            $updateData['photo_path'] = $photoData['path'];
-                        }
-                        
-                        $existingPhoto->update($updateData);
-                    }
-                }
+            $result = $service->update($updateData);
+
+            if ($result) {
+                session()->flash('message', 'Servicio actualizado correctamente.');
+                // En Livewire, usamos redirect() en lugar de return redirect()
+                return $this->redirect(route('servicios.index'));
+            } else {
+                $this->addError('general', 'No se pudo actualizar el servicio. Inténtalo de nuevo.');
             }
 
-            // Clear temporary photos tracking since service was updated successfully
-            $this->temporaryPhotos = [];
-
-            session()->flash('message', 'Servicio actualizado correctamente.');
-            
-            // Redirigir a la lista de servicios
-            return redirect()->route('servicios.index');
         } catch (\Exception $e) {
-            // If service update fails, cleanup temporary photos
-            $this->cleanupTemporaryPhotos();
-            throw $e;
+            $this->addError('general', 'Error al guardar el servicio: ' . $e->getMessage());
+        }
+    }
+    // ======================= FIN: Guardar Edición de Servicio =======================
+
+    // ======================= INICIO: Métodos para Fotos =======================
+    public function openPhotoForm($index = null)
+    {
+        if ($index !== null) {
+            $this->editingPhotoIndex = $index;
+            $this->modalPhotoDescription = $this->servicePhotos[$index]['description'] ?? '';
+            $this->modalPhotoPreview = $this->servicePhotos[$index]['preview'] ?? null;
+            $this->showPhotoForm = true;
+        } else {
+            $this->editingPhotoIndex = null;
+            $this->showPhotoForm = true;
+            $this->modalPhoto = null;
+            $this->modalPhotoPreview = null;
+            $this->modalPhotoDescription = '';
         }
     }
 
-    public function cleanupTemporaryPhotos()
+    public function addPhoto()
     {
-        foreach ($this->temporaryPhotos as $photoPath) {
-            if (Storage::disk('public')->exists($photoPath)) {
-                Storage::disk('public')->delete($photoPath);
-            }
+        $this->validate([
+            'modalPhoto' => 'required|image|max:2048',
+            'modalPhotoDescription' => 'nullable|string|max:255',
+        ]);
+        $path = $this->modalPhoto->store('service_photos', 'public');
+        $this->servicePhotos[] = [
+            'path' => $path,
+            'description' => $this->modalPhotoDescription,
+            'preview' => asset('storage/' . $path),
+            'is_existing' => false,
+        ];
+        $this->closePhotoForm();
+        session()->flash('message', 'Foto agregada correctamente.');
+    }
+
+    public function deletePhoto($index)
+    {
+        if (isset($this->servicePhotos[$index])) {
+            unset($this->servicePhotos[$index]);
+            $this->servicePhotos = array_values($this->servicePhotos);
         }
-        $this->temporaryPhotos = [];
     }
 
-    public function dehydrate()
+    public function savePhotoDescriptionEdit()
     {
-        // Cleanup temporary photos when component is destroyed
-        $this->cleanupTemporaryPhotos();
-    }
-
-    public function updated($propertyName)
-    {
-        // If user navigates away without saving, cleanup temporary photos
-        if ($propertyName === 'servicePhotos' && empty($this->servicePhotos)) {
-            $this->cleanupTemporaryPhotos();
+        if ($this->editingPhotoIndex !== null) {
+            $this->servicePhotos[$this->editingPhotoIndex]['description'] = $this->modalPhotoDescription;
+            $this->editingPhotoIndex = null;
+            $this->showPhotoForm = false;
+            $this->modalPhotoDescription = '';
+            $this->modalPhotoPreview = null;
         }
     }
 
+    public function cancelPhotoDescriptionEdit()
+    {
+        $this->editingPhotoIndex = null;
+        $this->showPhotoForm = false;
+        $this->modalPhotoDescription = '';
+        $this->modalPhotoPreview = null;
+    }
+
+    public function closePhotoForm()
+    {
+        $this->showPhotoForm = false;
+        $this->modalPhoto = null;
+        $this->modalPhotoPreview = null;
+        $this->modalPhotoDescription = '';
+        $this->editingPhotoIndex = null;
+    }
+    // ======================= FIN: Métodos para Fotos =======================
+
+    // ======================= INICIO: Render y utilitarios =======================
     public function render()
     {
         $users = User::where('status', true)->orderBy('name')->get();
@@ -716,5 +624,23 @@ class Edit extends Component
             'filteredUsers' => $filteredUsers,
             'filteredInventories' => $filteredInventories,
         ]);
+    }
+    // ======================= FIN: Render y utilitarios =======================
+
+    protected function sanitizeInput($input)
+    {
+        // Elimina scripts y eventos on*
+        $input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
+        $input = preg_replace('/on\w+="[^"]*"/i', '', $input);
+        return $input;
+    }
+
+    function cleanAttributes($input) {
+        // Elimina cualquier atributo on* (ej: onclick, onmouseover, etc.)
+        $input = preg_replace('/on\w+="[^"]*"/i', '', $input);
+        $input = preg_replace("/on\w+='[^']*'/i", '', $input);
+        // Elimina cualquier <script>...</script>
+        $input = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
+        return $input;
     }
 }

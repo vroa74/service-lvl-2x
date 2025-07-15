@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Service extends Model
@@ -97,6 +98,14 @@ class Service extends Model
     public function servicesAsCapturo()
     {
         return $this->hasMany(Service::class, 'capturo');
+    }
+
+    /**
+     * Get the photos associated with this service.
+     */
+    public function photos()
+    {
+        return $this->hasMany(ServicePhoto::class);
     }
 
     protected function actividades(): Attribute

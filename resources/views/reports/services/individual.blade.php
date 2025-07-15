@@ -664,7 +664,7 @@
                                 <div class="text-center ">
                                     <span class="font-bold ml-5 text-sm"> Actividades Realizadas </span>
                                 </div><br>
-                                <span  class="text-xs text-justify">
+                                <span  class="text-11px text-justify">
                                     {!! $service->actividades ?? 'N/A' !!}
                                 </span>
                             </div>
@@ -675,7 +675,7 @@
                                 <div class="text-center mb-2">
                                     <span class="font-bold ml-5 text-sm"> Observaciones </span>
                                 </div> <br>
-                                <span class="text-xs text-justify">
+                                <span class="text-11px text-justify">
                                     {!! $service->observaciones ?? 'N/A' !!}
                                 </span>
                             </div>
