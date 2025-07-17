@@ -144,7 +144,12 @@ class Edit extends Component
         // Si el primer parámetro es 'objetivo', concatenar al textarea obj_sol
         //==============================================================================
         if ($this->inventoryModalType === 'objetivo') {
-            $info = "INVENTARIO: NI: {$inventory->ni}, SN: {$inventory->ns}, TYPE: {$inventory->type}, ARTICULO: {$inventory->articulo}";
+            $info = '';
+            $info .= $inventory->articulo ? "ARTICULO: {$inventory->articulo}, " : '';
+            $info .= $inventory->marca ? "MARCA: {$inventory->marca}, " : '';
+            $info .= $inventory->modelo ? "MODELO: {$inventory->modelo}, " : '';
+            $info .= $inventory->ni ? "NI: {$inventory->ni}, " : '';
+            $info .= $inventory->ns ? "SN: {$inventory->ns}, " : '';
             if (!empty($this->obj_sol)) {
                 $this->obj_sol .= "\n" . $info;
             } else {
@@ -154,7 +159,7 @@ class Edit extends Component
         }
         //==============================================================================
         if ($this->inventoryModalType === 'actividades') {
-            $info = "INVENTARIO: NI: {$inventory->ni}, SN: {$inventory->ns}, TYPE: {$inventory->type}, ARTICULO: {$inventory->articulo}";
+            $info = "INVENTARIO: NI: {$inventory->ni}, SN: {$inventory->ns}, TYPE: {$inventory->type}, ARTICULO: {$inventory->articulo} . ";
             if (!empty($this->actividades)) {
                 $this->actividades .= "\n" . $info;
             } else {
