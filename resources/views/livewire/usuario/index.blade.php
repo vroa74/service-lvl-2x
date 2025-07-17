@@ -194,19 +194,19 @@
         
         <!-- Vista desktop: Tabla -->
         <div class="hidden lg:block overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-700 rounded-3xl overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-700 rounded-3xl overflow-hidden table-auto-height">
                 <thead class="bg-gray-700">
                     <tr>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[20%] rounded-tl-3xl">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[25%] rounded-tl-3xl">
                             Usuario
                         </th>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[12%]">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%]">
                             RFC
                         </th>
-                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[25%]">
+                        <th class="px-3 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider w-[20%]">
                             Dirección / Posición
                         </th>
-                        <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[12%]">
+                        <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[10%]">
                             Sexo
                         </th>
                         <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%]">
@@ -218,7 +218,7 @@
                         <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%]">
                             Estado
                         </th>
-                        <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[8%] rounded-tr-3xl">
+                        <th class="px-3 py-3 text-center text-xs font-medium text-gray-300 uppercase tracking-wider w-[7%] rounded-tr-3xl">
                             Acciones
                         </th>
                     </tr>
@@ -226,37 +226,41 @@
                 <tbody class="bg-gray-800 divide-y divide-gray-700">
                     @forelse($users as $user)
                         <tr class="hover:bg-gray-700 transition-colors">
-                            <td class="px-3 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-6 w-6">
+                            <td class="px-3 py-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 mt-1">
                                         @if($user->profile_photo_url)
-                                            <img class="h-6 w-6 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
+                                            <img class="h-6 w-6 rounded-full" src="{{ $user->profile_photo_url }}" 
+                                            {{-- alt="{{ $user->name }} --}}
+                                            ">
                                         @else
                                             <div class="h-6 w-6 rounded-full bg-gray-600 flex items-center justify-center">
                                                 <x-lucide name="user" class="w-4 h-4 text-gray-300" />
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="ml-4">
-                                        <div class="text-xs font-medium text-white"> id: {{ $user->id }}</div>
-                                        <div class="text-sm font-medium text-white"> nombre: {{ $user->name }}</div>
-                                        <div class="text-sm text-gray-400"> email: {{ $user->email }}</div>
+                                    <div class="ml-3 min-w-0 flex-1">
+                                        <div class="text-xs font-medium text-white truncate" title="ID: {{ $user->id }}">ID: {{ $user->id }}</div>
+                                        <div class="text-sm font-medium text-white truncate" title="{{ $user->name }}">{{ $user->name }}</div>
+                                        <div class="text-sm text-gray-400 truncate" title="{{ $user->email }}">{{ $user->email }}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-300">
-                                rfc: {{ $user->rfc ?? 'N/A' }}
+                            <td class="px-3 py-3 text-sm text-gray-300">
+                                <div class="truncate" title="{{ $user->rfc ?? 'N/A' }}">
+                                    {{ $user->rfc ?? 'N/A' }}
+                                </div>
                             </td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-300">
-                                <div class="max-w-md">
+                            <td class="px-3 py-3 text-sm text-gray-300">
+                                <div class="space-y-1">
                                     @if($user->direction)
-                                        <div class="font-medium text-white" title="{{ $user->direction }}">
-                                            dir: {{ Str::limit($user->direction, 50) }}
+                                        <div class="font-medium text-white truncate" title="{{ $user->direction }}">
+                                            {{ Str::limit($user->direction, 30) }}
                                         </div>
                                     @endif
                                     @if($user->position)
-                                        <div class="text-gray-400 text-xs" title="{{ $user->position }}">
-                                            pos: {{ Str::limit($user->position, 50) }}
+                                        <div class="text-gray-400 text-xs truncate" title="{{ $user->position }}">
+                                            {{ Str::limit($user->position, 30) }}
                                         </div>
                                     @endif
                                     @if(!$user->direction && !$user->position)
@@ -264,7 +268,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td class="px-3 py-4 text-center">
+                            <td class="px-3 py-3 text-center">
                                 @if($user->sex)
                                     <div class="flex items-center justify-center gap-2">
                                         @if($user->sex === 'masculino')
@@ -273,7 +277,7 @@
                                                 class="flex items-center gap-1 px-2 py-1 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors cursor-pointer"
                                                 title="Haz clic para cambiar a Femenino"
                                             >
-                                                <x-lucide name="male" class="w-4 h-4 text-black" />
+                                                <x-lucide name="male" class="w-3 h-3 text-black" />
                                                 <span class="text-xs font-medium text-black">Masculino</span>
                                             </button>
                                         @else
@@ -282,7 +286,7 @@
                                                 class="flex items-center gap-1 px-2 py-1 rounded-full bg-pink-100 hover:bg-pink-200 transition-colors cursor-pointer"
                                                 title="Haz clic para cambiar a Masculino"
                                             >
-                                                <x-lucide name="female" class="w-4 h-4 text-black" />
+                                                <x-lucide name="female" class="w-3 h-3 text-black" />
                                                 <span class="text-xs font-medium text-black">Femenino</span>
                                             </button>
                                         @endif
@@ -293,28 +297,30 @@
                                         class="flex items-center gap-1 px-2 py-1 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
                                         title="Haz clic para establecer como Masculino"
                                     >
-                                        <x-lucide name="male" class="w-4 h-4 text-black" />
-                                        <span class="text-xs font-medium text-black">Establecer</span>
+                                        <x-lucide name="male" class="w-3 h-3 text-black" />
+                                        <span class="text-xs font-medium text-black">?</span>
                                     </button>
                                 @endif
                             </td>
-                            <td class="px-3 py-4 text-center text-sm text-gray-300">
-                                lvl: {{ $user->lvl ?? 'N/A' }}
+                            <td class="px-3 py-3 text-center text-sm text-gray-300">
+                                <div class="truncate" title="Nivel: {{ $user->lvl ?? 'N/A' }}">
+                                    {{ $user->lvl ?? 'N/A' }}
+                                </div>
                             </td>
-                            <td class="px-3 py-4 text-center">
+                            <td class="px-3 py-3 text-center">
                                 @switch($user->tipo)
                                     @case(1)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                            Administrador
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" title="Administrador">
+                                            Admin
                                         </span>
                                         @break
                                     @case(2)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                            En Servicio Técnico
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800" title="En Servicio Técnico">
+                                            Técnico
                                         </span>
                                         @break
                                     @case(3)
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" title="Usuario">
                                             Usuario
                                         </span>
                                         @break
@@ -322,11 +328,11 @@
                                         <span class="text-gray-500">N/A</span>
                                 @endswitch
                             </td>
-                            <td class="px-3 py-4 text-center">
+                            <td class="px-3 py-3 text-center">
                                 @if($user->status)
                                     <button 
                                         wire:click="toggleStatus({{ $user->id }})"
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 hover:bg-green-200 transition-colors cursor-pointer"
+                                        class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 hover:bg-green-200 transition-colors cursor-pointer"
                                         title="Haz clic para desactivar"
                                     >
                                         Activo
@@ -334,14 +340,14 @@
                                 @else
                                     <button 
                                         wire:click="toggleStatus({{ $user->id }})"
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-black hover:bg-gray-200 transition-colors cursor-pointer"
+                                        class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-black hover:bg-gray-200 transition-colors cursor-pointer"
                                         title="Haz clic para activar"
                                     >
                                         Inactivo
                                     </button>
                                 @endif
                             </td>
-                            <td class="px-3 py-4 text-center">
+                            <td class="px-3 py-3 text-center">
                                 <div class="flex items-center justify-center gap-1">
                                     <button 
                                         wire:click="editUser({{ $user->id }})"
@@ -777,6 +783,18 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
+    }
+    
+    /* Permitir altura natural de las filas */
+    .table-auto-height td {
+        height: auto !important;
+        min-height: auto !important;
+        vertical-align: top;
+    }
+    
+    .table-auto-height tr {
+        height: auto !important;
+        min-height: auto !important;
     }
 </style>
 
