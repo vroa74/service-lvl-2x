@@ -60,6 +60,7 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'initials',
     ];
 
     /**
@@ -195,5 +196,56 @@ class User extends Authenticatable
     public function responsivasInformatica()
     {
         return $this->hasMany(Responsiva::class, 'informatica_id');
+    }
+
+    /**
+     * Get the user's initials from their name.
+     */
+    public function getInitialsAttribute()
+    {
+        $name = trim($this->name);
+        if (empty($name)) {
+            return '?';
+        }
+
+        $words = explode(' ', $name);
+        $initials = '';
+
+        // Tomar la primera letra del primer nombre
+        if (isset($words[0])) {
+            $initials .= mb_strtoupper(mb_substr($words[0], 0, 1));
+        }
+
+        // Tomar la primera letra del apellido (última palabra)
+        if (count($words) > 1) {
+            $lastWord = end($words);
+            $initials .= mb_strtoupper(mb_substr($lastWord, 0, 1));
+        }
+
+        return $initials;
+    }
+
+    /**
+     * Check if the user has a profile photo.
+     */
+    public function hasProfilePhoto()
+    {
+        // Verificar si existe la ruta de la foto
+        if (empty($this->profile_photo_path)) {
+            return false;
+        }
+
+        // Verificar si el archivo existe físicamente
+        $filePath = storage_path('app/public/' . $this->profile_photo_path);
+        if (!file_exists($filePath)) {
+            return false;
+        }
+
+        // Verificar que el archivo no esté vacío
+        if (filesize($filePath) === 0) {
+            return false;
+        }
+
+        return true;
     }
 }

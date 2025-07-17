@@ -65,11 +65,11 @@
                     <div class="flex items-start justify-between mb-3">
                         <div class="flex items-center flex-1">
                             <div class="flex-shrink-0 h-12 w-12 mr-3">
-                                @if($user->profile_photo_url)
+                                @if($user->hasProfilePhoto())
                                     <img class="h-12 w-12 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
                                 @else
                                     <div class="h-12 w-12 rounded-full bg-gray-600 flex items-center justify-center">
-                                        <x-lucide name="user" class="w-6 h-6 text-gray-300" />
+                                        <span class="text-sm font-medium text-white">{{ $user->initials }}</span>
                                     </div>
                                 @endif
                             </div>
@@ -229,13 +229,12 @@
                             <td class="px-3 py-3">
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0 h-6 w-6 mt-1">
-                                        @if($user->profile_photo_url)
-                                            <img class="h-6 w-6 rounded-full" src="{{ $user->profile_photo_url }}" 
-                                            {{-- alt="{{ $user->name }} --}}
-                                            ">
+                                        @if($user->hasProfilePhoto())
+                                            <img class="h-6 w-6 rounded-full object-cover" src="{{ $user->profile_photo_url }}" 
+                                            alt="{{ $user->name }}">
                                         @else
                                             <div class="h-6 w-6 rounded-full bg-gray-600 flex items-center justify-center">
-                                                <x-lucide name="user" class="w-4 h-4 text-gray-300" />
+                                                <span class="text-xs font-medium text-white">{{ $user->initials }}</span>
                                             </div>
                                         @endif
                                     </div>
@@ -617,11 +616,11 @@
                                     $currentUser = \App\Models\User::find($userId);
                                 @endphp
                                 <div class="mt-2" x-show="! photoPreview">
-                                    @if($currentUser && $currentUser->profile_photo_url)
+                                    @if($currentUser && $currentUser->hasProfilePhoto())
                                         <img src="{{ $currentUser->profile_photo_url }}" alt="{{ $currentUser->name }}" class="rounded-full size-16 object-cover">
                                     @else
                                         <div class="rounded-full size-16 bg-gray-600 flex items-center justify-center">
-                                            <x-lucide name="user" class="w-6 h-6 text-gray-300" />
+                                            <span class="text-lg font-medium text-white">{{ $currentUser->initials ?? '?' }}</span>
                                         </div>
                                     @endif
                                 </div>
