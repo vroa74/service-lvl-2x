@@ -76,6 +76,8 @@ class Create extends Component
     public $inventorySearchSn = '';
     public $inventorySearchType = '';
     public $inventorySearchArticulo = '';
+    public $inventorySearchUserName = '';
+    public $inventorySearchUserDirection = '';
     public $selectedInventoryId = null;
     public $selectedInventory = null;
 
@@ -148,6 +150,8 @@ class Create extends Component
         $this->inventorySearchSn = '';
         $this->inventorySearchType = '';
         $this->inventorySearchArticulo = '';
+        $this->inventorySearchUserName = '';
+        $this->inventorySearchUserDirection = '';
         $this->selectedInventoryId = null;
         $this->selectedInventory = null;
     }
@@ -217,6 +221,8 @@ class Create extends Component
         $this->inventorySearchSn = '';
         $this->inventorySearchType = '';
         $this->inventorySearchArticulo = '';
+        $this->inventorySearchUserName = '';
+        $this->inventorySearchUserDirection = '';
         $this->selectedInventoryId = null;
         $this->selectedInventory = null;
     }
@@ -620,7 +626,8 @@ class Create extends Component
             ->get();
 
         // Filtrar inventarios para el modal
-        $filteredInventories = \App\Models\Inventory::where('status', true)
+        $filteredInventories = \App\Models\Inventory::with(['assignedUser', 'responsible'])
+            ->where('status', true)
             ->when($this->inventorySearchNi, function ($query) {
                 $query->where('ni', 'like', '%' . $this->inventorySearchNi . '%');
             })
@@ -632,6 +639,26 @@ class Create extends Component
             })
             ->when($this->inventorySearchArticulo, function ($query) {
                 $query->where('articulo', 'like', '%' . $this->inventorySearchArticulo . '%');
+            })
+            ->when($this->inventorySearchUserName, function ($query) {
+                $query->where(function ($subQuery) {
+                    $subQuery->whereHas('assignedUser', function ($userQuery) {
+                        $userQuery->where('name', 'like', '%' . $this->inventorySearchUserName . '%');
+                    })
+                    ->orWhereHas('responsible', function ($userQuery) {
+                        $userQuery->where('name', 'like', '%' . $this->inventorySearchUserName . '%');
+                    });
+                });
+            })
+            ->when($this->inventorySearchUserDirection, function ($query) {
+                $query->where(function ($subQuery) {
+                    $subQuery->whereHas('assignedUser', function ($userQuery) {
+                        $userQuery->where('direction', 'like', '%' . $this->inventorySearchUserDirection . '%');
+                    })
+                    ->orWhereHas('responsible', function ($userQuery) {
+                        $userQuery->where('direction', 'like', '%' . $this->inventorySearchUserDirection . '%');
+                    });
+                });
             })
             ->orderBy('ni')
             ->get();

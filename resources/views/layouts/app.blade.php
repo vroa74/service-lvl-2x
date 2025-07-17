@@ -79,6 +79,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="module"> import lucide from 'https://cdn.jsdelivr.net/npm/lucide@0.525.0/+esm' </script>
+        // <script type="module"> import lucide from https://cdn.jsdelivr.net/npm/lucide@0.525.0/+esm </script>
 
     </body>
 </html>
