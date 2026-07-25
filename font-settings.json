@@ -1,0 +1,14 @@
+{
+    "editor.fontFamily": "JetBrains Mono, 'Fira Code', 'Cascadia Code', 'Lilex Nerd Font', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 14,
+    "editor.fontWeight": "400",
+    "editor.letterSpacing": 0.5,
+    "editor.lineHeight": 1.5,
+    "terminal.integrated.fontFamily": "JetBrains Mono, 'Fira Code', 'Cascadia Code', Consolas, monospace",
+    "terminal.integrated.fontLigatures": true,
+    "terminal.integrated.fontSize": 14,
+    "debug.console.fontFamily": "JetBrains Mono, 'Fira Code', 'Cascadia Code', Consolas, monospace",
+    "debug.console.fontLigatures": true,
+    "markdown.preview.fontFamily": "JetBrains Mono, 'Fira Code', 'Cascadia Code', -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif"
+}

@@ -1,0 +1,471 @@
+[33mcommit 3fc613a155e713a5c782b61f442dc2b128f8e160[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Sep 8 10:13:47 2025 -0600
+
+    up 64
+    
+    se esta verificando que el login el campos status de la tabla user = true
+
+[33mcommit 098722b86b29e074ba2109334140bde48e10be4f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Aug 6 16:56:51 2025 -0600
+
+    up 63
+
+[33mcommit 23f7dd71ca43b59a2640c9462b6c73f6c7817b90[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Aug 4 08:25:28 2025 -0600
+
+    up 62
+
+[33mcommit 9339442bbfbc0db8fcb2b45b36bde46e48d638d5[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sun Jul 27 14:51:05 2025 -0600
+
+    up 61
+
+[33mcommit 3dcfab75802e395d6dfb9397af13c57730c502c8[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 14:25:35 2025 -0600
+
+    up 60
+
+[33mcommit 1c20c5e2f04d1523653c179315410be99da793d6[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 13:41:06 2025 -0600
+
+    up 59
+
+[33mcommit 488524873a97cffe471e92253d84d15e9a7927c2[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 13:33:23 2025 -0600
+
+    up 58
+
+[33mcommit 435196853d6bd351e650b51d7fb294584c3e39e6[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:52:47 2025 -0600
+
+    up 57
+
+[33mcommit 9a5cb0658728ee53647abe9bb787b2fc563031ea[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:44:20 2025 -0600
+
+    up 57
+
+[33mcommit 2f5e001de1d116a3f37a83e4a73dc1f1aecaa621[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:38:04 2025 -0600
+
+    up 56
+
+[33mcommit a8749df453613b56fa89a26d7836210794c8aea6[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:23:26 2025 -0600
+
+    up 55
+
+[33mcommit 1e4608e32c5bf892c7442895e0a440c189fe28c0[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:12:27 2025 -0600
+
+    up_54
+
+[33mcommit 11bb122a54a9c261b7ba31ce4e2f4380f01f9a10[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:05:23 2025 -0600
+
+    up 53
+
+[33mcommit 1963159a6cdf0bf9ae7362389b40f21a2a82b557[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 12:01:10 2025 -0600
+
+    up 53
+
+[33mcommit 327578dc02195f023a7d8ce507c567c4cba8978c[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 25 11:23:03 2025 -0600
+
+    up 52
+
+[33mcommit 186d20ad8132f7c5ac69c79e3e4de9ddc7ee7a9a[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 14:32:38 2025 -0600
+
+    up 51
+
+[33mcommit 3302cffa96af55a1681c92faf57eb0156b9142f1[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 14:18:34 2025 -0600
+
+    up 50
+
+[33mcommit 470cfae1f297937a6c6fe14b5dd70b56260ecacd[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 13:29:33 2025 -0600
+
+    up 48
+
+[33mcommit 74dfd53b1612f95c98c1fb63bf6b8b56966bab7a[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 13:18:21 2025 -0600
+
+    up 47
+
+[33mcommit b6c1e542a35713f151be7acdfac259b9718ee40c[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 11:04:55 2025 -0600
+
+    UP 46
+
+[33mcommit fc0251b944900f0f1a11fc69f29c20c9975afae9[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 10:16:43 2025 -0600
+
+    up 45
+    
+    cambio del tamalo de los textarea
+
+[33mcommit 0cd306bab7a503293f6fcd8f44cbbd7fd1d4a9e0[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 09:46:23 2025 -0600
+
+    up  44
+    
+    se actualizo las modales de inventario  del servicios
+
+[33mcommit 2b076f01db30dc24c1bf8bcf46a39fee1abd6000[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 23 09:31:22 2025 -0600
+
+    up 43
+    
+    los filtros de los inventarios se han hecho por nombre y por direccion.
+
+[33mcommit 404cd54c2c041d08ba827433f651037fe7c49ded[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 22 12:26:20 2025 -0600
+
+    up 42
+    
+    se agregos dos datos de los programas calendarizados.
+
+[33mcommit cabcd1b1a3676fb293709900d9c2fa94ff6de3a8[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 22 12:09:55 2025 -0600
+
+    up 41
+    
+    modificacion de login con 3 factores
+
+[33mcommit 8de281e9a453ee854e2d1c98171fda95404aaf93[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 22 07:44:30 2025 -0600
+
+    up 40
+
+[33mcommit a29307ac159689af9b7f259adee7f72a352e9598[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 22 07:41:06 2025 -0600
+
+    up 39
+
+[33mcommit 63c8d9b59d02bf86f40203d4bb7564ceab79c981[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 21 12:49:12 2025 -0600
+
+    up 38
+
+[33mcommit d7ed13e897ca0b5992592c7b6f887fc627e6145d[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 21 12:36:36 2025 -0600
+
+    up 37
+
+[33mcommit e77289ecda28d47b4237876b79a86dffefaae0ed[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 21 10:47:42 2025 -0600
+
+    UP 36
+
+[33mcommit de28cbc254e63512732aacd3c6576db521215130[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 21 10:26:26 2025 -0600
+
+    UP 35
+
+[33mcommit 27f2ca93d4dbc4fa2272ece9be173bd7d8f9da6d[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 21 09:19:22 2025 -0600
+
+    up 34
+
+[33mcommit 71761ba329ca135e8ef020b4bbab2802815b3664[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 18 07:15:49 2025 -0600
+
+    up 33
+
+[33mcommit e7722f481bc8612a3088df3098749b533a2bcc22[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 17 15:39:48 2025 -0600
+
+    up 32
+
+[33mcommit 95d6af01394767bcfab903969760e3a6cf30a637[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 17 14:54:05 2025 -0600
+
+    up 31
+
+[33mcommit 02eb14a047868c5437f4fad087ba6a0f6737f618[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 17 14:04:42 2025 -0600
+
+    up 30
+    
+    cambio de icono y tamaño del modal en inventory
+
+[33mcommit c0528d4b013ad6b298d313e70ff43b4dc2930f70[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 17 11:51:43 2025 -0600
+
+    up 29
+
+[33mcommit a7aad57568d509c6639a0e8d877a0817a257e898[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 15 14:22:22 2025 -0600
+
+    up 28
+
+[33mcommit 9ba1be13da7ef435c4a472ba9020040c4069b720[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 15 13:31:19 2025 -0600
+
+    up 27
+
+[33mcommit 81365918b6ad1f22cf4ef5ce259c817ac57982c5[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 15 09:17:16 2025 -0600
+
+    UP 26
+
+[33mcommit 39bcc0dcf94237d456106e431f251135210d6360[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jul 12 08:26:36 2025 -0600
+
+    up 25
+
+[33mcommit dca716c7874f2ec5dfa8f0548cb0b3ace4e57b10[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 11 13:56:45 2025 -0600
+
+    up 24
+
+[33mcommit 310098533ae3d87d061ce0a45e2eb81c985fd1b1[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 11 10:37:01 2025 -0600
+
+    up 23
+
+[33mcommit 91aa0376ccacc2f9a6ca36fe4562dc441c45767b[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jul 11 10:04:52 2025 -0600
+
+    up 22
+
+[33mcommit 7aec7d30402303822ffa991c92caaefbe61955d2[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 10 14:50:48 2025 -0600
+
+    up 21
+
+[33mcommit acdfd6f3789a6a62574647a4fb2b75fa8203b93a[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 10 14:35:28 2025 -0600
+
+    up 20
+
+[33mcommit 75f5aa3e438a73abe4d59cb1dee6fcfff3da94cd[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 10 14:30:49 2025 -0600
+
+    up 19
+
+[33mcommit 515134bdcc8f22e4d64c873e21f3f7c40372c5c6[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jul 7 14:35:27 2025 -0600
+
+    up 18
+
+[33mcommit e5ca1b42e6f3072def7fe5f1d1335c14ef79afb1[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jul 3 14:21:15 2025 -0600
+
+    up 17
+
+[33mcommit 03bde07f20a1a5f7ff3926f608a656461f1249e5[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 2 12:22:56 2025 -0600
+
+    up 16
+
+[33mcommit 8910266d775e8007ef702e927194cc94d2175b21[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jul 2 11:29:08 2025 -0600
+
+    up 15
+
+[33mcommit ef6b3a982bb8842f63996124681251a41d63b577[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 1 14:50:47 2025 -0600
+
+    up 14
+
+[33mcommit 085b03f4c66dab231fa166ceafcc671bc95e2f6e[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jul 1 08:49:34 2025 -0600
+
+    up 13
+
+[33mcommit 0a3883dbb60cd79fb248200da1185fefeda3cfb3[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 30 12:06:17 2025 -0600
+
+    up 12.5
+
+[33mcommit 515e5705afbbf5d4307c9b988ea85471d3fec732[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 30 10:43:56 2025 -0600
+
+    UP 12
+
+[33mcommit ac585b564927f62681d3937af7bbe06be2edfcb7[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 30 10:11:58 2025 -0600
+
+    up 11
+
+[33mcommit fe0f779ec0b00786265b6736f676d829e6669a58[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jun 26 14:26:58 2025 -0600
+
+    up 10
+
+[33mcommit d9158c7e38bc4617f8aebb3f4019e024e2821689[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Thu Jun 26 07:59:51 2025 -0600
+
+    up 9
+
+[33mcommit f122110bb3b30b65e91bb28da53bf7d805a955df[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Wed Jun 25 07:16:21 2025 -0600
+
+    up 8
+
+[33mcommit 935a2b78da056f0005157d60a00260196a3b9329[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jun 24 15:50:27 2025 -0600
+
+    up 8
+
+[33mcommit 4d72f1c2514caa8a815a8376b865f45748f742a0[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jun 24 11:59:03 2025 -0600
+
+    up 7 weollcomo change
+
+[33mcommit 6b30703093a40af10b944949a66724289c928b8d[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Tue Jun 24 10:15:31 2025 -0600
+
+    up 6
+
+[33mcommit 2eca9b05cb5817de897a3a4e6ecdaddca18c3630[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 21:42:57 2025 -0600
+
+    up 5 logotipos y fav icon
+
+[33mcommit 9f78c648a0b4a0999775fe7f2e98dd2123545c2c[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 21:33:07 2025 -0600
+
+    up 4
+
+[33mcommit dd41b3f2ac5b19a22e42b6e4260f3dab32feea37[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 21:20:35 2025 -0600
+
+    up 3
+    
+    ya funcionan los modales en edit y en create de service
+
+[33mcommit 03216009aa569ef7a20650340490209d382e9584[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 21:10:55 2025 -0600
+
+    up 2
+
+[33mcommit 51beabb51f2fe7f8161a06cef9eebd5a59fd3d7a[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 17:52:53 2025 -0600
+
+    Up 1
+
+[33mcommit ccda442a3baa6c501cedcc4453e12dce183d24c9[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 16:46:01 2025 -0600
+
+    last
+
+[33mcommit f73bef276fd8f24f0c836d8ab31c9efb3ac803be[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Mon Jun 23 13:06:56 2025 -0600
+
+    -7
+
+[33mcommit bfa3d2ad3e1ae19a07aa29774d7bdfb80f4f6a3e[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jun 21 22:03:39 2025 -0600
+
+    -6
+
+[33mcommit 5149ec9545cf2cd508c5e0979cd3f0d4e092ef54[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jun 21 21:21:45 2025 -0600
+
+    -5
+
+[33mcommit fc98898772f51572abab4b9c3c4a32cff8c46032[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jun 21 20:35:31 2025 -0600
+
+    -4
+
+[33mcommit 370f656f383f4e97105f1395d2456869bd4c7088[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jun 21 18:00:55 2025 -0600
+
+    3
+
+[33mcommit d30c3761174fdd003c888b5403d2abbeb9cb3f01[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Sat Jun 21 13:06:34 2025 -0600
+
+    2
+
+[33mcommit f92989729c905c78d51b950372b3106b2c3760f6[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jun 20 22:55:31 2025 -0600
+
+    1
+
+[33mcommit 98a4b0d2db3e8d9dffaa1265297a9a650f73e41f[m
+Author: vroa74 <33233830+vroa74@users.noreply.github.com>
+Date:   Fri Jun 20 19:47:14 2025 -0600
+
+    init

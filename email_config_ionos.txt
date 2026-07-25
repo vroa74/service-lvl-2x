@@ -1,0 +1,22 @@
+# CONFIGURACIÓN DE EMAIL PARA IONOS
+# Copia estas líneas a tu archivo .env y reemplaza los valores
+
+# Configuración de Email - IONOS (SMTP)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.ionos.mx
+MAIL_PORT=587
+MAIL_USERNAME=tu_email@tu_dominio.com
+MAIL_PASSWORD=tu_contraseña_email
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="tu_email@tu_dominio.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# Configuración alternativa para IMAP (si necesitas leer emails)
+# IMAP_HOST=imap.ionos.mx
+# IMAP_PORT=993
+# IMAP_ENCRYPTION=ssl
+
+# Configuración alternativa para POP3 (si prefieres POP3)
+# POP3_HOST=pop.ionos.mx
+# POP3_PORT=995
+# POP3_ENCRYPTION=ssl
